@@ -17,9 +17,13 @@ const styles = theme => ({
   page: {
     overflow: "hidden"
   },
+  directionTitleTop: {
+    marginTop: "2em",
+    textAlign: "center"
+  },
   paperContainer: {
     padding: '2em',
-    margin: '2em',
+    margin: '1.5em',
     maxWidth: 850,
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -27,6 +31,9 @@ const styles = theme => ({
   fabButton: {
     marginRight: '1em',
     marginTop: '1em',
+  },
+  directionTitleBottom: {
+    textAlign: "center"
   },
   selectionContainer: {
     maxWidth: 900,
@@ -36,10 +43,6 @@ const styles = theme => ({
     padding: "2em",
     paddingBottom: "5em",
     margin: "1em"
-  },
-  directionTitle: {
-    marginTop: "2em",
-    textAlign: "center"
   },
   gridContainer: {
     marginTop: "1.5em",
@@ -84,12 +87,12 @@ class HomePage extends Component {
           </Toolbar>
         </AppBar>
 
-        <div className={classes.directionTitle}>
-          <Typography variant="h3">Volunteering Requirements</Typography>
+        <div className={classes.directionTitleTop}>
+          <Typography variant="h4">View Requirements</Typography>
         </div>
 
         <Paper className={classes.paperContainer}>
-          <Typography variant="h4">Select Your Category</Typography>
+          <Typography variant="h5">Select Your Category</Typography>
           <Fab variant="extended" className={classes.fabButton}>
             Providers
           </Fab>
@@ -105,8 +108,8 @@ class HomePage extends Component {
         </Paper>
 
         <div className={classes.selectionContainer}>
-          <div className={classes.directionTitle}>
-            <Typography variant="h3">Volunteer For An Organization</Typography>
+          <div className={classes.directionTitleBottom}>
+            <Typography variant="h4">Organizations</Typography>
           </div>
 
           <div className={classes.gridContainer}>
