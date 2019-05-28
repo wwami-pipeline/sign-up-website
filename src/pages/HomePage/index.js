@@ -12,6 +12,10 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import LinkBox from "../../components/LinkBox";
+import MedicalStudentRequirements from "../../components/MedicalStudentRequirements";
+import OtherGraduateRequirements from "../../components/OtherGraduateRequirements";
+import UndergraduateRequirements from "../../components/UndergraduateRequirements";
+import ProviderRequirements from "../../components/ProviderRequirements";
 
 const styles = theme => ({
   page: {
@@ -22,15 +26,15 @@ const styles = theme => ({
     textAlign: "center"
   },
   paperContainer: {
-    padding: '2em',
-    margin: '1.5em',
+    padding: "2em",
+    margin: "1.5em",
     maxWidth: 850,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   fabButton: {
-    marginRight: '1em',
-    marginTop: '1em',
+    marginRight: "1em",
+    marginTop: "1em"
   },
   directionTitleBottom: {
     textAlign: "center"
@@ -58,12 +62,10 @@ const styles = theme => ({
 
 class HomePage extends Component {
   state = {
-    modal: false,
-    secondsElapsed: 0,
-    timeElapsed: null,
-    openThrusterPasswordErrorKey: null,
-    openThrusterErrorKey: null,
-    closeThrusterErrorKey: null
+    providerRequirementsOpen: false,
+    medicalRequirementsOpen: false,
+    otherGradRequirementsOpen: false,
+    undergradRequirementsOpen: false
   };
 
   render() {
@@ -87,25 +89,68 @@ class HomePage extends Component {
           </Toolbar>
         </AppBar>
 
+        {/* Modals */}
+
+        <MedicalStudentRequirements
+          open={this.state.medicalRequirementsOpen}
+          handleClose={() => this.setState({ medicalRequirementsOpen: false })}
+        />
+        <UndergraduateRequirements
+          open={this.state.undergradRequirementsOpen}
+          handleClose={() =>
+            this.setState({ undergradRequirementsOpen: false })
+          }
+        />
+        <OtherGraduateRequirements
+          open={this.state.otherGradRequirementsOpen}
+          handleClose={() =>
+            this.setState({ otherGradRequirementsOpen: false })
+          }
+        />
+        <ProviderRequirements
+          open={this.state.providerRequirementsOpen}
+          handleClose={() => this.setState({ providerRequirementsOpen: false })}
+        />
+
+        {/* Requirements */}
+
         <div className={classes.directionTitleTop}>
           <Typography variant="h4">View Requirements</Typography>
         </div>
 
         <Paper className={classes.paperContainer}>
           <Typography variant="h5">Select Your Category</Typography>
-          <Fab variant="extended" className={classes.fabButton}>
+          <Fab
+            variant="extended"
+            className={classes.fabButton}
+            onClick={() => this.setState({ providerRequirementsOpen: true })}
+          >
             Providers
           </Fab>
-          <Fab variant="extended" className={classes.fabButton}>
+          <Fab
+            variant="extended"
+            className={classes.fabButton}
+            onClick={() => this.setState({ medicalRequirementsOpen: true })}
+          >
             Medical Students
           </Fab>
-          <Fab variant="extended" className={classes.fabButton}>
+          <Fab
+            variant="extended"
+            className={classes.fabButton}
+            onClick={() => this.setState({ otherGradRequirementsOpen: true })}
+          >
             Other Health Science Graduate Students
           </Fab>
-          <Fab variant="extended" className={classes.fabButton}>
+          <Fab
+            variant="extended"
+            className={classes.fabButton}
+            onClick={() => this.setState({ undergradRequirementsOpen: true })}
+          >
             Undergraduates
           </Fab>
         </Paper>
+
+        {/* Organizations */}
 
         <div className={classes.selectionContainer}>
           <div className={classes.directionTitleBottom}>
