@@ -10,6 +10,7 @@ import registerServiceWorker from "./registerServiceWorker";
 // Global Theme
 const theme = createMuiTheme({
   palette: {
+    type: 'dark',
     primary: purple
   }
 });
