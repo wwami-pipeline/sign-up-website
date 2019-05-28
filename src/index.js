@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import purple from "@material-ui/core/colors/purple";
 
-import App from "./app";
+import App from "./App";
 
 import registerServiceWorker from "./registerServiceWorker";
 

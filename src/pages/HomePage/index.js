@@ -16,6 +16,7 @@ import MedicalStudentRequirements from "../../components/MedicalStudentRequireme
 import OtherGraduateRequirements from "../../components/OtherGraduateRequirements";
 import UndergraduateRequirements from "../../components/UndergraduateRequirements";
 import ProviderRequirements from "../../components/ProviderRequirements";
+import NavBar from "../../components/NavBar";
 
 const styles = theme => ({
   page: {
@@ -75,18 +76,8 @@ class HomePage extends Component {
       <div className={classes.page}>
         <CssBaseline />
         <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              Volunteer Sign Up
-            </Typography>
-          </Toolbar>
+          <NavBar />
+          
         </AppBar>
 
         {/* Modals */}
