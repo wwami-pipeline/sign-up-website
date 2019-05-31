@@ -1,0 +1,25 @@
+.toolbar-logo {
+  text-align: center;
+  margin: 25px 0px 25px 0px;
+}
+
+.toolbar-tabs a {
+  color: white;
+  text-decoration: none;
+}
+
+.toolbar-tabs li {
+  padding: 0 0.5rem;
+}
+
+.toolbar-tabs ul {
+  list-style: none;
+  margin: none;
+  padding: none;
+  display: flex;
+}
+
+.tabLabel {
+  font-size: 1.2em;
+  font-weight: bold;
+}
