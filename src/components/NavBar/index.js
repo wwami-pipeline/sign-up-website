@@ -9,17 +9,13 @@ import './index.css';
 
 const NavBar = () => {
     return(
-    <BrowserRouter>
-      <div className="App">
-        <Route
-          path="/"
-          render={({ location }) => (
+      <div className="App">    
             <Fragment>
                 <AppBar position="static">
                     <div className="toolbar-logo">
                         <Typography variant="title" color="inherit">UW Medicine Service Learning</Typography>
                     </div>
-                    <Tabs value={location.pathname}>
+                    <Tabs>
                         <Tab label={<span className="tabLabel"> Home</span>} value="/" component={Link} to="/" />
                         <Tab label={<span className="tabLabel">About Us</span>} value="/about" component={Link} to="/about" />
                         <Tab label={<span className="tabLabel">Gallery</span>} value="/gallery" component={Link} to="/gallery" />
@@ -28,51 +24,14 @@ const NavBar = () => {
                 </Tabs>
                 <Switch>
                     <Route exact path="/" />
-                    <Route exact path="/about" />
-                    <Route exact path="/gallery" />
-                    <Route exact path="/contact" />
-                    <Route exact path="/login" />
+                    <Route path="/about" />
+                    <Route path="/gallery" />
+                    <Route path="/contact" />
+                    <Route path="/login" />
                 </Switch>
               </AppBar>
             </Fragment>
-          )}
-        />
       </div>
-    </BrowserRouter>
-
-        // <div>
-        // <AppBar position="static">
-        //     <Toolbar>
-        //         <div className="toolbar-logo"><a href="/">LOGO</a></div>
-        //         <Typography variant="title" color="inherit">
-        //         Volunteer Signup
-        //         </Typography>
-        //         <div className="toolbar-tabs">
-        //             <ul>
-        //                 <li><a href="/" className="toolbar-link"> About Us</a></li>
-        //                 <li><a href="/" className="toolbar-link"> Contact Us</a></li>
-                    
-        //             </ul>
-        //         </div>
-
-
-        //     </Toolbar>
-
-        //     {/* <Toolbar>
-        //     <IconButton
-        //     className={classes.menuButton}
-        //     color="inherit"
-        //     aria-label="Menu"
-        //     >
-        //     <MenuIcon />
-        //     </IconButton>
-        //     <Typography variant="h6" color="inherit" className={classes.grow}>
-        //     Volunteer Sign Up
-        //     </Typography>
-        // </Toolbar> */}
-
-        // </AppBar>
-        // </div>
     )
 }
-export default NavBar;
+export default (NavBar);
