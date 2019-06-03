@@ -8,12 +8,69 @@ class App extends Component {
   constructor(props) {
     super(props);
     firebase.initializeApp(config);
-    const db = firebase.firestore();
+    const db = firebase.database();
+
+    let SHIFA = [];
+    db.ref("/SHIFA")
+      .once("value")
+      .then(value => {
+        const items = value.toJSON();
+        for (let key in items) {
+          SHIFA.push(items[key]);
+        }
+      });
+
+    let CHAP = [];
+    db.ref("/CHAP")
+      .once("value")
+      .then(value => {
+        const items = value.toJSON();
+        for (let key in items) {
+          CHAP.push(items[key]);
+        }
+      });
+
+    let UDSM = [];
+    db.ref("/UDSM")
+      .once("value")
+      .then(value => {
+        const items = value.toJSON();
+        for (let key in items) {
+          UDSM.push(items[key]);
+        }
+      });
+
+    let DoD = [];
+    db.ref("/DoD")
+      .once("value")
+      .then(value => {
+        const items = value.toJSON();
+        for (let key in items) {
+          DoD.push(items[key]);
+        }
+      });
+
+    this.state = {
+      SHIFA,
+      CHAP,
+      UDSM,
+      DoD
+    };
   }
   render() {
     return (
       <Router>
-        <Route exact path="/" component={HomePage} />
+        <Route
+          exact path="/"
+          render={() => (
+            <HomePage
+              SHIFA={this.state.SHIFA}
+              CHAP={this.state.CHAP}
+              UDSM={this.state.UDSM}
+              DoD={this.state.DoD}
+            />
+          )}
+        />
       </Router>
     );
   }
