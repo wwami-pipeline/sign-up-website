@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Switch, Route, Link, BrowserRouter, Redirect } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";

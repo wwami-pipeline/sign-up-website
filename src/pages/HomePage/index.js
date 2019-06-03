@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {
   AppBar,
-  Toolbar,
-  IconButton,
   withStyles,
   Typography,
   CssBaseline,
@@ -10,7 +8,6 @@ import {
   Fab,
   Grid
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 import LinkBox from "../../components/LinkBox";
 import MedicalStudentRequirements from "../../components/MedicalStudentRequirements";
 import OtherGraduateRequirements from "../../components/OtherGraduateRequirements";
