@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
 
 const styles = () => ({
     card: {
@@ -18,30 +19,40 @@ const styles = () => ({
     }
 });
 
-const LinkBox = props => {
+const LinkBox = (props) => {
   const { classes } = props;
+  const data = props.data;
+  
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          alt={props.title}
-          image={props.imageLocation}
-          title={props.title}
-          className={classes.image}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
-          </Typography>
-        </CardContent>
+        {/* <Link to={props.path} render={(data) => {return(<UDSM {...data} {...props}  />)}}> */}
+        <Link to={{
+          pathname:props.path,
+          state: {
+            data
+          }
+        }}>
+          <CardMedia
+            component="img"
+            alt={props.title}
+            image={props.imageLocation}
+            title={props.title}
+            className={classes.image}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {props.title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.description}
+            </Typography>
+          </CardContent>
+        </Link>
       </CardActionArea>
       <CardActions>
         <Button size="small">
-          Volunteer
+            Volunteer
         </Button>
         <Button size="small">
           Learn More

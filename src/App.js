@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import firebase from "firebase";
 import config from "./config";
+import { Switch } from "react-router-dom";
+import UDSM from "./components/UDSM";
 
 class App extends Component {
   constructor(props) {
@@ -60,17 +62,23 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route
-          exact path="/"
-          render={() => (
-            <HomePage
-              SHIFA={this.state.SHIFA}
-              CHAP={this.state.CHAP}
-              UDSM={this.state.UDSM}
-              DoD={this.state.DoD}
-            />
-          )}
-        />
+        <Switch>
+          <Route
+            exact path="/"
+            render={() => (
+              <HomePage
+                SHIFA={this.state.SHIFA}
+                CHAP={this.state.CHAP}
+                UDSM={this.state.UDSM}
+                DoD={this.state.DoD}
+              />
+            )}
+          />
+          <Route path="/SHIFA" component={UDSM}/>
+          <Route path="/CHAP" component={UDSM}/>
+          <Route path="/UDSM" component={UDSM}/>
+          <Route path="/Dod" component={UDSM}/>
+        </Switch>
       </Router>
     );
   }
