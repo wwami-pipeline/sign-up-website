@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
 import firebase from "firebase";
 import config from "./config";
 
@@ -60,17 +61,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route
-          exact path="/"
-          render={() => (
+        <Route exact path="/" render={() => (
             <HomePage
               SHIFA={this.state.SHIFA}
               CHAP={this.state.CHAP}
               UDSM={this.state.UDSM}
               DoD={this.state.DoD}
-            />
-          )}
-        />
+            />)}/>
+        <Route path="/about" component={AboutPage} />
       </Router>
     );
   }
