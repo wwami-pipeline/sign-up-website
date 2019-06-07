@@ -10,31 +10,33 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
 const styles = () => ({
-    card: {
-        minWidth: 280,
-    },
-    image: {
-        height: 200,
-        objectFit: 'cover'
-    }
+  card: {
+    minWidth: 280
+  },
+  image: {
+    height: 200,
+    objectFit: "cover"
+  }
 });
 
-const LinkBox = (props) => {
+const LinkBox = props => {
   const { classes } = props;
   const data = props.data;
-  const description = props.description
-  
+  const description = props.description;
+
   return (
     <Card className={classes.card}>
       <CardActionArea>
         {/* <Link to={props.path} render={(data) => {return(<UDSM {...data} {...props}  />)}}> */}
-        <Link to={{
-          pathname:props.path,
-          state: {
-            data,
-            description
-          }
-        }}>
+        <Link
+          to={{
+            pathname: props.path,
+            state: {
+              data,
+              description
+            }
+          }}
+        >
           <CardMedia
             component="img"
             alt={props.title}
@@ -53,12 +55,17 @@ const LinkBox = (props) => {
         </Link>
       </CardActionArea>
       <CardActions>
-        <Button size="small">
-            Volunteer
-        </Button>
-        <Button size="small">
-          Learn More
-        </Button>
+        <Link
+          to={{
+            pathname: props.path,
+            state: {
+              data,
+              description
+            }
+          }}
+        >
+          <Button size="small">Volunteer</Button>
+        </Link>
       </CardActions>
     </Card>
   );
