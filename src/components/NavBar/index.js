@@ -13,7 +13,7 @@ const NavBar = () => {
             <Fragment>
                 <AppBar position="static">
                     <div className="toolbar-logo">
-                        <Typography variant="title" color="inherit">UW Medicine Service Learning</Typography>
+                        <img src="/images/header2.png" width="600px"/>
                     </div>
                     <Tabs>
                         <Tab label={<span className="tabLabel"> Home</span>} value="/" component={Link} to="/" />
