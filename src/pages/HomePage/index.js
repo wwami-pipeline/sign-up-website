@@ -74,7 +74,6 @@ class HomePage extends Component {
         <CssBaseline />
         <AppBar position="static">
           <NavBar />
-          
         </AppBar>
 
         {/* Modals */}
@@ -153,6 +152,8 @@ class HomePage extends Component {
                     title="SHIFA"
                     description="Student Health Initiative For Access"
                     imageLocation="images/SHIFA.jpg"
+                    path="/SHIFA"
+                    data={this.props.SHIFA}
                   />
                 </div>
               </Grid>
@@ -162,15 +163,20 @@ class HomePage extends Component {
                     title="CHAP"
                     description="Community Health Advancement Program"
                     imageLocation="images/CHAP.jpg"
+                    path="/CHAP"
+                    data={this.props.CHAP}
                   />
                 </div>
               </Grid>
               <Grid item xs>
                 <div className={classes.linkBoxContainer}>
+                  {console.log(this.props.UDSM)}
                   <LinkBox
                     title="UDSM"
                     description="University District Street Medicine"
                     imageLocation="images/UDSM.png"
+                    path="/UDSM"
+                    data={this.props.UDSM}
                   />
                 </div>
               </Grid>
@@ -180,6 +186,8 @@ class HomePage extends Component {
                     title="Doc for a Day"
                     description="Doctor for a Day"
                     imageLocation="images/DD.jpg"
+                    path="/DoD"
+                    data={this.props.DoD}
                   />
                 </div>
               </Grid>
