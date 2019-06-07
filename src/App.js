@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import firebase from "firebase";
 import config from "./config";
 import { Switch } from "react-router-dom";
-import UDSM from "./components/UDSM";
+import OrgPage from "./components/OrgPage";
 
 class App extends Component {
   constructor(props) {
@@ -74,10 +74,10 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/SHIFA" component={UDSM}/>
-          <Route path="/CHAP" component={UDSM}/>
-          <Route path="/UDSM" component={UDSM}/>
-          <Route path="/Dod" component={UDSM}/>
+          <Route path="/SHIFA" component={OrgPage}/>
+          <Route path="/CHAP" component={OrgPage}/>
+          <Route path="/UDSM" component={OrgPage}/>
+          <Route path="/Dod" component={OrgPage}/>
         </Switch>
       </Router>
     );

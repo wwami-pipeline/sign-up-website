@@ -22,6 +22,7 @@ const styles = () => ({
 const LinkBox = (props) => {
   const { classes } = props;
   const data = props.data;
+  const description = props.description
   
   return (
     <Card className={classes.card}>
@@ -30,7 +31,8 @@ const LinkBox = (props) => {
         <Link to={{
           pathname:props.path,
           state: {
-            data
+            data,
+            description
           }
         }}>
           <CardMedia
