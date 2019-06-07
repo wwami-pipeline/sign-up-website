@@ -4,15 +4,7 @@ import {
   withStyles,
   Typography,
   CssBaseline,
-  Card,
-  Fab,
-  Grid
 } from "@material-ui/core";
-import LinkBox from "../../components/LinkBox";
-import MedicalStudentRequirements from "../../components/MedicalStudentRequirements";
-import OtherGraduateRequirements from "../../components/OtherGraduateRequirements";
-import UndergraduateRequirements from "../../components/UndergraduateRequirements";
-import ProviderRequirements from "../../components/ProviderRequirements";
 import NavBar from "../../components/NavBar";
 
 const styles = theme => ({
@@ -33,39 +25,6 @@ const styles = theme => ({
     textAlign: "center",
     marginBottom: "15px"
   },
-  paperContainer: {
-    padding: "2em",
-    margin: "1.5em",
-    maxWidth: 850,
-    marginLeft: "auto",
-    marginRight: "auto"
-  },
-  fabButton: {
-    marginRight: "1em",
-    marginTop: "1em"
-  },
-  directionTitleBottom: {
-    textAlign: "center"
-  },
-  selectionContainer: {
-    maxWidth: 900,
-    marginLeft: "auto",
-    marginRight: "auto",
-    textAlign: "center",
-    padding: "2em",
-    paddingBottom: "5em",
-    margin: "1em"
-  },
-  gridContainer: {
-    marginTop: "1.5em",
-    marginBottom: "1em",
-    marginLeft: "auto",
-    marginRight: "auto"
-  },
-  linkBoxContainer: {
-    mariginLeft: "auto",
-    marginRight: "auto"
-  }
 });
 
 class AboutPage extends Component {
