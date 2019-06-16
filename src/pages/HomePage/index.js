@@ -170,7 +170,6 @@ class HomePage extends Component {
               </Grid>
               <Grid item xs>
                 <div className={classes.linkBoxContainer}>
-                  {console.log(this.props.UDSM)}
                   <LinkBox
                     title="UDSM"
                     description="University District Street Medicine"
@@ -185,7 +184,7 @@ class HomePage extends Component {
                   <LinkBox
                     title="Doc for a Day"
                     description="Doctor for a Day"
-                    imageLocation="images/DD.jpg"
+                    imageLocation="images/DFAD.JPG"
                     path="/DoD"
                     data={this.props.DoD}
                   />
