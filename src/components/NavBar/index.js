@@ -17,6 +17,8 @@ const NavBar = () => {
                     <Tabs>
                         <Tab label={<span className="tabLabel"> Home</span>} value="/" component={Link} to="/" />
                         <Tab label={<span className="tabLabel">About Us</span>} value="/about" component={Link} to="/about" />
+                        <Tab label={<span className="tabLabel">Contact Us</span>} value="/contact" component={Link} to="/contact" />
+                        <Tab label={<span className="tabLabel">Donate</span>} value="/donate" component={Link} to="/donate" />
                         {/* <Tab label={<span className="tabLabel">Gallery</span>} value="/gallery" component={Link} to="/gallery" />
                         <Tab label={<span className="tabLabel">Contact Us</span>} value="/contact" component={Link} to="/contact" />
                         <Tab label={<span className="tabLabel">Login / Create Account</span>} value="/login" component={Link} to="/login" /> */}

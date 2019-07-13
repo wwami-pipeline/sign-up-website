@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import DonatePage from "./pages/DonationsPage";
 import firebase from "firebase";
 import config from "./config";
 import { Switch } from "react-router-dom";
@@ -79,7 +81,9 @@ class App extends Component {
           <Route path="/CHAP" component={OrgPage}/>
           <Route path="/UDSM" component={OrgPage}/>
           <Route path="/Dod" component={OrgPage}/>
-          <Route path="/about" component={AboutPage} />          
+          <Route path="/about" component={AboutPage} />   
+          <Route path="/contact" component={ContactPage} />   
+          <Route path="/donate" component={DonatePage} />           
         </Switch>
       </Router>
     );
