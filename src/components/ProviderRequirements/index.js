@@ -34,13 +34,11 @@ class ProviderRequirements extends React.Component {
           onClose={this.props.handleClose}
           fullWidth
         >
-          <DialogTitle><Typography variant="h4">Provider Requirements</Typography></DialogTitle>
+          <DialogTitle><Typography variant="h4">Providers</Typography></DialogTitle>
           <DialogContent className={this.props.dialogContent}>
-            <Typography className={classes.title} variant="h5">All Projects</Typography>
-            <Typography className={classes.text}>All providers are required to apply for the Washington state sponsored Volunteer and Retired Provider (VRP) Program.  This program offers free liability coverage for volunteer providers at all of our clinical projects.  To apply online click <Link color="secondary" href="https://www.wahealthcareaccessalliance.org/volunteers/apply-for-vrp">here</Link>.</Typography>
-            <Typography className={classes.title} variant="h5">Project Specific</Typography>
-            <Typography className={classes.text}>University District Street Medicine (UDSM) - all supervising providers are required to view a short training video prior to volunteering with UDSM.</Typography>
-            <Typography className={classes.text}>CHAP - all supervising providers are required to review <Link color="secondary" href="https://depts.washington.edu/fammed/wp-content/uploads/2019/01/Foot-Care-and-Foot-Exam.pptx">CHAP footcare slides</Link>.  It is also recommended that new volunteers shadow an experienced provider at a CHAP clinic.</Typography>
+            <Typography className={classes.text}>Fill out a brief survey <Link color="secondary" href="https://catalyst.uw.edu/webq/survey/clarkel/374890">here</Link>.</Typography>
+            <Typography className={classes.text}>The University requires that providers at a UWSOM service learning clinical sites apply for the free professional liability coverage through the <Link color="secondary" herf="https://www.wahealthcareaccessalliance.org/volunteers">Volunteer and Retired Provider (VRP) program</Link>.  The VRP program offers coverage for non-invasive primary and specialty care of low-income patients in qualified settings. The form is quite simple and approval takes 1-2 weeks.  To apply online click <Link color="secondary" href="https://www.wahealthcareaccessalliance.org/volunteers/apply-for-vrp#Malpractice">here</Link>.</Typography>
+            <Typography className={classes.text}>Individual projects may have additional requirements.  See project specific pages for details.</Typography>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.handleClose} color="white">

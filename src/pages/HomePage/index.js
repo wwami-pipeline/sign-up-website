@@ -21,7 +21,15 @@ const styles = theme => ({
   },
   directionTitleTop: {
     marginTop: "2em",
-    textAlign: "center"
+    textAlign: "center",
+    marginBottom: "3em",
+    maxWidth: 800,
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  directionTitleTopText: {
+    marginTop: 5,
+    textAlign: 'left'
   },
   paperContainer: {
     padding: "2em",
@@ -102,11 +110,13 @@ class HomePage extends Component {
         {/* Requirements */}
 
         <div className={classes.directionTitleTop}>
-          <Typography variant="h4">View Requirements</Typography>
+          <Typography variant="h4">Volunteer With Us</Typography>
+          <Typography className={classes.directionTitleTopText}>We invite you to explore our many opportunities for providers and students alike.  Volunteering with our program is a wonderful way to practice your clinical and teaching skills, make a difference in our community and form meaningful connections.</Typography>
+          <Typography className={classes.directionTitleTopText}>We very flexible and try to make it easy to work around busy schedules.  There is no required hourly commitment.  Simply sign up when you have the time!</Typography>
         </div>
 
         <Paper className={classes.paperContainer}>
-          <Typography variant="h5">Select Your Category</Typography>
+          <Typography variant="h4">Here's What You Need To Know To Get Started</Typography>
           <Fab
             variant="extended"
             className={classes.fabButton}
@@ -141,7 +151,7 @@ class HomePage extends Component {
 
         <div className={classes.selectionContainer}>
           <div className={classes.directionTitleBottom}>
-            <Typography variant="h4">Organizations</Typography>
+            <Typography variant="h4">Find An Opportunity</Typography>
           </div>
 
           <div className={classes.gridContainer}>
@@ -150,7 +160,8 @@ class HomePage extends Component {
                 <div className={classes.linkBoxContainer}>
                   <LinkBox
                     title="SHIFA"
-                    description="Student Health Initiative For Access"
+                    name="Student Health Initiative For Access"
+                    description="SHIFA runs six student clinics with openings for providers (MD or ARNP), medical students, and undergraduates interpreters or patient navigators."
                     imageLocation="images/SHIFA.jpg"
                     path="/SHIFA"
                     data={this.props.SHIFA}
@@ -161,7 +172,8 @@ class HomePage extends Component {
                 <div className={classes.linkBoxContainer}>
                   <LinkBox
                     title="CHAP"
-                    description="Community Health Advancement Program"
+                    name="Community Health Advancement Program"
+                    description="CHAP has openings for providers (MD, PA or ARNP), medical students, and nursing students."
                     imageLocation="images/CHAP.jpg"
                     path="/CHAP"
                     data={this.props.CHAP}
@@ -172,7 +184,8 @@ class HomePage extends Component {
                 <div className={classes.linkBoxContainer}>
                   <LinkBox
                     title="UDSM"
-                    description="University District Street Medicine"
+                    name="University District Street Medicine"
+                    description="UDSM runs six outreach projects with openings for providers and graduate students from all Health Sciences disciplines, undergraduate scribes, and law students."
                     imageLocation="images/UDSM.png"
                     path="/UDSM"
                     data={this.props.UDSM}
@@ -183,7 +196,8 @@ class HomePage extends Component {
                 <div className={classes.linkBoxContainer}>
                   <LinkBox
                     title="Doc for a Day"
-                    description="Doctor for a Day"
+                    name="DFAD"
+                    description="DFAD has openings for MD providers, medicine residents and fellows, medical students, and pre-med undergraduates with pre-approval."
                     imageLocation="images/DFAD.JPG"
                     path="/DoD"
                     data={this.props.DoD}

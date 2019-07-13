@@ -2,20 +2,21 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
 const styles = () => ({
   card: {
-    minWidth: 280
+    minWidth: 280,
   },
   image: {
     height: 200,
     objectFit: "cover"
+  },
+  disableLinkUnderline: {
+    textDecoration: 'none'
   }
 });
 
@@ -36,6 +37,7 @@ const LinkBox = props => {
               description
             }
           }}
+          className={classes.disableLinkUnderline}
         >
           <CardMedia
             component="img"
@@ -45,28 +47,18 @@ const LinkBox = props => {
             className={classes.image}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography variant="h5" component="h2">
               {props.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
+              {props.name}
+            </Typography>
+            <Typography variant="body" color="textSecondary" component="p">
               {props.description}
             </Typography>
           </CardContent>
         </Link>
       </CardActionArea>
-      <CardActions>
-        <Link
-          to={{
-            pathname: props.path,
-            state: {
-              data,
-              description
-            }
-          }}
-        >
-          <Button size="small">Volunteer</Button>
-        </Link>
-      </CardActions>
     </Card>
   );
 };

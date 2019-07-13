@@ -36,11 +36,8 @@ class UndergraduateRequirements extends React.Component {
         >
           <DialogTitle><Typography variant="h4">Undergraduate Student Requirements</Typography></DialogTitle>
           <DialogContent className={this.props.dialogContent}>
-            <Typography className={classes.title} variant="h5">All Projects</Typography>
-            <Typography className={classes.text}>All undergraduates are required to complete a HIPAA training prior to volunteering at any of our sites.</Typography>
-            <Typography className={classes.title} variant="h5">Project Specific</Typography>
-            <Typography className={classes.text}>SHIFA: Undergraduate interpreters are required to attend a SHIFA interpreter training.</Typography>
-            <Typography className={classes.text}>University District Street Medicine (UDSM) - all undergraduate students must complete an <Link color="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSfJ4khjNkzWZoR9jSKnLcTTihSSvaiKPNlXb8CQxa0Xvgodbg/viewform">online application form</Link> are required to view a short training video prior to volunteering with UDSM.</Typography>
+            <Typography className={classes.text}>Undergraduate students are required to complete an online HIPAA certification training.  Contact Leonora Clarke (clarkel@uw.edu) for details.</Typography>
+            <Typography className={classes.text}>Individual projects may have additional requirements.  See project specific pages for details.</Typography>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.handleClose} color="white">
