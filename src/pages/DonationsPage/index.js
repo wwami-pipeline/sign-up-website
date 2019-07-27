@@ -60,7 +60,7 @@ class AboutPage extends Component {
             <Fab
               variant="extended"
               className={classes.fabButton}
-              href=""
+              href="http://depts.washington.edu/givemed/give/?page=make&source=servmd"
             >
               Make A Gift
             </Fab>
