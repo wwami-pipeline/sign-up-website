@@ -34,7 +34,7 @@ const styles = theme => ({
   paperContainer: {
     padding: "2em",
     margin: "1.5em",
-    maxWidth: 850,
+    maxWidth: 900,
     marginLeft: "auto",
     marginRight: "auto"
   },
@@ -46,7 +46,7 @@ const styles = theme => ({
     textAlign: "center"
   },
   selectionContainer: {
-    maxWidth: 900,
+    maxWidth: 950,
     marginLeft: "auto",
     marginRight: "auto",
     textAlign: "center",
@@ -161,10 +161,9 @@ class HomePage extends Component {
                   <LinkBox
                     title="SHIFA"
                     name="Student Health Initiative For Access"
-                    description="SHIFA runs six student clinics with openings for providers (MD or ARNP), medical students, and undergraduates interpreters or patient navigators."
+                    description={this.props.overviews.SHIFA}
                     imageLocation="images/SHIFA.jpg"
                     path="/SHIFA"
-                    data={this.props.SHIFA}
                   />
                 </div>
               </Grid>
@@ -173,10 +172,9 @@ class HomePage extends Component {
                   <LinkBox
                     title="CHAP"
                     name="Community Health Advancement Program"
-                    description="CHAP has openings for providers (MD, PA or ARNP), medical students, and nursing students."
+                    description={this.props.overviews.CHAP}
                     imageLocation="images/CHAP.jpg"
                     path="/CHAP"
-                    data={this.props.CHAP}
                   />
                 </div>
               </Grid>
@@ -185,10 +183,9 @@ class HomePage extends Component {
                   <LinkBox
                     title="UDSM"
                     name="University District Street Medicine"
-                    description="UDSM runs six outreach projects with openings for providers and graduate students from all Health Sciences disciplines, undergraduate scribes, and law students."
+                    description={this.props.overviews.UDSM}
                     imageLocation="images/UDSM.png"
                     path="/UDSM"
-                    data={this.props.UDSM}
                   />
                 </div>
               </Grid>
@@ -197,10 +194,9 @@ class HomePage extends Component {
                   <LinkBox
                     title="Doc for a Day"
                     name="DFAD"
-                    description="DFAD has openings for MD providers, medicine residents and fellows, medical students, and pre-med undergraduates with pre-approval."
+                    description={this.props.overviews.DFAD}
                     imageLocation="images/DFAD.JPG"
                     path="/DoD"
-                    data={this.props.DoD}
                   />
                 </div>
               </Grid>

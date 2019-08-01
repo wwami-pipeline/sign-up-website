@@ -16,7 +16,7 @@ const styles = () => ({
     marginBottom: '1em'
   },
   card: {
-    paddingBottom: '1em'
+    paddingBottom: 5,
   },
   textItem: {
     marginBottom: 8
@@ -77,6 +77,9 @@ class OrgItemModal extends React.Component {
             </Typography>
             <Typography gutterBottom align="left" component="p">
               <b>Location: </b> {project['Location']}
+            </Typography>
+            <Typography align="left" component="p">
+              <b>Description: </b> {project['Description']}
             </Typography>
           </CardContent>
           <CardActions>

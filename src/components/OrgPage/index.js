@@ -77,7 +77,7 @@ class OrgPage extends Component {
             <Typography className={classes.title} gutterBottom variant="h4">
               {title}
             </Typography>
-            <Typography className={classes.title} gutterBottom variant="h5">
+            <Typography className={classes.title} gutterBottom variant="h6">
               {description}
             </Typography>
             <Grid container spacing={24}>

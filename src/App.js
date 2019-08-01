@@ -61,27 +61,72 @@ class App extends Component {
       UDSM,
       DoD
     };
+
+    let overviews = {};
+    db.ref('/Overviews')
+      .once('value')
+      .then(value => {
+        this.state.overviews = value.toJSON();
+        this.forceUpdate();
+      });
+
+    this.state = {
+      SHIFA,
+      CHAP,
+      UDSM,
+      DoD,
+      overviews
+    };
   }
   render() {
+    console.log(this.state.overviews);
     return (
       <Router>
         <Switch>
           <Route
-            exact
-            path="/"
+            exact path="/"
+            render={() => {return this.state.overviews ? <HomePage overviews={this.state.overviews} /> : <div />}}
+          />
+          <Route
+            path="/SHIFA"
             render={() => (
-              <HomePage
-                SHIFA={this.state.SHIFA}
-                CHAP={this.state.CHAP}
-                UDSM={this.state.UDSM}
-                DoD={this.state.DoD}
+              <OrgPage
+                projects={this.state.SHIFA}
+                description={this.state.overviews.SHIFA}
+                title="SHIFA"
               />
             )}
           />
-          <Route path="/SHIFA" render={() => <OrgPage projects={this.state.SHIFA} description="" title="SHIFA"/>} />
-          <Route path="/CHAP" render={() => <OrgPage projects={this.state.CHAP} description="" title="CHAP"/>} />
-          <Route path="/UDSM" render={() => <OrgPage projects={this.state.UDSM} description="" title="UDSM"/>} />
-          <Route path="/Dod" crender={() => <OrgPage projects={this.state.DoD} description="" title="DoD"/>} />
+          <Route
+            path="/CHAP"
+            render={() => (
+              <OrgPage
+                projects={this.state.CHAP}
+                description={this.state.overviews.CHAP}
+                title="CHAP"
+              />
+            )}
+          />
+          <Route
+            path="/UDSM"
+            render={() => (
+              <OrgPage
+                projects={this.state.UDSM}
+                description={this.state.overviews.UDSM}
+                title="UDSM"
+              />
+            )}
+          />
+          <Route
+            path="/Dod"
+            crender={() => (
+              <OrgPage
+                projects={this.state.DoD}
+                description={this.state.overviews.DoD}
+                title="DoD"
+              />
+            )}
+          />
           <Route path="/about" component={AboutPage} />
           <Route path="/contact" component={ContactPage} />
           <Route path="/donate" component={DonatePage} />
