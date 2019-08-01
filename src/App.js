@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
-import DonatePage from "./pages/DonationsPage";
-import firebase from "firebase";
-import config from "./config";
-import { Switch } from "react-router-dom";
-import OrgPage from "./components/OrgPage";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import DonatePage from './pages/DonationsPage';
+import firebase from 'firebase';
+import config from './config';
+import { Switch } from 'react-router-dom';
+import OrgPage from './components/OrgPage';
 
 class App extends Component {
   constructor(props) {
@@ -16,8 +16,8 @@ class App extends Component {
     const db = firebase.database();
 
     let SHIFA = [];
-    db.ref("/SHIFA")
-      .once("value")
+    db.ref('/SHIFA')
+      .once('value')
       .then(value => {
         const items = value.toJSON();
         for (let key in items) {
@@ -26,8 +26,8 @@ class App extends Component {
       });
 
     let CHAP = [];
-    db.ref("/CHAP")
-      .once("value")
+    db.ref('/CHAP')
+      .once('value')
       .then(value => {
         const items = value.toJSON();
         for (let key in items) {
@@ -36,8 +36,8 @@ class App extends Component {
       });
 
     let UDSM = [];
-    db.ref("/UDSM")
-      .once("value")
+    db.ref('/UDSM')
+      .once('value')
       .then(value => {
         const items = value.toJSON();
         for (let key in items) {
@@ -46,8 +46,8 @@ class App extends Component {
       });
 
     let DoD = [];
-    db.ref("/DoD")
-      .once("value")
+    db.ref('/DoD')
+      .once('value')
       .then(value => {
         const items = value.toJSON();
         for (let key in items) {
@@ -67,7 +67,8 @@ class App extends Component {
       <Router>
         <Switch>
           <Route
-            exact path="/"
+            exact
+            path="/"
             render={() => (
               <HomePage
                 SHIFA={this.state.SHIFA}
@@ -77,13 +78,13 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/SHIFA" component={OrgPage}/>
-          <Route path="/CHAP" component={OrgPage}/>
-          <Route path="/UDSM" component={OrgPage}/>
-          <Route path="/Dod" component={OrgPage}/>
-          <Route path="/about" component={AboutPage} />   
-          <Route path="/contact" component={ContactPage} />   
-          <Route path="/donate" component={DonatePage} />           
+          <Route path="/SHIFA" render={() => <OrgPage projects={this.state.SHIFA} description="" title="SHIFA"/>} />
+          <Route path="/CHAP" render={() => <OrgPage projects={this.state.CHAP} description="" title="CHAP"/>} />
+          <Route path="/UDSM" render={() => <OrgPage projects={this.state.UDSM} description="" title="UDSM"/>} />
+          <Route path="/Dod" crender={() => <OrgPage projects={this.state.DoD} description="" title="DoD"/>} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/contact" component={ContactPage} />
+          <Route path="/donate" component={DonatePage} />
         </Switch>
       </Router>
     );

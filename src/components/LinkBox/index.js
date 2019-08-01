@@ -22,20 +22,13 @@ const styles = () => ({
 
 const LinkBox = props => {
   const { classes } = props;
-  const data = props.data;
-  const description = props.description;
 
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        {/* <Link to={props.path} render={(data) => {return(<UDSM {...data} {...props}  />)}}> */}
         <Link
           to={{
-            pathname: props.path,
-            state: {
-              data,
-              description
-            }
+            pathname: props.path
           }}
           className={classes.disableLinkUnderline}
         >
