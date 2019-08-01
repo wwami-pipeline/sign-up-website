@@ -14,6 +14,9 @@ const styles = theme => ({
     page: {
         overflow: "hidden"
     },
+    title: {
+        marginBottom: '1em'
+    },
     directionTitleTop: {
         marginTop: "2em",
         textAlign: "center"
@@ -21,7 +24,7 @@ const styles = theme => ({
     paperContainer: {
         padding: "2em",
         margin: "1.5em",
-        maxWidth: 850,
+        maxWidth: '85%',
         marginLeft: "auto",
         marginRight: "auto"
     },
@@ -33,7 +36,7 @@ const styles = theme => ({
         textAlign: "center"
     },
     selectionContainer: {
-        maxWidth: 900,
+        maxWidth: '90%',
         marginLeft: "auto",
         marginRight: "auto",
         textAlign: "center",
@@ -71,7 +74,7 @@ class UDSM extends Component {
 
                 <div className={classes.selectionContainer}>
                     <div className={classes.directionTitleBottom}>
-                        <Typography gutterBottom variant="h4">{description}</Typography>
+                        <Typography className={classes.title} gutterBottom variant="h5">{description}</Typography>
                         <Grid container spacing={24}>
                             {projects.map((project) => {
                                 return(
@@ -79,15 +82,12 @@ class UDSM extends Component {
                                         <Card className={classes.card}>
                                             <CardContent>
                                                 <Typography gutterBottom align="left" variant="h4">{project['Title']}</Typography>
-                                                <Typography gutterBottom align="left" component="p">{project['Community Partner']}</Typography>
-                                                <Typography gutterBottom align="left" component="p">{project['Location']}</Typography>
-                                                <Typography gutterBottom align="left" component="p">{project['Shift']}</Typography>
-                                                <Typography gutterBottom align="left" component="p">{project['Project Description']}</Typography>
-                                                <Typography gutterBottom align="left" component="p">{project['Required Training for Students']}</Typography>
-                                                <Typography gutterBottom align="left" component="p">{project['Student Volunteer Information']}</Typography>
-                                                <Typography gutterBottom align="left" component="p">{project['Undergraduate Students']}</Typography>
-                                                <Typography gutterBottom align="left" component="p">{project['Other Requirements for Preceptors']}</Typography>
-                                                <Typography align="left" component="p">{project['Website Link']}</Typography>
+                                                {Object.keys(project).map(key => {
+                                                    if(key !== 'Title')
+                                                        return <Typography gutterBottom align="left" component="p"><b>{key}:</b>{project[key]}</Typography>
+                                                    return <div/>
+                                                })}
+                                                {/* <Typography align="left" component="p">{project['Website Link']}</Typography> */}
                                             </CardContent>
                                         </Card>
                                     </Grid>
