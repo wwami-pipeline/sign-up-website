@@ -8,6 +8,7 @@ import firebase from 'firebase';
 import config from './config';
 import { Switch } from 'react-router-dom';
 import OrgPage from './components/OrgPage';
+import ProceduresPage from './pages/ProceduresPage';
 
 class App extends Component {
   constructor(props) {
@@ -130,6 +131,7 @@ class App extends Component {
           <Route path="/about" component={AboutPage} />
           <Route path="/contact" component={ContactPage} />
           <Route path="/donate" component={DonatePage} />
+          <Route path="/procedures" component={ProceduresPage} />
         </Switch>
       </Router>
     );
