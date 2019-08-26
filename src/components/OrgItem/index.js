@@ -16,10 +16,13 @@ const styles = () => ({
     marginBottom: '1em'
   },
   card: {
-    paddingBottom: 5,
+    paddingBottom: 5
   },
   textItem: {
     marginBottom: 8
+  },
+  indentText: {
+    paddingLeft: 10
   }
 });
 
@@ -55,7 +58,9 @@ class OrgItemModal extends React.Component {
                     component="p"
                   >
                     <b>{key}:</b>
-                    {project[key]}
+                    {project[key].split('\n').map((item, i) => {
+                      return <p className={classes.indentText} key={i}>{item}</p>;
+                    })}
                   </Typography>
                 );
               return <div />;
