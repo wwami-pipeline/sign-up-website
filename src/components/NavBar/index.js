@@ -4,8 +4,7 @@ import {
     AppBar,
     Tab,
     Tabs,
-    Typography,
-    createMuiTheme,
+    Typography
   } from "@material-ui/core";
 
 import './index.css';
