@@ -7,11 +7,12 @@ import {
 } from "@material-ui/core";
 import NavBar from "../../components/NavBar";
 
-const styles = theme => ({
+const styles = () => ({
   page: {
     overflow: "hidden"
   },
   description: {
+    fontFamily: 'Lato',
     maxWidth: 750,
     textAlign: "center",
     marginBottom: "50px",
@@ -21,6 +22,7 @@ const styles = theme => ({
   },
 
   directionTitleTop: {
+    fontFamily: 'Lato',
     marginTop: "2em",
     textAlign: "center",
     marginBottom: "15px"
@@ -36,13 +38,10 @@ class AboutPage extends Component {
         <CssBaseline />
         <AppBar position="static">
           <NavBar />          
-        </AppBar>
-
-        <div className={classes.directionTitleTop}>
-          <Typography variant="h4">Our Goal</Typography>
-        </div>
+        </AppBar>      
       
         <div>
+          <Typography className={classes.directionTitleTop} variant="h4">Our Goal</Typography>
           <Typography variant="subtitle1" className={classes.description}>
             The UW School of Medicine's Service Learning program strives to enrich medical education
             by providing our students with opportunities to hone their skills while addressing the

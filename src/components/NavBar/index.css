@@ -1,6 +1,16 @@
 .toolbar-logo {
-  text-align: left;
-  margin: 15px 0px 0px 30px;
+  margin: 20px 0px 0px 15px;
+  height: 35px;
+}
+
+.toolbar-title {
+  margin: 5px 0px 20px 15px;
+  height: 35px;
+}
+
+.wwami-logo {
+  margin: 15px 15px 0px 15px;
+  height: 80px;
 }
 
 .toolbar-tabs a {
@@ -20,6 +30,7 @@
 }
 
 .tabLabel {
+  color: #440088;
   font-size: 1.2em;
   font-weight: bold;
 }

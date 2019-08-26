@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import NavBar from "../../components/NavBar";
 
-const styles = theme => ({
+const styles = () => ({
   page: {
     overflow: "hidden"
   },
@@ -18,6 +18,7 @@ const styles = theme => ({
     marginRight: "auto"
   },
   topDonationText: {
+    fontFamily: 'Lato',
     maxWidth: 850,
     marginTop: "3em",
     textAlign: "center",

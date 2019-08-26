@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppBar, withStyles, Typography, CssBaseline } from '@material-ui/core';
 import NavBar from '../../components/NavBar';
 
-const styles = theme => ({
+const styles = () => ({
   page: {
     overflow: 'hidden',
     paddingBottom: '2em'
@@ -21,6 +21,7 @@ const styles = theme => ({
     color: 'white'
   },
   directionTitleTop: {
+    fontFamily: 'Lato',
     marginTop: '2em',
     textAlign: 'center',
     marginBottom: '15px'
@@ -38,8 +39,8 @@ class AboutPage extends Component {
           <NavBar />
         </AppBar>
 
-        <div className={classes.directionTitleTop}>
-          <Typography variant="h4">UWSOM Learning Procedures</Typography>
+        <div>
+          <Typography className={classes.directionTitleTop} variant="h4">UWSOM Learning Procedures</Typography>
         </div>
 
         <div>

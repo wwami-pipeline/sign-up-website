@@ -1,18 +1,29 @@
 import React, { Fragment } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import AppBar from "@material-ui/core/AppBar";
+import {
+    AppBar,
+    Tab,
+    Tabs,
+    Typography,
+    createMuiTheme,
+  } from "@material-ui/core";
 
 import './index.css';
 
 const NavBar = () => {
     return(
-      <div className="App">    
+      <div className="App">
             <Fragment>
-                <AppBar position="static">
-                    <div className="toolbar-logo">
-                        <img alt="UW School of Medicine Volunteer Logo" src="/images/header2.png" width="600px"/>
+                <AppBar position="dynamic">
+                    <div>
+                      <div style={{float:'left'}}>
+                        <img className="toolbar-logo" alt="UW School of Medicine Volunteer Logo" src="/images/uw_name_logo.jpg" />
+                        <br/>
+                        <Typography style={{color:'#440088', fontWeight: 'bold', margin: '0px 0px 0px 20px'}} variant='h5'>SCHOOL OF MEDICINE SERVICE LEARNING</Typography>
+                      </div>
+                      <div style={{display:'inline'}}>
+                        <img className="wwami-logo" alt="UW School of Medicine Volunteer Logo" src="/images/wwami_logo.png" />
+                      </div>
                     </div>
                     <Tabs>
                         <Tab label={<span className="tabLabel">Home</span>} value="/" component={Link} to="/" />
@@ -20,9 +31,6 @@ const NavBar = () => {
                         <Tab label={<span className="tabLabel">About Us</span>} value="/about" component={Link} to="/about" />
                         <Tab label={<span className="tabLabel">Contact Us</span>} value="/contact" component={Link} to="/contact" />
                         <Tab label={<span className="tabLabel">Donate</span>} value="/donate" component={Link} to="/donate" />
-                        {/* <Tab label={<span className="tabLabel">Gallery</span>} value="/gallery" component={Link} to="/gallery" />
-                        <Tab label={<span className="tabLabel">Contact Us</span>} value="/contact" component={Link} to="/contact" />
-                        <Tab label={<span className="tabLabel">Login / Create Account</span>} value="/login" component={Link} to="/login" /> */}
                 </Tabs>
                 <Switch>
                     <Route exact path="/" />

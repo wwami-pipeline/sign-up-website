@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  AppBar,
   withStyles,
   Typography,
   CssBaseline,
@@ -15,56 +14,76 @@ import UndergraduateRequirements from "../../components/UndergraduateRequirement
 import ProviderRequirements from "../../components/ProviderRequirements";
 import NavBar from "../../components/NavBar";
 
-const styles = theme => ({
-  page: {
-    overflow: "hidden"
-  },
-  directionTitleTop: {
-    marginTop: "2em",
-    textAlign: "center",
-    marginBottom: "3em",
-    maxWidth: 800,
-    marginLeft: "auto",
-    marginRight: "auto"
-  },
-  directionTitleTopText: {
-    marginTop: 5,
-    textAlign: 'left'
-  },
-  paperContainer: {
-    padding: "2em",
-    margin: "1.5em",
-    maxWidth: 900,
-    marginLeft: "auto",
-    marginRight: "auto"
-  },
-  fabButton: {
-    marginRight: "1em",
-    marginTop: "1em"
-  },
-  directionTitleBottom: {
-    textAlign: "center"
-  },
-  selectionContainer: {
-    maxWidth: 950,
-    marginLeft: "auto",
-    marginRight: "auto",
-    textAlign: "center",
-    padding: "2em",
-    paddingBottom: "5em",
-    margin: "1em"
-  },
-  gridContainer: {
-    marginTop: "1.5em",
-    marginBottom: "1em",
-    marginLeft: "auto",
-    marginRight: "auto"
-  },
-  linkBoxContainer: {
-    mariginLeft: "auto",
-    marginRight: "auto"
-  }
-});
+const styles = () => {
+  return ({
+    page: {
+      overflow: "hidden"
+    },
+    directionTitleTop: {
+      marginTop: "2em",
+      textAlign: "center",
+      marginBottom: "3em",
+      maxWidth: 800,
+      marginLeft: "auto",
+      marginRight: "auto"
+    },
+    directionTitleHeader: {
+      fontSize: '2em',
+      textAlign: 'center'
+    },
+    directionTitleHeaderBold: {
+      fontSize: '2.4em',
+      fontWeight: 'bold',
+      textAlign: 'center'
+    },
+    directionTitleTopText: {
+      fontSize: '1.2em',
+      marginTop: 5,
+      textAlign: 'left'
+    },
+    directionTitleBottom: {
+      textAlign: "center"
+    },
+    fabButton: {
+      fontFamily: 'Lato',
+      fontWeight: 'bold',
+      fontSize: '1.1em',
+      width: '400px',
+      marginRight: '1em',
+      marginTop: '1em'
+    },
+    fabButtonHolder: {
+      textAlign: 'center'
+    },
+    paperContainer: {
+      backgroundColor: '#513E6D',
+      padding: "2em",
+      margin: "1.5em",
+      maxWidth: 900,
+      marginLeft: "auto",
+      marginRight: "auto"
+    },
+    selectionContainer: {
+      maxWidth: 950,
+      marginLeft: "auto",
+      marginRight: "auto",
+      textAlign: "center",
+      padding: "2em",
+      paddingBottom: "5em",
+      margin: "1em"
+    },
+    gridContainer: {
+      marginTop: "1.5em",
+      marginBottom: "1em",
+      marginLeft: "auto",
+      marginRight: "auto"
+    },
+    linkBoxContainer: {
+      mariginLeft: "auto",
+      marginRight: "auto"
+    }
+  });
+};
 
 class HomePage extends Component {
   state = {
@@ -80,9 +99,7 @@ class HomePage extends Component {
     return (
       <div className={classes.page}>
         <CssBaseline />
-        <AppBar position="static">
-          <NavBar />
-        </AppBar>
+        <NavBar />
 
         {/* Modals */}
 
@@ -110,48 +127,52 @@ class HomePage extends Component {
         {/* Requirements */}
 
         <div className={classes.directionTitleTop}>
-          <Typography variant="h4">Volunteer With Us</Typography>
+          <Typography className={classes.directionTitleHeaderBold}>VOLUNTEER WITH US</Typography>
           <Typography className={classes.directionTitleTopText}>We invite you to explore our many opportunities for providers and students alike.  Volunteering with our program is a wonderful way to practice your clinical and teaching skills, make a difference in our community and form meaningful connections.</Typography>
           <Typography className={classes.directionTitleTopText}>We very flexible and try to make it easy to work around busy schedules.  There is no required hourly commitment.  Simply sign up when you have the time!</Typography>
         </div>
 
         <Paper className={classes.paperContainer}>
-          <Typography variant="h4">Here's What You Need To Know To Get Started</Typography>
-          <Fab
-            variant="extended"
-            className={classes.fabButton}
-            onClick={() => this.setState({ providerRequirementsOpen: true })}
-          >
-            Providers
-          </Fab>
-          <Fab
-            variant="extended"
-            className={classes.fabButton}
-            onClick={() => this.setState({ medicalRequirementsOpen: true })}
-          >
+          <Typography className={classes.directionTitleHeader}>Here's What You Need To Know To Get Started</Typography>
+          <div className={classes.fabButtonHolder}>
+            <Fab
+              variant="extended"
+              className={classes.fabButton}
+              onClick={() => this.setState({ providerRequirementsOpen: true })}
+            >
+              Providers
+            </Fab>
+            <Fab
+              variant="extended"
+              className={classes.fabButton}
+              onClick={() => this.setState({ medicalRequirementsOpen: true })}
+            >
             Medical Students
-          </Fab>
-          <Fab
-            variant="extended"
-            className={classes.fabButton}
-            onClick={() => this.setState({ otherGradRequirementsOpen: true })}
-          >
-            Other Health Science Graduate Students
-          </Fab>
-          <Fab
-            variant="extended"
-            className={classes.fabButton}
-            onClick={() => this.setState({ undergradRequirementsOpen: true })}
-          >
-            Undergraduates
-          </Fab>
+            </Fab>
+          </div>
+          <div className={classes.fabButtonHolder}>
+            <Fab
+              variant="extended"
+              className={classes.fabButton}
+              onClick={() => this.setState({ otherGradRequirementsOpen: true })}
+            >
+              Other HS Graduate Students
+            </Fab>
+            <Fab
+              variant="extended"
+              className={classes.fabButton}
+              onClick={() => this.setState({ undergradRequirementsOpen: true })}
+            >
+              Undergraduates
+            </Fab>
+          </div>
         </Paper>
 
         {/* Organizations */}
 
         <div className={classes.selectionContainer}>
           <div className={classes.directionTitleBottom}>
-            <Typography variant="h4">Find An Opportunity</Typography>
+            <Typography className={classes.directionTitleHeaderBold}>FIND AN OPPORTUNITY</Typography>
           </div>
 
           <div className={classes.gridContainer}>

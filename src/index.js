@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
-import purple from "@material-ui/core/colors/purple";
 
 import App from "./App";
 
@@ -10,13 +9,18 @@ import registerServiceWorker from "./registerServiceWorker";
 // Global Theme
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
-    primary: purple
+    background: {
+      default: "#2E1159"
+    },
+    fontFamily: 'Lato',
+    primary: { 500: '#FFFFFF'},
+    type: 'dark'
   }
 });
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"/>
     <App />
   </MuiThemeProvider>,
   document.getElementById("root")

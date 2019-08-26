@@ -9,7 +9,7 @@ import {
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
 
-const styles = theme => ({
+const styles = () => ({
   page: {
     overflow: 'hidden'
   },
