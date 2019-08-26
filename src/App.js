@@ -46,13 +46,14 @@ class App extends Component {
         }
       });
 
-    let DoD = [];
-    db.ref('/DoD')
+    let DFAD = [];
+    db.ref('/DFAD')
       .once('value')
       .then(value => {
         const items = value.toJSON();
         for (let key in items) {
-          DoD.push(items[key]);
+          console.log("PUSH: " + items[key]);
+          DFAD.push(items[key]);
         }
       });
 
@@ -60,7 +61,7 @@ class App extends Component {
       SHIFA,
       CHAP,
       UDSM,
-      DoD
+      DFAD
     };
 
     let overviews = {};
@@ -75,12 +76,11 @@ class App extends Component {
       SHIFA,
       CHAP,
       UDSM,
-      DoD,
+      DFAD,
       overviews
     };
   }
   render() {
-    console.log(this.state.overviews);
     return (
       <Router>
         <Switch>
@@ -119,12 +119,12 @@ class App extends Component {
             )}
           />
           <Route
-            path="/Dod"
-            crender={() => (
+            path="/DFAD"
+            render={() => (
               <OrgPage
-                projects={this.state.DoD}
-                description={this.state.overviews.DoD}
-                title="DoD"
+                projects={this.state.DFAD}
+                description={this.state.overviews.DFAD}
+                title="DFAD"
               />
             )}
           />

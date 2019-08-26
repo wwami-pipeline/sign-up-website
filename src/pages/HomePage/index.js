@@ -217,7 +217,7 @@ class HomePage extends Component {
                     name="DFAD"
                     description={this.props.overviews.DFAD}
                     imageLocation="images/DFAD.JPG"
-                    path="/DoD"
+                    path="/DFAD"
                   />
                 </div>
               </Grid>
