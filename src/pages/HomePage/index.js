@@ -50,7 +50,7 @@ const styles = () => {
       fontSize: '1.1em',
       width: '400px',
       marginRight: '1em',
-      marginTop: '1em'
+      marginTop: '1em',
     },
     fabButtonHolder: {
       textAlign: 'center'
@@ -135,14 +135,16 @@ class HomePage extends Component {
         <Paper className={classes.paperContainer}>
           <Typography className={classes.directionTitleHeader}>Here's What You Need To Know To Get Started</Typography>
           <div className={classes.fabButtonHolder}>
-            <Fab
+            <Fab color="secondary"
+              style={{color: "#2E1159"}}
               variant="extended"
               className={classes.fabButton}
               onClick={() => this.setState({ providerRequirementsOpen: true })}
             >
               Providers
             </Fab>
-            <Fab
+            <Fab color="secondary"
+              style={{color: "#2E1159"}}
               variant="extended"
               className={classes.fabButton}
               onClick={() => this.setState({ medicalRequirementsOpen: true })}
@@ -151,14 +153,16 @@ class HomePage extends Component {
             </Fab>
           </div>
           <div className={classes.fabButtonHolder}>
-            <Fab
+            <Fab color="secondary"
+              style={{color: "#2E1159"}}
               variant="extended"
               className={classes.fabButton}
               onClick={() => this.setState({ otherGradRequirementsOpen: true })}
             >
               Other HS Graduate Students
             </Fab>
-            <Fab
+            <Fab color="secondary"
+              style={{color: "#2E1159"}}
               variant="extended"
               className={classes.fabButton}
               onClick={() => this.setState({ undergradRequirementsOpen: true })}
@@ -181,7 +185,7 @@ class HomePage extends Component {
                 <div className={classes.linkBoxContainer}>
                   <LinkBox
                     title="SHIFA"
-                    name="Student Health Initiative For Access"
+                    name="STUDENT HEALTH INITIATIVE FOR ACCESS"
                     description={this.props.overviews.SHIFA}
                     imageLocation="images/SHIFA.jpg"
                     path="/SHIFA"
@@ -192,7 +196,7 @@ class HomePage extends Component {
                 <div className={classes.linkBoxContainer}>
                   <LinkBox
                     title="CHAP"
-                    name="Community Health Advancement Program"
+                    name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
                     description={this.props.overviews.CHAP}
                     imageLocation="images/CHAP.jpg"
                     path="/CHAP"
@@ -203,7 +207,7 @@ class HomePage extends Component {
                 <div className={classes.linkBoxContainer}>
                   <LinkBox
                     title="UDSM"
-                    name="University District Street Medicine"
+                    name="UNIVERSITY DISTRICT STREET MEDICINE"
                     description={this.props.overviews.UDSM}
                     imageLocation="images/UDSM.png"
                     path="/UDSM"

@@ -14,6 +14,7 @@ const theme = createMuiTheme({
     },
     fontFamily: 'Lato',
     primary: { 500: '#FFFFFF'},
+    secondary: {main: '#F4EFA8'},
     type: 'dark'
   }
 });

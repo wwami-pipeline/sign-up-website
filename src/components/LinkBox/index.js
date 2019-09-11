@@ -1,10 +1,11 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles,
+  Typography
+} from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
 const styles = () => ({
@@ -39,14 +40,14 @@ const LinkBox = props => {
             title={props.title}
             className={classes.image}
           />
-          <CardContent>
-            <Typography variant="h5" component="h2">
+          <CardContent style={{ backgroundColor: "#F4EFA8" }}>
+            <Typography variant="h5" style={{color: "#2E1159", fontFamily: "Lato"}} component="h2">
               {props.title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body2" style={{color: "#2E1159", fontWeight: "bold", fontFamily: "Lato"}} component="h3">
               {props.name}
             </Typography>
-            <Typography variant="body" color="textSecondary" component="p">
+            <Typography variant="body" style={{color: "#2E1159", fontFamily: "Lato"}} component="p">
               {props.description}
             </Typography>
           </CardContent>
