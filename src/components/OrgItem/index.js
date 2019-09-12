@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Card, CardContent, CardActions } from '@material-ui/core';
 import React from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 const styles = () => ({
