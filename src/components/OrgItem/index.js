@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Card, CardContent, CardActions } from '@material-ui/core';
 import React from 'react';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 const styles = () => ({
   title: {
@@ -35,13 +37,14 @@ class OrgItemModal extends React.Component {
   }
 
   render() {
-    const { classes, project } = this.props;
+    const { fullScreen, classes, project } = this.props;
     return (
       <div>
         <Dialog
           open={this.state.modalOpen}
           onClose={() => this.setState({ modalOpen: false })}
-          fullWidth
+          fullWidth={!fullScreen}
+          fullScreen={fullScreen}
           maxWidth="lg"
         >
           <DialogTitle>
@@ -59,7 +62,11 @@ class OrgItemModal extends React.Component {
                   >
                     <b>{key}:</b>
                     {project[key].split('\n').map((item, i) => {
-                      return <p className={classes.indentText} key={i}>{item}</p>;
+                      return (
+                        <p className={classes.indentText} key={i}>
+                          {item}
+                        </p>
+                      );
                     })}
                   </Typography>
                 );
@@ -101,4 +108,4 @@ class OrgItemModal extends React.Component {
   }
 }
 
-export default withStyles(styles)(OrgItemModal);
+export default withMobileDialog()(withStyles(styles)(OrgItemModal));
