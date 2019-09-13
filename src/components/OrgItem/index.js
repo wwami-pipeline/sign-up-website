@@ -13,12 +13,14 @@ const styles = () => ({
     marginBottom: '.5em'
   },
   text: {
+    fontFamily: 'Lato',
     marginBottom: '1em'
   },
   card: {
     paddingBottom: 5,
   },
   textItem: {
+    fontFamily: 'Lato',
     marginBottom: 8
   }
 });
@@ -39,8 +41,7 @@ class OrgItemModal extends React.Component {
           open={this.state.modalOpen}
           onClose={() => this.setState({ modalOpen: false })}
           fullWidth
-          maxWidth="lg"
-        >
+          maxWidth="lg">
           <DialogTitle>
             <Typography variant="h4">{project['Title']}</Typography>
           </DialogTitle>
@@ -72,21 +73,19 @@ class OrgItemModal extends React.Component {
         </Dialog>
         <Card className={classes.card}>
           <CardContent>
-            <Typography gutterBottom align="left" variant="h5">
+            <Typography className={classes.text} gutterBottom align="left" variant="h5">
               {project['Title']}
             </Typography>
-            <Typography gutterBottom align="left" component="p">
+            <Typography className={classes.text} gutterBottom align="left" component="p">
               <b>Location: </b> {project['Location']}
             </Typography>
-            <Typography align="left" component="p">
+            <Typography className={classes.text} align="left" component="p">
               <b>Description: </b> {project['Description']}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button
-              size="small"
-              onClick={() => this.setState({ modalOpen: true })}
-            >
+            <Button className={classes.text} size="small" 
+              onClick={() => this.setState({ modalOpen: true })}>
               View
             </Button>
           </CardActions>

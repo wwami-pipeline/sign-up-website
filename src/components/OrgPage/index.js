@@ -14,6 +14,7 @@ const styles = () => ({
     overflow: 'hidden'
   },
   title: {
+    fontFamily: 'Lato',
     marginBottom: '1em'
   },
   directionTitleTop: {

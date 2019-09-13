@@ -8,6 +8,7 @@ const styles = () => ({
     paddingBottom: '2em'
   },
   title: {
+    fontFamily: 'Lato',
     marginTop: '1em',
     maxWidth: 750,
     marginLeft: 'auto',
@@ -15,6 +16,7 @@ const styles = () => ({
     color: 'white'
   },
   description: {
+    fontFamily: 'Lato',
     maxWidth: 750,
     marginLeft: 'auto',
     marginRight: 'auto',

@@ -17,6 +17,9 @@ const styles = () => ({
   },
   disableLinkUnderline: {
     textDecoration: 'none'
+  },
+  text: {
+    fontFamily: 'Lato'
   }
 });
 
@@ -40,13 +43,13 @@ const LinkBox = props => {
             className={classes.image}
           />
           <CardContent>
-            <Typography variant="h5" component="h2">
+            <Typography className={classes.text} variant="h5" component="h2">
               {props.title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography className={classes.text} variant="body2" color="textSecondary" component="p">
               {props.name}
             </Typography>
-            <Typography variant="body" color="textSecondary" component="p">
+            <Typography className={classes.text} variant="body" color="textSecondary" component="p">
               {props.description}
             </Typography>
           </CardContent>

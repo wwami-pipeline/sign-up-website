@@ -28,15 +28,18 @@ const styles = () => {
       marginRight: "auto"
     },
     directionTitleHeader: {
+      fontFamily: 'Lato',
       fontSize: '2em',
       textAlign: 'center'
     },
     directionTitleHeaderBold: {
+      fontFamily: 'Lato',
       fontSize: '2.4em',
       fontWeight: 'bold',
       textAlign: 'center'
     },
     directionTitleTopText: {
+      fontFamily: 'Lato',
       fontSize: '1.2em',
       marginTop: 5,
       textAlign: 'left'

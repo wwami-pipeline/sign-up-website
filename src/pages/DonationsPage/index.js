@@ -24,6 +24,7 @@ const styles = () => ({
     textAlign: "center",
   },
   donationText: {
+    fontFamily: 'Lato',
     maxWidth: 850,
     marginTop: "1em",
     textAlign: "center",
@@ -48,21 +49,14 @@ class AboutPage extends Component {
         </AppBar>
 
         <div className={classes.donateSection}>
-          <div className={classes.topDonationText}>
-            <Typography variant="h5">Consider A Gift To The</Typography>
-          </div>
-          <div className={classes.donationText}>
-            <Typography variant="h4">UWSOM Medicine Service Learning Fund</Typography>
-          </div>
-          <div className={classes.donationText}>
-            <Typography variant="h5">You Will Help To Sustain our Efforts!</Typography>
-          </div>
+          <Typography className={classes.topDonationText} variant="h5">Consider A Gift To The</Typography>
+          <Typography className={classes.donationText} variant="h4">UWSOM Medicine Service Learning Fund</Typography>
+          <Typography className={classes.donationText}variant="h5">You Will Help To Sustain our Efforts!</Typography>
           <div className={classes.buttonContainer}>
             <Fab
               variant="extended"
-              className={classes.fabButton}
-              href="http://depts.washington.edu/givemed/give/?page=make&source=servmd"
-            >
+              className={classes.donationText}
+              href="http://depts.washington.edu/givemed/give/?page=make&source=servmd">
               Make A Gift
             </Fab>
           </div>
