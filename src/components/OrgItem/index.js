@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Card, CardContent, CardActions } from '@material-ui/core';
 import React from 'react';
+import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 const styles = () => ({
   title: {
@@ -17,11 +18,14 @@ const styles = () => ({
     marginBottom: '1em'
   },
   card: {
-    paddingBottom: 5,
+    paddingBottom: 5
   },
   textItem: {
     fontFamily: 'Lato',
     marginBottom: 8
+  },
+  indentText: {
+    paddingLeft: 10
   }
 });
 
@@ -34,14 +38,21 @@ class OrgItemModal extends React.Component {
   }
 
   render() {
-    const { classes, project } = this.props;
+    const { fullScreen, classes, project } = this.props;
     return (
       <div>
         <Dialog
           open={this.state.modalOpen}
           onClose={() => this.setState({ modalOpen: false })}
+<<<<<<< HEAD
           fullWidth
           maxWidth="lg">
+=======
+          fullWidth={!fullScreen}
+          fullScreen={fullScreen}
+          maxWidth="lg"
+        >
+>>>>>>> 49f90fda61b4ff7f357dc1b461a2e594dd7a4947
           <DialogTitle>
             <Typography variant="h4">{project['Title']}</Typography>
           </DialogTitle>
@@ -56,7 +67,13 @@ class OrgItemModal extends React.Component {
                     component="p"
                   >
                     <b>{key}:</b>
-                    {project[key]}
+                    {project[key].split('\n').map((item, i) => {
+                      return (
+                        <p className={classes.indentText} key={i}>
+                          {item}
+                        </p>
+                      );
+                    })}
                   </Typography>
                 );
               return <div />;
@@ -95,4 +112,4 @@ class OrgItemModal extends React.Component {
   }
 }
 
-export default withStyles(styles)(OrgItemModal);
+export default withMobileDialog()(withStyles(styles)(OrgItemModal));

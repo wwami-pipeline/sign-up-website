@@ -4,8 +4,7 @@ import {
     AppBar,
     Tab,
     Tabs,
-    Typography,
-    createMuiTheme,
+    Typography
   } from "@material-ui/core";
 
 import './index.css';
@@ -31,13 +30,17 @@ const NavBar = () => {
                         <Tab label={<span className="tabLabel">About Us</span>} value="/about" component={Link} to="/about" />
                         <Tab label={<span className="tabLabel">Contact Us</span>} value="/contact" component={Link} to="/contact" />
                         <Tab label={<span className="tabLabel">Donate</span>} value="/donate" component={Link} to="/donate" />
-                </Tabs>
+                    </Tabs>
                 <Switch>
                     <Route exact path="/" />
                     <Route path="/about" />
                     <Route path="/gallery" />
                     <Route path="/contact" />
                     <Route path="/procedures" />
+                    <Route path="/UDSM" />
+                    <Route path="/SHIFA" />
+                    <Route path="/CHAP" />
+                    <Route path="/DFAD" />
                 </Switch>
               </AppBar>
             </Fragment>
