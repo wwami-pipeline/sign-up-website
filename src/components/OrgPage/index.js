@@ -86,9 +86,13 @@ class OrgPage extends Component {
               {description}
             </Typography>
             <Grid container spacing={24}>
-                {projects.map(project => {
-                  return <Grid item xs={12} md={6}><OrgItem project={project} /></Grid>;
-                })}
+              {projects.map(project => {
+                return (
+                  <Grid item xs={12} md={6}>
+                    <OrgItem project={project} />
+                  </Grid>
+                );
+              })}
             </Grid>
           </div>
         </div>

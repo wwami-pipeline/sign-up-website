@@ -5,7 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Card, CardContent, CardActions } from '@material-ui/core';
+import { Card, CardContent, CardActions, Fab } from '@material-ui/core';
 import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 
@@ -26,6 +26,9 @@ const styles = () => ({
   },
   indentText: {
     paddingLeft: 10
+  },
+  button: {
+    marginTop: '1em'
   }
 });
 
@@ -35,6 +38,23 @@ class OrgItemModal extends React.Component {
     this.state = {
       modalOpen: false
     };
+  }
+
+  getOrderNumber(x) {
+    if (x.toLowerCase() === 'project description') return 3;
+    if (x.toLowerCase() === 'volunteer openings') return 3;
+    if (x.toLowerCase() === 'clinic schedule') return 4;
+    if (x.toLowerCase() === 'parking and directions') return 5;
+    if (x.toLowerCase() === 'volunteer provider') return 6;
+    if (x.toLowerCase() === 'student volunteer onboarding process') return 7;
+    if (x.toLowerCase() === 'undergraduate specific volunteer information')
+      return 8;
+    if (x.toLowerCase() === 'project specific training') return 9;
+    if (x.toLowerCase() === 'tips and reminders') return 10;
+    if (x.toLowerCase() === 'contact and cancellation policy') return 11;
+    if (x.toLowerCase() === 'clinic flow') return 12;
+    if (x.toLowerCase() === 'website link') return 13;
+    return 14;
   }
 
   render() {
@@ -50,29 +70,42 @@ class OrgItemModal extends React.Component {
         >
           <DialogTitle>
             <Typography variant="h4">{project['Title']}</Typography>
+            <Button
+              size="large"
+              color="secondary"
+              variant="contained"
+              className={classes.button}
+              href={project['Sign-up Link']}
+            >
+              Sign Up
+            </Button>
           </DialogTitle>
           <DialogContent className={this.props.dialogContent}>
-            {Object.keys(project).map(key => {
-              if (key !== 'Title')
-                return (
-                  <Typography
-                    className={classes.textItem}
-                    gutterBottom
-                    align="left"
-                    component="p"
-                  >
-                    <b>{key}:</b>
-                    {project[key].split('\n').map((item, i) => {
-                      return (
-                        <p className={classes.indentText} key={i}>
-                          {item}
-                        </p>
-                      );
-                    })}
-                  </Typography>
-                );
-              return <div />;
-            })}
+            {Object.keys(project)
+              .sort((x, y) => {
+                return this.getOrderNumber(x) - this.getOrderNumber(y);
+              })
+              .map(key => {
+                if (key.toLowerCase() !== 'title' && key !== 'Sign-up Link')
+                  return (
+                    <Typography
+                      className={classes.textItem}
+                      gutterBottom
+                      align="left"
+                      component="p"
+                    >
+                      <h3><u>{key}</u></h3>
+                      {project[key].split('\n').map((item, i) => {
+                        return (
+                          <p className={classes.indentText} key={i}>
+                            {item}
+                          </p>
+                        );
+                      })}
+                    </Typography>
+                  );
+                return <div />;
+              })}
           </DialogContent>
           <DialogActions>
             <Button
@@ -85,19 +118,32 @@ class OrgItemModal extends React.Component {
         </Dialog>
         <Card className={classes.card}>
           <CardContent>
-            <Typography className={classes.text} gutterBottom align="left" variant="h5">
+            <Typography
+              className={classes.text}
+              gutterBottom
+              align="left"
+              variant="h5"
+            >
               {project['Title']}
             </Typography>
-            <Typography className={classes.text} gutterBottom align="left" component="p">
+            <Typography
+              className={classes.text}
+              gutterBottom
+              align="left"
+              component="p"
+            >
               <b>Location: </b> {project['Location']}
             </Typography>
             <Typography className={classes.text} align="left" component="p">
-              <b>Description: </b> {project['Description']}
+              <b>Description: </b> {project['Project Description']}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button className={classes.text} size="small" 
-              onClick={() => this.setState({ modalOpen: true })}>
+            <Button
+              className={classes.text}
+              size="small"
+              onClick={() => this.setState({ modalOpen: true })}
+            >
               View
             </Button>
           </CardActions>
