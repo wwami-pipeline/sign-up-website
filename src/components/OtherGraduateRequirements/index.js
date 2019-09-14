@@ -35,8 +35,8 @@ class OtherGraduateRequirements extends React.Component {
         >
           <DialogTitle><Typography variant="h4">Graduate Health Science Students</Typography></DialogTitle>
           <DialogContent className={this.props.dialogContent}>
-            <Typography className={classes.text}>All graduate health sciences students are required to attend a fingerstick training prior to performing any blood glucose tests.</Typography>
-            <Typography className={classes.text}>ndividual projects may have additional requirements.  See project specific pages for details.</Typography>
+            <Typography className={classes.text}>All graduate health sciences students are required to attend a fingerstick training prior to performing any blood glucose tests. (UW students only)</Typography>
+            <Typography className={classes.text}>Individual projects may have additional requirements.  See project specific pages for details.</Typography>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.handleClose} color="white">

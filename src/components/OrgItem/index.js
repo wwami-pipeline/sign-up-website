@@ -44,15 +44,10 @@ class OrgItemModal extends React.Component {
         <Dialog
           open={this.state.modalOpen}
           onClose={() => this.setState({ modalOpen: false })}
-<<<<<<< HEAD
-          fullWidth
-          maxWidth="lg">
-=======
           fullWidth={!fullScreen}
           fullScreen={fullScreen}
           maxWidth="lg"
         >
->>>>>>> 49f90fda61b4ff7f357dc1b461a2e594dd7a4947
           <DialogTitle>
             <Typography variant="h4">{project['Title']}</Typography>
           </DialogTitle>

@@ -35,7 +35,7 @@ class MedicalStudentRequirements extends React.Component {
         >
           <DialogTitle><Typography variant="h4">Medical Students</Typography></DialogTitle>
           <DialogContent className={this.props.dialogContent}>
-            <Typography className={classes.text}>All medical students are required to attend a fingerstick training prior to working at any of our sites that do blood glucose testing.</Typography>
+            <Typography className={classes.text}>All medical students are required to attend a fingerstick training prior to working at any of our sites that do blood glucose testing. (UW students only)</Typography>
             <Typography className={classes.text}>Individual projects may have additional requirements.  See project specific pages for details.</Typography>
           </DialogContent>
           <DialogActions>

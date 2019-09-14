@@ -26,7 +26,7 @@ const NavBar = () => {
                     </div>
                     <Tabs>
                         <Tab label={<span className="tabLabel">Home</span>} value="/" component={Link} to="/" />
-                        <Tab label={<span className="tabLabel">Procedures</span>} value="/donate" component={Link} to="/procedures" />
+                        <Tab label={<span className="tabLabel">Resources</span>} value="/resources" component={Link} to="/resources" />
                         <Tab label={<span className="tabLabel">About Us</span>} value="/about" component={Link} to="/about" />
                         <Tab label={<span className="tabLabel">Contact Us</span>} value="/contact" component={Link} to="/contact" />
                         <Tab label={<span className="tabLabel">Donate</span>} value="/donate" component={Link} to="/donate" />
@@ -36,7 +36,7 @@ const NavBar = () => {
                     <Route path="/about" />
                     <Route path="/gallery" />
                     <Route path="/contact" />
-                    <Route path="/procedures" />
+                    <Route path="/resources" />
                     <Route path="/UDSM" />
                     <Route path="/SHIFA" />
                     <Route path="/CHAP" />
