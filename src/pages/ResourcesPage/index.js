@@ -78,7 +78,12 @@ class ResourcesPage extends Component {
             Toolkit for Preceptors
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
-            Reflection Activities
+            <Link
+              color="secondary"
+              href="https://drive.google.com/file/d/195OaVgbVZ5DFdejFLJwX1_96FdnM-z-e/view?usp=sharing"
+            >
+              Reflection Activities
+            </Link>
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
             Interprofessional Supervision Guide – If you are a preceptor and
@@ -107,7 +112,10 @@ class ResourcesPage extends Component {
             Protocols
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
+            <Link
+              color="secondary"
+              href="https://drive.google.com/file/d/19YXIakAij0IOf0yyEiP4ZjNPFJr-CLUc/view?usp=sharing"
+            >
               UWSOM Bloodborne Pathogen Protocol – Step-by-step instructions on
               what to do in the case of a needlestick.
             </Link>
@@ -116,15 +124,26 @@ class ResourcesPage extends Component {
             CHAP SPECIFIC PROTOCOLS
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
+            <Link
+              color="secondary"
+              href="https://drive.google.com/file/d/1ArIy-cOJ2d3keqkjyUxP-IBE3Y1D4q3z/view?usp=sharing"
+            >
               Chap Footcare Manual
             </Link>
           </Typography>
           <Typography variant="overline" className={classes.title}>
-            SHIFA SPECIFIC PROTOCOLS
+            <Link
+              color="secondary"
+              href="https://drive.google.com/file/d/1W5g2tey9tPEMCyc5VMb-AsW3ITCqnWSz/view?usp=sharing"
+            >
+              SHIFA SPECIFIC PROTOCOLS
+            </Link>
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
+            <Link
+              color="secondary"
+              href="https://drive.google.com/file/d/1ZTbz-diYHWxnEpEhEu57fLeCykdBD6UW/view?usp=sharing"
+            >
               (SHIFA) Blood Glucose Guide
             </Link>
           </Typography>
@@ -134,12 +153,18 @@ class ResourcesPage extends Component {
             </Link>
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
+            <Link
+              color="secondary"
+              href="https://drive.google.com/file/d/1__J_8Kc7P2Ll0WcVlJoFUECZ7lzDTFAp/view?usp=sharing"
+            >
               (SHIFA) Blood Pressure Volunteer Information
             </Link>
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
+            <Link
+              color="secondary"
+              href="https://drive.google.com/file/d/19mAxA_9UNJ8whBkpRXdHlk26SmM3hnDU/view?usp=sharing"
+            >
               (SHIFA) Screen and refer information for preceptors
             </Link>
           </Typography>
