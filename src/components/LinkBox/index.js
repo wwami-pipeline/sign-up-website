@@ -50,7 +50,7 @@ const LinkBox = props => {
             <Typography variant="body2" style={{color: "#2E1159", fontWeight: "bold", fontFamily: "Lato"}} component="h3">
               {props.name}
             </Typography>
-            <Typography variant="body" style={{color: "#2E1159", fontFamily: "Lato"}} component="p">
+            <Typography variant="body1" style={{color: "#2E1159", fontFamily: "Lato"}} component="p">
               {props.description}
             </Typography>
           </CardContent>
