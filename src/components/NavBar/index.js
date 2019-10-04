@@ -13,7 +13,7 @@ const NavBar = () => {
     return(
       <div className="App">
             <Fragment>
-                <AppBar position="dynamic">
+                <AppBar position="relative">
                     <div>
                       <div style={{float:'left'}}>
                         <img className="toolbar-logo" alt="UW School of Medicine Volunteer Logo" src="/images/uw_name_logo.jpg" />
