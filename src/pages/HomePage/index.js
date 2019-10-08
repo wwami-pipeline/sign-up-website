@@ -190,7 +190,7 @@ class HomePage extends Component {
                     title="SHIFA"
                     name="STUDENT HEALTH INITIATIVE FOR ACCESS"
                     description={this.props.overviews.SHIFA}
-                    imageLocation="images/shifa/SHIFA.jpg"
+                    imageLocation="images/SHIFA/SHIFA.jpg"
                     path="/SHIFA"
                   />
                 </div>
@@ -201,7 +201,7 @@ class HomePage extends Component {
                     title="CHAP"
                     name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
                     description={this.props.overviews.CHAP}
-                    imageLocation="images/chap/CHAP.jpg"
+                    imageLocation="images/CHAP/CHAP.jpg"
                     path="/CHAP"
                   />
                 </div>
@@ -212,7 +212,7 @@ class HomePage extends Component {
                     title="UDSM"
                     name="UNIVERSITY DISTRICT STREET MEDICINE"
                     description={this.props.overviews.UDSM}
-                    imageLocation="images/udsm/UDSM.png"
+                    imageLocation="images/UDSM/UDSM.png"
                     path="/UDSM"
                   />
                 </div>
@@ -223,7 +223,7 @@ class HomePage extends Component {
                     title="Doc for a Day"
                     name="DFAD"
                     description={this.props.overviews.DFAD}
-                    imageLocation="images/dfad/DFAD.JPG"
+                    imageLocation="images/DFAD/DFAD.jpg"
                     path="/DFAD"
                   />
                 </div>

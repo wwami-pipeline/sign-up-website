@@ -5,31 +5,43 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Card, CardContent, CardActions } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardHeader, CardMedia } from '@material-ui/core';
 import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 const styles = () => ({
-  title: {
-    marginBottom: '.5em'
-  },
-  text: {
-    fontFamily: 'Lato',
-    marginBottom: '1em'
+  button: {
+    marginTop: '1em'
   },
   card: {
     paddingBottom: 5
+  },
+  cardContent: {
+    //height: 120
+  },
+  cardHeader: {
+    backgroundColor: '#f0f9a4'
+  },
+  cardMedia: {
+    height: 240
+  },
+  indentText: {
+    paddingLeft: 10
+  },
+  title: {
+    marginBottom: '.5em'
+  },
+  titleText: {
+    color:'#5a2c6e'
+  },
+  text: {
+    fontFamily: 'Lato',
+    marginBottom: '.5em'
   },
   textItem: {
     fontFamily: 'Lato',
     marginBottom: 8
   },
-  indentText: {
-    paddingLeft: 10
-  },
-  button: {
-    marginTop: '1em'
-  }
 });
 
 class OrgItemModal extends React.Component {
@@ -58,7 +70,8 @@ class OrgItemModal extends React.Component {
   }
 
   render() {
-    const { fullScreen, classes, project } = this.props;
+    const { fullScreen, classes, project, title } = this.props;
+    console.log("images/" + title + "/" + project['Title'] + ".jpg")
     return (
       <div>
         <Dialog
@@ -117,15 +130,16 @@ class OrgItemModal extends React.Component {
           </DialogActions>
         </Dialog>
         <Card className={classes.card}>
-          <CardContent>
-            <Typography
-              className={classes.text}
-              gutterBottom
-              align="left"
-              variant="h5"
-            >
-              {project['Title']}
-            </Typography>
+          <CardMedia
+            className={classes.cardMedia}
+            image={"/images/" + title + "/" + project['Title'] + ".jpg"}
+            title={project['Title']}
+          />
+          <CardHeader
+            className={classes.cardHeader}
+            title={<Typography className={classes.titleText} variant='h5'> {project['Title']} </Typography>}>
+          </CardHeader>
+          <CardContent className={classes.cardContent}>
             <Typography
               className={classes.text}
               gutterBottom

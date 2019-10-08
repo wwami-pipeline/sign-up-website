@@ -89,7 +89,7 @@ class OrgPage extends Component {
               {projects.map(project => {
                 return (
                   <Grid item xs={12} md={6}>
-                    <OrgItem project={project} />
+                    <OrgItem project={project} title={title} />
                   </Grid>
                 );
               })}
