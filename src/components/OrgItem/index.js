@@ -183,7 +183,9 @@ class OrgItemModal extends React.Component {
           <CardActions>
             <Button
               className={classes.text}
-              size="small"
+              size="medium"
+              color="secondary"
+              variant="contained"
               onClick={() => this.setState({ modalOpen: true })}
             >
               View
