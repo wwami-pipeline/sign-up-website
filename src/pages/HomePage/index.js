@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   withStyles,
   Typography,
@@ -6,26 +6,26 @@ import {
   Paper,
   Fab,
   Grid
-} from "@material-ui/core";
-import LinkBox from "../../components/LinkBox";
-import MedicalStudentRequirements from "../../components/MedicalStudentRequirements";
-import OtherGraduateRequirements from "../../components/OtherGraduateRequirements";
-import UndergraduateRequirements from "../../components/UndergraduateRequirements";
-import ProviderRequirements from "../../components/ProviderRequirements";
-import NavBar from "../../components/NavBar";
+} from '@material-ui/core';
+import LinkBox from '../../components/LinkBox';
+import MedicalStudentRequirements from '../../components/MedicalStudentRequirements';
+import OtherGraduateRequirements from '../../components/OtherGraduateRequirements';
+import UndergraduateRequirements from '../../components/UndergraduateRequirements';
+import ProviderRequirements from '../../components/ProviderRequirements';
+import NavBar from '../../components/NavBar';
 
 const styles = () => {
-  return ({
+  return {
     page: {
-      overflow: "hidden"
+      overflow: 'hidden'
     },
     directionTitleTop: {
-      marginTop: "2em",
-      textAlign: "center",
-      marginBottom: "3em",
+      marginTop: '2em',
+      textAlign: 'center',
+      marginBottom: '3em',
       maxWidth: 800,
-      marginLeft: "auto",
-      marginRight: "auto"
+      marginLeft: 'auto',
+      marginRight: 'auto'
     },
     directionTitleHeader: {
       fontFamily: 'Lato',
@@ -45,7 +45,7 @@ const styles = () => {
       textAlign: 'left'
     },
     directionTitleBottom: {
-      textAlign: "center"
+      textAlign: 'center'
     },
     fabButton: {
       fontFamily: 'Lato',
@@ -53,39 +53,39 @@ const styles = () => {
       fontSize: '1.1em',
       width: '400px',
       marginRight: '1em',
-      marginTop: '1em',
+      marginTop: '1em'
     },
     fabButtonHolder: {
       textAlign: 'center'
     },
     paperContainer: {
       backgroundColor: '#513E6D',
-      padding: "2em",
-      margin: "1.5em",
+      padding: '2em',
+      margin: '1.5em',
       maxWidth: 900,
-      marginLeft: "auto",
-      marginRight: "auto"
+      marginLeft: 'auto',
+      marginRight: 'auto'
     },
     selectionContainer: {
       maxWidth: 950,
-      marginLeft: "auto",
-      marginRight: "auto",
-      textAlign: "center",
-      padding: "2em",
-      paddingBottom: "5em",
-      margin: "1em"
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      textAlign: 'center',
+      padding: '2em',
+      paddingBottom: '5em',
+      margin: '1em'
     },
     gridContainer: {
-      marginTop: "1.5em",
-      marginBottom: "1em",
-      marginLeft: "auto",
-      marginRight: "auto"
+      marginTop: '1.5em',
+      marginBottom: '1em',
+      marginLeft: 'auto',
+      marginRight: 'auto'
     },
     linkBoxContainer: {
-      mariginLeft: "auto",
-      marginRight: "auto"
+      mariginLeft: 'auto',
+      marginRight: 'auto'
     }
-  });
+  };
 };
 
 class HomePage extends Component {
@@ -130,42 +130,59 @@ class HomePage extends Component {
         {/* Requirements */}
 
         <div className={classes.directionTitleTop}>
-          <Typography className={classes.directionTitleHeaderBold}>VOLUNTEER WITH US</Typography>
-          <Typography className={classes.directionTitleTopText}>We invite you to explore our many opportunities for providers and students alike.  Volunteering with our program is a wonderful way to practice your clinical and teaching skills, make a difference in our community and form meaningful connections.</Typography>
-          <Typography className={classes.directionTitleTopText}>We very flexible and try to make it easy to work around busy schedules.  There is no required hourly commitment.  Simply sign up when you have the time!</Typography>
+          <Typography className={classes.directionTitleHeaderBold}>
+            VOLUNTEER WITH US
+          </Typography>
+          <Typography className={classes.directionTitleTopText}>
+            Volunteering with our programs is a wonderful way to practice your
+            clinical and teaching skills, make a difference in our community and
+            form meaningful connections. We invite you to explore our
+            opportunities for providers and students alike.{' '}
+          </Typography>
+          <Typography className={classes.directionTitleTopText}>
+            We are very flexible and try to make it easy to work around busy
+            schedules. There is no required hourly commitment. Simply sign up
+            when you have the time!
+          </Typography>
         </div>
 
         <Paper className={classes.paperContainer}>
-          <Typography className={classes.directionTitleHeader}>Here's What You Need To Know To Get Started</Typography>
+          <Typography className={classes.directionTitleHeader}>
+            Here's What You Need To Know To Get Started
+          </Typography>
           <div className={classes.fabButtonHolder}>
-            <Fab color="secondary"
-              style={{color: "#2E1159"}}
+            <Fab
+              color="secondary"
+              style={{ color: '#2E1159' }}
               variant="extended"
               className={classes.fabButton}
               onClick={() => this.setState({ providerRequirementsOpen: true })}
             >
               Providers
             </Fab>
-            <Fab color="secondary"
-              style={{color: "#2E1159"}}
+            <Fab
+              color="secondary"
+              style={{ color: '#2E1159' }}
               variant="extended"
               className={classes.fabButton}
               onClick={() => this.setState({ medicalRequirementsOpen: true })}
             >
-            Medical Students
+              Medical Students
             </Fab>
           </div>
           <div className={classes.fabButtonHolder}>
-            <Fab color="secondary"
-              style={{color: "#2E1159"}}
+            <Fab
+              color="secondary"
+              style={{ color: '#2E1159' }}
               variant="extended"
               className={classes.fabButton}
               onClick={() => this.setState({ otherGradRequirementsOpen: true })}
             >
               Other HS Graduate Students
             </Fab>
-            <Fab color="secondary"
-              style={{color: "#2E1159"}}
+            <Fab
+              color="secondary"
+              style={{ color: '#2E1159' }}
               variant="extended"
               className={classes.fabButton}
               onClick={() => this.setState({ undergradRequirementsOpen: true })}
@@ -179,7 +196,9 @@ class HomePage extends Component {
 
         <div className={classes.selectionContainer}>
           <div className={classes.directionTitleBottom}>
-            <Typography className={classes.directionTitleHeaderBold}>FIND AN OPPORTUNITY</Typography>
+            <Typography className={classes.directionTitleHeaderBold}>
+              FIND AN OPPORTUNITY
+            </Typography>
           </div>
 
           <div className={classes.gridContainer}>

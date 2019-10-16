@@ -50,13 +50,13 @@ class ResourcesPage extends Component {
 
         <div>
           <Typography className={classes.directionTitleTop} variant="h4">
-            UWSOM Learning Procedures
+            Service Learning Resources and Protocols
           </Typography>
         </div>
 
         <div>
           <Typography variant="overline" className={classes.title}>
-            (MD STUDENTS ONLY) FOR ALL UWSOM SERVICE LEARNING LOGISTICS
+            UWSOM SERVICE LEARNING LOGISTICS (FOR MD STUDENTS ONLY)
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
             For information on things like purchasing supplies, the SLAC
@@ -109,7 +109,7 @@ class ResourcesPage extends Component {
             </Link>
           </Typography>
           <Typography variant="overline" className={classes.title}>
-            Protocols
+            GENERAL PROTOCOLS
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
             <Link
