@@ -5,7 +5,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Card, CardActions, CardContent, CardHeader, CardMedia } from '@material-ui/core';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia
+} from '@material-ui/core';
 import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 
@@ -32,7 +38,7 @@ const styles = () => ({
     marginBottom: '.5em'
   },
   titleText: {
-    color:'#5a2c6e'
+    color: '#5a2c6e'
   },
   text: {
     fontFamily: 'Lato',
@@ -41,14 +47,15 @@ const styles = () => ({
   textItem: {
     fontFamily: 'Lato',
     marginBottom: 8
-  },
+  }
 });
 
 class OrgItemModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      signUpLinks: props.project['Sign-up Link'].split(',')
     };
   }
 
@@ -71,7 +78,7 @@ class OrgItemModal extends React.Component {
 
   render() {
     const { fullScreen, classes, project, title } = this.props;
-    console.log("images/" + title + "/" + project['Title'] + ".jpg")
+    console.log('images/' + title + '/' + project['Title'] + '.jpg');
     return (
       <div>
         <Dialog
@@ -83,15 +90,29 @@ class OrgItemModal extends React.Component {
         >
           <DialogTitle>
             <Typography variant="h4">{project['Title']}</Typography>
-            <Button
-              size="large"
-              color="secondary"
-              variant="contained"
-              className={classes.button}
-              href={project['Sign-up Link']}
-            >
-              Sign Up
-            </Button>
+            {this.state.signUpLinks.length == 1 ? (
+              <Button
+                size="large"
+                color="secondary"
+                variant="contained"
+                className={classes.button}
+                href={this.state.signUpLinks[0]}
+              >
+                Sign Up
+              </Button>
+            ) : (
+              this.state.signUpLinks.map((link, index) => (
+                <Button
+                  size="large"
+                  color="secondary"
+                  variant="contained"
+                  className={classes.button}
+                  href={link}
+                >
+                  Sign Up (Option {index + 1})
+                </Button>
+              ))
+            )}
           </DialogTitle>
           <DialogContent className={this.props.dialogContent}>
             {Object.keys(project)
@@ -107,7 +128,9 @@ class OrgItemModal extends React.Component {
                       align="left"
                       component="p"
                     >
-                      <h3><u>{key}</u></h3>
+                      <h3>
+                        <u>{key}</u>
+                      </h3>
                       {project[key].split('\n').map((item, i) => {
                         return (
                           <p className={classes.indentText} key={i}>
@@ -132,13 +155,18 @@ class OrgItemModal extends React.Component {
         <Card className={classes.card}>
           <CardMedia
             className={classes.cardMedia}
-            image={"/images/" + title + "/" + project['Title'] + ".jpg"}
+            image={'/images/' + title + '/' + project['Title'] + '.jpg'}
             title={project['Title']}
           />
           <CardHeader
             className={classes.cardHeader}
-            title={<Typography className={classes.titleText} variant='h5'> {project['Title']} </Typography>}>
-          </CardHeader>
+            title={
+              <Typography className={classes.titleText} variant="h5">
+                {' '}
+                {project['Title']}{' '}
+              </Typography>
+            }
+          ></CardHeader>
           <CardContent className={classes.cardContent}>
             <Typography
               className={classes.text}
