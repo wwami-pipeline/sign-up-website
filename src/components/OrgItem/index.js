@@ -90,7 +90,7 @@ class OrgItemModal extends React.Component {
         >
           <DialogTitle>
             <Typography variant="h4">{project['Title']}</Typography>
-            {this.state.signUpLinks.length == 1 ? (
+            {this.state.signUpLinks.length === 1 ? (
               <Button
                 size="large"
                 color="secondary"
