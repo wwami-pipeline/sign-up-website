@@ -61,16 +61,18 @@ class OrgItemModal extends React.Component {
 
   getOrderNumber(x) {
     if (x.toLowerCase() === 'project description') return 3;
-    if (x.toLowerCase() === 'volunteer openings') return 3;
+    if (x.toLowerCase() === 'types of volunteers needed') return 3.5;
     if (x.toLowerCase() === 'clinic schedule') return 4;
+    if (x.toLowerCase() === 'location') return 4.5;
     if (x.toLowerCase() === 'parking and directions') return 5;
-    if (x.toLowerCase() === 'volunteer provider') return 6;
-    if (x.toLowerCase() === 'student volunteer onboarding process') return 7;
-    if (x.toLowerCase() === 'undergraduate specific volunteer information')
-      return 8;
-    if (x.toLowerCase() === 'project specific training') return 9;
+    if (x.toLowerCase() === 'provider information') return 6;
+    if (x.toLowerCase() === 'hs grad student information') return 7;
+    if (x.toLowerCase() === 'undergraduate information') return 8;
+    if (x.toLowerCase() === 'project specific training/onboarding') return 9;
     if (x.toLowerCase() === 'tips and reminders') return 10;
-    if (x.toLowerCase() === 'contact and cancellation policy') return 11;
+    if (x.toLowerCase() === 'contact information and cancellation policy')
+      return 11;
+    if (x.toLowerCase() === 'services provided') return 11.5;
     if (x.toLowerCase() === 'clinic flow') return 12;
     if (x.toLowerCase() === 'website link') return 13;
     return 14;
@@ -96,7 +98,7 @@ class OrgItemModal extends React.Component {
                 color="secondary"
                 variant="contained"
                 className={classes.button}
-                target='_blank'
+                target="_blank"
                 href={this.state.signUpLinks[0]}
               >
                 Sign Up
@@ -108,7 +110,7 @@ class OrgItemModal extends React.Component {
                   color="secondary"
                   variant="contained"
                   className={classes.button}
-                  target='_blank'
+                  target="_blank"
                   href={link}
                 >
                   Sign Up (Option {index + 1})
