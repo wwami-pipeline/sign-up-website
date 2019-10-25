@@ -96,6 +96,7 @@ class OrgItemModal extends React.Component {
                 color="secondary"
                 variant="contained"
                 className={classes.button}
+                target='_blank'
                 href={this.state.signUpLinks[0]}
               >
                 Sign Up
@@ -107,6 +108,7 @@ class OrgItemModal extends React.Component {
                   color="secondary"
                   variant="contained"
                   className={classes.button}
+                  target='_blank'
                   href={link}
                 >
                   Sign Up (Option {index + 1})
