@@ -13,6 +13,7 @@ import OtherGraduateRequirements from '../../components/OtherGraduateRequirement
 import UndergraduateRequirements from '../../components/UndergraduateRequirements';
 import ProviderRequirements from '../../components/ProviderRequirements';
 import NavBar from '../../components/NavBar';
+import { withRouter } from 'react-router-dom';
 
 const styles = () => {
   return {
@@ -204,7 +205,12 @@ class HomePage extends Component {
           <div className={classes.gridContainer}>
             <Grid container spacing={24}>
               <Grid item xs>
-                <div className={classes.linkBoxContainer}>
+                <div
+                  className={classes.linkBoxContainer}
+                  onClick={() => {
+                    this.props.history.push('/SHIFA');
+                  }}
+                >
                   <LinkBox
                     title="SHIFA"
                     name="STUDENT HEALTH INITIATIVE FOR ACCESS"
@@ -215,7 +221,12 @@ class HomePage extends Component {
                 </div>
               </Grid>
               <Grid item xs>
-                <div className={classes.linkBoxContainer}>
+                <div
+                  className={classes.linkBoxContainer}
+                  onClick={() => {
+                    this.props.history.push('/CHAP');
+                  }}
+                >
                   <LinkBox
                     title="CHAP"
                     name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
@@ -226,7 +237,12 @@ class HomePage extends Component {
                 </div>
               </Grid>
               <Grid item xs>
-                <div className={classes.linkBoxContainer}>
+                <div
+                  className={classes.linkBoxContainer}
+                  onClick={() => {
+                    this.props.history.push('/UDSM');
+                  }}
+                >
                   <LinkBox
                     title="UDSM"
                     name="UNIVERSITY DISTRICT STREET MEDICINE"
@@ -237,7 +253,12 @@ class HomePage extends Component {
                 </div>
               </Grid>
               <Grid item xs>
-                <div className={classes.linkBoxContainer}>
+                <div
+                  className={classes.linkBoxContainer}
+                  onClick={() => {
+                    this.props.history.push('/DFAD');
+                  }}
+                >
                   <LinkBox
                     title="Doc for a Day"
                     name="DFAD"
@@ -255,4 +276,4 @@ class HomePage extends Component {
   }
 }
 
-export default withStyles(styles)(HomePage);
+export default withStyles(styles)(withRouter(HomePage));

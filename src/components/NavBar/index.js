@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     AppBar,
     Tab,
@@ -25,23 +25,12 @@ const NavBar = () => {
                       </div>
                     </div>
                     <Tabs>
-                        <Tab label={<span className="tabLabel">Home</span>} value="/" component={Link} to="/" />
-                        <Tab label={<span className="tabLabel">Resources</span>} value="/resources" component={Link} to="/resources" />
-                        <Tab label={<span className="tabLabel">About Us</span>} value="/about" component={Link} to="/about" />
-                        <Tab label={<span className="tabLabel">Contact Us</span>} value="/contact" component={Link} to="/contact" />
-                        <Tab label={<span className="tabLabel">Donate</span>} value="/donate" component={Link} to="/donate" />
+                        <Tab label={<span className="tabLabel">Home</span>} component={Link} to="/" />
+                        <Tab label={<span className="tabLabel">Resources</span>} component={Link} to="/resources" />
+                        <Tab label={<span className="tabLabel">About Us</span>} component={Link} to="/about" />
+                        <Tab label={<span className="tabLabel">Contact Us</span>} component={Link} to="/contact" />
+                        <Tab label={<span className="tabLabel">Donate</span>} component={Link} to="/donate" />
                     </Tabs>
-                <Switch>
-                    <Route exact path="/" />
-                    <Route path="/about" />
-                    <Route path="/gallery" />
-                    <Route path="/contact" />
-                    <Route path="/resources" />
-                    <Route path="/UDSM" />
-                    <Route path="/SHIFA" />
-                    <Route path="/CHAP" />
-                    <Route path="/DFAD" />
-                </Switch>
               </AppBar>
             </Fragment>
       </div>
