@@ -22,14 +22,11 @@ const styles = () => ({
   card: {
     paddingBottom: 5
   },
-  cardContent: {
-    //height: 120
-  },
   cardHeader: {
     backgroundColor: '#f0f9a4'
   },
   cardMedia: {
-    height: 240
+    height: 250   
   },
   indentText: {
     paddingLeft: 10
@@ -118,7 +115,7 @@ class OrgItemModal extends React.Component {
               ))
             )}
           </DialogTitle>
-          <DialogContent className={this.props.dialogContent}>
+          <DialogContent>
             {Object.keys(project)
               .sort((x, y) => {
                 return this.getOrderNumber(x) - this.getOrderNumber(y);

@@ -52,7 +52,7 @@ const styles = () => {
       fontFamily: 'Lato',
       fontWeight: 'bold',
       fontSize: '1.1em',
-      width: '400px',
+      width: '320px',
       marginRight: '1em',
       marginTop: '1em'
     },

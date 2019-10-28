@@ -85,10 +85,10 @@ class OrgPage extends Component {
             <Typography className={classes.title} gutterBottom variant="h6">
               {description}
             </Typography>
-            <Grid container spacing={24}>
+            <Grid container spacing={24} alignContent='center'>
               {projects.map(project => {
                 return (
-                  <Grid item xs={12} md={6}>
+                  <Grid item xs={12} md={3}>
                     <OrgItem project={project} title={title} />
                   </Grid>
                 );
