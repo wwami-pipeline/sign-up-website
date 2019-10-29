@@ -20,6 +20,7 @@ const styles = () => ({
     marginTop: '1em'
   },
   card: {
+    backgroundColor: '#513E6D',
     paddingBottom: 5
   },
   cardHeader: {
@@ -27,6 +28,12 @@ const styles = () => ({
   },
   cardMedia: {
     height: 250   
+  },
+  closeButton: {
+    float: 'right'
+  },
+  dialogBody: {
+    backgroundColor: '#513E6D',
   },
   indentText: {
     paddingLeft: 10
@@ -77,7 +84,6 @@ class OrgItemModal extends React.Component {
 
   render() {
     const { fullScreen, classes, project, title } = this.props;
-    console.log('images/' + title + '/' + project['Title'] + '.jpg');
     return (
       <div>
         <Dialog
@@ -87,71 +93,80 @@ class OrgItemModal extends React.Component {
           fullScreen={fullScreen}
           maxWidth="lg"
         >
-          <DialogTitle>
-            <Typography variant="h4">{project['Title']}</Typography>
-            {this.state.signUpLinks.length === 1 ? (
+          <div className={classes.dialogBody}> 
+            <DialogTitle>
+              <Typography variant="h4"> {project['Title']} </Typography>
               <Button
-                size="large"
-                color="secondary"
-                variant="contained"
-                className={classes.button}
-                target="_blank"
-                href={this.state.signUpLinks[0]}
-              >
-                Sign Up
+                className={classes.closeButton}
+                onClick={() => this.setState({ modalOpen: false })}
+                color="white" >
+                Close
               </Button>
-            ) : (
-              this.state.signUpLinks.map((link, index) => (
+              {this.state.signUpLinks.length === 1 ? (
                 <Button
                   size="large"
                   color="secondary"
                   variant="contained"
                   className={classes.button}
                   target="_blank"
-                  href={link}
+                  href={this.state.signUpLinks[0]}
                 >
-                  Sign Up (Option {index + 1})
+                  Sign Up
                 </Button>
-              ))
-            )}
-          </DialogTitle>
-          <DialogContent>
-            {Object.keys(project)
-              .sort((x, y) => {
-                return this.getOrderNumber(x) - this.getOrderNumber(y);
-              })
-              .map(key => {
-                if (key.toLowerCase() !== 'title' && key !== 'Sign-up Link')
-                  return (
-                    <Typography
-                      className={classes.textItem}
-                      gutterBottom
-                      align="left"
-                      component="p"
-                    >
-                      <h3>
-                        <u>{key}</u>
-                      </h3>
-                      {project[key].split('\n').map((item, i) => {
-                        return (
-                          <p className={classes.indentText} key={i}>
-                            {item}
-                          </p>
-                        );
-                      })}
-                    </Typography>
-                  );
-                return <div />;
-              })}
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={() => this.setState({ modalOpen: false })}
-              color="white"
-            >
-              Close
-            </Button>
-          </DialogActions>
+              ) : (
+                this.state.signUpLinks.map((link, index) => (
+                  <Button
+                    size="large"
+                    color="secondary"
+                    variant="contained"
+                    className={classes.button}
+                    target="_blank"
+                    href={link}
+                  >
+                    Sign Up (Option {index + 1})
+                  </Button>
+                ))
+              )}
+              
+            </DialogTitle>
+            <DialogContent>
+              {Object.keys(project)
+                .sort((x, y) => {
+                  return this.getOrderNumber(x) - this.getOrderNumber(y);
+                })
+                .map(key => {
+                  if (key.toLowerCase() !== 'title' && key !== 'Sign-up Link')
+                    return (
+                      <Typography
+                        className={classes.textItem}
+                        gutterBottom
+                        align="left"
+                        component="p"
+                      >
+                        <h3>
+                          <u>{key}</u>
+                        </h3>
+                        {project[key].split('\n').map((item, i) => {
+                          return (
+                            <p className={classes.indentText} key={i}>
+                              {item}
+                            </p>
+                          );
+                        })}
+                      </Typography>
+                    );
+                  return <div />;
+                })}
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => this.setState({ modalOpen: false })}
+                color="white"
+              >
+                Close
+              </Button>
+            </DialogActions>
+          </div>
         </Dialog>
         <Card className={classes.card}>
           <CardMedia
@@ -168,7 +183,7 @@ class OrgItemModal extends React.Component {
               </Typography>
             }
           ></CardHeader>
-          <CardContent className={classes.cardContent}>
+          <CardContent>
             <Typography
               className={classes.text}
               gutterBottom

@@ -14,26 +14,27 @@ const styles = () => ({
     paddingBottom: '2em'
   },
   title: {
+    color: 'white',
     fontFamily: 'Lato',
-    fontSize: '1em',
+    fontSize: '1.1em',
     marginTop: '1em',
-    maxWidth: 750,
     marginLeft: 'auto',
     marginRight: 'auto',
-    color: 'white'
+    maxWidth: 750,
+    textDecoration: 'underline'
   },
   description: {
+    color: 'white',
     fontFamily: 'Lato',
     maxWidth: 750,
     marginLeft: 'auto',
     marginRight: 'auto',
-    color: 'white'
   },
   directionTitleTop: {
     fontFamily: 'Lato',
     marginTop: '2em',
-    textAlign: 'center',
-    marginBottom: '15px'
+    marginBottom: '15px',
+    textAlign: 'center'
   }
 });
 
@@ -73,7 +74,6 @@ class ResourcesPage extends Component {
           <Typography variant="overline" className={classes.title}>
             TEACHING TOOLS
           </Typography>
-          <Typography variant="overline" className={classes.title}></Typography>
           <Typography variant="subtitle1" className={classes.description}>
             Toolkit for Preceptors
           </Typography>

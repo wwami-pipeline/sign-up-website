@@ -13,8 +13,8 @@ const styles = () => ({
   },
   contactSection: {
     maxWidth: 850,
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   title: {
     fontFamily: 'Lato',
