@@ -57,12 +57,27 @@ class App extends Component {
         }
       });
 
-    this.state = {
-      SHIFA,
-      CHAP,
-      UDSM,
-      DFAD
-    };
+    let UTEST = [];
+    db.ref('/UTEST')
+      .once('value')
+      .then(value => {
+        const items = value.toJSON();
+        for (let key in items) {
+          console.log("PUSH: " + items[key]);
+          UTEST.push(items[key]);
+        }
+      });
+
+    let Others = [];
+    db.ref('/Others')
+      .once('value')
+      .then(value => {
+        const items = value.toJSON();
+        for (let key in items) {
+          console.log("PUSH: " + items[key]);
+          Others.push(items[key]);
+        }
+      });
 
     let overviews = {};
     db.ref('/Overviews')
@@ -77,6 +92,8 @@ class App extends Component {
       CHAP,
       UDSM,
       DFAD,
+      UTEST,
+      Others,
       overviews
     };
   }
@@ -125,6 +142,26 @@ class App extends Component {
                 projects={this.state.DFAD}
                 description={this.state.overviews.DFAD}
                 title="DFAD"
+              />
+            )}
+          />
+          <Route
+            path="/UTEST"
+            render={() => (
+              <OrgPage
+                projects={this.state.UTEST}
+                description={this.state.overviews.UTEST}
+                title="UTEST"
+              />
+            )}
+          />
+          <Route
+            path="/Others"
+            render={() => (
+              <OrgPage
+                projects={this.state.Others}
+                description={this.state.overviews.Others}
+                title="Others"
               />
             )}
           />

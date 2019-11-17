@@ -13,7 +13,7 @@ const styles = () => ({
     minWidth: 280,
   },
   image: {
-    height: 200,
+    maxHeight: 280,
     objectFit: "cover"
   },
   disableLinkUnderline: {

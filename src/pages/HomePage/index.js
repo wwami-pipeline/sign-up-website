@@ -13,7 +13,7 @@ import OtherGraduateRequirements from '../../components/OtherGraduateRequirement
 import UndergraduateRequirements from '../../components/UndergraduateRequirements';
 import ProviderRequirements from '../../components/ProviderRequirements';
 import NavBar from '../../components/NavBar';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const styles = () => {
   return {
@@ -85,6 +85,24 @@ const styles = () => {
     linkBoxContainer: {
       mariginLeft: 'auto',
       marginRight: 'auto'
+    },
+    otherProjectsDiv: {
+      backgroundColor: '#F4EFA8',
+      height: 473,
+      minWidth: 280,
+      border: '1px solid red',
+      display: 'table-cell',
+      verticalAlign: 'middle'
+    },
+    otherProjectsLink: {
+      textDecoration: 'none'
+    },
+    otherProjectsText: {
+      color: '#2E1159',
+      marginLeft: '50px',
+      marginRight: '50px',
+      fontFamily: 'Lato',
+      textAlign: 'center',
     }
   };
 };
@@ -267,6 +285,32 @@ class HomePage extends Component {
                     path="/DFAD"
                   />
                 </div>
+              </Grid>
+              <Grid item xs>
+                <div
+                  className={classes.linkBoxContainer}
+                  onClick={() => {
+                    this.props.history.push('/UTEST');
+                  }}
+                >
+                  <LinkBox
+                    title="UTest"
+                    name="UTEST"
+                    description={this.props.overviews.DFAD}
+                    imageLocation="images/UTEST/UTEST.png"
+                    path="/UTEST"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs>
+                <Link to={{pathname: 'Others'}} className={classes.otherProjectsLink}>
+                  <div className={classes.otherProjectsDiv}
+                  onClick={() => { this.props.history.push('/Others') }}>
+                    <Typography variant='h4' className={classes.otherProjectsText}>
+                        All other UWSOM Service Learning Projects
+                    </Typography>      
+                  </div>
+                </Link>
               </Grid>
             </Grid>
           </div>
