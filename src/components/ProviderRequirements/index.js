@@ -54,14 +54,14 @@ class ProviderRequirements extends React.Component {
               </u>
             </Typography>
             <Typography className={classes.text}>
-              UW faculty (full-time or part-time) in the Departments of Internal
+              UW employees (full-time or part-time) in the Departments of Internal
               Medicine, Family Medicine, Emergency Medicine, Neurology, and
               Pediatrics, NO additional approval is required. If you are
               interested in volunteering at any of our service learning
               activities, please sign up on this website!
             </Typography>
             <Typography className={classes.text}>
-              UW faculty (full-time or part-time) in ALL OTHER departments,
+              UW employees (full-time or part-time) in ALL OTHER departments,
               please contact Leonora Clarke,{' '}
               <Link color="secondary" href="emailto://clarkel@uw.edu">
                 clarkel@uw.edu
@@ -69,7 +69,7 @@ class ProviderRequirements extends React.Component {
               .
             </Typography>
             <Typography className={classes.text}>
-              Non-UW faculty (this includes VA and FQHC employees), please check
+              Non-UW employees (this includes VA and FQHC employees), please check
               with your insurance to find out if you are covered during service
               learning activities. If your coverage does not extend to the
               service learning activity, or if you are retired, liability
