@@ -51,6 +51,10 @@ const styles = () => ({
   textItem: {
     fontFamily: 'Lato',
     marginBottom: 8
+  },
+  textCaps: {
+    fontFamily: 'Lato',
+    textTransform: 'uppercase'
   }
 });
 
@@ -143,7 +147,7 @@ class OrgItemModal extends React.Component {
                         align="left"
                         component="p"
                       >
-                        <h3>
+                        <h3 className={classes.textCaps}>
                           <u>{key}</u>
                         </h3>
                         {project[key].split('\n').map((item, i) => {
