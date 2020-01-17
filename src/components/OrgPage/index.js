@@ -53,6 +53,19 @@ const styles = () => ({
   linkBoxContainer: {
     mariginLeft: 'auto',
     marginRight: 'auto'
+  },
+  searchBar: {
+    marginTop: '1em',
+    marginBottom: '2em',
+    border: 'none',
+    fontSize: '18px'
+  },
+  searchClear: {
+    marginTop: '1em',
+    marginBottom: '2em',
+    border: 'none',
+    fontSize: '18px',
+    backgroundColor: 'green'
   }
 });
 
@@ -60,7 +73,8 @@ class OrgPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      searchText: ''
     };
   }
 
@@ -68,9 +82,19 @@ class OrgPage extends Component {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
+  
+  updateSearchText = (e) => {
+    this.setState({searchText: e.target.value});
+  }
+  
+  clearSearchText = () => {
+    this.setState({searchText: ''});
+    this.refs.searchInput.value = '';
+  }
 
   render() {
     const { classes, projects, description, title } = this.props;
+    
     return (
       <div className={classes.page}>
         <CssBaseline />
@@ -85,12 +109,17 @@ class OrgPage extends Component {
             <Typography className={classes.title} gutterBottom variant="h6">
               {description}
             </Typography>
+            <input className={classes.searchBar} ref='searchInput' type='text' placeholder='Search Here' onChange={this.updateSearchText} />
+            <button className={classes.searchClear} onClick={this.clearSearchText}>Clear</button>
             <Grid container spacing={24} alignContent='center'>
               {projects.map(project => {
                 return (
+                  (this.state.searchText == "" || (project['Title'].concat(project['Project Description'].toLowerCase()).includes(this.state.searchText.toLowerCase()))) ?
                   <Grid item xs={12} md={3}>
                     <OrgItem project={project} title={title} />
                   </Grid>
+                  :
+                  <div />
                 );
               })}
             </Grid>
