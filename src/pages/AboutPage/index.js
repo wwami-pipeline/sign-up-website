@@ -14,7 +14,6 @@ const styles = () => ({
   description: {
     fontFamily: 'Lato',
     maxWidth: 750,
-    textAlign: "center",
     marginBottom: "50px",
     marginLeft: "auto",
     marginRight: "auto",
@@ -41,7 +40,7 @@ class AboutPage extends Component {
         </AppBar>      
       
         <div>
-          <Typography className={classes.directionTitleTop} variant="h4">Our Goal</Typography>
+          <Typography className={classes.directionTitleTop} variant="h4">Goals</Typography>
           <Typography variant="subtitle1" className={classes.description}>
             The UW School of Medicine's Service Learning program strives to enrich medical education
             by providing our students with opportunities to hone their skills while addressing the
