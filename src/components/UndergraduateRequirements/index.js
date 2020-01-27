@@ -9,11 +9,24 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import React from 'react';
 
 const styles = () => ({
+  dialogBody: {
+    backgroundColor: '#B1A6C1'
+  },
+  dialogBorder: {    
+    backgroundColor: '#513E6D',
+    height: '20px'
+  },
   title: {
     marginBottom: '.5em'
   },
   text: {
+    color: 'black',
+    fontFamily: 'Lato',
     marginBottom: '1em'
+  },
+  textCaps: {
+    fontFamily: 'Lato',
+    textTransform: 'uppercase'
   }
 });
 
@@ -34,11 +47,14 @@ class UndergraduateRequirements extends React.Component {
           onClose={this.props.handleClose}
           fullWidth
         >
-          <DialogTitle>
-            <Typography variant="h4">
-              Undergraduate Student Requirements
+          
+          <div className={classes.dialogBorder} />
+          <DialogTitle className={classes.dialogBody}>
+            <Typography variant="h4" className={classes.textCaps}>
+              Undergraduates
             </Typography>
           </DialogTitle>
+          <div className={classes.dialogBody}>
           <DialogContent className={this.props.dialogContent}>
             <Typography className={classes.text}>
               Undergraduate students are required to complete an online HIPAA
@@ -58,6 +74,8 @@ class UndergraduateRequirements extends React.Component {
               Close
             </Button>
           </DialogActions>
+          </div>
+          <div className={classes.dialogBorder} />
         </Dialog>
       </div>
     );

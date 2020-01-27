@@ -295,7 +295,7 @@ class HomePage extends Component {
                 >
                   <LinkBox
                     title="UTest"
-                    name="UTEST"
+                    name="Rapid HIV Testing"
                     description={this.props.overviews.DFAD}
                     imageLocation="images/UTEST/UTEST.png"
                     path="/UTEST"

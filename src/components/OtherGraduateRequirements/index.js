@@ -8,11 +8,24 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import React from "react";
 
 const styles = () => ({
+  dialogBody: {
+    backgroundColor: '#B1A6C1'
+  },
+  dialogBorder: {    
+    backgroundColor: '#513E6D',
+    height: '20px'
+  },
   title: {
-    marginBottom: '.5em',
+    marginBottom: '.5em'
   },
   text: {
-    marginBottom: '1em',
+    color: 'black',
+    fontFamily: 'Lato',
+    marginBottom: '1em'
+  },
+  textCaps: {
+    fontFamily: 'Lato',
+    textTransform: 'uppercase'
   }
 });
 
@@ -33,7 +46,14 @@ class OtherGraduateRequirements extends React.Component {
           onClose={this.props.handleClose}
           fullWidth
         >
-          <DialogTitle><Typography variant="h4">Graduate Health Science Students</Typography></DialogTitle>
+          
+          <div className={classes.dialogBorder} />
+          <DialogTitle className={classes.dialogBody}>
+            <Typography variant="h4" className={classes.textCaps}>
+              Graduate Health Science Students
+            </Typography>
+          </DialogTitle>
+          <div className={classes.dialogBody}>
           <DialogContent className={this.props.dialogContent}>
             <Typography className={classes.text}>All graduate health sciences students are required to attend a fingerstick training prior to performing any blood glucose tests. (UW students only)</Typography>
             <Typography className={classes.text}>Individual projects may have additional requirements.  See project specific pages for details.</Typography>
@@ -43,6 +63,8 @@ class OtherGraduateRequirements extends React.Component {
               Close
             </Button>
           </DialogActions>
+          </div>
+          <div className={classes.dialogBorder} />
         </Dialog>
       </div>
     );
