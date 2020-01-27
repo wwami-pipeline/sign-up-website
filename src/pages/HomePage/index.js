@@ -150,7 +150,7 @@ class HomePage extends Component {
 
         <div className={classes.directionTitleTop}>
           <Typography className={classes.directionTitleHeaderBold}>
-            VOLUNTEER WITH US
+            SERVE WITH US
           </Typography>
           <Typography className={classes.directionTitleTopText}>
             Volunteering with our programs is a wonderful way to practice your

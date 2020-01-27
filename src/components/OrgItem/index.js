@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   CardMedia
@@ -172,7 +171,7 @@ class OrgItemModal extends React.Component {
             </DialogActions>
           </div>
         </Dialog>
-        <Card className={classes.card}>
+        <Card className={classes.card} onClick={() => this.setState({ modalOpen: true })}>
           <CardMedia
             className={classes.cardMedia}
             image={'/images/' + title + '/' + project['Title'] + '.jpg'}
@@ -200,18 +199,7 @@ class OrgItemModal extends React.Component {
               <b>Description: </b> {project['Project Description']}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Button
-              className={classes.text}
-              size="medium"
-              color="secondary"
-              variant="contained"
-              onClick={() => this.setState({ modalOpen: true })}
-            >
-              View
-            </Button>
-          </CardActions>
-        </Card>
+          </Card>
       </div>
     );
   }

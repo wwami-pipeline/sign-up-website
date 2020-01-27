@@ -66,6 +66,7 @@ class ResourcesPage extends Component {
             <Link
               color="secondary"
               href="https://canvas.uw.edu/courses/1176739"
+              target="_blank"
             >
               here
             </Link>
@@ -81,6 +82,7 @@ class ResourcesPage extends Component {
             <Link
               color="secondary"
               href="https://drive.google.com/file/d/195OaVgbVZ5DFdejFLJwX1_96FdnM-z-e/view?usp=sharing"
+              target="_blank"
             >
               Reflection Activities
             </Link>
@@ -99,7 +101,7 @@ class ResourcesPage extends Component {
             </Link>
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="https://youtu.be/-1Uzhd7YLdA">
+            <Link color="secondary" href="https://youtu.be/-1Uzhd7YLdA" target="_blank">
               Working with Minors
             </Link>
           </Typography>
@@ -115,6 +117,7 @@ class ResourcesPage extends Component {
             <Link
               color="secondary"
               href="https://drive.google.com/file/d/19YXIakAij0IOf0yyEiP4ZjNPFJr-CLUc/view?usp=sharing"
+              target="_blank"
             >
               UWSOM Bloodborne Pathogen Protocol – Step-by-step instructions on
               what to do in the case of a needlestick.
@@ -127,6 +130,7 @@ class ResourcesPage extends Component {
             <Link
               color="secondary"
               href="https://drive.google.com/file/d/1ArIy-cOJ2d3keqkjyUxP-IBE3Y1D4q3z/view?usp=sharing"
+              target="_blank"
             >
               Chap Footcare Manual
             </Link>
@@ -135,6 +139,7 @@ class ResourcesPage extends Component {
             <Link
               color="secondary"
               href="https://drive.google.com/file/d/1W5g2tey9tPEMCyc5VMb-AsW3ITCqnWSz/view?usp=sharing"
+              target="_blank"
             >
               SHIFA SPECIFIC PROTOCOLS
             </Link>
@@ -143,6 +148,7 @@ class ResourcesPage extends Component {
             <Link
               color="secondary"
               href="https://drive.google.com/file/d/1ZTbz-diYHWxnEpEhEu57fLeCykdBD6UW/view?usp=sharing"
+              target="_blank"
             >
               (SHIFA) Blood Glucose Guide
             </Link>
@@ -156,6 +162,7 @@ class ResourcesPage extends Component {
             <Link
               color="secondary"
               href="https://drive.google.com/file/d/1__J_8Kc7P2Ll0WcVlJoFUECZ7lzDTFAp/view?usp=sharing"
+              target="_blank"
             >
               (SHIFA) Blood Pressure Volunteer Information
             </Link>
@@ -164,6 +171,7 @@ class ResourcesPage extends Component {
             <Link
               color="secondary"
               href="https://drive.google.com/file/d/19mAxA_9UNJ8whBkpRXdHlk26SmM3hnDU/view?usp=sharing"
+              target="_blank"
             >
               (SHIFA) Screen and refer information for preceptors
             </Link>

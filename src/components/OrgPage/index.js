@@ -13,8 +13,13 @@ const styles = () => ({
   page: {
     overflow: 'hidden'
   },
+  description: {
+    fontFamily: 'Lato',
+    marginBottom: '1em'
+  },
   title: {
     fontFamily: 'Lato',
+    letterSpacing: '10px',
     marginBottom: '1em'
   },
   directionTitleTop: {
@@ -82,7 +87,7 @@ class OrgPage extends Component {
             <Typography className={classes.title} gutterBottom variant="h4">
               {title}
             </Typography>
-            <Typography className={classes.title} gutterBottom variant="h6">
+            <Typography className={classes.description} gutterBottom variant="h6">
               {description}
             </Typography>
             <Grid container spacing={24} alignContent='center'>
