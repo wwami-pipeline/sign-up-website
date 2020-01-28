@@ -3,10 +3,7 @@ import {
   AppBar,
   withStyles,
   Typography,
-  CssBaseline,
-  Fab,
-  Button,
-  Grid
+  CssBaseline
 } from "@material-ui/core";
 import NavBar from "../../components/NavBar";
 
