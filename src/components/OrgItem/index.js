@@ -20,7 +20,8 @@ const styles = () => ({
   },
   card: {
     backgroundColor: '#513E6D',
-    paddingBottom: 5
+    paddingBottom: 5,
+    cursor: 'pointer',
   },
   cardHeader: {
     backgroundColor: '#f0f9a4'

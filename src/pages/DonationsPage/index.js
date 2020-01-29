@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   AppBar,
+  Button,
   withStyles,
   Typography,
   CssBaseline
@@ -47,16 +48,18 @@ const styles = () => ({
     marginBottom: '10px',
     display: 'flex'
   },
-  donationButtonSeconday: {
+  donationButtonSecondary: {
     backgroundColor: '#836ba6',
-    color: 'white',
     border: 'none',
-    padding: '20px 30px',
+    color: 'white',
+    display: 'inherit',
     fontFamily: 'Lato',
-    fontSize: '20px',
+    fontSize: '18px',
     margin: 'auto',
     marginBottom: '5px',
-    display: 'flex'
+    padding: '15px 15px',
+    textAlign: 'center',
+    width: '400px',
   }
 });
 
@@ -76,34 +79,39 @@ class AboutPage extends Component {
           <Typography className={classes.donationText} variant="h4">UWSOM MEDICINE SERVICE LEARNING FUND</Typography>
           <Typography className={classes.donationText}variant="h4">YOUR SUPPORT WILL HELP TO SUSTAIN OUR EFFORTS!</Typography>
           <div className={classes.buttonContainer}>
-            <button
+            <Button
               className={classes.donationButtonMain}
-              href="http://depts.washington.edu/givemed/give/?page=make&source=servmd">
+              href="http://depts.washington.edu/givemed/give/?page=make&source=servmd"
+              target="_blank">
               Make A Gift
-            </button>
+            </Button>
           </div>
           <Typography className={classes.donationText}variant="h4">SPECIFIC PROJECT FUNDRAISING PAGES</Typography>
           <div className={classes.buttonContainer}>
-            <button
-              className={classes.donationButtonSeconday}
-              href="https://online.gifts.washington.edu/peer2peer/campaign/b2a0bc42-b48b-49c7-8615-4a6fc1ad53c2">
+            <Button
+              className={classes.donationButtonSecondary}
+              href="https://online.gifts.washington.edu/peer2peer/campaign/b2a0bc42-b48b-49c7-8615-4a6fc1ad53c2"
+              target="_blank">
               HEALTH SCIENCES MOBILE HEALTH VAN
-            </button>
-            <button
-              className={classes.donationButtonSeconday}
-              href="https://online.gifts.washington.edu/peer2peer/campaign/5c9028f3-582b-449d-ba71-91e56490e82f">
+            </Button>
+            <Button
+              className={classes.donationButtonSecondary}
+              href="https://online.gifts.washington.edu/peer2peer/campaign/5c9028f3-582b-449d-ba71-91e56490e82f"
+              target="_blank">
               SHIFA
-            </button>
-            <button
-              className={classes.donationButtonSeconday}
-              href="https://online.gifts.washington.edu/peer2peer/campaign/44c375de-6bec-40cf-8e99-e8af258b04d9">
+            </Button>
+            <Button
+              className={classes.donationButtonSecondary}
+              href="https://online.gifts.washington.edu/peer2peer/campaign/44c375de-6bec-40cf-8e99-e8af258b04d9"
+              target="_blank">
               UDSM
-            </button>
-            <button
-              className={classes.donationButtonSeconday}
-              href="https://online.gifts.washington.edu/peer2peer/Campaign/d929d3c5-a01a-45cd-b84f-80925a2fc6e3">
+            </Button>
+            <Button
+              className={classes.donationButtonSecondary}
+              href="https://online.gifts.washington.edu/peer2peer/Campaign/d929d3c5-a01a-45cd-b84f-80925a2fc6e3"
+              target="_blank">
               UTEST
-            </button>
+            </Button>
           </div>
         </div>
       </div>
