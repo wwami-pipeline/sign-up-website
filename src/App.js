@@ -16,70 +16,12 @@ class App extends Component {
     firebase.initializeApp(config);
     const db = firebase.database();
 
-    let SHIFA = [];
-    db.ref('/SHIFA')
-      .once('value')
-      .then(value => {
-        const items = value.toJSON();
-        for (let key in items) {
-          SHIFA.push(items[key]);
-        }
-      });
+    this.state = {
+      Seattle: {},
+      Overviews
+    };
 
-    let CHAP = [];
-    db.ref('/CHAP')
-      .once('value')
-      .then(value => {
-        const items = value.toJSON();
-        for (let key in items) {
-          CHAP.push(items[key]);
-        }
-      });
-
-    let UDSM = [];
-    db.ref('/UDSM')
-      .once('value')
-      .then(value => {
-        const items = value.toJSON();
-        for (let key in items) {
-          UDSM.push(items[key]);
-        }
-      });
-
-    let DFAD = [];
-    db.ref('/DFAD')
-      .once('value')
-      .then(value => {
-        const items = value.toJSON();
-        for (let key in items) {
-          console.log("PUSH: " + items[key]);
-          DFAD.push(items[key]);
-        }
-      });
-
-    let UTEST = [];
-    db.ref('/UTEST')
-      .once('value')
-      .then(value => {
-        const items = value.toJSON();
-        for (let key in items) {
-          console.log("PUSH: " + items[key]);
-          UTEST.push(items[key]);
-        }
-      });
-
-    let Others = [];
-    db.ref('/Others')
-      .once('value')
-      .then(value => {
-        const items = value.toJSON();
-        for (let key in items) {
-          console.log("PUSH: " + items[key]);
-          Others.push(items[key]);
-        }
-      });
-
-    let overviews = {};
+    // Populate overviews
     db.ref('/Overviews')
       .once('value')
       .then(value => {
@@ -87,29 +29,36 @@ class App extends Component {
         this.forceUpdate();
       });
 
-    this.state = {
-      SHIFA,
-      CHAP,
-      UDSM,
-      DFAD,
-      UTEST,
-      Others,
-      overviews
-    };
+    // Populate Seattle organizations
+    db.ref('/Seattle')
+      .once('value')
+      .then(value => {
+        const items = value.toJSON();
+        for (let key in items) {
+          this.state.Seattle[key] = items[key];
+        }
+      });
   }
   render() {
     return (
       <Router>
         <Switch>
           <Route
-            exact path="/"
-            render={() => {return this.state.overviews ? <HomePage overviews={this.state.overviews} /> : <div />}}
+            exact
+            path="/"
+            render={() => {
+              return this.state.overviews ? (
+                <HomePage overviews={this.state.overviews} />
+              ) : (
+                <div />
+              );
+            }}
           />
           <Route
             path="/SHIFA"
             render={() => (
               <OrgPage
-                projects={this.state.SHIFA}
+                projects={this.state.Seattle.SHIFA}
                 description={this.state.overviews.SHIFA}
                 title="SHIFA"
               />
@@ -119,7 +68,7 @@ class App extends Component {
             path="/CHAP"
             render={() => (
               <OrgPage
-                projects={this.state.CHAP}
+                projects={this.state.Seattle.CHAP}
                 description={this.state.overviews.CHAP}
                 title="CHAP"
               />
@@ -129,7 +78,7 @@ class App extends Component {
             path="/UDSM"
             render={() => (
               <OrgPage
-                projects={this.state.UDSM}
+                projects={this.state.Seattle.UDSM}
                 description={this.state.overviews.UDSM}
                 title="UDSM"
               />
@@ -139,7 +88,7 @@ class App extends Component {
             path="/DFAD"
             render={() => (
               <OrgPage
-                projects={this.state.DFAD}
+                projects={this.state.Seattle.DFAD}
                 description={this.state.overviews.DFAD}
                 title="DFAD"
               />
@@ -149,7 +98,7 @@ class App extends Component {
             path="/UTEST"
             render={() => (
               <OrgPage
-                projects={this.state.UTEST}
+                projects={this.state.Seattle.UTEST}
                 description={this.state.overviews.UTEST}
                 title="UTEST"
               />
@@ -159,7 +108,7 @@ class App extends Component {
             path="/Others"
             render={() => (
               <OrgPage
-                projects={this.state.Others}
+                projects={this.state.Seattle.Others}
                 description={this.state.overviews.Others}
                 title="Others"
               />
