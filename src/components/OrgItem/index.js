@@ -5,12 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia
-} from '@material-ui/core';
+import { Card, CardContent, CardHeader, CardMedia } from '@material-ui/core';
 import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 
@@ -21,19 +16,19 @@ const styles = () => ({
   card: {
     backgroundColor: '#513E6D',
     paddingBottom: 5,
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
   cardHeader: {
     backgroundColor: '#f0f9a4'
   },
   cardMedia: {
-    height: 250   
+    height: 250
   },
   closeButton: {
     float: 'right'
   },
   dialogBody: {
-    backgroundColor: '#513E6D',
+    backgroundColor: '#513E6D'
   },
   indentText: {
     paddingLeft: 10
@@ -68,21 +63,21 @@ class OrgItemModal extends React.Component {
   }
 
   getOrderNumber(x) {
-    if (x.toLowerCase() === 'project description') return 3;
-    if (x.toLowerCase() === 'types of volunteers needed') return 3.5;
-    if (x.toLowerCase() === 'clinic schedule') return 4;
-    if (x.toLowerCase() === 'location') return 4.5;
-    if (x.toLowerCase() === 'parking and directions') return 5;
-    if (x.toLowerCase() === 'provider information') return 6;
-    if (x.toLowerCase() === 'hs grad student information') return 7;
-    if (x.toLowerCase() === 'undergraduate information') return 8;
-    if (x.toLowerCase() === 'project specific training/onboarding') return 9;
-    if (x.toLowerCase() === 'tips and reminders') return 10;
-    if (x.toLowerCase() === 'contact information and cancellation policy')
+    if (x.toLowerCase().includes('project description')) return 3;
+    if (x.toLowerCase().includes('types of volunteers needed')) return 3.5;
+    if (x.toLowerCase().includes('clinic schedule')) return 4;
+    if (x.toLowerCase().includes('location')) return 4.5;
+    if (x.toLowerCase().includes('parking and directions')) return 5;
+    if (x.toLowerCase().includes('provider information')) return 6;
+    if (x.toLowerCase().includes('hs grad student information')) return 7;
+    if (x.toLowerCase().includes('undergraduate information')) return 8;
+    if (x.toLowerCase().includes('project specific training')) return 9;
+    if (x.toLowerCase().includes('tips and reminders')) return 10;
+    if (x.toLowerCase().includes('contact information and cancellation policy'))
       return 11;
-    if (x.toLowerCase() === 'services provided') return 11.5;
-    if (x.toLowerCase() === 'clinic flow') return 12;
-    if (x.toLowerCase() === 'website link') return 13;
+    if (x.toLowerCase().includes('services provided')) return 11.5;
+    if (x.toLowerCase().includes('clinic flow')) return 12;
+    if (x.toLowerCase().includes('website link')) return 13;
     return 14;
   }
 
@@ -97,13 +92,14 @@ class OrgItemModal extends React.Component {
           fullScreen={fullScreen}
           maxWidth="lg"
         >
-          <div className={classes.dialogBody}> 
+          <div className={classes.dialogBody}>
             <DialogTitle>
               <Typography variant="h4"> {project['Title']} </Typography>
               <Button
                 className={classes.closeButton}
                 onClick={() => this.setState({ modalOpen: false })}
-                color="white" >
+                color="white"
+              >
                 Close
               </Button>
               {this.state.signUpLinks.length === 1 ? (
@@ -131,7 +127,6 @@ class OrgItemModal extends React.Component {
                   </Button>
                 ))
               )}
-              
             </DialogTitle>
             <DialogContent>
               {Object.keys(project)
@@ -172,7 +167,10 @@ class OrgItemModal extends React.Component {
             </DialogActions>
           </div>
         </Dialog>
-        <Card className={classes.card} onClick={() => this.setState({ modalOpen: true })}>
+        <Card
+          className={classes.card}
+          onClick={() => this.setState({ modalOpen: true })}
+        >
           <CardMedia
             className={classes.cardMedia}
             image={'/images/' + title + '/' + project['Title'] + '.jpg'}
@@ -200,7 +198,7 @@ class OrgItemModal extends React.Component {
               <b>Description: </b> {project['Project Description']}
             </Typography>
           </CardContent>
-          </Card>
+        </Card>
       </div>
     );
   }
