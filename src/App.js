@@ -21,22 +21,27 @@ class App extends Component {
       Overviews
     };
 
+    // Populate Seattle organizations
+    db.ref('/Seattle')
+      .once('value')
+      .then(value => {
+        const SeattleOrgs = value.toJSON();
+        for (let org in SeattleOrgs) {
+          this.state.Seattle[key] = [];
+          const keys = Object.keys(org);
+          for (let key in keys) {
+            this.state.Seattle[key].push(SeattleOrgs[org][key]);
+          }
+        }
+        this.forceUpdate();
+      });
+
     // Populate overviews
     db.ref('/Overviews')
       .once('value')
       .then(value => {
         this.state.overviews = value.toJSON();
         this.forceUpdate();
-      });
-
-    // Populate Seattle organizations
-    db.ref('/Seattle')
-      .once('value')
-      .then(value => {
-        const items = value.toJSON();
-        for (let key in items) {
-          this.state.Seattle[key] = items[key];
-        }
       });
   }
   render() {
