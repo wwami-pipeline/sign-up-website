@@ -12,7 +12,7 @@ const styles = () => ({
   dialogBody: {
     backgroundColor: '#B1A6C1'
   },
-  dialogBorder: {    
+  dialogBorder: {
     backgroundColor: '#513E6D',
     height: '20px'
   },
@@ -48,31 +48,72 @@ class ProviderRequirements extends React.Component {
           fullWidth
         >
           <div className={classes.dialogBorder} />
-          <DialogTitle className={classes.dialogBody} >
-            <Typography variant="h4" className={classes.textCaps}>Providers</Typography>
+          <DialogTitle className={classes.dialogBody}>
+            <Typography variant="h4" className={classes.textCaps}>
+              Providers
+            </Typography>
           </DialogTitle>
-          <div className={classes.dialogBody}> 
+          <div className={classes.dialogBody}>
             <DialogContent className={this.props.dialogContent}>
               <Typography className={classes.text}>
-                1. Fill out a brief survey{' '}
+                <b>All Providers: </b> Fill out a brief survey{' '}
                 <Link
                   color="secondary"
-                  href="https://catalyst.uw.edu/webq/survey/clarkel/374890"
+                  href="https://catalyst.uw.edu/webq/survey/clarkel/343031"
                 >
                   here
                 </Link>
                 .
               </Typography>
               <Typography className={classes.text}>
-                2. The University requires that all non-MD providers at a UWSOM
+                <b>
+                  <u>MD Providers</u>
+                </b>
+              </Typography>
+              <Typography className={classes.text}>
+                UW employees (full-time or part-time) in the Departments of
+                Internal Medicine, Family Medicine, Emergency Medicine,
+                Neurology, and Pediatrics, NO additional approval is required.
+                If you are interested in volunteering at any of our service
+                learning activities, please sign up on this website!
+              </Typography>
+              <Typography className={classes.text}>
+                UW employees (full-time or part-time) in ALL OTHER departments,
+                please contact Leonora Clarke,
+                <Link color="secondary" href=" mailto://clarkel@uw.edu">
+                  {' '}
+                  clarkel@uw.edu
+                </Link>
+                .
+              </Typography>
+              <Typography className={classes.text}>
+                Non-UW employees (this includes VA and FQHC employees), please
+                check with your insurance to find out if you are covered during
+                service learning activities. If your coverage does not extend to
+                the service learning activity, or if you are retired, liability
+                coverage can be obtained through the Washington State VRP
+                program (see link below).
+              </Typography>
+              <Typography className={classes.text}>
+                <b>
+                  <u>Non-MD Providers</u>
+                </b>
+              </Typography>
+              <Typography className={classes.text}>
+                The University requires that all non-MD providers at a UWSOM
                 service learning clinical sites apply for the free professional
-                liability coverage through the <Link color="secondary"
+                liability coverage through the{' '}
+                <Link
+                  color="secondary"
                   href=" https://www.wahealthcareaccessalliance.org/volunteers"
-                > Volunteer and Retired Provider (VRP) program </Link>. The VRP program offers coverage for non-invasive
-                primary and specialty care of low-income patients in qualified
-                settings. The form is quite simple and approval takes 1-2 weeks.
-                To apply online click{' '}
-                
+                >
+                  {' '}
+                  Volunteer and Retired Provider (VRP) program{' '}
+                </Link>
+                . The VRP program offers coverage for non-invasive primary and
+                specialty care of low-income patients in qualified settings. The
+                form is quite simple and approval takes 1-2 weeks. To apply
+                online click{' '}
                 <Link
                   color="secondary"
                   href=" https://www.wahealthcareaccessalliance.org/volunteers/apply-for-vrp#Malpractice"
@@ -82,8 +123,8 @@ class ProviderRequirements extends React.Component {
                 .
               </Typography>
               <Typography className={classes.text}>
-                Individual projects may have additional requirements. See project
-                specific pages for details.
+                Individual projects may have additional requirements. See
+                project specific pages for details.
               </Typography>
             </DialogContent>
             <DialogActions>

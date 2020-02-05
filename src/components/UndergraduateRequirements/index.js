@@ -4,7 +4,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link'
+import Link from '@material-ui/core/Link';
 import withStyles from '@material-ui/core/styles/withStyles';
 import React from 'react';
 
@@ -12,7 +12,7 @@ const styles = () => ({
   dialogBody: {
     backgroundColor: '#B1A6C1'
   },
-  dialogBorder: {    
+  dialogBorder: {
     backgroundColor: '#513E6D',
     height: '20px'
   },
@@ -47,7 +47,6 @@ class UndergraduateRequirements extends React.Component {
           onClose={this.props.handleClose}
           fullWidth
         >
-          
           <div className={classes.dialogBorder} />
           <DialogTitle className={classes.dialogBody}>
             <Typography variant="h4" className={classes.textCaps}>
@@ -55,25 +54,26 @@ class UndergraduateRequirements extends React.Component {
             </Typography>
           </DialogTitle>
           <div className={classes.dialogBody}>
-          <DialogContent className={this.props.dialogContent}>
-            <Typography className={classes.text}>
-              Undergraduate students are required to complete an online HIPAA
-              certification training. Contact Leonora Clarke (
-              <Link href="mailto://clarkel@uw.edu" color="secondary">
-                clarkel@uw.edu
-              </Link>
-              ) for details. (UW students only)
-            </Typography>
-            <Typography className={classes.text}>
-              Individual projects may have additional requirements. See project
-              specific pages for details.
-            </Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.props.handleClose} color="white">
-              Close
-            </Button>
-          </DialogActions>
+            <DialogContent className={this.props.dialogContent}>
+              <Typography className={classes.text}>
+                Undergraduate students are required to complete an online HIPAA
+                certification training. Contact Leonora Clarke (
+                <Link href="mailto://clarkel@uw.edu" color="secondary">
+                  clarkel@uw.edu
+                </Link>
+                ) for details. Participation in our programming is limited to UW
+                students only.
+              </Typography>
+              <Typography className={classes.text}>
+                Individual projects may have additional requirements. See
+                project specific pages for details.
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.props.handleClose} color="white">
+                Close
+              </Button>
+            </DialogActions>
           </div>
           <div className={classes.dialogBorder} />
         </Dialog>

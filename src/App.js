@@ -52,7 +52,7 @@ class App extends Component {
       .then(value => {
         const items = value.toJSON();
         for (let key in items) {
-          console.log("PUSH: " + items[key]);
+          console.log('PUSH: ' + items[key]);
           DFAD.push(items[key]);
         }
       });
@@ -63,7 +63,7 @@ class App extends Component {
       .then(value => {
         const items = value.toJSON();
         for (let key in items) {
-          console.log("PUSH: " + items[key]);
+          console.log('PUSH: ' + items[key]);
           UTEST.push(items[key]);
         }
       });
@@ -74,7 +74,7 @@ class App extends Component {
       .then(value => {
         const items = value.toJSON();
         for (let key in items) {
-          console.log("PUSH: " + items[key]);
+          console.log('PUSH: ' + items[key]);
           Others.push(items[key]);
         }
       });
@@ -102,8 +102,15 @@ class App extends Component {
       <Router>
         <Switch>
           <Route
-            exact path="/"
-            render={() => {return this.state.overviews ? <HomePage overviews={this.state.overviews} /> : <div />}}
+            exact
+            path="/"
+            render={() => {
+              return this.state.overviews ? (
+                <HomePage overviews={this.state.overviews} />
+              ) : (
+                <div />
+              );
+            }}
           />
           <Route
             path="/SHIFA"

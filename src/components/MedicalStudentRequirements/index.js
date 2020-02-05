@@ -1,17 +1,17 @@
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Typography from "@material-ui/core/Typography";
-import withStyles from "@material-ui/core/styles/withStyles";
-import React from "react";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
+import React from 'react';
 
 const styles = () => ({
   dialogBody: {
     backgroundColor: '#B1A6C1'
   },
-  dialogBorder: {    
+  dialogBorder: {
     backgroundColor: '#513E6D',
     height: '20px'
   },
@@ -47,20 +47,30 @@ class MedicalStudentRequirements extends React.Component {
           fullWidth
         >
           <div className={classes.dialogBorder} />
-            <DialogTitle className={classes.dialogBody}>
-              <Typography variant="h4" className={classes.textCaps}>Medical Students</Typography>
-            </DialogTitle>
-            <div className={classes.dialogBody}>
+          <DialogTitle className={classes.dialogBody}>
+            <Typography variant="h4" className={classes.textCaps}>
+              Medical Students
+            </Typography>
+          </DialogTitle>
+          <div className={classes.dialogBody}>
             <DialogContent className={this.props.dialogContent}>
-              <Typography className={classes.text}>All medical students are required to attend a fingerstick training prior to working at any of our sites that do blood glucose testing. (UW students only)</Typography>
-              <Typography className={classes.text}>Individual projects may have additional requirements.  See project specific pages for details.</Typography>
+              <Typography className={classes.text}>
+                All medical students are required to attend a fingerstick
+                training prior to working at any of our sites that do blood
+                glucose testing. Participation in our programming is limited to
+                UW students only.
+              </Typography>
+              <Typography className={classes.text}>
+                Individual projects may have additional requirements. See
+                project specific pages for details.
+              </Typography>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.props.handleClose} color="white">
                 Close
               </Button>
             </DialogActions>
-            </div>
+          </div>
           <div className={classes.dialogBorder} />
         </Dialog>
       </div>
