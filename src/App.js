@@ -170,7 +170,7 @@ class App extends Component {
               <OrgPage
                 projects={this.state.UMOV}
                 description={this.state.overviews.UMOV}
-                title="UMOV"
+                title="Mobile Health Outreach Van"
               />
             )}
           />

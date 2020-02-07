@@ -294,9 +294,9 @@ class HomePage extends Component {
                   }}
                 >
                   <LinkBox
-                    title="UW Mobile Outreach Van"
-                    name="UMOV"
-                    description={this.props.overviews.DFAD}
+                    title="Mobile Health Outreach Van"
+                    name=""
+                    description={this.props.overviews.UMOV}
                     imageLocation="images/UMOV/UMOV.jpg"
                     path="/UMOV"
                   />
