@@ -67,6 +67,17 @@ class App extends Component {
           UTEST.push(items[key]);
         }
       });
+    
+    let UMOV = [];
+    db.ref('/UMOV')
+      .once('value')
+      .then(value => {
+        const items = value.toJSON();
+        for (let key in items) {
+          console.log('PUSH: ' + items[key]);
+          UMOV.push(items[key]);
+        }
+      });
 
     let Others = [];
     db.ref('/Others')
@@ -92,6 +103,7 @@ class App extends Component {
       CHAP,
       UDSM,
       DFAD,
+      UMOV,
       UTEST,
       Others,
       overviews
@@ -149,6 +161,16 @@ class App extends Component {
                 projects={this.state.DFAD}
                 description={this.state.overviews.DFAD}
                 title="DFAD"
+              />
+            )}
+          />
+          <Route
+            path="/UMOV"
+            render={() => (
+              <OrgPage
+                projects={this.state.UMOV}
+                description={this.state.overviews.UMOV}
+                title="UMOV"
               />
             )}
           />
