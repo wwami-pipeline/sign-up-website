@@ -18,7 +18,7 @@ class App extends Component {
 
     this.state = {
       Seattle: {},
-      Overviews
+      Overviews: {}
     };
 
     // Populate Seattle organizations
@@ -27,10 +27,10 @@ class App extends Component {
       .then(value => {
         const SeattleOrgs = value.toJSON();
         for (let org in SeattleOrgs) {
-          this.state.Seattle[key] = [];
+          this.state.Seattle[org] = [];
           const keys = Object.keys(org);
           for (let key in keys) {
-            this.state.Seattle[key].push(SeattleOrgs[org][key]);
+            this.state.Seattle[org].push(SeattleOrgs[org][key]);
           }
         }
         this.forceUpdate();
