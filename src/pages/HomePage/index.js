@@ -290,6 +290,22 @@ class HomePage extends Component {
                 <div
                   className={classes.linkBoxContainer}
                   onClick={() => {
+                    this.props.history.push('/UMOV');
+                  }}
+                >
+                  <LinkBox
+                    title="Mobile Health Outreach Van"
+                    name=""
+                    description={this.props.overviews.UMOV}
+                    imageLocation="images/UMOV/UMOV.jpg"
+                    path="/UMOV"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs>
+                <div
+                  className={classes.linkBoxContainer}
+                  onClick={() => {
                     this.props.history.push('/UTEST');
                   }}
                 >

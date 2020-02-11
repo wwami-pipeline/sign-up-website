@@ -44,6 +44,7 @@ class App extends Component {
         this.forceUpdate();
       });
   }
+  
   render() {
     return (
       <Router>
@@ -96,6 +97,16 @@ class App extends Component {
                 projects={this.state.Seattle.DFAD}
                 description={this.state.overviews.DFAD}
                 title="DFAD"
+              />
+            )}
+          />
+          <Route
+            path="/UMOV"
+            render={() => (
+              <OrgPage
+                projects={this.state.Seattle.UMOV}
+                description={this.state.overviews.UMOV}
+                title="Mobile Health Outreach Van"
               />
             )}
           />
