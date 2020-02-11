@@ -17,36 +17,28 @@ class App extends Component {
     const db = firebase.database();
 
     this.state = {
-      Seattle: {},
-      Overviews: {}
+      Seattle: undefined,
+      overviews: undefined
     };
-
-    // Populate Seattle organizations
-    db.ref('/Seattle')
-      .once('value')
-      .then(value => {
-        const SeattleOrgs = value.toJSON();
-        for (let org in SeattleOrgs) {
-          this.state.Seattle[org] = [];
-          const keys = Object.keys(org);
-          for (let key in keys) {
-            this.state.Seattle[org].push(SeattleOrgs[org][key]);
-          }
-        }
-        this.forceUpdate();
-      });
 
     // Populate overviews
     db.ref('/Overviews')
       .once('value')
       .then(value => {
         this.state.overviews = value.toJSON();
-        this.forceUpdate();
+        // Populate Seattle organizations
+        db.ref('/Seattle')
+          .once('value')
+          .then(value => {
+            this.state.Seattle = value.toJSON();
+            console.log(this.state.Seattle)
+            this.forceUpdate();
+          });
       });
   }
-  
+
   render() {
-    return (
+    return this.state.overviews === undefined ? <div /> : (
       <Router>
         <Switch>
           <Route

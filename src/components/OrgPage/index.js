@@ -91,10 +91,10 @@ class OrgPage extends Component {
               {description}
             </Typography>
             <Grid container spacing={24} alignContent='center'>
-              {projects.map(project => {
+              {Object.keys(projects).map(project => {
                 return (
                   <Grid item xs={12} md={6}>
-                    <OrgItem project={project} title={title} />
+                    <OrgItem project={projects[project]} title={title} />
                   </Grid>
                 );
               })}
