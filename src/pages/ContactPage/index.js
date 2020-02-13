@@ -16,26 +16,25 @@ const styles = () => ({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-  title: {
+  titleTop: {
     fontFamily: 'Lato',
-    maxWidth: 850,
-    marginTop: "2em",
-    textAlign: "center",
-    marginBottom: "15px"
+    margin: '30px 0 15px 0',
+    textAlign: 'center'
   },
   secondaryTitle: {
     fontFamily: 'Lato',
     maxWidth: 850,
-    marginTop: "1em",
+    margin: "15px 0 15px 0",
     textAlign: "center",
-    marginBottom: "15px"
   },
   contactBlock: {
     fontFamily: 'Lato',
-    marginTop: '1em',
+    fontSize: '1.2em',
+    margin: '10px 0 0 0',
   },
   contactBlockBold: {
     fontFamily: 'Lato',
+    fontSize: '1.4em',
     fontWeight: 'bold',
     marginTop: '1em',
   }
@@ -53,8 +52,12 @@ class AboutPage extends Component {
         </AppBar>
 
         <div className={classes.contactSection}>
-            <Typography className={classes.title} variant="h4">Contact Us</Typography>
-            <Typography className={classes.secondaryTitle} variant="h5">Questions? We'd love to hear from you.</Typography>
+            <Typography className={classes.titleTop} variant="h4">
+              CONTACT US
+            </Typography>
+            <Typography className={classes.secondaryTitle} variant="h5">
+              Questions? We'd love to hear from you.
+            </Typography>
 
           <div>
             <Typography className={classes.contactBlockBold}>Leonora Clarke, Service Learning Manager, UW School of Medicine </Typography> 

@@ -16,7 +16,7 @@ const styles = () => ({
   title: {
     color: 'white',
     fontFamily: 'Lato',
-    fontSize: '1.1em',
+    fontSize: '1.2em',
     marginTop: '1em',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -26,14 +26,14 @@ const styles = () => ({
   description: {
     color: 'white',
     fontFamily: 'Lato',
+    fontSize: '1.1em',
     maxWidth: 750,
     marginLeft: 'auto',
     marginRight: 'auto',
   },
   directionTitleTop: {
     fontFamily: 'Lato',
-    marginTop: '2em',
-    marginBottom: '15px',
+    margin: '30px 0 15px 0',
     textAlign: 'center'
   }
 });
@@ -51,7 +51,7 @@ class ResourcesPage extends Component {
 
         <div>
           <Typography className={classes.directionTitleTop} variant="h4">
-            Service Learning Resources and Protocols
+            SERVICE LEARNING RESOURCES AND PROTOCOLS
           </Typography>
         </div>
 

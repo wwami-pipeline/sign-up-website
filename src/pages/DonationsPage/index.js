@@ -20,7 +20,7 @@ const styles = () => ({
   topDonationText: {
     fontFamily: 'Lato',
     maxWidth: 850,
-    marginTop: "3em",
+    marginTop: "2em",
     textAlign: "center",
   },
   donationText: {
@@ -44,6 +44,7 @@ const styles = () => ({
     padding: '20px 30px',
     fontFamily: 'Lato',
     fontSize: '28px',
+    fontWeight: 'bold',
     margin: 'auto',
     marginBottom: '10px',
     display: 'flex'
@@ -55,6 +56,7 @@ const styles = () => ({
     display: 'inherit',
     fontFamily: 'Lato',
     fontSize: '18px',
+    fontWeight: 'bold',
     margin: 'auto',
     marginBottom: '5px',
     padding: '15px 15px',
@@ -75,9 +77,11 @@ class AboutPage extends Component {
         </AppBar>
 
         <div className={classes.donateSection}>
-          <Typography className={classes.topDonationText} variant="h5">CONSIDER A GIFT TO THE</Typography>
+          <Typography className={classes.topDonationText} variant="h5">Consider A Gift To The </Typography>
           <Typography className={classes.donationText} variant="h4">UWSOM MEDICINE SERVICE LEARNING FUND</Typography>
-          <Typography className={classes.donationText}variant="h4">YOUR SUPPORT WILL HELP TO SUSTAIN OUR EFFORTS!</Typography>
+          <Typography className={classes.donationText}variant="h5">
+            Your Support Will Help To Sustain Our Efforts!
+          </Typography>
           <div className={classes.buttonContainer}>
             <Button
               className={classes.donationButtonMain}
@@ -86,7 +90,9 @@ class AboutPage extends Component {
               Make A Gift
             </Button>
           </div>
-          <Typography className={classes.donationText}variant="h4">SPECIFIC PROJECT FUNDRAISING PAGES</Typography>
+          <Typography className={classes.donationText}variant="h4">
+            Specific Project Fundraising Pages
+          </Typography>
           <div className={classes.buttonContainer}>
             <Button
               className={classes.donationButtonSecondary}
