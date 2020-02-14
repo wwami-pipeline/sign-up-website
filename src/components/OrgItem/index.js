@@ -22,7 +22,7 @@ const styles = () => ({
     backgroundColor: '#f0f9a4'
   },
   cardMedia: {
-    height: 250
+    height: 360
   },
   closeButton: {
     float: 'right'
@@ -83,6 +83,7 @@ class OrgItemModal extends React.Component {
 
   render() {
     const { fullScreen, classes, project, title } = this.props;
+    console.log('/images/' + title + '/' + project['Title'] + '.jpg')
     return (
       <div>
         <Dialog

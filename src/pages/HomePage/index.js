@@ -59,23 +59,6 @@ const styles = () => {
     fabButtonHolder: {
       textAlign: 'center'
     },
-    paperContainer: {
-      backgroundColor: '#513E6D',
-      padding: '2em',
-      margin: '1.5em',
-      maxWidth: 900,
-      marginLeft: 'auto',
-      marginRight: 'auto'
-    },
-    selectionContainer: {
-      maxWidth: 950,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      textAlign: 'center',
-      padding: '2em',
-      paddingBottom: '5em',
-      margin: '1em'
-    },
     gridContainer: {
       marginTop: '1.5em',
       marginBottom: '1em',
@@ -103,6 +86,21 @@ const styles = () => {
       marginRight: '50px',
       fontFamily: 'Lato',
       textAlign: 'center',
+    },
+    paperContainer: {
+      backgroundColor: '#513E6D',
+      padding: '2em',
+      margin: '1.5em',
+      maxWidth: 900,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    },
+    selectionContainer: {
+      maxWidth: 950,
+      margin: '15px auto 0 auto',
+      textAlign: 'center',
+      padding: '2em',
+      paddingBottom: '5em',
     }
   };
 };
@@ -265,7 +263,7 @@ class HomePage extends Component {
                     title="UDSM"
                     name="UNIVERSITY DISTRICT STREET MEDICINE"
                     description={this.props.overviews.UDSM}
-                    imageLocation="images/UDSM/UDSM.png"
+                    imageLocation="images/UDSM/UDSM.jpg"
                     path="/UDSM"
                   />
                 </div>
@@ -313,7 +311,7 @@ class HomePage extends Component {
                     title="UTest"
                     name="Rapid HIV Testing"
                     description={this.props.overviews.DFAD}
-                    imageLocation="images/UTEST/UTEST.png"
+                    imageLocation="images/UTEST/UTEST.jpg"
                     path="/UTEST"
                   />
                 </div>

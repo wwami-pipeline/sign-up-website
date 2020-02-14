@@ -41,13 +41,11 @@ const styles = () => ({
     textAlign: 'center'
   },
   selectionContainer: {
-    width: '90%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    maxWidth: 950,
+    margin: '15px auto 0 auto',
     textAlign: 'center',
     padding: '2em',
     paddingBottom: '5em',
-    margin: '1em'
   },
   gridContainer: {
     marginTop: '1.5em',
@@ -76,6 +74,15 @@ class OrgPage extends Component {
 
   render() {
     const { classes, projects, description, title } = this.props;
+    const gridItems = projects ? 
+    Object.keys(projects).map(project => {
+      return (
+        <Grid item xs={12} md={6}>
+          <OrgItem project={projects[project]} title={title} />
+        </Grid>
+      );
+    }) : 
+    React.createElement('div');
     return (
       <div className={classes.page}>
         <CssBaseline />
@@ -91,13 +98,7 @@ class OrgPage extends Component {
               {description}
             </Typography>
             <Grid container spacing={24} alignContent='center'>
-              {Object.keys(projects).map(project => {
-                return (
-                  <Grid item xs={12} md={6}>
-                    <OrgItem project={projects[project]} title={title} />
-                  </Grid>
-                );
-              })}
+              {gridItems}
             </Grid>
           </div>
         </div>

@@ -98,7 +98,7 @@ class App extends Component {
               <OrgPage
                 projects={this.state.Seattle.UMOV}
                 description={this.state.overviews.UMOV}
-                title="Mobile Health Outreach Van"
+                title="UMOV"
               />
             )}
           />
