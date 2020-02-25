@@ -45,7 +45,7 @@ const styles = () => ({
     margin: '15px auto 0 auto',
     textAlign: 'center',
     padding: '2em',
-    paddingBottom: '5em',
+    paddingBottom: '5em'
   },
   gridContainer: {
     marginTop: '1.5em',
@@ -73,16 +73,16 @@ class OrgPage extends Component {
   }
 
   render() {
-    const { classes, projects, description, title } = this.props;
-    const gridItems = projects ? 
-    Object.keys(projects).map(project => {
-      return (
-        <Grid item xs={12} md={6}>
-          <OrgItem project={projects[project]} title={title} />
-        </Grid>
-      );
-    }) : 
-    React.createElement('div');
+    const { classes, projects, overview, title } = this.props;
+    const gridItems = projects
+      ? Object.keys(projects).map(project => {
+          return (
+            <Grid item xs={12} md={6}>
+              <OrgItem project={projects[project]} title={title} />
+            </Grid>
+          );
+        })
+      : React.createElement('div');
     return (
       <div className={classes.page}>
         <CssBaseline />
@@ -94,10 +94,32 @@ class OrgPage extends Component {
             <Typography className={classes.title} gutterBottom variant="h4">
               {title}
             </Typography>
-            <Typography className={classes.description} gutterBottom variant="h6">
-              {description}
+            <Typography
+              className={classes.description}
+              gutterBottom
+              variant="h6"
+            >
+              {overview.description}
             </Typography>
-            <Grid container spacing={24} alignContent='center'>
+            {overview.video ? (
+              <iframe
+                src={overview.video}
+                title={title}
+                width="640"
+                height="360"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+              ></iframe>
+            ) : (
+              <div />
+            )}
+            <Grid
+              container
+              spacing={24}
+              alignContent="center"
+              className={classes.gridContainer}
+            >
               {gridItems}
             </Grid>
           </div>

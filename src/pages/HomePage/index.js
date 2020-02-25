@@ -230,7 +230,7 @@ class HomePage extends Component {
                   <LinkBox
                     title="SHIFA"
                     name="STUDENT HEALTH INITIATIVE FOR ACCESS"
-                    description={this.props.overviews.SHIFA}
+                    description={this.props.overviews.SHIFA.description}
                     imageLocation="images/SHIFA/SHIFA.jpg"
                     path="/SHIFA"
                   />
@@ -246,7 +246,7 @@ class HomePage extends Component {
                   <LinkBox
                     title="CHAP"
                     name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
-                    description={this.props.overviews.CHAP}
+                    description={this.props.overviews.CHAP.description}
                     imageLocation="images/CHAP/CHAP.jpg"
                     path="/CHAP"
                   />
@@ -262,7 +262,7 @@ class HomePage extends Component {
                   <LinkBox
                     title="UDSM"
                     name="UNIVERSITY DISTRICT STREET MEDICINE"
-                    description={this.props.overviews.UDSM}
+                    description={this.props.overviews.UDSM.description}
                     imageLocation="images/UDSM/UDSM.jpg"
                     path="/UDSM"
                   />
@@ -278,7 +278,7 @@ class HomePage extends Component {
                   <LinkBox
                     title="Doc for a Day"
                     name="DFAD"
-                    description={this.props.overviews.DFAD}
+                    description={this.props.overviews.DFAD.description}
                     imageLocation="images/DFAD/DFAD.jpg"
                     path="/DFAD"
                   />
@@ -294,7 +294,7 @@ class HomePage extends Component {
                   <LinkBox
                     title="Mobile Health Outreach Van"
                     name=""
-                    description={this.props.overviews.UMOV}
+                    description={this.props.overviews.UMOV.description}
                     imageLocation="images/UMOV/UMOV.jpg"
                     path="/UMOV"
                   />
@@ -310,7 +310,7 @@ class HomePage extends Component {
                   <LinkBox
                     title="UTest"
                     name="Rapid HIV Testing"
-                    description={this.props.overviews.DFAD}
+                    description={this.props.overviews.DFAD.description}
                     imageLocation="images/UTEST/UTEST.jpg"
                     path="/UTEST"
                   />

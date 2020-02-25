@@ -31,7 +31,6 @@ class App extends Component {
           .once('value')
           .then(value => {
             this.state.Seattle = value.toJSON();
-            console.log(this.state.Seattle)
             this.forceUpdate();
           });
       });
@@ -57,7 +56,7 @@ class App extends Component {
             render={() => (
               <OrgPage
                 projects={this.state.Seattle.SHIFA}
-                description={this.state.overviews.SHIFA}
+                overview={this.state.overviews.SHIFA}
                 title="SHIFA"
               />
             )}
@@ -67,7 +66,7 @@ class App extends Component {
             render={() => (
               <OrgPage
                 projects={this.state.Seattle.CHAP}
-                description={this.state.overviews.CHAP}
+                overview={this.state.overviews.CHAP}
                 title="CHAP"
               />
             )}
@@ -77,7 +76,7 @@ class App extends Component {
             render={() => (
               <OrgPage
                 projects={this.state.Seattle.UDSM}
-                description={this.state.overviews.UDSM}
+                overview={this.state.overviews.UDSM}
                 title="UDSM"
               />
             )}
@@ -87,7 +86,7 @@ class App extends Component {
             render={() => (
               <OrgPage
                 projects={this.state.Seattle.DFAD}
-                description={this.state.overviews.DFAD}
+                overview={this.state.overviews.DFAD}
                 title="DFAD"
               />
             )}
@@ -97,7 +96,7 @@ class App extends Component {
             render={() => (
               <OrgPage
                 projects={this.state.Seattle.UMOV}
-                description={this.state.overviews.UMOV}
+                overview={this.state.overviews.UMOV}
                 title="UMOV"
               />
             )}
@@ -107,7 +106,7 @@ class App extends Component {
             render={() => (
               <OrgPage
                 projects={this.state.Seattle.UTEST}
-                description={this.state.overviews.UTEST}
+                overview={this.state.overviews.UTEST}
                 title="UTEST"
               />
             )}
@@ -117,7 +116,7 @@ class App extends Component {
             render={() => (
               <OrgPage
                 projects={this.state.Seattle.Others}
-                description={this.state.overviews.Others}
+                overview={this.state.overviews.Others}
                 title="Others"
               />
             )}
