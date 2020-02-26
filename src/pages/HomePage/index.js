@@ -14,11 +14,20 @@ import UndergraduateRequirements from '../../components/UndergraduateRequirement
 import ProviderRequirements from '../../components/ProviderRequirements';
 import NavBar from '../../components/NavBar';
 import { withRouter, Link } from 'react-router-dom';
+import EventCalendar from '../../components/EventCalendar';
+
+import '../../App.css';
 
 const styles = () => {
   return {
     page: {
       overflow: 'hidden'
+    },
+    calendarContainer: {
+      backgroundColor: 'white',
+      color: 'black',
+      margin: '15px auto 0px auto',
+      maxWidth: '900px',
     },
     directionTitleTop: {
       marginTop: '2em',
@@ -113,6 +122,10 @@ class HomePage extends Component {
     undergradRequirementsOpen: false
   };
 
+  calendarEventClick(info) {
+    console.log(info.event.title + ": " + info.event.extendedProps.description);
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -120,6 +133,19 @@ class HomePage extends Component {
       <div className={classes.page}>
         <CssBaseline />
         <NavBar />
+
+        <div className={classes.calendarContainer}>
+          <EventCalendar 
+            eventClickFn={e => this.calendarEventClick(e)}
+            events={[
+              {title: 'event 1', date: '2020-02-26', description: 'test' },
+              {title: 'event 2', date: '2020-02-26', description: 'test1' },
+              {title: 'event 3', date: '2020-02-26' },
+              {title: 'event 4', date: '2020-02-26' },
+              {title: 'event 5', date: '2020-02-26' }
+            ]}
+          />
+        </div>
 
         {/* Modals */}
 

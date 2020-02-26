@@ -5,6 +5,9 @@
   "dependencies": {
     "@material-ui/core": "^3.9.4",
     "@material-ui/icons": "^3.0.2",
+    "@fullcalendar/core": "^4.2.0",
+    "@fullcalendar/daygrid": "^4.2.0",
+    "@fullcalendar/react": "^4.2.0",
     "firebase": "^6.6.2",
     "react": "^16.12.0",
     "react-app-polyfill": "^1.0.5",

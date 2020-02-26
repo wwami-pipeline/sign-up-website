@@ -1,0 +1,50 @@
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
+h1, h2, h3, h4, h5, h6, span, a {
+  font-family: 'Lato'
+}
+
+/* Styles for the Full Calendar */
+
+.td.fc-today {
+  background: black
+}
+
+td.fc-today {
+  background: black
+}
+
+.fc-left {
+  margin: 10px 0 0 10px
+}
+
+.fc-right {
+  margin: 10px 10px 0 0
+}
+
+.fc-button {
+  background-color: #2E1159;
+  border: none;
+  font-family: Lato
+}
+
+.fc-button:hover {
+  background-color: #2E1159;
+  border: none
+}
+
+.fc-button:focus {
+  background-color: #2E1159;
+  border: none
+}
+
+.fc-event {
+  background-color: #4a336b;
+  border: none;
+  cursor: pointer
+}
+
+.fc-title {
+  margin: 0 0 0 4px
+}
