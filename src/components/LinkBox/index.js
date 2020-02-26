@@ -30,12 +30,8 @@ const LinkBox = props => {
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <Link
-          to={{
-            pathname: props.path
-          }}
-          className={classes.disableLinkUnderline}
-        >
+        <Link to={{ pathname: props.path }}
+          className={classes.disableLinkUnderline} >
           <CardMedia
             component="img"
             alt={props.title}
@@ -44,7 +40,7 @@ const LinkBox = props => {
             className={classes.image}
           />
           <CardContent style={{ backgroundColor: "#F4EFA8" }}>
-            <Typography variant="h5" style={{ color: "#2E1159" }}>
+            <Typography variant="h5" style={{ color: "#2E1159", fontFamily: "Lato" }} component="h2">
               {props.title}
             </Typography>
             <Typography variant="body2" style={{color: "#2E1159", fontWeight: "bold", fontFamily: "Lato"}} component="h3">
