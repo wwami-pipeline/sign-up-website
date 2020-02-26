@@ -420,7 +420,7 @@ class HomePage extends Component {
                   <LinkBox
                     title="UTest"
                     name="Rapid HIV Testing"
-                    description={this.props.overviews.DFAD.description}
+                    description={this.props.overviews.UTEST.description}
                     imageLocation="images/UTEST/UTEST.jpg"
                     path="/UTEST"
                   />

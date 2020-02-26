@@ -108,7 +108,7 @@ class OrgPage extends Component {
             </Typography>
             {overview.video ? (
               <Button onClick={() => window.open(overview.video)} className={classes.videoButton} variant="contained">
-                Video Overview
+                {title} Information Video
               </Button>
             ) : (
               <div />
