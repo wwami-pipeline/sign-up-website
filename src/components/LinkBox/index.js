@@ -44,7 +44,7 @@ const LinkBox = props => {
             className={classes.image}
           />
           <CardContent style={{ backgroundColor: "#F4EFA8" }}>
-            <Typography variant="h5" style={{color: "#2E1159", fontFamily: "Lato"}} component="h2">
+            <Typography variant="h5" style={{ color: "#2E1159" }}>
               {props.title}
             </Typography>
             <Typography variant="body2" style={{color: "#2E1159", fontWeight: "bold", fontFamily: "Lato"}} component="h3">
