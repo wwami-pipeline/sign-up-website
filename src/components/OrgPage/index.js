@@ -4,7 +4,8 @@ import {
   withStyles,
   Typography,
   CssBaseline,
-  Grid
+  Grid,
+  Button
 } from '@material-ui/core';
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
@@ -56,6 +57,10 @@ const styles = () => ({
   linkBoxContainer: {
     mariginLeft: 'auto',
     marginRight: 'auto'
+  },
+  videoButton: {
+    backgroundColor: '#f0f9a4',
+    color: 'black'
   }
 });
 
@@ -102,15 +107,9 @@ class OrgPage extends Component {
               {overview.description}
             </Typography>
             {overview.video ? (
-              <iframe
-                src={overview.video}
-                title={title}
-                width="640"
-                height="360"
-                frameborder="0"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-              ></iframe>
+              <Button onClick={() => window.open(overview.video)} className={classes.videoButton} variant="contained">
+                Video Overview
+              </Button>
             ) : (
               <div />
             )}
