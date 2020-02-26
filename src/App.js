@@ -87,7 +87,7 @@ class App extends Component {
               <OrgPage
                 projects={this.state.Seattle.DFAD}
                 overview={this.state.overviews.DFAD}
-                title="DFAD"
+                title="Doctor For A Day"
               />
             )}
           />
@@ -97,7 +97,7 @@ class App extends Component {
               <OrgPage
                 projects={this.state.Seattle.UMOV}
                 overview={this.state.overviews.UMOV}
-                title="UMOV"
+                title="University Mobile Outreach Van"
               />
             )}
           />
