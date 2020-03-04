@@ -6,7 +6,7 @@ import {
   Typography,
   CssBaseline
 } from "@material-ui/core";
-import NavBar from "../../components/NavBar";
+import Header from "../../components/Header";
 
 const styles = () => ({
   page: {
@@ -73,7 +73,7 @@ class AboutPage extends Component {
       <div className={classes.page}>
         <CssBaseline />
         <AppBar position="static">
-          <NavBar />          
+          <Header />          
         </AppBar>
 
         <div className={classes.donateSection}>

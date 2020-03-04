@@ -7,7 +7,7 @@ import {
   Grid,
   Button
 } from '@material-ui/core';
-import NavBar from '../NavBar';
+import NavBar from '../Header';
 import OrgItem from '../OrgItem';
 
 const styles = () => ({

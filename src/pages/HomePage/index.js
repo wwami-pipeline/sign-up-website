@@ -12,7 +12,7 @@ import MedicalStudentRequirements from '../../components/MedicalStudentRequireme
 import OtherGraduateRequirements from '../../components/OtherGraduateRequirements';
 import UndergraduateRequirements from '../../components/UndergraduateRequirements';
 import ProviderRequirements from '../../components/ProviderRequirements';
-import NavBar from '../../components/NavBar';
+import Header from '../../components/Header';
 import { withRouter, Link } from 'react-router-dom';
 
 const styles = () => {
@@ -119,7 +119,7 @@ class HomePage extends Component {
     return (
       <div className={classes.page}>
         <CssBaseline />
-        <NavBar />
+        <Header />
 
         {/* Modals */}
 

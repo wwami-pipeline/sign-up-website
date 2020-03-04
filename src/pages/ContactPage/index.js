@@ -5,7 +5,7 @@ import {
   Typography,
   CssBaseline
 } from "@material-ui/core";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/Header";
 
 const styles = () => ({
   page: {
