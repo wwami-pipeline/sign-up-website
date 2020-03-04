@@ -33,6 +33,34 @@ class App extends Component {
             this.state.Seattle = value.toJSON();
             this.forceUpdate();
           });
+        // Populate Alaska organizations
+        db.ref('/Alaska')
+          .once('value')
+          .then(value => {
+            this.state.Alaska = value.toJSON();
+            this.forceUpdate();
+          });
+        // Populate Montana organizations
+        db.ref('/Montana')
+          .once('value')
+          .then(value => {
+            this.state.Montana = value.toJSON();
+            this.forceUpdate();
+          });
+        // Populate Spokane organizations
+        db.ref('/Spokane')
+          .once('value')
+          .then(value => {
+            this.state.Spokane = value.toJSON();
+            this.forceUpdate();
+          });
+        // Populate Seattle organizations
+        db.ref('/Wyoming')
+          .once('value')
+          .then(value => {
+            this.state.Wyoming = value.toJSON();
+            this.forceUpdate();
+          });
       });
   }
 
