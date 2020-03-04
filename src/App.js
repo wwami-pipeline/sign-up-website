@@ -18,6 +18,10 @@ class App extends Component {
 
     this.state = {
       Seattle: undefined,
+      Alaska: undefined,
+      Montana: undefined,
+      Spokane: undefined,
+      Wyoming: undefined,
       overviews: undefined
     };
 
