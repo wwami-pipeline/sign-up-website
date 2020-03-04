@@ -18,7 +18,9 @@ const NavBar = () => {
                       <div style={{float:'left'}}>
                         <img className="toolbar-logo" alt="UW School of Medicine Volunteer Logo" src="/images/uw_name_logo.jpg" />
                         <br/>
-                        <Typography style={{color:'#440088', fontWeight: 'bold', margin: '0px 0px 0px 20px'}} variant='h5'>SCHOOL OF MEDICINE SERVICE LEARNING</Typography>
+                        <Typography style={{color:'#440088', fontWeight: 'bold', margin: '0px 0px 0px 20px'}} variant="h5">
+                          SCHOOL OF MEDICINE SERVICE LEARNING
+                        </Typography>
                       </div>
                       <div style={{display:'inline'}}>
                         <img className="wwami-logo" alt="UW School of Medicine Volunteer Logo" src="/images/wwami_logo.png" />

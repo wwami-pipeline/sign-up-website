@@ -82,8 +82,7 @@ class OrgItemModal extends React.Component {
   }
 
   render() {
-    const { fullScreen, classes, project, title } = this.props;
-    console.log('/images/' + title + '/' + project['Title'] + '.jpg')
+    const { classes, fullScreen, path, project} = this.props;
     return (
       <div>
         <Dialog
@@ -138,6 +137,7 @@ class OrgItemModal extends React.Component {
                   if (key.toLowerCase() !== 'title' && key !== 'Sign-up Link')
                     return (
                       <Typography
+                        key={key}
                         className={classes.textItem}
                         gutterBottom
                         align="left"
@@ -155,7 +155,7 @@ class OrgItemModal extends React.Component {
                         })}
                       </Typography>
                     );
-                  return <div />;
+                  return <div key="0" />;
                 })}
             </DialogContent>
             <DialogActions>
@@ -174,7 +174,7 @@ class OrgItemModal extends React.Component {
         >
           <CardMedia
             className={classes.cardMedia}
-            image={'/images/' + title + '/' + project['Title'] + '.jpg'}
+            image={'/images/' + path + '/' + project['Title'] + '.jpg'}
             title={project['Title']}
           />
           <CardHeader

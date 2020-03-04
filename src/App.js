@@ -55,6 +55,7 @@ class App extends Component {
             path="/SHIFA"
             render={() => (
               <OrgPage
+                path="/SHIFA"
                 projects={this.state.Seattle.SHIFA}
                 overview={this.state.overviews.SHIFA}
                 title="SHIFA"
@@ -65,6 +66,7 @@ class App extends Component {
             path="/CHAP"
             render={() => (
               <OrgPage
+                path="/CHAP"
                 projects={this.state.Seattle.CHAP}
                 overview={this.state.overviews.CHAP}
                 title="CHAP"
@@ -75,6 +77,7 @@ class App extends Component {
             path="/UDSM"
             render={() => (
               <OrgPage
+                path="/UDSM"
                 projects={this.state.Seattle.UDSM}
                 overview={this.state.overviews.UDSM}
                 title="UDSM"
@@ -85,6 +88,7 @@ class App extends Component {
             path="/DFAD"
             render={() => (
               <OrgPage
+                path="/DFAD"
                 projects={this.state.Seattle.DFAD}
                 overview={this.state.overviews.DFAD}
                 title="Doctor For A Day"
@@ -95,6 +99,7 @@ class App extends Component {
             path="/UMOV"
             render={() => (
               <OrgPage
+                path="/UMOV"
                 projects={this.state.Seattle.UMOV}
                 overview={this.state.overviews.UMOV}
                 title="University Mobile Outreach Van"
@@ -105,6 +110,7 @@ class App extends Component {
             path="/UTEST"
             render={() => (
               <OrgPage
+                path="/UTEST"
                 projects={this.state.Seattle.UTEST}
                 overview={this.state.overviews.UTEST}
                 title="UTEST"
@@ -115,6 +121,7 @@ class App extends Component {
             path="/Others"
             render={() => (
               <OrgPage
+                path="/Others"
                 projects={this.state.Seattle.Others}
                 overview={this.state.overviews.Others}
                 title="Others"
