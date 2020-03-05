@@ -140,6 +140,9 @@ class HomePage extends Component {
         <NavBar />
 
         <div style={{textAlign: "center"}}>
+          <Typography className={classes.directionTitleHeaderBold}>
+            SELECT A LOCATION
+          </Typography>
           <HomeMap />
         </div>
 

@@ -1,0 +1,61 @@
+import React, { Component } from 'react';
+import {
+  withStyles,
+  Typography,
+  CssBaseline
+} from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
+import HomeMap from '../../components/HomeMap';
+
+import '../../App.css';
+
+const styles = () => {
+  return {
+    page: {
+      overflow: 'hidden'
+    },
+    title: {
+      fontFamily: 'Lato',
+      fontSize: '2.4em',
+      fontWeight: 'bold',
+      marginTop: '24px',
+      textAlign: 'center'
+    }
+  };
+};
+
+class HomePage extends Component {
+  state = {
+    providerRequirementsOpen: false,
+    medicalRequirementsOpen: false,
+    otherGradRequirementsOpen: false,
+    undergradRequirementsOpen: false
+  };
+
+  calendarEventClick(info) {
+    console.log(info.event.title + ": " + info.event.extendedProps.description);
+  }
+
+  onMapClick(region) {
+    console.log(region);
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.page}>
+        <CssBaseline />
+
+        <div style={{textAlign: "center"}}>
+          <Typography className={classes.title}>
+            SELECT A LOCATION
+          </Typography>
+          <HomeMap />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default withStyles(styles)(withRouter(HomePage));

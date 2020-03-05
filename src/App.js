@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import MainPage from './pages/MainPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import DonatePage from './pages/DonationsPage';
@@ -33,6 +33,12 @@ class App extends Component {
             this.state.Seattle = value.toJSON();
             this.forceUpdate();
           });
+        db.ref('/Alaska')
+          .once('value')
+          .then(value => {
+            this.state.Alaska = value.toJSON();
+            this.forceUpdate();
+          });
       });
   }
 
@@ -45,11 +51,21 @@ class App extends Component {
             path="/"
             render={() => {
               return this.state.overviews ? (
-                <HomePage overviews={this.state.overviews} />
+                <MainPage overviews={this.state.overviews} />
               ) : (
                 <div />
               );
             }}
+          />
+          <Route
+            path="/Alaska"
+            render={() => (
+              <OrgPage
+                projects={this.state.Alaska}
+                overview={this.state.overviews.SHIFA}
+                title="SHIFA"
+              />
+            )}
           />
           <Route
             path="/SHIFA"
