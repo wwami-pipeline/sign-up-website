@@ -78,12 +78,12 @@ class OrgPage extends Component {
   }
 
   render() {
-    const { classes, projects, overview, title } = this.props;
+    const { classes, path, projects, overview, title } = this.props;
     const gridItems = projects
-      ? Object.keys(projects).map(project => {
+      ? Object.keys(projects).map((project, index) => {
           return (
-            <Grid item xs={12} md={6}>
-              <OrgItem project={projects[project]} title={title} />
+            <Grid item key={index} xs={12} md={6}>
+              <OrgItem project={projects[project]} path={path} />
             </Grid>
           );
         })

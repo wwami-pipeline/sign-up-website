@@ -139,14 +139,7 @@ class HomePage extends Component {
         <CssBaseline />
         <NavBar />
 
-        <div style={{textAlign: "center"}}>
-          <Typography className={classes.directionTitleHeaderBold}>
-            SELECT A LOCATION
-          </Typography>
-          <HomeMap />
-        </div>
-
-        {/* <div className={classes.calendarContainer}>
+        <div className={classes.calendarContainer}>
           <EventCalendar 
             eventClickFn={e => this.calendarEventClick(e)}
             events={[
@@ -157,7 +150,7 @@ class HomePage extends Component {
               {title: 'event 5', date: '2020-02-26' }
             ]}
           />
-        </div> */}
+        </div>
 
         {/* Modals */}
 

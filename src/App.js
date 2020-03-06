@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
+import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import DonatePage from './pages/DonationsPage';
@@ -18,6 +19,10 @@ class App extends Component {
 
     this.state = {
       Seattle: undefined,
+      Alaska: undefined,
+      Montana: undefined,
+      Spokane: undefined,
+      Wyoming: undefined,
       overviews: undefined
     };
 
@@ -33,10 +38,32 @@ class App extends Component {
             this.state.Seattle = value.toJSON();
             this.forceUpdate();
           });
+        // Populate Alaska organizations
         db.ref('/Alaska')
           .once('value')
           .then(value => {
             this.state.Alaska = value.toJSON();
+            this.forceUpdate();
+          });
+        // Populate Montana organizations
+        db.ref('/Montana')
+          .once('value')
+          .then(value => {
+            this.state.Montana = value.toJSON();
+            this.forceUpdate();
+          });
+        // Populate Spokane organizations
+        db.ref('/Spokane')
+          .once('value')
+          .then(value => {
+            this.state.Spokane = value.toJSON();
+            this.forceUpdate();
+          });
+        // Populate Seattle organizations
+        db.ref('/Wyoming')
+          .once('value')
+          .then(value => {
+            this.state.Wyoming = value.toJSON();
             this.forceUpdate();
           });
       });
@@ -60,17 +87,28 @@ class App extends Component {
           <Route
             path="/Alaska"
             render={() => (
-              <OrgPage
+              <HomePage
                 projects={this.state.Alaska}
-                overview={this.state.overviews.SHIFA}
+                overviews={this.state.overviews}
+                title="SHIFA"
+              />
+            )}
+          />
+           <Route
+            path="/Seattle"
+            render={() => (
+              <HomePage
+                projects={this.state.Seattle}
+                overviews={this.state.overviews}
                 title="SHIFA"
               />
             )}
           />
           <Route
-            path="/SHIFA"
+            path="/Seattle/SHIFA"
             render={() => (
               <OrgPage
+                path="/SHIFA"
                 projects={this.state.Seattle.SHIFA}
                 overview={this.state.overviews.SHIFA}
                 title="SHIFA"
@@ -78,9 +116,10 @@ class App extends Component {
             )}
           />
           <Route
-            path="/CHAP"
+            path="/Seattle/CHAP"
             render={() => (
               <OrgPage
+                path="/CHAP"
                 projects={this.state.Seattle.CHAP}
                 overview={this.state.overviews.CHAP}
                 title="CHAP"
@@ -88,9 +127,10 @@ class App extends Component {
             )}
           />
           <Route
-            path="/UDSM"
+            path="/Seattle/UDSM"
             render={() => (
               <OrgPage
+                path="/UDSM"
                 projects={this.state.Seattle.UDSM}
                 overview={this.state.overviews.UDSM}
                 title="UDSM"
@@ -98,9 +138,10 @@ class App extends Component {
             )}
           />
           <Route
-            path="/DFAD"
+            path="/Seattle/DFAD"
             render={() => (
               <OrgPage
+                path="/DFAD"
                 projects={this.state.Seattle.DFAD}
                 overview={this.state.overviews.DFAD}
                 title="Doctor For A Day"
@@ -108,9 +149,10 @@ class App extends Component {
             )}
           />
           <Route
-            path="/UMOV"
+            path="/Seattle/UMOV"
             render={() => (
               <OrgPage
+                path="/UMOV"
                 projects={this.state.Seattle.UMOV}
                 overview={this.state.overviews.UMOV}
                 title="University Mobile Outreach Van"
@@ -118,9 +160,10 @@ class App extends Component {
             )}
           />
           <Route
-            path="/UTEST"
+            path="/Seattle/UTEST"
             render={() => (
               <OrgPage
+                path="/UTEST"
                 projects={this.state.Seattle.UTEST}
                 overview={this.state.overviews.UTEST}
                 title="UTEST"
@@ -131,6 +174,7 @@ class App extends Component {
             path="/Others"
             render={() => (
               <OrgPage
+                path="/Others"
                 projects={this.state.Seattle.Others}
                 overview={this.state.overviews.Others}
                 title="Others"
