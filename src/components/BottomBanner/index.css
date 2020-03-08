@@ -1,0 +1,13 @@
+.bottom-banner {
+  background-color: #836ba6;
+  text-align: center;
+  margin-top: 50px;
+  padding: 10px;
+  width: 100%;
+  bottom: 0;
+}
+
+.bottom-banner p {
+  font-family: Lato;
+  color: white;
+}

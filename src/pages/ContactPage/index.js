@@ -6,6 +6,7 @@ import {
   CssBaseline
 } from "@material-ui/core";
 import NavBar from "../../components/NavBar";
+import BottomBanner from '../../components/BottomBanner';
 
 const styles = () => ({
   page: {
@@ -74,6 +75,7 @@ class AboutPage extends Component {
             Seattle, WA  98195 </Typography> 
           </div>
         </div>
+        <BottomBanner />
       </div>
     );
   }

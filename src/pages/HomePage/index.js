@@ -13,6 +13,7 @@ import OtherGraduateRequirements from '../../components/OtherGraduateRequirement
 import UndergraduateRequirements from '../../components/UndergraduateRequirements';
 import ProviderRequirements from '../../components/ProviderRequirements';
 import NavBar from '../../components/NavBar';
+import BottomBanner from '../../components/BottomBanner';
 import { withRouter, Link } from 'react-router-dom';
 
 const styles = () => {
@@ -329,6 +330,7 @@ class HomePage extends Component {
             </Grid>
           </div>
         </div>
+        <BottomBanner />
       </div>
     );
   }
