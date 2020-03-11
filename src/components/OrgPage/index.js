@@ -75,7 +75,7 @@ class OrgPage extends Component {
   componentDidMount() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-  }
+  } 
 
   render() {
     const { classes, path, projects, overview, title } = this.props;

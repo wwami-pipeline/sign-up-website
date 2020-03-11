@@ -13,6 +13,7 @@ import UndergraduateRequirements from '../../components/UndergraduateRequirement
 import ProviderRequirements from '../../components/ProviderRequirements';
 import NavBar from '../../components/NavBar';
 import EventCalendar from '../../components/EventCalendar';
+import AlaskaGrid from '../../components/OpportunityGrid/AlaskaGrid';
 import SeattleGrid from '../../components/OpportunityGrid/SeattleGrid';
 
 import '../../App.css';
@@ -130,8 +131,16 @@ class HomePage extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    var opportunityGrid = <SeattleGrid overviews={this.props.overviews} />;
+    const { classes, overviews, title } = this.props;
+    var opportunityGrid;
+    switch (title) {
+      case "Alaska"  : opportunityGrid = <AlaskaGrid overviews={overviews} />;
+      case "Seattle" : opportunityGrid = <SeattleGrid overviews={overviews} />;
+      // case "Spokane" : opportunityGrid = <SpokaneGrid overviews={overviews} />;
+      // case "Montana" : opportunityGrid = <MontanaGrid overviews={overviews} />;
+      // case "Idaho"   : opportunityGrid = <IdahoGrid overviews={overviews} />;
+      // case "Wyoming" : opportunityGrid = <WyomingGrid overviews={overviews} />;
+    }
 
     return (
       <div className={classes.page}>

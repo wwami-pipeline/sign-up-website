@@ -90,7 +90,7 @@ class App extends Component {
               <HomePage
                 projects={this.state.Alaska}
                 overviews={this.state.overviews}
-                title="SHIFA"
+                title="Alaska"
               />
             )}
           />
@@ -100,7 +100,47 @@ class App extends Component {
               <HomePage
                 projects={this.state.Seattle}
                 overviews={this.state.overviews}
-                title="SHIFA"
+                title="Seattle"
+              />
+            )}
+          />
+           <Route
+            path="/Spokane"
+            render={() => (
+              <HomePage
+                projects={this.state.Spokane}
+                overviews={this.state.overviews}
+                title="Spokane"
+              />
+            )}
+          />
+           <Route
+            path="/Montana"
+            render={() => (
+              <HomePage
+                projects={this.state.Montana}
+                overviews={this.state.overviews}
+                title="Montana"
+              />
+            )}
+          />
+           <Route
+            path="/Idaho"
+            render={() => (
+              <HomePage
+                projects={this.state.Idaho}
+                overviews={this.state.overviews}
+                title="Idaho"
+              />
+            )}
+          />
+           <Route
+            path="/Wyoming"
+            render={() => (
+              <HomePage
+                projects={this.state.Wyoming}
+                overviews={this.state.overviews}
+                title="Wyoming"
               />
             )}
           />
@@ -110,7 +150,7 @@ class App extends Component {
               <OrgPage
                 path="/SHIFA"
                 projects={this.state.Seattle.SHIFA}
-                overview={this.state.overviews.SHIFA}
+                overview={this.state.overviews}
                 title="SHIFA"
               />
             )}
@@ -119,7 +159,7 @@ class App extends Component {
             path="/Seattle/CHAP"
             render={() => (
               <OrgPage
-                path="/CHAP"
+                path="/Seattle/CHAP"
                 projects={this.state.Seattle.CHAP}
                 overview={this.state.overviews.CHAP}
                 title="CHAP"
@@ -130,7 +170,7 @@ class App extends Component {
             path="/Seattle/UDSM"
             render={() => (
               <OrgPage
-                path="/UDSM"
+                path="/Seattle/UDSM"
                 projects={this.state.Seattle.UDSM}
                 overview={this.state.overviews.UDSM}
                 title="UDSM"
@@ -141,7 +181,7 @@ class App extends Component {
             path="/Seattle/DFAD"
             render={() => (
               <OrgPage
-                path="/DFAD"
+                path="/Seattle/DFAD"
                 projects={this.state.Seattle.DFAD}
                 overview={this.state.overviews.DFAD}
                 title="Doctor For A Day"
@@ -152,7 +192,7 @@ class App extends Component {
             path="/Seattle/UMOV"
             render={() => (
               <OrgPage
-                path="/UMOV"
+                path="/Seattle/UMOV"
                 projects={this.state.Seattle.UMOV}
                 overview={this.state.overviews.UMOV}
                 title="University Mobile Outreach Van"
@@ -163,7 +203,7 @@ class App extends Component {
             path="/Seattle/UTEST"
             render={() => (
               <OrgPage
-                path="/UTEST"
+                path="/Seattle/UTEST"
                 projects={this.state.Seattle.UTEST}
                 overview={this.state.overviews.UTEST}
                 title="UTEST"
