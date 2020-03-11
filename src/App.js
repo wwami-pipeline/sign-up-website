@@ -69,7 +69,9 @@ class App extends Component {
   }
 
   render() {
-    return this.state.overviews === undefined ? <div /> : (
+    return this.state.overviews === undefined ? (
+      <div />
+    ) : (
       <Router>
         <Switch>
           <Route
@@ -155,7 +157,7 @@ class App extends Component {
               <OrgPage
                 path="/Others"
                 projects={this.state.Seattle.Others}
-                overview={this.state.overviews.Others}
+                overview={{ description: 'Other Projects in Seattle' }}
                 title="Others"
               />
             )}
