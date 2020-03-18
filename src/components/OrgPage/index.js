@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
+import OtherItem from '../OtherItem'
 
 const styles = () => ({
   page: {
@@ -83,7 +84,11 @@ class OrgPage extends Component {
       ? Object.keys(projects).map((project, index) => {
           return (
             <Grid item key={index} xs={12} md={6}>
-              <OrgItem project={projects[project]} path={path} />
+              {title === 'Others' ? (
+                <OtherItem project={projects[project]} path={path} />
+              ) : (
+                <OrgItem project={projects[project]} path={path} />
+              )}
             </Grid>
           );
         })
@@ -107,7 +112,11 @@ class OrgPage extends Component {
               {overview.description}
             </Typography>
             {overview.video ? (
-              <Button onClick={() => window.open(overview.video)} className={classes.videoButton} variant="contained">
+              <Button
+                onClick={() => window.open(overview.video)}
+                className={classes.videoButton}
+                variant="contained"
+              >
                 {title} Information Video
               </Button>
             ) : (
