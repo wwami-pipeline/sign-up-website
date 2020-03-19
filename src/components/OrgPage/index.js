@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
-import OtherItem from '../OtherItem'
+import OtherItem from '../OtherItem';
 
 const styles = () => ({
   page: {
@@ -80,19 +80,55 @@ class OrgPage extends Component {
 
   render() {
     const { classes, path, projects, overview, title } = this.props;
-    const gridItems = projects
-      ? Object.keys(projects).map((project, index) => {
-          return (
+    // Divide projects by their category field, if present
+    let categories = {};
+    categories[''] = [];
+    if (projects) {
+      Object.keys(projects).forEach(projectKey => {
+        const project = projects[projectKey];
+        console.log(project)
+        if (project.Category) {
+          const kvp = categories[project.Category];
+          if (kvp) {
+            kvp.push(project);
+          } else {
+            const arr = [project];
+            categories[project.Category] = arr;
+          }
+        } else {
+          const emptyCategory = categories[''];
+          emptyCategory.push(project);
+        }
+      });
+    }
+    const grids = Object.keys(categories).map(category => (
+      <div>
+        {category !== '' ? (
+          <Typography variant="h5">{category}</Typography>
+        ) : (
+          <div />
+        )}
+        <Grid
+          container
+          spacing={24}
+          alignContent="center"
+          className={classes.gridContainer}
+        >
+          {Object.keys(categories[category]).map((project, index) => (
             <Grid item key={index} xs={12} md={6}>
               {title === 'Others' ? (
-                <OtherItem project={projects[project]} path={path} />
+                <OtherItem
+                  project={categories[category][project]}
+                  path={path}
+                />
               ) : (
-                <OrgItem project={projects[project]} path={path} />
+                <OrgItem project={categories[category][project]} path={path} />
               )}
             </Grid>
-          );
-        })
-      : React.createElement('div');
+          ))}
+        </Grid>
+      </div>
+    ));
     return (
       <div className={classes.page}>
         <CssBaseline />
@@ -122,14 +158,8 @@ class OrgPage extends Component {
             ) : (
               <div />
             )}
-            <Grid
-              container
-              spacing={24}
-              alignContent="center"
-              className={classes.gridContainer}
-            >
-              {gridItems}
-            </Grid>
+            {/* Card Grids By Category */}
+            {grids}
           </div>
         </div>
       </div>
