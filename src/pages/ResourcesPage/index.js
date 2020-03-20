@@ -7,11 +7,11 @@ import {
   Link
 } from '@material-ui/core';
 import NavBar from '../../components/NavBar';
+import BottomBanner from '../../components/BottomBanner';
 
 const styles = () => ({
   page: {
-    overflow: 'hidden',
-    paddingBottom: '2em'
+    overflow: 'hidden'
   },
   title: {
     color: 'white',
@@ -182,6 +182,7 @@ class ResourcesPage extends Component {
             </Link>
           </Typography>
         </div>
+        <BottomBanner />
       </div>
     );
   }

@@ -18,6 +18,7 @@ import AlaskaGrid from '../../components/OpportunityGrid/AlaskaGrid';
 import SeattleGrid from '../../components/OpportunityGrid/SeattleGrid';
 
 import '../../App.css';
+import BottomBanner from '../../components/BottomBanner';
 
 const styles = () => {
   return {
@@ -98,7 +99,7 @@ const styles = () => {
       marginLeft: '50px',
       marginRight: '50px',
       fontFamily: 'Lato',
-      textAlign: 'center',
+      textAlign: 'center'
     },
     paperContainer: {
       backgroundColor: '#513E6D',
@@ -130,23 +131,26 @@ const styles = () => {
 };
 
 class HomePage extends Component {
-  state = {
-    providerRequirementsOpen: false,
-    medicalRequirementsOpen: false,
-    otherGradRequirementsOpen: false,
-    undergradRequirementsOpen: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      providerRequirementsOpen: false,
+      medicalRequirementsOpen: false,
+      otherGradRequirementsOpen: false,
+      undergradRequirementsOpen: false
+    };
+  }
 
   calendarEventClick(info) {
     console.log(info.event.title + ": " + info.event.extendedProps.description);
   }
 
   render() {
-    const { classes, history, overviews, title } = this.props;
+    const { classes, history, images, overviews, title } = this.props;
     var opportunityGrid;
     switch (title) {
-      case "Alaska"  : opportunityGrid = <AlaskaGrid overviews={overviews} history={history} />; break;
-      case "Seattle" : opportunityGrid = <SeattleGrid overviews={overviews} history={history} />; break;
+      case "Alaska"  : opportunityGrid = <AlaskaGrid overviews={overviews} history={history} images={images}/>; break;
+      case "Seattle" : opportunityGrid = <SeattleGrid overviews={overviews} history={history} images={images} />; break;
       // case "Spokane" : opportunityGrid = <SpokaneGrid overviews={overviews} history={history}/>; break;
       // case "Montana" : opportunityGrid = <MontanaGrid overviews={overviews} history={history}/>; break;
       // case "Idaho"   : opportunityGrid = <IdahoGrid overviews={overviews} history={history}/>; break;
@@ -281,8 +285,9 @@ class HomePage extends Component {
             </Typography>
           </div>
 
-          {opportunityGrid}
+          { opportunityGrid }
         </div>
+        <BottomBanner />
       </div>
     );
   }

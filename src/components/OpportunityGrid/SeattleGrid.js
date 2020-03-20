@@ -48,7 +48,7 @@ class SeattleGrid extends React.Component {
       <div className={classes.gridContainer}>
         <Grid container spacing={24}>
           <Grid item xs>
-            <div  className={classes.linkBoxContainer}
+            <div className={classes.linkBoxContainer}
               onClick={() => {
                 this.props.history.push('/Seattle/SHIFA');
               }}

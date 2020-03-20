@@ -9,6 +9,8 @@ import {
 } from '@material-ui/core';
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
+import OtherItem from '../OtherItem';
+import BottomBanner from "../../components/BottomBanner";
 
 const styles = () => ({
   page: {
@@ -78,17 +80,58 @@ class OrgPage extends Component {
   } 
 
   render() {
-    const { classes, path, projects, overview, title } = this.props;
-    console.log(overview.video);
-    const gridItems = projects
-      ? Object.keys(projects).map((project, index) => {
-          return (
+    const { classes, path, projects, images, overview, title } = this.props;
+    // Divide projects by their category field, if present
+    let categories = {};
+    categories[''] = [];
+    if (projects) {
+      Object.keys(projects).forEach(projectKey => {
+        const project = projects[projectKey];
+        if (project.Category) {
+          const kvp = categories[project.Category];
+          if (kvp) {
+            kvp.push(project);
+          } else {
+            const arr = [project];
+            categories[project.Category] = arr;
+          }
+        } else {
+          const emptyCategory = categories[''];
+          emptyCategory.push(project);
+        }
+      });
+    }
+    const grids = Object.keys(categories).map(category => (
+      <div>
+        {category !== '' ? (
+          <Typography variant="h5">{category}</Typography>
+        ) : (
+          <div />
+        )}
+        <Grid
+          container
+          spacing={24}
+          alignContent="center"
+          className={classes.gridContainer}
+        >
+          {Object.keys(categories[category]).map((project, index) => (
             <Grid item key={index} xs={12} md={6}>
-              <OrgItem project={projects[project]} path={path} />
+              {title === 'Others' ? (
+                <OtherItem
+                  project={categories[category][project]}
+                  path={path}
+                />
+              ) : (
+                <OrgItem
+                  project={categories[category][project]}
+                  imageUrl={images[categories[category][project]['Title']]}
+                />
+              )}
             </Grid>
-          );
-        })
-      : React.createElement('div');
+          ))}
+        </Grid>
+      </div>
+    ));
     return (
       <div className={classes.page}>
         <CssBaseline />
@@ -110,22 +153,21 @@ class OrgPage extends Component {
               <div/>
             )} */}
             {overview.video ? (
-              <Button onClick={() => window.open(overview.video)} className={classes.videoButton} variant="contained">
+              <Button
+                onClick={() => window.open(overview.video)}
+                className={classes.videoButton}
+                variant="contained"
+              >
                 {title} Information Video
               </Button>
             ) : (
               <div />
             )}
-            <Grid
-              container
-              spacing={24}
-              alignContent="center"
-              className={classes.gridContainer}
-            >
-              {gridItems}
-            </Grid>
+            {/* Card Grids By Category */}
+            {grids}
           </div>
         </div>
+        <BottomBanner />
       </div>
     );
   }

@@ -24,7 +24,12 @@ class App extends Component {
       Montana: undefined,
       Spokane: undefined,
       Wyoming: undefined,
-      overviews: undefined
+      overviews: undefined,
+      SeattleImages: {},
+      AlaskaImages: {},
+      MontanaImages: {},
+      SpokaneImages: {},
+      WyomingImages: {}
     };
 
     // Populate overviews
@@ -32,12 +37,27 @@ class App extends Component {
       .once('value')
       .then(value => {
         this.state.overviews = value.toJSON();
+        // Populate Seattle organizations
+        db.ref('/Seattle')
+          .once('value')
+          .then(value => {
+            this.state.Seattle = value.toJSON();
+            this.populateLocationImages(
+              'Seattle',
+              this.state.Seattle,
+              this.state.SeattleImages
+            );
+          });
         // Populate Alaska organizations
         db.ref('/Alaska')
           .once('value')
           .then(value => {
             this.state.Alaska = value.toJSON();
-            this.forceUpdate();
+            this.populateLocationImages(
+              'Alaska',
+              this.state.Alaska,
+              this.state.AlaskaImages
+            );
           });
         // Populate Seattle organizations
         db.ref('/Seattle')
@@ -51,27 +71,91 @@ class App extends Component {
           .once('value')
           .then(value => {
             this.state.Montana = value.toJSON();
-            this.forceUpdate();
+            this.populateLocationImages(
+              'Montana',
+              this.state.Montana,
+              this.state.MontanaImages
+            );
           });
         // Populate Spokane organizations
         db.ref('/Spokane')
           .once('value')
           .then(value => {
             this.state.Spokane = value.toJSON();
-            this.forceUpdate();
+            this.populateLocationImages(
+              'Spokane',
+              this.state.Spokane,
+              this.state.SpokaneImages
+            );
           });
         // Populate Seattle organizations
         db.ref('/Wyoming')
           .once('value')
           .then(value => {
             this.state.Wyoming = value.toJSON();
-            this.forceUpdate();
+            this.populateLocationImages(
+              'Wyoming',
+              this.state.Wyoming,
+              this.state.WyomingImages
+            );
           });
       });
   }
 
+  populateLocationImages = (locationName, locationData, imageData) => {
+    const orgs = Object.keys(locationData);
+    const storageRef = firebase.storage().ref();
+    let orgCount = 0;
+    // Populate Image URLs by organization
+    orgs.forEach(org => {
+      // Get org image
+      storageRef
+        .child('/' + locationName + '/' + org + '.jpg')
+        .getDownloadURL()
+        .then(url => {
+          imageData[org + '.jpg'] = url;
+          orgCount++;
+          if (orgCount >= orgs.length) {
+            this.forceUpdate();
+          }
+        })
+        .catch(() => {
+          orgCount++;
+        });
+      // Get image for each event in org
+      imageData[org] = {};
+      const events = Object.keys(locationData[org]);
+      let eventsCount = 0;
+      events.forEach(event => {
+        storageRef
+          .child(
+            '/' +
+              locationName +
+              '/' +
+              org +
+              '/' +
+              locationData[org][event]['Title'] +
+              '.jpg'
+          )
+          .getDownloadURL()
+          .then(url => {
+            imageData[org][locationData[org][event]['Title']] = url;
+            eventsCount++;
+            if (eventsCount >= events.length) {
+              this.forceUpdate();
+            }
+          })
+          .catch(() => {
+            eventsCount++;
+          });
+      });
+    });
+  };
+
   render() {
-    return this.state.overviews === undefined ? <div /> : (
+    return this.state.overviews === undefined ? (
+      <div />
+    ) : (
       <Router>
         <Switch>
           <Route
@@ -79,71 +163,29 @@ class App extends Component {
             path="/"
             render={() => {
               return this.state.overviews ? (
-                <MainPage overviews={this.state.overviews} />
+                <MainPage
+                  overviews={this.state.overviews}
+                  images={this.state.SeattleImages}
+                />
               ) : (
                 <div />
               );
             }}
           />
           <Route
-            exact path="/Alaska"
-            render={() => (
-              <HomePage
-                projects={this.state.Alaska}
-                overviews={this.state.overviews}
-                title="Alaska"
-              />
-            )}
-          />
-           <Route
-            exact path="/Seattle"
-            render={() => (
-              <HomePage
-                projects={this.state.Seattle}
-                overviews={this.state.overviews}
-                title="Seattle"
-              />
-            )}
-          />
-           <Route
-            exact path="/Spokane"
-            render={() => (
-              <HomePage
-                projects={this.state.Spokane}
-                overviews={this.state.overviews}
-                title="Spokane"
-              />
-            )}
-          />
-           <Route
-            exact path="/Montana"
-            render={() => (
-              <HomePage
-                projects={this.state.Montana}
-                overviews={this.state.overviews}
-                title="Montana"
-              />
-            )}
-          />
-           <Route
-            exact path="/Idaho"
-            render={() => (
-              <HomePage
-                projects={this.state.Idaho}
-                overviews={this.state.overviews}
-                title="Idaho"
-              />
-            )}
-          />
-           <Route
-            exact path="/Wyoming"
-            render={() => (
-              <HomePage
-                projects={this.state.Wyoming}
-                overviews={this.state.overviews}
-                title="Wyoming"
-              />
-            )}
+            exact
+            path="/Seattle"
+            render={() => {
+              return this.state.overviews ? (
+                <HomePage
+                  overviews={this.state.overviews}
+                  images={this.state.SeattleImages}
+                  title="Seattle"
+                />
+              ) : (
+                <div />
+              );
+            }}
           />
           <Route
             path="/Seattle/SHIFA"
@@ -152,6 +194,7 @@ class App extends Component {
                 path="/Seattle/SHIFA"
                 projects={this.state.Seattle.SHIFA}
                 overview={this.state.overviews.SHIFA}
+                images={this.state.SeattleImages['SHIFA']}
                 title="SHIFA"
               />
             )}
@@ -163,6 +206,7 @@ class App extends Component {
                 path="/Seattle/CHAP"
                 projects={this.state.Seattle.CHAP}
                 overview={this.state.overviews.CHAP}
+                images={this.state.SeattleImages['CHAP']}
                 title="CHAP"
               />
             )}
@@ -174,6 +218,7 @@ class App extends Component {
                 path="/Seattle/UDSM"
                 projects={this.state.Seattle.UDSM}
                 overview={this.state.overviews.UDSM}
+                images={this.state.SeattleImages['UDSM']}
                 title="UDSM"
               />
             )}
@@ -185,6 +230,7 @@ class App extends Component {
                 path="/Seattle/DFAD"
                 projects={this.state.Seattle.DFAD}
                 overview={this.state.overviews.DFAD}
+                images={this.state.SeattleImages['DFAD']}
                 title="Doctor For A Day"
               />
             )}
@@ -196,6 +242,7 @@ class App extends Component {
                 path="/Seattle/UMOV"
                 projects={this.state.Seattle.UMOV}
                 overview={this.state.overviews.UMOV}
+                images={this.state.SeattleImages['UMOV']}
                 title="University Mobile Outreach Van"
               />
             )}
@@ -207,6 +254,7 @@ class App extends Component {
                 path="/Seattle/UTEST"
                 projects={this.state.Seattle.UTEST}
                 overview={this.state.overviews.UTEST}
+                images={this.state.SeattleImages['UTEST']}
                 title="UTEST"
               />
             )}
@@ -217,36 +265,7 @@ class App extends Component {
               <OrgPage
                 path="/Seattle/Others"
                 projects={this.state.Seattle.Others}
-                title="Others"
-              />
-            )}
-          />
-          <Route
-            path="/Alaska/BFFC"
-            render={() => (
-              <OrgPage
-                path="/Alaska/BFFC"
-                projects={this.state.Alaska.BFFC}
-                title="BFFC"
-              />
-            )}
-          />
-          <Route
-            path="/Alaska/PHC"
-            render={() => (
-              <OrgPage
-                path="/Seattle/PHC"
-                projects={this.state.Alaska.Others}
-                title="PHC"
-              />
-            )}
-          />
-          <Route
-            path="/Seattle/Others"
-            render={() => (
-              <OrgPage
-                path="/Seattle/Others"
-                projects={this.state.Seattle.Others}
+                overview={{ description: 'Other Projects in Seattle' }}
                 title="Others"
               />
             )}
