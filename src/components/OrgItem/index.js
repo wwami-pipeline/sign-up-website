@@ -82,7 +82,7 @@ class OrgItemModal extends React.Component {
   }
 
   render() {
-    const { classes, fullScreen, path, project} = this.props;
+    const { classes, fullScreen, project, imageUrl } = this.props;
     return (
       <div>
         <Dialog
@@ -174,7 +174,7 @@ class OrgItemModal extends React.Component {
         >
           <CardMedia
             className={classes.cardMedia}
-            image={'/images/' + path + '/' + project['Title'] + '.jpg'}
+            image={imageUrl}
             title={project['Title']}
           />
           <CardHeader

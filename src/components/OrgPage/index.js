@@ -79,14 +79,13 @@ class OrgPage extends Component {
   }
 
   render() {
-    const { classes, path, projects, overview, title } = this.props;
+    const { classes, path, projects, images, overview, title } = this.props;
     // Divide projects by their category field, if present
     let categories = {};
     categories[''] = [];
     if (projects) {
       Object.keys(projects).forEach(projectKey => {
         const project = projects[projectKey];
-        console.log(project)
         if (project.Category) {
           const kvp = categories[project.Category];
           if (kvp) {
@@ -122,7 +121,10 @@ class OrgPage extends Component {
                   path={path}
                 />
               ) : (
-                <OrgItem project={categories[category][project]} path={path} />
+                <OrgItem
+                  project={categories[category][project]}
+                  imageUrl={images[categories[category][project]['Title']]}
+                />
               )}
             </Grid>
           ))}
