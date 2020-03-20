@@ -43,7 +43,7 @@ const styles = () => {
 
 class SeattleGrid extends React.Component {
   render() {
-    const { classes, overviews } = this.props;
+    const { classes, images, overviews } = this.props;
     return ( 
       <div className={classes.gridContainer}>
         <Grid container spacing={24}>
