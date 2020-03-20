@@ -10,6 +10,7 @@ import {
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
 import OtherItem from '../OtherItem';
+import BottomBanner from "../../components/BottomBanner";
 
 const styles = () => ({
   page: {
@@ -164,6 +165,7 @@ class OrgPage extends Component {
             {grids}
           </div>
         </div>
+        <BottomBanner />
       </div>
     );
   }
