@@ -5,6 +5,7 @@ import {
   CssBaseline,
   Paper,
   Fab,
+  Button
 } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import MedicalStudentRequirements from '../../components/MedicalStudentRequirements';
@@ -28,6 +29,9 @@ const styles = () => {
       color: 'black',
       margin: '15px auto 0px auto',
       maxWidth: '900px',
+    },
+    calendarSignIn: {
+      textAlign: 'center'
     },
     directionTitleTop: {
       marginTop: '2em',
@@ -111,6 +115,17 @@ const styles = () => {
       padding: '2em',
       paddingBottom: '5em',
     },
+    signInButton: {
+      fontSize: '1.2em',
+      margin: '12px 0 24px 0'
+    },
+    title: {
+      fontFamily: 'Lato',
+      fontSize: '2em',
+      fontWeight: 'bold',
+      marginTop: '24px',
+      textAlign: 'center'
+    }
   };
 };
 
@@ -126,20 +141,16 @@ class HomePage extends Component {
     console.log(info.event.title + ": " + info.event.extendedProps.description);
   }
 
-  onMapClick(region) {
-    console.log(region);
-  }
-
   render() {
-    const { classes, overviews, title } = this.props;
+    const { classes, history, overviews, title } = this.props;
     var opportunityGrid;
     switch (title) {
-      case "Alaska"  : opportunityGrid = <AlaskaGrid overviews={overviews} />;
-      case "Seattle" : opportunityGrid = <SeattleGrid overviews={overviews} />;
-      // case "Spokane" : opportunityGrid = <SpokaneGrid overviews={overviews} />;
-      // case "Montana" : opportunityGrid = <MontanaGrid overviews={overviews} />;
-      // case "Idaho"   : opportunityGrid = <IdahoGrid overviews={overviews} />;
-      // case "Wyoming" : opportunityGrid = <WyomingGrid overviews={overviews} />;
+      case "Alaska"  : opportunityGrid = <AlaskaGrid overviews={overviews} history={history} />; break;
+      case "Seattle" : opportunityGrid = <SeattleGrid overviews={overviews} history={history} />; break;
+      // case "Spokane" : opportunityGrid = <SpokaneGrid overviews={overviews} history={history}/>; break;
+      // case "Montana" : opportunityGrid = <MontanaGrid overviews={overviews} history={history}/>; break;
+      // case "Idaho"   : opportunityGrid = <IdahoGrid overviews={overviews} history={history}/>; break;
+      // case "Wyoming" : opportunityGrid = <WyomingGrid overviews={overviews} history={history}/>; break;
     }
 
     return (
@@ -147,7 +158,20 @@ class HomePage extends Component {
         <CssBaseline />
         <NavBar />
 
-        <div className={classes.calendarContainer}>
+        {!this.state.authenticated ? (
+          <div className={classes.calendarSignIn}>
+          <Typography className={classes.title}>
+            Sign in required to access calendar
+          </Typography>
+          <Button 
+            className={classes.signInButton}
+            color="secondary"
+            variant="contained"
+            onClick={() => this.setState({authenticated: true})}>
+            UW Sign In
+          </Button>        
+        </div>
+        ) : (<div className={classes.calendarContainer}>
           <EventCalendar 
             eventClickFn={e => this.calendarEventClick(e)}
             events={[
@@ -158,7 +182,7 @@ class HomePage extends Component {
               {title: 'event 5', date: '2020-02-26' }
             ]}
           />
-        </div>
+        </div>)}       
 
         {/* Modals */}
 

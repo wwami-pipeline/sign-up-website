@@ -278,7 +278,7 @@ class HomeMap extends React.Component {
           </svg>
           <svg width="159px" height="167px" className={classes.seattle}>
             <g transform="translate(0, 167) scale(0.1, -0.1)" fill="transparent" stroke="none">
-              <a href="/Seattle" target="_self" cursor="pointer">
+              <a href="/Seattle" target="_self" cursor="pointer" >
                 <path d="M677 1624 c-22 -22 -1 -95 54 -181 18 -30 1 -44 -18 -15 -9 12 -24
                   22 -36 22 -17 0 -19 -5 -14 -33 3 -19 -1 -43 -9 -57 -7 -14 -13 -40 -14 -57 0
                   -25 -4 -33 -18 -33 -9 0 -25 -12 -34 -27 l-16 -28 -7 27 c-7 26 -7 26 -132 33

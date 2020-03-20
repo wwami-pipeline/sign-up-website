@@ -28,6 +28,7 @@ const styles = () => {
       verticalAlign: 'middle'
     },
     otherProjectsLink: {
+      cursor: 'pointer',
       textDecoration: 'none'
     },
     otherProjectsText: {
@@ -47,26 +48,25 @@ class SeattleGrid extends React.Component {
       <div className={classes.gridContainer}>
         <Grid container spacing={24}>
           <Grid item xs>
-            <div
-              className={classes.linkBoxContainer}
+            <div  className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/SHIFA');
+                this.props.history.push('/Seattle/SHIFA');
               }}
             >
-              <LinkBox
-                title="SHIFA"
-                name="STUDENT HEALTH INITIATIVE FOR ACCESS"
-                description={overviews.SHIFA.Description}
-                imageLocation="images/Seattle/SHIFA/SHIFA.jpg"
-                path="/SHIFA"
-              />
+                <LinkBox
+                  title="SHIFA"
+                  name="STUDENT HEALTH INITIATIVE FOR ACCESS"
+                  description={overviews.SHIFA.Description}
+                  imageLocation="images/Seattle/SHIFA/SHIFA.jpg"
+                  path="Seattle/SHIFA"
+                />              
             </div>
           </Grid>
           <Grid item xs>
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/CHAP');
+                this.props.history.push('/Seattle/CHAP');
               }}
             >
               <LinkBox
@@ -74,7 +74,7 @@ class SeattleGrid extends React.Component {
                 name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
                 description={overviews.CHAP.Description}
                 imageLocation="images/Seattle/CHAP/CHAP.jpg"
-                path="/CHAP"
+                path="Seattle/CHAP"
               />
             </div>
           </Grid>
@@ -82,7 +82,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/UDSM');
+                this.props.history.push('/Seattle/UDSM');
               }}
             >
               <LinkBox
@@ -90,7 +90,7 @@ class SeattleGrid extends React.Component {
                 name="UNIVERSITY DISTRICT STREET MEDICINE"
                 description={overviews.UDSM.Description}
                 imageLocation="images/Seattle/UDSM/UDSM.jpg"
-                path="/UDSM"
+                path="Seattle/UDSM"
               />
             </div>
           </Grid>
@@ -98,7 +98,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/DFAD');
+                this.props.history.push('/Seattle/DFAD');
               }}
             >
               <LinkBox
@@ -106,7 +106,7 @@ class SeattleGrid extends React.Component {
                 name="DFAD"
                 description={overviews.DFAD.Description}
                 imageLocation="images/Seattle/DFAD/DFAD.jpg"
-                path="/DFAD"
+                path="Seattle/DFAD"
               />
             </div>
           </Grid>
@@ -114,7 +114,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/UMOV');
+                this.props.history.push('/Seattle/UMOV');
               }}
             >
               <LinkBox
@@ -122,7 +122,7 @@ class SeattleGrid extends React.Component {
                 name=""
                 description={overviews.UMOV.Description}
                 imageLocation="images/Seattle/UMOV/UMOV.jpg"
-                path="/UMOV"
+                path="Seattle/UMOV"
               />
             </div>
           </Grid>
@@ -130,7 +130,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/UTEST');
+                this.props.history.push('/Seattle/UTEST');
               }}
             >
               <LinkBox
@@ -138,14 +138,14 @@ class SeattleGrid extends React.Component {
                 name="Rapid HIV Testing"
                 description={overviews.UTEST.Description}
                 imageLocation="images/Seattle/UTEST/UTEST.jpg"
-                path="/UTEST"
+                path="Seattle/UTEST"
               />
             </div>
           </Grid>
           <Grid item xs>
-            <Link to={{pathname: 'Others'}} className={classes.otherProjectsLink}>
+            <Link to={{pathname: 'Seattle/Others'}} className={classes.otherProjectsLink}>
               <div className={classes.otherProjectsDiv}
-              onClick={() => { this.props.history.push('/Others') }}>
+              onClick={() => { this.props.history.push('/Seattle/Others') }}>
                 <Typography variant='h4' className={classes.otherProjectsText}>
                     All other UWSOM Service Learning Projects
                 </Typography>      

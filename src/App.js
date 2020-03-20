@@ -14,6 +14,7 @@ import ResourcesPage from './pages/ResourcesPage';
 class App extends Component {
   constructor(props) {
     super(props);
+    console.log("ctor");
     firebase.initializeApp(config);
     const db = firebase.database();
 
@@ -31,13 +32,6 @@ class App extends Component {
       .once('value')
       .then(value => {
         this.state.overviews = value.toJSON();
-        // Populate Seattle organizations
-        db.ref('/Seattle')
-          .once('value')
-          .then(value => {
-            this.state.Seattle = value.toJSON();
-            this.forceUpdate();
-          });
         // Populate Alaska organizations
         db.ref('/Alaska')
           .once('value')
@@ -45,6 +39,13 @@ class App extends Component {
             this.state.Alaska = value.toJSON();
             this.forceUpdate();
           });
+        // Populate Seattle organizations
+        db.ref('/Seattle')
+        .once('value')
+        .then(value => {
+          this.state.Seattle = value.toJSON();
+          this.forceUpdate();
+        });
         // Populate Montana organizations
         db.ref('/Montana')
           .once('value')
@@ -85,7 +86,7 @@ class App extends Component {
             }}
           />
           <Route
-            path="/Alaska"
+            exact path="/Alaska"
             render={() => (
               <HomePage
                 projects={this.state.Alaska}
@@ -95,7 +96,7 @@ class App extends Component {
             )}
           />
            <Route
-            path="/Seattle"
+            exact path="/Seattle"
             render={() => (
               <HomePage
                 projects={this.state.Seattle}
@@ -105,7 +106,7 @@ class App extends Component {
             )}
           />
            <Route
-            path="/Spokane"
+            exact path="/Spokane"
             render={() => (
               <HomePage
                 projects={this.state.Spokane}
@@ -115,7 +116,7 @@ class App extends Component {
             )}
           />
            <Route
-            path="/Montana"
+            exact path="/Montana"
             render={() => (
               <HomePage
                 projects={this.state.Montana}
@@ -125,7 +126,7 @@ class App extends Component {
             )}
           />
            <Route
-            path="/Idaho"
+            exact path="/Idaho"
             render={() => (
               <HomePage
                 projects={this.state.Idaho}
@@ -135,7 +136,7 @@ class App extends Component {
             )}
           />
            <Route
-            path="/Wyoming"
+            exact path="/Wyoming"
             render={() => (
               <HomePage
                 projects={this.state.Wyoming}
@@ -148,9 +149,9 @@ class App extends Component {
             path="/Seattle/SHIFA"
             render={() => (
               <OrgPage
-                path="/SHIFA"
+                path="/Seattle/SHIFA"
                 projects={this.state.Seattle.SHIFA}
-                overview={this.state.overviews}
+                overview={this.state.overviews.SHIFA}
                 title="SHIFA"
               />
             )}
@@ -211,12 +212,41 @@ class App extends Component {
             )}
           />
           <Route
-            path="/Others"
+            path="/Seattle/Others"
             render={() => (
               <OrgPage
-                path="/Others"
+                path="/Seattle/Others"
                 projects={this.state.Seattle.Others}
-                overview={this.state.overviews.Others}
+                title="Others"
+              />
+            )}
+          />
+          <Route
+            path="/Alaska/BFFC"
+            render={() => (
+              <OrgPage
+                path="/Alaska/BFFC"
+                projects={this.state.Alaska.BFFC}
+                title="BFFC"
+              />
+            )}
+          />
+          <Route
+            path="/Alaska/PHC"
+            render={() => (
+              <OrgPage
+                path="/Seattle/PHC"
+                projects={this.state.Alaska.Others}
+                title="PHC"
+              />
+            )}
+          />
+          <Route
+            path="/Seattle/Others"
+            render={() => (
+              <OrgPage
+                path="/Seattle/Others"
+                projects={this.state.Seattle.Others}
                 title="Others"
               />
             )}

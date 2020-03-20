@@ -79,6 +79,7 @@ class OrgPage extends Component {
 
   render() {
     const { classes, path, projects, overview, title } = this.props;
+    console.log(overview.video);
     const gridItems = projects
       ? Object.keys(projects).map((project, index) => {
           return (
@@ -99,13 +100,15 @@ class OrgPage extends Component {
             <Typography className={classes.title} gutterBottom variant="h4">
               {title}
             </Typography>
-            <Typography
+            {/* {overview && overview.description ? (<Typography
               className={classes.description}
               gutterBottom
               variant="h6"
             >
               {overview.description}
-            </Typography>
+            </Typography>) : (
+              <div/>
+            )} */}
             {overview.video ? (
               <Button onClick={() => window.open(overview.video)} className={classes.videoButton} variant="contained">
                 {title} Information Video

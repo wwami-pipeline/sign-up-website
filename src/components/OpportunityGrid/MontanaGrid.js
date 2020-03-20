@@ -40,7 +40,7 @@ const styles = () => {
   };
 };
 
-class AlaskaGrid extends React.Component {
+class MontanaGrid extends React.Component {
   render() {
     const { classes, overviews } = this.props;
     return ( 
@@ -50,15 +50,15 @@ class AlaskaGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/Alaska/BFFC');
+                this.props.history.push('/Montana/AIDS');
               }}
             >
               <LinkBox
-                title="BFFC"
-                name="Brother Francis Foot Care"
-                // description={overviews.BFFC.description}
-                imageLocation="images/Alaska/BFFC/BFFC.jpg"
-                path="/Alaska/BFFC"
+                title="AIDS Outreach"
+                name="AIDS Outreach"
+                // description={overviews.AIDS_Outreach.description}
+                imageLocation="images/Montana/AIDS Outreach/AIDS Outreach.jpg"
+                path="/Montana/AIDS Outreach"
               />
             </div>
           </Grid>
@@ -66,15 +66,15 @@ class AlaskaGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/Alaska/PHC');
+                this.props.history.push('/Montana/MMH');
               }}
             >
               <LinkBox
-                title="PHC"
-                name="Project Homeless Connect"
-                // description={overviews.PHC.description}
-                imageLocation="images/Alaska/Project Homeless Connect/PHC.jpg"
-                path="/Alaska/PHC"
+                title="MMH"
+                name="Montana Mental Health"
+                // description={overviews.MMH.description}
+                imageLocation="images/Montana/MMH/MMH.jpg"
+                path="/Montana/MMH"
               />
             </div>
           </Grid>
@@ -84,4 +84,4 @@ class AlaskaGrid extends React.Component {
   }
 }
 
-export default withStyles(styles)(AlaskaGrid);
+export default withStyles(styles)(MontanaGrid);

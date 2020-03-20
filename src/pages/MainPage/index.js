@@ -32,29 +32,12 @@ const styles = () => {
 };
 
 class HomePage extends Component {
-  state = {
-    providerRequirementsOpen: false,
-    medicalRequirementsOpen: false,
-    otherGradRequirementsOpen: false,
-    undergradRequirementsOpen: false
-  };
-
-  calendarEventClick(info) {
-    console.log(info.event.title + ": " + info.event.extendedProps.description);
-  }
-
-  onMapClick(region) {
-    console.log(region);
-  }
-
   render() {
     const { classes } = this.props;
-
     return (
       <div className={classes.page}>
         <CssBaseline />
         <NavBar />
-
         <div style={{textAlign: "center"}}>
           <Typography className={classes.title}>
             UWSOM SERVICE LEARNING
