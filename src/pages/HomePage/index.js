@@ -155,6 +155,7 @@ class HomePage extends Component {
       // case "Montana" : opportunityGrid = <MontanaGrid overviews={overviews} history={history}/>; break;
       // case "Idaho"   : opportunityGrid = <IdahoGrid overviews={overviews} history={history}/>; break;
       // case "Wyoming" : opportunityGrid = <WyomingGrid overviews={overviews} history={history}/>; break;
+      default: console.log("Error loading opportuniy grid"); break;
     }
 
     return (

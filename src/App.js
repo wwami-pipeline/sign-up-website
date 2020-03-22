@@ -14,7 +14,6 @@ import ResourcesPage from './pages/ResourcesPage';
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log("ctor");
     firebase.initializeApp(config);
     const db = firebase.database();
 
@@ -59,13 +58,6 @@ class App extends Component {
               this.state.AlaskaImages
             );
           });
-        // Populate Seattle organizations
-        db.ref('/Seattle')
-        .once('value')
-        .then(value => {
-          this.state.Seattle = value.toJSON();
-          this.forceUpdate();
-        });
         // Populate Montana organizations
         db.ref('/Montana')
           .once('value')

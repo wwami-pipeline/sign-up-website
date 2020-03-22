@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   Grid,
-  Link,
-  Typography,
   withStyles
 } from '@material-ui/core';
 import LinkBox from '../LinkBox/index';
@@ -42,7 +40,7 @@ const styles = () => {
 
 class AlaskaGrid extends React.Component {
   render() {
-    const { classes, overviews } = this.props;
+    const { classes, images, overviews } = this.props;
     return ( 
       <div className={classes.gridContainer}>
         <Grid container spacing={24}>
@@ -57,7 +55,7 @@ class AlaskaGrid extends React.Component {
                 title="BFFC"
                 name="Brother Francis Foot Care"
                 // description={overviews.BFFC.description}
-                imageLocation="images/Alaska/BFFC/BFFC.jpg"
+                imageLocation={images['BFFC.jpg']}
                 path="/Alaska/BFFC"
               />
             </div>
@@ -72,8 +70,8 @@ class AlaskaGrid extends React.Component {
               <LinkBox
                 title="PHC"
                 name="Project Homeless Connect"
-                // description={overviews.PHC.description}
-                imageLocation="images/Alaska/Project Homeless Connect/PHC.jpg"
+                // description={overviews.BFFC.description}
+                imageLocation={images['PHC.jpg']}
                 path="/Alaska/PHC"
               />
             </div>

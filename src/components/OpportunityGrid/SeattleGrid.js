@@ -57,8 +57,8 @@ class SeattleGrid extends React.Component {
               <LinkBox
                 title="SHIFA"
                 name="STUDENT HEALTH INITIATIVE FOR ACCESS"
-                description={this.props.overviews.SHIFA.description}
-                imageLocation={this.props.images['SHIFA.jpg']}
+                description={overviews.SHIFA.description}
+                imageLocation={images['SHIFA.jpg']}
                 path="/Seattle/SHIFA"
               />
             </div>
@@ -73,8 +73,8 @@ class SeattleGrid extends React.Component {
               <LinkBox
                 title="CHAP"
                 name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
-                description={this.props.overviews.CHAP.description}
-                imageLocation={this.props.images['CHAP.jpg']}
+                description={overviews.CHAP.description}
+                imageLocation={images['CHAP.jpg']}
                 path="/Seattle/CHAP"
               />
             </div>
@@ -89,8 +89,8 @@ class SeattleGrid extends React.Component {
               <LinkBox
                 title="UDSM"
                 name="UNIVERSITY DISTRICT STREET MEDICINE"
-                description={this.props.overviews.UDSM.description}
-                imageLocation={this.props.images['UDSM.jpg']}
+                description={overviews.UDSM.description}
+                imageLocation={images['UDSM.jpg']}
                 path="/Seattle/UDSM"
               />
             </div>
@@ -105,8 +105,8 @@ class SeattleGrid extends React.Component {
               <LinkBox
                 title="Doc for a Day"
                 name="DFAD"
-                description={this.props.overviews.DFAD.description}
-                imageLocation={this.props.images['DFAD.jpg']}
+                description={overviews.DFAD.description}
+                imageLocation={images['DFAD.jpg']}
                 path="/Seattle/DFAD"
               />
             </div>
@@ -121,8 +121,8 @@ class SeattleGrid extends React.Component {
               <LinkBox
                 title="Mobile Health Outreach Van"
                 name=""
-                description={this.props.overviews.UMOV.description}
-                imageLocation={this.props.images['UMOV.jpg']}
+                description={overviews.UMOV.description}
+                imageLocation={images['UMOV.jpg']}
                 path="/Seattle/UMOV"
               />
             </div>
@@ -137,8 +137,8 @@ class SeattleGrid extends React.Component {
               <LinkBox
                 title="UTest"
                 name="Rapid HIV Testing"
-                description={this.props.overviews.UTEST.description}
-                imageLocation={this.props.images['UTEST.jpg']}
+                description={overviews.UTEST.description}
+                imageLocation={images['UTEST.jpg']}
                 path="/Seattle/UTEST"
               />
             </div>
