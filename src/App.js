@@ -180,6 +180,21 @@ class App extends Component {
             }}
           />
           <Route
+            exact
+            path="/Alaska"
+            render={() => {
+              return this.state.overviews ? (
+                <HomePage
+                  overviews={this.state.overviews}
+                  images={this.state.AlaskaImages}
+                  title="Alaska"
+                />
+              ) : (
+                <div />
+              );
+            }}
+          />
+          <Route
             path="/Seattle/SHIFA"
             render={() => (
               <OrgPage

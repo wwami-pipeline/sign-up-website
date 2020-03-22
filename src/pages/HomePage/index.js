@@ -35,12 +35,9 @@ const styles = () => {
       textAlign: 'center'
     },
     directionTitleTop: {
-      marginTop: '2em',
+      margin: '0.5em auto 3em auto',
       textAlign: 'center',
-      marginBottom: '3em',
       maxWidth: 800,
-      marginLeft: 'auto',
-      marginRight: 'auto'
     },
     directionTitleHeader: {
       fontFamily: 'Lato',
@@ -118,7 +115,7 @@ const styles = () => {
     },
     signInButton: {
       fontSize: '1.2em',
-      margin: '12px 0 24px 0'
+      margin: '12px 0 12px 0'
     },
     title: {
       fontFamily: 'Lato',
@@ -142,7 +139,7 @@ class HomePage extends Component {
   }
 
   calendarEventClick(info) {
-    console.log(info.event.title + ": " + info.event.extendedProps.description);
+    alert(info.event.title + ": " + info.event.extendedProps.description);
   }
 
   render() {
@@ -176,18 +173,38 @@ class HomePage extends Component {
             UW Sign In
           </Button>        
         </div>
-        ) : (<div className={classes.calendarContainer}>
-          <EventCalendar 
-            eventClickFn={e => this.calendarEventClick(e)}
-            events={[
-              {title: 'event 1', date: '2020-02-26', description: 'test' },
-              {title: 'event 2', date: '2020-02-26', description: 'test1' },
-              {title: 'event 3', date: '2020-02-26' },
-              {title: 'event 4', date: '2020-02-26' },
-              {title: 'event 5', date: '2020-02-26' }
-            ]}
-          />
-        </div>)}       
+        ) : !this.state.calendarHidden ? (
+        <div>
+          <div className={classes.calendarSignIn}>
+            <Button 
+              className={classes.signInButton}
+              color="secondary"
+              variant="contained"
+              onClick={() => this.setState({calendarHidden: true})}>
+              Hide Calendar
+            </Button>
+          </div>
+          <div className={classes.calendarContainer}>
+            <EventCalendar 
+              eventClickFn={e => this.calendarEventClick(e)}
+              events={[
+                {title: 'event 1', date: '2020-02-26', description: 'test' },
+                {title: 'event 2', date: '2020-02-26', description: 'test1' },
+                {title: 'event 3', date: '2020-02-26' },
+                {title: 'event 4', date: '2020-02-26' },
+                {title: 'event 5', date: '2020-02-26' }]} 
+            />
+          </div>
+        </div>) : 
+          <div className={classes.calendarSignIn}>
+            <Button 
+            className={classes.signInButton}
+            color="secondary"
+            variant="contained"
+            onClick={() => this.setState({calendarHidden: false})}>
+            Show Calendar
+          </Button>
+          </div> }       
 
         {/* Modals */}
 
