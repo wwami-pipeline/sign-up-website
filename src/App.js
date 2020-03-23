@@ -21,11 +21,13 @@ class App extends Component {
       Seattle: undefined,
       Alaska: undefined,
       Montana: undefined,
+      Idaho: undefined,
       Spokane: undefined,
       Wyoming: undefined,
       overviews: undefined,
       SeattleImages: {},
       AlaskaImages: {},
+      IdahoImages: {},
       MontanaImages: {},
       SpokaneImages: {},
       WyomingImages: {}
@@ -69,6 +71,17 @@ class App extends Component {
               this.state.MontanaImages
             );
           });
+        // Populate Idaho organizations
+        // db.ref('/Idaho')
+        // .once('value')
+        // .then(value => {
+        //   this.state.Idaho = value.toJSON();
+        //   this.populateLocationImages(
+        //     'Idaho',
+        //     this.state.Idaho,
+        //     this.state.IdahoImages
+        //   );
+        // });
         // Populate Spokane organizations
         db.ref('/Spokane')
           .once('value')
@@ -188,6 +201,66 @@ class App extends Component {
                   overviews={this.state.overviews}
                   images={this.state.AlaskaImages}
                   title="Alaska"
+                />
+              ) : (
+                <div />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/Spokane"
+            render={() => {
+              return this.state.overviews ? (
+                <HomePage
+                  overviews={this.state.overviews}
+                  images={this.state.SpokaneImages}
+                  title="Spokane"
+                />
+              ) : (
+                <div />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/Montana"
+            render={() => {
+              return this.state.overviews ? (
+                <HomePage
+                  overviews={this.state.overviews}
+                  images={this.state.MontanaImages}
+                  title="Montana"
+                />
+              ) : (
+                <div />
+              );
+            }}
+          />
+          {/* <Route
+            exact
+            path="/Idaho"
+            render={() => {
+              return this.state.overviews ? (
+                <HomePage
+                  overviews={this.state.overviews}
+                  images={this.state.IdahoImages}
+                  title="Idaho"
+                />
+              ) : (
+                <div />
+              );
+            }}
+          /> */}
+          <Route
+            exact
+            path="/Wyoming"
+            render={() => {
+              return this.state.overviews ? (
+                <HomePage
+                  overviews={this.state.overviews}
+                  images={this.state.WyomingImages}
+                  title="Wyoming"
                 />
               ) : (
                 <div />

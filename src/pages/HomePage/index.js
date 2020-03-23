@@ -160,7 +160,7 @@ class HomePage extends Component {
         <CssBaseline />
         <NavBar />
 
-        {!this.state.authenticated ? (
+        {/* {!this.state.authenticated ? (
           <div className={classes.calendarSignIn}>
           <Typography className={classes.title}>
             Sign in required to access calendar
@@ -187,12 +187,14 @@ class HomePage extends Component {
           <div className={classes.calendarContainer}>
             <EventCalendar 
               eventClickFn={e => this.calendarEventClick(e)}
-              events={[
-                {title: 'event 1', date: '2020-02-26', description: 'test' },
-                {title: 'event 2', date: '2020-02-26', description: 'test1' },
-                {title: 'event 3', date: '2020-02-26' },
-                {title: 'event 4', date: '2020-02-26' },
-                {title: 'event 5', date: '2020-02-26' }]} 
+              // events={[
+              //   { rrule: 'DTSTART:20120201T103000Z\nRRULE:FREQ=WEEKLY;INTERVAL=5;UNTIL=20120601;BYDAY=MO,FR' }
+              //   // {title: 'event 1', date: '2020-02-26', description: 'test' },
+              //   // {title: 'event 2', date: '2020-02-26', description: 'test1' },
+              //   // {title: 'event 3', date: '2020-02-26' },
+              //   // {title: 'event 4', date: '2020-02-26' },
+              //   // {title: 'event 5', date: '2020-02-26' }
+              // ]} 
             />
           </div>
         </div>) : 
@@ -204,7 +206,7 @@ class HomePage extends Component {
             onClick={() => this.setState({calendarHidden: false})}>
             Show Calendar
           </Button>
-          </div> }       
+          </div> }        */}
 
         {/* Modals */}
 
