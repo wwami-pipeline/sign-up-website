@@ -18,19 +18,8 @@ class App extends Component {
     const db = firebase.database();
 
     this.state = {
-      Seattle: undefined,
-      Alaska: undefined,
-      Montana: undefined,
-      Idaho: undefined,
-      Spokane: undefined,
-      Wyoming: undefined,
-      overviews: undefined,
-      SeattleImages: {},
-      AlaskaImages: {},
-      IdahoImages: {},
-      MontanaImages: {},
-      SpokaneImages: {},
-      WyomingImages: {}
+      locations: {},
+      locationImages: {}
     };
 
     // Populate overviews
@@ -38,71 +27,19 @@ class App extends Component {
       .once('value')
       .then(value => {
         this.state.overviews = value.toJSON();
-        // Populate Seattle organizations
-        db.ref('/Seattle')
+        db.ref('/Locations')
           .once('value')
           .then(value => {
-            this.state.Seattle = value.toJSON();
-            this.populateLocationImages(
-              'Seattle',
-              this.state.Seattle,
-              this.state.SeattleImages
-            );
-          });
-        // Populate Alaska organizations
-        db.ref('/Alaska')
-          .once('value')
-          .then(value => {
-            this.state.Alaska = value.toJSON();
-            this.populateLocationImages(
-              'Alaska',
-              this.state.Alaska,
-              this.state.AlaskaImages
-            );
-          });
-        // Populate Montana organizations
-        db.ref('/Montana')
-          .once('value')
-          .then(value => {
-            this.state.Montana = value.toJSON();
-            this.populateLocationImages(
-              'Montana',
-              this.state.Montana,
-              this.state.MontanaImages
-            );
-          });
-        // Populate Idaho organizations
-        // db.ref('/Idaho')
-        // .once('value')
-        // .then(value => {
-        //   this.state.Idaho = value.toJSON();
-        //   this.populateLocationImages(
-        //     'Idaho',
-        //     this.state.Idaho,
-        //     this.state.IdahoImages
-        //   );
-        // });
-        // Populate Spokane organizations
-        db.ref('/Spokane')
-          .once('value')
-          .then(value => {
-            this.state.Spokane = value.toJSON();
-            this.populateLocationImages(
-              'Spokane',
-              this.state.Spokane,
-              this.state.SpokaneImages
-            );
-          });
-        // Populate Seattle organizations
-        db.ref('/Wyoming')
-          .once('value')
-          .then(value => {
-            this.state.Wyoming = value.toJSON();
-            this.populateLocationImages(
-              'Wyoming',
-              this.state.Wyoming,
-              this.state.WyomingImages
-            );
+            const locations = value.toJSON();
+            Object.keys(locations).forEach(location => {
+              this.state['locations'][location] = locations[location];
+              this.state['locationImages'][location] = {};
+              this.populateLocationImages(
+                location,
+                this.state['locations'][location],
+                this.state['locationImages'][location]
+              );
+            });
           });
       });
   }
@@ -184,176 +121,28 @@ class App extends Component {
               return this.state.overviews ? (
                 <HomePage
                   overviews={this.state.overviews}
-                  images={this.state.SeattleImages}
-                  title="Seattle"
+                  images={this.state['locationImages'].Seattle}
                 />
               ) : (
                 <div />
               );
             }}
           />
+          {/* Routes for each organization */}
           <Route
-            exact
-            path="/Alaska"
-            render={() => {
-              return this.state.overviews ? (
-                <HomePage
-                  overviews={this.state.overviews}
-                  images={this.state.AlaskaImages}
-                  title="Alaska"
-                />
-              ) : (
-                <div />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/Spokane"
-            render={() => {
-              return this.state.overviews ? (
-                <HomePage
-                  overviews={this.state.overviews}
-                  images={this.state.SpokaneImages}
-                  title="Spokane"
-                />
-              ) : (
-                <div />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/Montana"
-            render={() => {
-              return this.state.overviews ? (
-                <HomePage
-                  overviews={this.state.overviews}
-                  images={this.state.MontanaImages}
-                  title="Montana"
-                />
-              ) : (
-                <div />
-              );
-            }}
-          />
-          {/* <Route
-            exact
-            path="/Idaho"
-            render={() => {
-              return this.state.overviews ? (
-                <HomePage
-                  overviews={this.state.overviews}
-                  images={this.state.IdahoImages}
-                  title="Idaho"
-                />
-              ) : (
-                <div />
-              );
-            }}
-          /> */}
-          <Route
-            exact
-            path="/Wyoming"
-            render={() => {
-              return this.state.overviews ? (
-                <HomePage
-                  overviews={this.state.overviews}
-                  images={this.state.WyomingImages}
-                  title="Wyoming"
-                />
-              ) : (
-                <div />
-              );
-            }}
-          />
-          <Route
-            path="/Seattle/SHIFA"
+            path="/location/"
             render={() => (
               <OrgPage
-                path="/Seattle/SHIFA"
-                projects={this.state.Seattle.SHIFA}
-                overview={this.state.overviews.SHIFA}
-                images={this.state.SeattleImages['SHIFA']}
-                title="SHIFA"
+                locations={this.state['locations']}
+                overviews={this.state['overviews']}
+                images={this.state['locationImages']}
               />
             )}
           />
-          <Route
-            path="/Seattle/CHAP"
-            render={() => (
-              <OrgPage
-                path="/Seattle/CHAP"
-                projects={this.state.Seattle.CHAP}
-                overview={this.state.overviews.CHAP}
-                images={this.state.SeattleImages['CHAP']}
-                title="CHAP"
-              />
-            )}
-          />
-          <Route
-            path="/Seattle/UDSM"
-            render={() => (
-              <OrgPage
-                path="/Seattle/UDSM"
-                projects={this.state.Seattle.UDSM}
-                overview={this.state.overviews.UDSM}
-                images={this.state.SeattleImages['UDSM']}
-                title="UDSM"
-              />
-            )}
-          />
-          <Route
-            path="/Seattle/DFAD"
-            render={() => (
-              <OrgPage
-                path="/Seattle/DFAD"
-                projects={this.state.Seattle.DFAD}
-                overview={this.state.overviews.DFAD}
-                images={this.state.SeattleImages['DFAD']}
-                title="Doctor For A Day"
-              />
-            )}
-          />
-          <Route
-            path="/Seattle/UMOV"
-            render={() => (
-              <OrgPage
-                path="/Seattle/UMOV"
-                projects={this.state.Seattle.UMOV}
-                overview={this.state.overviews.UMOV}
-                images={this.state.SeattleImages['UMOV']}
-                title="University Mobile Outreach Van"
-              />
-            )}
-          />
-          <Route
-            path="/Seattle/UTEST"
-            render={() => (
-              <OrgPage
-                path="/Seattle/UTEST"
-                projects={this.state.Seattle.UTEST}
-                overview={this.state.overviews.UTEST}
-                images={this.state.SeattleImages['UTEST']}
-                title="UTEST"
-              />
-            )}
-          />
-          <Route
-            path="/Seattle/Others"
-            render={() => (
-              <OrgPage
-                path="/Seattle/Others"
-                projects={this.state.Seattle.Others}
-                overview={{ description: 'Other Projects in Seattle' }}
-                title="Others"
-              />
-            )}
-          />
-          <Route path="/about" component={AboutPage} />
-          <Route path="/contact" component={ContactPage} />
-          <Route path="/donate" component={DonatePage} />
-          <Route path="/resources" component={ResourcesPage} />
+          <Route exact path="/about" component={AboutPage} />
+          <Route exact path="/contact" component={ContactPage} />
+          <Route exact path="/donate" component={DonatePage} />
+          <Route exact path="/resources" component={ResourcesPage} />
         </Switch>
       </Router>
     );

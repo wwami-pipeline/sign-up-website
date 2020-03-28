@@ -10,7 +10,7 @@ import {
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
 import OtherItem from '../OtherItem';
-import BottomBanner from "../../components/BottomBanner";
+import BottomBanner from '../../components/BottomBanner';
 
 const styles = () => ({
   page: {
@@ -72,6 +72,7 @@ class OrgPage extends Component {
     this.state = {
       modalOpen: false
     };
+    this.updateState();
   }
 
   componentDidMount() {
@@ -79,8 +80,35 @@ class OrgPage extends Component {
     document.documentElement.scrollTop = 0;
   } 
 
+  updateState = (location, org) => {
+    if (
+      this.props['images'][location] !== undefined &&
+      this.props['locations'][location] !== undefined
+    ) {
+      this.setState({
+        images: this.props['images'][location][org],
+        overview: this.props['overviews'][org],
+        title: org,
+        path: window.location.pathname,
+        projects: this.props['locations'][location][org]
+      });
+    }
+  };
+
   render() {
-    const { classes, path, projects, images, overview, title } = this.props;
+    if (this.state.path !== window.location.pathname) {
+      const splitUrl = window.location.pathname.split('/');
+      this.updateState(decodeURIComponent(splitUrl[2]), decodeURIComponent(splitUrl[3]));
+      return <div />;
+    }
+
+    const { classes } = this.props;
+    const { path, projects, images, overview, title } = this.state;
+
+    if (path !== this.state.currPath) {
+      this.setState({ currPath: path });
+    }
+
     // Divide projects by their category field, if present
     let categories = {};
     categories[''] = [];
@@ -143,26 +171,32 @@ class OrgPage extends Component {
             <Typography className={classes.title} gutterBottom variant="h4">
               {title}
             </Typography>
-            {/* {overview && overview.description ? (<Typography
-              className={classes.description}
-              gutterBottom
-              variant="h6"
-            >
-              {overview.description}
-            </Typography>) : (
-              <div/>
-            )} */}
-            {overview.video ? (
-              <Button
-                onClick={() => window.open(overview.video)}
-                className={classes.videoButton}
-                variant="contained"
-              >
-                {title} Information Video
-              </Button>
+            
+            {overview ? (
+              <div>
+                <Typography
+                  className={classes.description}
+                  gutterBottom
+                  variant="h6"
+                >
+                  {overview.description}
+                </Typography>
+                {overview.video ? (
+                  <Button
+                    onClick={() => window.open(overview.video)}
+                    className={classes.videoButton}
+                    variant="contained"
+                  >
+                    {title} Information Video
+                  </Button>
+                ) : (
+                  <div />
+                )}
+              </div>
             ) : (
               <div />
             )}
+
             {/* Card Grids By Category */}
             {grids}
           </div>
