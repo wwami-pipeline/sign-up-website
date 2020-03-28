@@ -228,7 +228,7 @@ class HomePage extends Component {
                 <div
                   className={classes.linkBoxContainer}
                   onClick={() => {
-                    this.props.history.push('/Seattle/SHIFA');
+                    this.props.history.push('/location/Seattle/SHIFA');
                   }}
                 >
                   <LinkBox
@@ -236,7 +236,7 @@ class HomePage extends Component {
                     name="STUDENT HEALTH INITIATIVE FOR ACCESS"
                     description={this.props.overviews.SHIFA.description}
                     imageLocation={this.props.images['SHIFA.jpg']}
-                    path="/Seattle/SHIFA"
+                    path="/location/Seattle/SHIFA"
                   />
                 </div>
               </Grid>
@@ -244,7 +244,7 @@ class HomePage extends Component {
                 <div
                   className={classes.linkBoxContainer}
                   onClick={() => {
-                    this.props.history.push('/Seattle/CHAP');
+                    this.props.history.push('/location/Seattle/CHAP');
                   }}
                 >
                   <LinkBox
@@ -252,7 +252,7 @@ class HomePage extends Component {
                     name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
                     description={this.props.overviews.CHAP.description}
                     imageLocation={this.props.images['CHAP.jpg']}
-                    path="/Seattle/CHAP"
+                    path="/location/Seattle/CHAP"
                   />
                 </div>
               </Grid>
@@ -260,7 +260,7 @@ class HomePage extends Component {
                 <div
                   className={classes.linkBoxContainer}
                   onClick={() => {
-                    this.props.history.push('/Seattle/UDSM');
+                    this.props.history.push('/location/Seattle/UDSM');
                   }}
                 >
                   <LinkBox
@@ -268,7 +268,7 @@ class HomePage extends Component {
                     name="UNIVERSITY DISTRICT STREET MEDICINE"
                     description={this.props.overviews.UDSM.description}
                     imageLocation={this.props.images['UDSM.jpg']}
-                    path="/Seattle/UDSM"
+                    path="/location/Seattle/UDSM"
                   />
                 </div>
               </Grid>
@@ -276,7 +276,7 @@ class HomePage extends Component {
                 <div
                   className={classes.linkBoxContainer}
                   onClick={() => {
-                    this.props.history.push('/Seattle/DFAD');
+                    this.props.history.push('/location/Seattle/DFAD');
                   }}
                 >
                   <LinkBox
@@ -284,7 +284,7 @@ class HomePage extends Component {
                     name="DFAD"
                     description={this.props.overviews.DFAD.description}
                     imageLocation={this.props.images['DFAD.jpg']}
-                    path="/Seattle/DFAD"
+                    path="/location/Seattle/DFAD"
                   />
                 </div>
               </Grid>
@@ -292,7 +292,7 @@ class HomePage extends Component {
                 <div
                   className={classes.linkBoxContainer}
                   onClick={() => {
-                    this.props.history.push('/Seattle/UMOV');
+                    this.props.history.push('/location/Seattle/UMOV');
                   }}
                 >
                   <LinkBox
@@ -300,7 +300,7 @@ class HomePage extends Component {
                     name=""
                     description={this.props.overviews.UMOV.description}
                     imageLocation={this.props.images['UMOV.jpg']}
-                    path="/Seattle/UMOV"
+                    path="/location/Seattle/UMOV"
                   />
                 </div>
               </Grid>
@@ -308,7 +308,7 @@ class HomePage extends Component {
                 <div
                   className={classes.linkBoxContainer}
                   onClick={() => {
-                    this.props.history.push('/Seattle/UTEST');
+                    this.props.history.push('/location/Seattle/UTEST');
                   }}
                 >
                   <LinkBox
@@ -316,19 +316,19 @@ class HomePage extends Component {
                     name="Rapid HIV Testing"
                     description={this.props.overviews.UTEST.description}
                     imageLocation={this.props.images['UTEST.jpg']}
-                    path="/Seattle/UTEST"
+                    path="/location/Seattle/UTEST"
                   />
                 </div>
               </Grid>
               <Grid item xs>
                 <Link
-                  to={{ pathname: '/Seattle/Others' }}
+                  to={{ pathname: '/location/Seattle/Others' }}
                   className={classes.otherProjectsLink}
                 >
                   <div
                     className={classes.otherProjectsDiv}
                     onClick={() => {
-                      this.props.history.push('/Seattle/Others');
+                      this.props.history.push('/location/Seattle/Others');
                     }}
                   >
                     <Typography
