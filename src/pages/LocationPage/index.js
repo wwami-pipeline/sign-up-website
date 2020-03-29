@@ -5,6 +5,7 @@ import {
   CssBaseline,
   Paper,
   Fab,
+  Grid,
   Button
 } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
@@ -16,6 +17,8 @@ import NavBar from '../../components/NavBar';
 import EventCalendar from '../../components/EventCalendar';
 import AlaskaGrid from '../../components/OpportunityGrid/AlaskaGrid';
 import SeattleGrid from '../../components/OpportunityGrid/SeattleGrid';
+import LinkBox from '../../components/LinkBox';
+import { Link } from 'react-router-dom';
 
 import '../../App.css';
 import BottomBanner from '../../components/BottomBanner';
@@ -29,7 +32,7 @@ const styles = () => {
       backgroundColor: 'white',
       color: 'black',
       margin: '15px auto 0px auto',
-      maxWidth: '900px',
+      maxWidth: '900px'
     },
     calendarSignIn: {
       textAlign: 'center'
@@ -37,7 +40,7 @@ const styles = () => {
     directionTitleTop: {
       margin: '0.5em auto 3em auto',
       textAlign: 'center',
-      maxWidth: 800,
+      maxWidth: 800
     },
     directionTitleHeader: {
       fontFamily: 'Lato',
@@ -111,7 +114,7 @@ const styles = () => {
       margin: '15px auto 0 auto',
       textAlign: 'center',
       padding: '2em',
-      paddingBottom: '5em',
+      paddingBottom: '5em'
     },
     signInButton: {
       fontSize: '1.2em',
@@ -139,20 +142,35 @@ class HomePage extends Component {
   }
 
   calendarEventClick(info) {
-    alert(info.event.title + ": " + info.event.extendedProps.description);
+    alert(info.event.title + ': ' + info.event.extendedProps.description);
   }
 
   render() {
-    const { classes, history, images, overviews, title } = this.props;
+    const { classes, history, images, overviews } = this.props;
+    const title = window.location.pathname.split('/')[2]; // Get location from URL
     var opportunityGrid;
     switch (title) {
-      case "Alaska"  : opportunityGrid = <AlaskaGrid overviews={overviews} history={history} images={images}/>; break;
-      case "Seattle" : opportunityGrid = <SeattleGrid overviews={overviews} history={history} images={images} />; break;
+      case 'Alaska':
+        opportunityGrid = (
+          <AlaskaGrid overviews={overviews} history={history} images={images} />
+        );
+        break;
+      case 'Seattle':
+        opportunityGrid = (
+          <SeattleGrid
+            overviews={overviews}
+            history={history}
+            images={images}
+          />
+        );
+        break;
       // case "Spokane" : opportunityGrid = <SpokaneGrid overviews={overviews} history={history}/>; break;
       // case "Montana" : opportunityGrid = <MontanaGrid overviews={overviews} history={history}/>; break;
       // case "Idaho"   : opportunityGrid = <IdahoGrid overviews={overviews} history={history}/>; break;
       // case "Wyoming" : opportunityGrid = <WyomingGrid overviews={overviews} history={history}/>; break;
-      default: console.log("Error loading opportuniy grid"); break;
+      default:
+        console.log('Error loading opportuniy grid');
+        break;
     }
 
     return (
@@ -305,126 +323,7 @@ class HomePage extends Component {
             </Typography>
           </div>
 
-          <div className={classes.gridContainer}>
-            <Grid container spacing={24}>
-              <Grid item xs>
-                <div
-                  className={classes.linkBoxContainer}
-                  onClick={() => {
-                    this.props.history.push('/location/Seattle/SHIFA');
-                  }}
-                >
-                  <LinkBox
-                    title="SHIFA"
-                    name="STUDENT HEALTH INITIATIVE FOR ACCESS"
-                    description={this.props.overviews.SHIFA.description}
-                    imageLocation={this.props.images['SHIFA.jpg']}
-                    path="/location/Seattle/SHIFA"
-                  />
-                </div>
-              </Grid>
-              <Grid item xs>
-                <div
-                  className={classes.linkBoxContainer}
-                  onClick={() => {
-                    this.props.history.push('/location/Seattle/CHAP');
-                  }}
-                >
-                  <LinkBox
-                    title="CHAP"
-                    name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
-                    description={this.props.overviews.CHAP.description}
-                    imageLocation={this.props.images['CHAP.jpg']}
-                    path="/location/Seattle/CHAP"
-                  />
-                </div>
-              </Grid>
-              <Grid item xs>
-                <div
-                  className={classes.linkBoxContainer}
-                  onClick={() => {
-                    this.props.history.push('/location/Seattle/UDSM');
-                  }}
-                >
-                  <LinkBox
-                    title="UDSM"
-                    name="UNIVERSITY DISTRICT STREET MEDICINE"
-                    description={this.props.overviews.UDSM.description}
-                    imageLocation={this.props.images['UDSM.jpg']}
-                    path="/location/Seattle/UDSM"
-                  />
-                </div>
-              </Grid>
-              <Grid item xs>
-                <div
-                  className={classes.linkBoxContainer}
-                  onClick={() => {
-                    this.props.history.push('/location/Seattle/DFAD');
-                  }}
-                >
-                  <LinkBox
-                    title="Doc for a Day"
-                    name="DFAD"
-                    description={this.props.overviews.DFAD.description}
-                    imageLocation={this.props.images['DFAD.jpg']}
-                    path="/location/Seattle/DFAD"
-                  />
-                </div>
-              </Grid>
-              <Grid item xs>
-                <div
-                  className={classes.linkBoxContainer}
-                  onClick={() => {
-                    this.props.history.push('/location/Seattle/UMOV');
-                  }}
-                >
-                  <LinkBox
-                    title="Mobile Health Outreach Van"
-                    name=""
-                    description={this.props.overviews.UMOV.description}
-                    imageLocation={this.props.images['UMOV.jpg']}
-                    path="/location/Seattle/UMOV"
-                  />
-                </div>
-              </Grid>
-              <Grid item xs>
-                <div
-                  className={classes.linkBoxContainer}
-                  onClick={() => {
-                    this.props.history.push('/location/Seattle/UTEST');
-                  }}
-                >
-                  <LinkBox
-                    title="UTest"
-                    name="Rapid HIV Testing"
-                    description={this.props.overviews.UTEST.description}
-                    imageLocation={this.props.images['UTEST.jpg']}
-                    path="/location/Seattle/UTEST"
-                  />
-                </div>
-              </Grid>
-              <Grid item xs>
-                <Link
-                  to={{ pathname: '/location/Seattle/Others' }}
-                  className={classes.otherProjectsLink}
-                >
-                  <div
-                    className={classes.otherProjectsDiv}
-                    onClick={() => {
-                      this.props.history.push('/location/Seattle/Others');
-                    }}
-                  >
-                    <Typography
-                      variant="h4"
-                      className={classes.otherProjectsText}
-                    >
-                      All other UWSOM Service Learning Projects
-                    </Typography>
-                  </div>
-                </Link>
-              </Grid>
-            </Grid>
-          </div>
+          <div className={classes.gridContainer}>{opportunityGrid}</div>
         </div>
         <BottomBanner />
       </div>

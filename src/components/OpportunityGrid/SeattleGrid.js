@@ -51,7 +51,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/Seattle/SHIFA');
+                this.props.history.push('/org/Seattle/SHIFA');
               }}
             >
               <LinkBox
@@ -59,7 +59,7 @@ class SeattleGrid extends React.Component {
                 name="STUDENT HEALTH INITIATIVE FOR ACCESS"
                 description={overviews.SHIFA.description}
                 imageLocation={images['SHIFA.jpg']}
-                path="/Seattle/SHIFA"
+                path="/org/Seattle/SHIFA"
               />
             </div>
           </Grid>
@@ -67,7 +67,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/Seattle/CHAP');
+                this.props.history.push('/org/Seattle/CHAP');
               }}
             >
               <LinkBox
@@ -75,7 +75,7 @@ class SeattleGrid extends React.Component {
                 name="COMMUNITY HEALTH ADVANCEMENT PROGRAM"
                 description={overviews.CHAP.description}
                 imageLocation={images['CHAP.jpg']}
-                path="/Seattle/CHAP"
+                path="/org/Seattle/CHAP"
               />
             </div>
           </Grid>
@@ -83,7 +83,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/Seattle/UDSM');
+                this.props.history.push('/org/Seattle/UDSM');
               }}
             >
               <LinkBox
@@ -91,7 +91,7 @@ class SeattleGrid extends React.Component {
                 name="UNIVERSITY DISTRICT STREET MEDICINE"
                 description={overviews.UDSM.description}
                 imageLocation={images['UDSM.jpg']}
-                path="/Seattle/UDSM"
+                path="/org/Seattle/UDSM"
               />
             </div>
           </Grid>
@@ -99,7 +99,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/Seattle/DFAD');
+                this.props.history.push('/org/Seattle/DFAD');
               }}
             >
               <LinkBox
@@ -107,7 +107,7 @@ class SeattleGrid extends React.Component {
                 name="DFAD"
                 description={overviews.DFAD.description}
                 imageLocation={images['DFAD.jpg']}
-                path="/Seattle/DFAD"
+                path="/org/Seattle/DFAD"
               />
             </div>
           </Grid>
@@ -115,7 +115,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/Seattle/UMOV');
+                this.props.history.push('/org/Seattle/UMOV');
               }}
             >
               <LinkBox
@@ -123,7 +123,7 @@ class SeattleGrid extends React.Component {
                 name=""
                 description={overviews.UMOV.description}
                 imageLocation={images['UMOV.jpg']}
-                path="/Seattle/UMOV"
+                path="/org/Seattle/UMOV"
               />
             </div>
           </Grid>
@@ -131,7 +131,7 @@ class SeattleGrid extends React.Component {
             <div
               className={classes.linkBoxContainer}
               onClick={() => {
-                this.props.history.push('/Seattle/UTEST');
+                this.props.history.push('/org/Seattle/UTEST');
               }}
             >
               <LinkBox
@@ -139,19 +139,19 @@ class SeattleGrid extends React.Component {
                 name="Rapid HIV Testing"
                 description={overviews.UTEST.description}
                 imageLocation={images['UTEST.jpg']}
-                path="/Seattle/UTEST"
+                path="/org/Seattle/UTEST"
               />
             </div>
           </Grid>
           <Grid item xs>
             <Link
-              to={{ pathname: '/Seattle/Others' }}
+              to={{ pathname: '/org/Seattle/Others' }}
               className={classes.otherProjectsLink}
             >
               <div
                 className={classes.otherProjectsDiv}
                 onClick={() => {
-                  this.props.history.push('/Seattle/Others');
+                  this.props.history.push('/org/Seattle/Others');
                 }}
               >
                 <Typography

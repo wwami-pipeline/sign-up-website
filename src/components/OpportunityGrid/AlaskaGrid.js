@@ -56,7 +56,7 @@ class AlaskaGrid extends React.Component {
                 name="Brother Francis Foot Care"
                 // description={overviews.BFFC.description}
                 imageLocation={images['BFFC.jpg']}
-                path="/Alaska/BFFC"
+                path="/org/Alaska/BFFC"
               />
             </div>
           </Grid>
@@ -72,7 +72,7 @@ class AlaskaGrid extends React.Component {
                 name="Project Homeless Connect"
                 // description={overviews.BFFC.description}
                 imageLocation={images['PHC.jpg']}
-                path="/Alaska/PHC"
+                path="/org/Alaska/PHC"
               />
             </div>
           </Grid>

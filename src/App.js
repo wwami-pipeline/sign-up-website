@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
-import HomePage from './pages/HomePage';
+import LocationPage from './pages/LocationPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import DonatePage from './pages/DonationsPage';
@@ -115,11 +115,10 @@ class App extends Component {
             }}
           />
           <Route
-            exact
-            path="/Seattle"
+            path="/location"
             render={() => {
               return this.state.overviews ? (
-                <HomePage
+                <LocationPage
                   overviews={this.state.overviews}
                   images={this.state['locationImages'].Seattle}
                 />
@@ -130,7 +129,7 @@ class App extends Component {
           />
           {/* Routes for each organization */}
           <Route
-            path="/location/"
+            path="/org"
             render={() => (
               <OrgPage
                 locations={this.state['locations']}
