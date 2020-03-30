@@ -146,10 +146,11 @@ class HomePage extends Component {
   }
 
   render() {
-    const { classes, history, images, overviews } = this.props;
-    const title = window.location.pathname.split('/')[2]; // Get location from URL
+    const { classes, history, allImages, overviews } = this.props;
+    const location = window.location.pathname.split('/')[2]; // Get location from URL
+    const images = allImages[location];
     var opportunityGrid;
-    switch (title) {
+    switch (location) {
       case 'Alaska':
         opportunityGrid = (
           <AlaskaGrid overviews={overviews} history={history} images={images} />
