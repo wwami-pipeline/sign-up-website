@@ -17,8 +17,11 @@ import NavBar from '../../components/NavBar';
 import EventCalendar from '../../components/EventCalendar';
 import AlaskaGrid from '../../components/OpportunityGrid/AlaskaGrid';
 import SeattleGrid from '../../components/OpportunityGrid/SeattleGrid';
-import LinkBox from '../../components/LinkBox';
-import { Link } from 'react-router-dom';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import '../../App.css';
 import BottomBanner from '../../components/BottomBanner';
@@ -142,7 +145,19 @@ class HomePage extends Component {
   }
 
   calendarEventClick(info) {
-    alert(info.event.title + ': ' + info.event.extendedProps.description);
+    // alert(info.event.title + ': ' + info.event.extendedProps.description);
+    console.log(info.event);
+    this.setState({
+      currentEventDescription: info.event.extendedProps.description,
+      currentEventEndTime: info.event.end.toLocaleTimeString(),
+      currentEventStartTime: info.event.start.toLocaleTimeString(),
+      currentEventTitle: info.event.title,
+      eventClicked: true
+    });
+    console.log(this.state.currentEventDescription);
+    console.log(this.state.currentEventEndTime);
+    console.log(this.state.currentEventStartTime);
+    console.log(this.state.currentEventTitle);
   }
 
   render() {
@@ -178,54 +193,71 @@ class HomePage extends Component {
       <div className={classes.page}>
         <CssBaseline />
         <NavBar />
+        
+        <Dialog
+          open={this.state.eventClicked}
+          onClose={() => this.setState({ eventClicked: false })}
+        >
+          <div className={classes.dialogBody}>
+            <DialogTitle>
+              <Typography variant="h4"> {this.state.currentEventTitle} </Typography>
+            </DialogTitle>
+            <DialogContent>
+            <Typography variant="h6"> Description: {this.state.currentEventDescription} </Typography>
+            <Typography variant="h6"> Start Time: {this.state.currentEventStartTime}
+              End Time: {this.state.currentEventEndTime} </Typography>
+            </DialogContent>
+          </div>
+        </Dialog>
 
-        {/* {!this.state.authenticated ? (
+        {/* Calendar div with authentication */}
+        {!this.state.authenticated ? (
           <div className={classes.calendarSignIn}>
-          <Typography className={classes.title}>
-            Sign in required to access calendar
-          </Typography>
-          <Button 
-            className={classes.signInButton}
-            color="secondary"
-            variant="contained"
-            onClick={() => this.setState({authenticated: true})}>
-            UW Sign In
-          </Button>        
-        </div>
-        ) : !this.state.calendarHidden ? (
-        <div>
-          <div className={classes.calendarSignIn}>
+            <Typography className={classes.title}>
+              Sign in required to access calendar
+            </Typography>
             <Button 
               className={classes.signInButton}
               color="secondary"
               variant="contained"
-              onClick={() => this.setState({calendarHidden: true})}>
-              Hide Calendar
+              onClick={() => this.setState({authenticated: true})}>
+              UW Sign In
+            </Button>        
+          </div>
+        ) : !this.state.calendarHidden ? (
+          <div>
+            <div className={classes.calendarSignIn}>
+              <Button 
+                className={classes.signInButton}
+                color="secondary"
+                variant="contained"
+                onClick={() => this.setState({calendarHidden: true})}>
+                Hide Calendar
+              </Button>
+            </div>
+            <div className={classes.calendarContainer}>
+              <EventCalendar 
+                eventClickFn={e => this.calendarEventClick(e)}
+                events={[
+                  { 
+                    description: 'This is the event\'s description',
+                    duration: '02:00', 
+                    rrule: 'DTSTART:20200325T070000Z\nRRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=MO,FR;UNTIL=20200430T070000Z',
+                    title: "SHIFA Event",
+                  }
+                ]} 
+              />
+            </div>
+          </div>) : 
+            <div className={classes.calendarSignIn}>
+              <Button 
+              className={classes.signInButton}
+              color="secondary"
+              variant="contained"
+              onClick={() => this.setState({calendarHidden: false})}>
+              Show Calendar
             </Button>
-          </div>
-          <div className={classes.calendarContainer}>
-            <EventCalendar 
-              eventClickFn={e => this.calendarEventClick(e)}
-              // events={[
-              //   { rrule: 'DTSTART:20120201T103000Z\nRRULE:FREQ=WEEKLY;INTERVAL=5;UNTIL=20120601;BYDAY=MO,FR' }
-              //   // {title: 'event 1', date: '2020-02-26', description: 'test' },
-              //   // {title: 'event 2', date: '2020-02-26', description: 'test1' },
-              //   // {title: 'event 3', date: '2020-02-26' },
-              //   // {title: 'event 4', date: '2020-02-26' },
-              //   // {title: 'event 5', date: '2020-02-26' }
-              // ]} 
-            />
-          </div>
-        </div>) : 
-          <div className={classes.calendarSignIn}>
-            <Button 
-            className={classes.signInButton}
-            color="secondary"
-            variant="contained"
-            onClick={() => this.setState({calendarHidden: false})}>
-            Show Calendar
-          </Button>
-          </div> }        */}
+          </div> }
 
         {/* Modals */}
 

@@ -12,13 +12,7 @@ export default class EventCalendar extends Component {
                 plugins={[ dayGridPlugin, rrulePlugin ]}
                 eventClick={this.props.eventClickFn}
                 eventLimit='true' 
-                events={ [
-                    {
-                        title: 'my recurring event',
-                        rrule: 'DTSTART:20120201T103000Z\nRRULE:FREQ=WEEKLY;INTERVAL=5;UNTIL=20120601;BYDAY=MO,FR',
-                        duration: '02:00'
-                    } 
-            ]}
+                events={this.props.events}
             />
         )
     }
