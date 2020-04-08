@@ -8,49 +8,50 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Card, CardContent, CardHeader, CardMedia } from '@material-ui/core';
 import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
+import { rrulestr } from 'rrule';
 
 const styles = () => ({
   button: {
-    marginTop: '1em'
+    marginTop: '1em',
   },
   card: {
     backgroundColor: '#513E6D',
     paddingBottom: 5,
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   cardHeader: {
-    backgroundColor: '#f0f9a4'
+    backgroundColor: '#f0f9a4',
   },
   cardMedia: {
-    height: 360
+    height: 360,
   },
   closeButton: {
-    float: 'right'
+    float: 'right',
   },
   dialogBody: {
-    backgroundColor: '#513E6D'
+    backgroundColor: '#513E6D',
   },
   indentText: {
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   title: {
-    marginBottom: '.5em'
+    marginBottom: '.5em',
   },
   titleText: {
-    color: '#5a2c6e'
+    color: '#5a2c6e',
   },
   text: {
     fontFamily: 'Lato',
-    marginBottom: '.5em'
+    marginBottom: '.5em',
   },
   textItem: {
     fontFamily: 'Lato',
-    marginBottom: 8
+    marginBottom: 8,
   },
   textCaps: {
     fontFamily: 'Lato',
-    textTransform: 'uppercase'
-  }
+    textTransform: 'uppercase',
+  },
 });
 
 class OrgItemModal extends React.Component {
@@ -58,11 +59,12 @@ class OrgItemModal extends React.Component {
     super(props);
     this.state = {
       modalOpen: false,
-      signUpLinks: props.project['Sign-up Link'].split(',')
+      signUpLinks: props.project['Sign-up Link'].split(','),
     };
   }
 
   getOrderNumber(x) {
+    if (x.toLowerCase().includes('occurrences')) return 2;
     if (x.toLowerCase().includes('project description')) return 3;
     if (x.toLowerCase().includes('types of volunteers needed')) return 3.5;
     if (x.toLowerCase().includes('clinic schedule')) return 4;
@@ -83,6 +85,16 @@ class OrgItemModal extends React.Component {
 
   render() {
     const { classes, fullScreen, project, imageUrl } = this.props;
+
+    // Turn Dates object of RRule array into readable string as 'Occurrences' field
+    if (project && project['Dates']) {
+      project['Occurrences'] = '';
+      Object.keys(project['Dates']).forEach((key) => {
+        project['Occurrences'] +=
+          "• " + rrulestr(project['Dates'][key]).toText() + '\n';
+      });
+    }
+
     return (
       <div>
         <Dialog
@@ -130,10 +142,11 @@ class OrgItemModal extends React.Component {
             </DialogTitle>
             <DialogContent>
               {Object.keys(project)
+                .filter((x) => x !== 'Dates')
                 .sort((x, y) => {
                   return this.getOrderNumber(x) - this.getOrderNumber(y);
                 })
-                .map(key => {
+                .map((key) => {
                   if (key.toLowerCase() !== 'title' && key !== 'Sign-up Link')
                     return (
                       <Typography
