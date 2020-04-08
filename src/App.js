@@ -116,7 +116,6 @@ class App extends Component {
           <Route
             path="/location"
             render={() => {
-              console.log(this.state);
               return this.state.overviews ? (
                 <LocationPage
                   allImages={this.state['locationImages']}
