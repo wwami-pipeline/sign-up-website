@@ -107,7 +107,6 @@ class App extends Component {
               return this.state.overviews ? (
                 <MainPage
                   overviews={this.state.overviews}
-                  images={this.state.SeattleImages}
                 />
               ) : (
                 <div />
@@ -117,10 +116,12 @@ class App extends Component {
           <Route
             path="/location"
             render={() => {
+              console.log(this.state);
               return this.state.overviews ? (
                 <LocationPage
-                  overviews={this.state.overviews}
                   allImages={this.state['locationImages']}
+                  locations={this.state['locations']}
+                  overviews={this.state.overviews}
                 />
               ) : (
                 <div />
