@@ -161,7 +161,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { classes, history, allImages, overviews } = this.props;
+    const { classes, history, allImages, locations, overviews } = this.props;
     const location = window.location.pathname.split('/')[2]; // Get location from URL
     const images = allImages[location];
     var opportunityGrid;
@@ -188,6 +188,21 @@ class HomePage extends Component {
         console.log('Error loading opportuniy grid');
         break;
     }
+
+    var calendarEvents = [];
+    Object.values(locations[location]).forEach(value => {
+      Object.values(value).forEach(org => {
+        var date = org["Dates"];
+        if (date) {
+          calendarEvents.push({
+            description : "this is the event's description",
+            duration : "02:00",
+            title: "test",
+            rrule: org["Dates"],
+          });
+        }
+      })
+    });
 
     return (
       <div className={classes.page}>
@@ -238,14 +253,7 @@ class HomePage extends Component {
             <div className={classes.calendarContainer}>
               <EventCalendar 
                 eventClickFn={e => this.calendarEventClick(e)}
-                events={[
-                  { 
-                    description: 'This is the event\'s description',
-                    duration: '02:00', 
-                    rrule: 'DTSTART:20200325T070000Z\nRRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=MO,FR;UNTIL=20200430T070000Z',
-                    title: "SHIFA Event",
-                  }
-                ]} 
+                events={calendarEvents} 
               />
             </div>
           </div>) : 
