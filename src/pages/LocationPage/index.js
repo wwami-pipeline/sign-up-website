@@ -124,7 +124,7 @@ const styles = () => {
   };
 };
 
-class HomePage extends Component {
+class LocationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -317,4 +317,4 @@ class HomePage extends Component {
   }
 }
 
-export default withStyles(styles)(withRouter(HomePage));
+export default withStyles(styles)(withRouter(LocationPage));
