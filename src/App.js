@@ -120,6 +120,7 @@ class App extends Component {
               return this.state.overviews ? (
                 <LocationPage
                   overviews={this.state.overviews}
+                  locations={this.state.locations}
                   allImages={this.state['locationImages']}
                 />
               ) : (

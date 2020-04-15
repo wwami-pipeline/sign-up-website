@@ -5,8 +5,6 @@ import {
   CssBaseline,
   Paper,
   Fab,
-  Grid,
-  Button
 } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import MedicalStudentRequirements from '../../components/MedicalStudentRequirements';
@@ -14,11 +12,7 @@ import OtherGraduateRequirements from '../../components/OtherGraduateRequirement
 import UndergraduateRequirements from '../../components/UndergraduateRequirements';
 import ProviderRequirements from '../../components/ProviderRequirements';
 import NavBar from '../../components/NavBar';
-import EventCalendar from '../../components/EventCalendar';
-import AlaskaGrid from '../../components/OpportunityGrid/AlaskaGrid';
-import SeattleGrid from '../../components/OpportunityGrid/SeattleGrid';
-import LinkBox from '../../components/LinkBox';
-import { Link } from 'react-router-dom';
+import OpportunityGrid from '../../components/OpportunityGrid/OpportunityGrid';
 
 import '../../App.css';
 import BottomBanner from '../../components/BottomBanner';
@@ -26,41 +20,41 @@ import BottomBanner from '../../components/BottomBanner';
 const styles = () => {
   return {
     page: {
-      overflow: 'hidden'
+      overflow: 'hidden',
     },
     calendarContainer: {
       backgroundColor: 'white',
       color: 'black',
       margin: '15px auto 0px auto',
-      maxWidth: '900px'
+      maxWidth: '900px',
     },
     calendarSignIn: {
-      textAlign: 'center'
+      textAlign: 'center',
     },
     directionTitleTop: {
       margin: '0.5em auto 3em auto',
       textAlign: 'center',
-      maxWidth: 800
+      maxWidth: 800,
     },
     directionTitleHeader: {
       fontFamily: 'Lato',
       fontSize: '2em',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     directionTitleHeaderBold: {
       fontFamily: 'Lato',
       fontSize: '2.4em',
       fontWeight: 'bold',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     directionTitleTopText: {
       fontFamily: 'Lato',
       fontSize: '1.2em',
       marginTop: 5,
-      textAlign: 'left'
+      textAlign: 'left',
     },
     directionTitleBottom: {
-      textAlign: 'center'
+      textAlign: 'center',
     },
     fabButton: {
       fontFamily: 'Lato',
@@ -68,20 +62,20 @@ const styles = () => {
       fontSize: '1.1em',
       width: '320px',
       marginRight: '1em',
-      marginTop: '1em'
+      marginTop: '1em',
     },
     fabButtonHolder: {
-      textAlign: 'center'
+      textAlign: 'center',
     },
     gridContainer: {
       marginTop: '1.5em',
       marginBottom: '1em',
       marginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
     },
     linkBoxContainer: {
       mariginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
     },
     otherProjectsDiv: {
       backgroundColor: '#F4EFA8',
@@ -89,17 +83,17 @@ const styles = () => {
       minWidth: 280,
       border: '1px solid red',
       display: 'table-cell',
-      verticalAlign: 'middle'
+      verticalAlign: 'middle',
     },
     otherProjectsLink: {
-      textDecoration: 'none'
+      textDecoration: 'none',
     },
     otherProjectsText: {
       color: '#2E1159',
       marginLeft: '50px',
       marginRight: '50px',
       fontFamily: 'Lato',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     paperContainer: {
       backgroundColor: '#513E6D',
@@ -107,26 +101,26 @@ const styles = () => {
       margin: '1.5em',
       maxWidth: 900,
       marginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
     },
     selectionContainer: {
       maxWidth: 950,
       margin: '15px auto 0 auto',
       textAlign: 'center',
       padding: '2em',
-      paddingBottom: '5em'
+      paddingBottom: '5em',
     },
     signInButton: {
       fontSize: '1.2em',
-      margin: '12px 0 12px 0'
+      margin: '12px 0 12px 0',
     },
     title: {
       fontFamily: 'Lato',
       fontSize: '2em',
       fontWeight: 'bold',
       marginTop: '24px',
-      textAlign: 'center'
-    }
+      textAlign: 'center',
+    },
   };
 };
 
@@ -137,7 +131,7 @@ class HomePage extends Component {
       providerRequirementsOpen: false,
       medicalRequirementsOpen: false,
       otherGradRequirementsOpen: false,
-      undergradRequirementsOpen: false
+      undergradRequirementsOpen: false,
     };
   }
 
@@ -146,32 +140,23 @@ class HomePage extends Component {
   }
 
   render() {
-    const { classes, history, allImages, overviews } = this.props;
+    const { classes, history, allImages, overviews, locations } = this.props;
     const location = window.location.pathname.split('/')[2]; // Get location from URL
     const images = allImages[location];
-    var opportunityGrid;
-    switch (location) {
-      case 'Alaska':
-        opportunityGrid = (
-          <AlaskaGrid overviews={overviews} history={history} images={images} />
-        );
-        break;
-      case 'Seattle':
-        opportunityGrid = (
-          <SeattleGrid
-            overviews={overviews}
-            history={history}
-            images={images}
-          />
-        );
-        break;
-      // case "Spokane" : opportunityGrid = <SpokaneGrid overviews={overviews} history={history}/>; break;
-      // case "Montana" : opportunityGrid = <MontanaGrid overviews={overviews} history={history}/>; break;
-      // case "Idaho"   : opportunityGrid = <IdahoGrid overviews={overviews} history={history}/>; break;
-      // case "Wyoming" : opportunityGrid = <WyomingGrid overviews={overviews} history={history}/>; break;
-      default:
-        console.log('Error loading opportuniy grid');
-        break;
+    let opportunityGrid;
+
+    if (locations[location]) {
+      opportunityGrid = (
+        <OpportunityGrid
+          overviews={overviews}
+          history={history}
+          images={images}
+          locationData={locations}
+          locationName={location}
+        />
+      );
+    } else {
+      console.log('Error loading opportunity grid for ' + location);
     }
 
     return (
