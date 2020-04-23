@@ -19,9 +19,7 @@ import AlaskaGrid from '../../components/OpportunityGrid/AlaskaGrid';
 import SeattleGrid from '../../components/OpportunityGrid/SeattleGrid';
 
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 import '../../App.css';
 import BottomBanner from '../../components/BottomBanner';
@@ -39,6 +37,24 @@ const styles = () => {
     },
     calendarSignIn: {
       textAlign: 'center'
+    },
+    dialogBody: {
+      backgroundColor: '#513E6D',
+    },
+    dialogButtonDiv: {
+      height: "36px",
+      margin: '10px 0 10px 0',
+      width: '100%'
+    },
+    dialogSubBody: {
+      margin: '10px'
+    },
+    dialogSignupButton: {
+      margin: '0 0 0px 20px',
+    },
+    dialogDetailsButton: {
+      float: 'right',
+      margin: '0 20px 0 0',
     },
     directionTitleTop: {
       margin: '0.5em auto 3em auto',
@@ -148,14 +164,20 @@ class HomePage extends Component {
     // alert(info.event.title + ': ' + info.event.extendedProps.description);
     console.log(info.event);
     this.setState({
-      currentEventDescription: info.event.extendedProps.description,
+      currentEventDate: info.event.start.toDateString().substring(4),
+      currentEventDetailsLink: info.event.extendedProps.detailsLink,
+      currentEventVolunteers: info.event.extendedProps.volunteers,
       currentEventEndTime: info.event.end.toLocaleTimeString(),
+      currentEventSignupLink: info.event.extendedProps.signupLink,
       currentEventStartTime: info.event.start.toLocaleTimeString(),
       currentEventTitle: info.event.title,
       eventClicked: true
     });
-    console.log(this.state.currentEventDescription);
+    console.log(this.state.currentEventDate);
+    console.log(this.state.currentEventVolunteers);
     console.log(this.state.currentEventEndTime);
+    console.log(this.state.currentEventSignupLink);
+    console.log(this.state.currentEventDetailsLink);
     console.log(this.state.currentEventStartTime);
     console.log(this.state.currentEventTitle);
   }
@@ -190,15 +212,27 @@ class HomePage extends Component {
     }
 
     var calendarEvents = [];
-    Object.values(locations[location]).forEach(value => {
+    // Demo event
+    calendarEvents.push({
+      duration : "02:00",
+      detailsLink: "/org/Seattle/SHIFA/Rotacare", // + "|" + org["Title"],
+      rrule: "FREQ=WEEKLY;BYDAY=SA;INTERVAL=1;UNTIL=20200620T070000Z",
+      signupLink : "https://www.wejoinin.com/sheets/uqkya", 
+      title: "Rotacare",
+      volunteers: "We need physician preceptors and MS1, MS2, MS3, & MS4 students\r\n"
+    });
+    Object.keys(locations[location]).forEach(key => {
+      var value = locations[location][key]
       Object.values(value).forEach(org => {
         var date = org["Dates"];
         if (date) {
           calendarEvents.push({
-            description : "this is the event's description",
+            detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
             duration : "02:00",
-            title: "test",
             rrule: org["Dates"],
+            signupLink: org["Sign-up Link"].split(',')[0],
+            title: org["Title"],
+            volunteers: org["Volunteer Openings"]
           });
         }
       })
@@ -214,13 +248,33 @@ class HomePage extends Component {
           onClose={() => this.setState({ eventClicked: false })}
         >
           <div className={classes.dialogBody}>
-            <DialogTitle>
-              <Typography variant="h4"> {this.state.currentEventTitle} </Typography>
-            </DialogTitle>
             <DialogContent>
-            <Typography variant="h6"> Description: {this.state.currentEventDescription} </Typography>
-            <Typography variant="h6"> Start Time: {this.state.currentEventStartTime}
-              End Time: {this.state.currentEventEndTime} </Typography>
+              <Typography variant="h5"> {this.state.currentEventDate} </Typography>
+              <Typography variant="h5"> {this.state.currentEventStartTime} - {this.state.currentEventEndTime} </Typography>
+              <span style={{color: 'white'}}> {this.state.currentEventVolunteers} </span>
+            
+              <div className={classes.dialogButtonDiv}>
+                <Button
+                    className={classes.dialogSignupButton}
+                    color="secondary"
+                    href={this.state.currentEventSignupLink}
+                    size="medium"
+                    target="_blank"
+                    variant="contained" >
+                    Sign Up
+                </Button>
+                <Button
+                  className={classes.dialogDetailsButton}
+                  color="secondary"
+                  href={this.state.currentEventDetailsLink}
+                  size="medium"
+                  target="_blank"
+                  variant="contained" >
+                  Details
+                </Button>
+              </div>
+              <span style={{color: 'white'}}> Please see DETAILS to confirm that you 
+              have the correct training/onboarding to sign up for this event </span>
             </DialogContent>
           </div>
         </Dialog>

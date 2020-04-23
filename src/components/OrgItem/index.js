@@ -58,7 +58,7 @@ class OrgItemModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false,
+      modalOpen: props.openedItem,
       signUpLinks: props.project['Sign-up Link'].split(','),
     };
   }
@@ -116,7 +116,7 @@ class OrgItemModal extends React.Component {
               </Button>
               {this.state.signUpLinks.length === 1 ? (
                 <Button
-                  size="large"
+                  size="large"  
                   color="secondary"
                   variant="contained"
                   className={classes.button}
