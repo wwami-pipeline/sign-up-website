@@ -7,10 +7,7 @@ import {
   Fab,
 } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
-import MedicalStudentRequirements from '../../components/MedicalStudentRequirements';
-import OtherGraduateRequirements from '../../components/OtherGraduateRequirements';
-import UndergraduateRequirements from '../../components/UndergraduateRequirements';
-import ProviderRequirements from '../../components/ProviderRequirements';
+import Requirements from '../../components/Requirements';
 import NavBar from '../../components/NavBar';
 import OpportunityGrid from '../../components/OpportunityGrid/OpportunityGrid';
 
@@ -214,24 +211,33 @@ class LocationPage extends Component {
 
         {/* Modals */}
 
-        <MedicalStudentRequirements
+        <Requirements
           open={this.state.medicalRequirementsOpen}
+          title="Medical Student Requirements"
+          data={this.props.prerequisites['Medical Students']}
           handleClose={() => this.setState({ medicalRequirementsOpen: false })}
         />
-        <UndergraduateRequirements
+
+        <Requirements
           open={this.state.undergradRequirementsOpen}
+          title="Undergraduate Student Requirements"
+          data={this.props.prerequisites['Undergraduates']}
           handleClose={() =>
             this.setState({ undergradRequirementsOpen: false })
           }
         />
-        <OtherGraduateRequirements
+        <Requirements
           open={this.state.otherGradRequirementsOpen}
+          title="Other HS Graduate Student Requirements"
+          data={this.props.prerequisites['Other HS Graduate Students']}
           handleClose={() =>
             this.setState({ otherGradRequirementsOpen: false })
           }
         />
-        <ProviderRequirements
+        <Requirements
           open={this.state.providerRequirementsOpen}
+          title="Provider Requirements"
+          data={this.props.prerequisites['Providers']}
           handleClose={() => this.setState({ providerRequirementsOpen: false })}
         />
 

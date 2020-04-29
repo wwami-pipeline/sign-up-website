@@ -19,27 +19,34 @@ class App extends Component {
 
     this.state = {
       locations: {},
-      locationImages: {}
+      locationImages: {},
     };
 
     // Populate overviews
     db.ref('/Overviews')
       .once('value')
-      .then(value => {
+      .then((value) => {
         this.state.overviews = value.toJSON();
-        db.ref('/Locations')
+        // Populate prerequisites
+        db.ref('Prerequisites')
           .once('value')
-          .then(value => {
-            const locations = value.toJSON();
-            Object.keys(locations).forEach(location => {
-              this.state['locations'][location] = locations[location];
-              this.state['locationImages'][location] = {};
-              this.populateLocationImages(
-                location,
-                this.state['locations'][location],
-                this.state['locationImages'][location]
-              );
-            });
+          .then((value) => {
+            this.state.prerequisites = value.toJSON();
+            // Finally, populate Locations
+            db.ref('/Locations')
+              .once('value')
+              .then((value) => {
+                const locations = value.toJSON();
+                Object.keys(locations).forEach((location) => {
+                  this.state['locations'][location] = locations[location];
+                  this.state['locationImages'][location] = {};
+                  this.populateLocationImages(
+                    location,
+                    this.state['locations'][location],
+                    this.state['locationImages'][location]
+                  );
+                });
+              });
           });
       });
   }
@@ -49,12 +56,12 @@ class App extends Component {
     const storageRef = firebase.storage().ref();
     let orgCount = 0;
     // Populate Image URLs by organization
-    orgs.forEach(org => {
+    orgs.forEach((org) => {
       // Get org image
       storageRef
         .child('/' + locationName + '/' + org + '.jpg')
         .getDownloadURL()
-        .then(url => {
+        .then((url) => {
           imageData[org + '.jpg'] = url;
           orgCount++;
           if (orgCount >= orgs.length) {
@@ -68,7 +75,7 @@ class App extends Component {
       imageData[org] = {};
       const events = Object.keys(locationData[org]);
       let eventsCount = 0;
-      events.forEach(event => {
+      events.forEach((event) => {
         storageRef
           .child(
             '/' +
@@ -80,7 +87,7 @@ class App extends Component {
               '.jpg'
           )
           .getDownloadURL()
-          .then(url => {
+          .then((url) => {
             imageData[org][locationData[org][event]['Title']] = url;
             eventsCount++;
             if (eventsCount >= events.length) {
@@ -120,6 +127,7 @@ class App extends Component {
               return this.state.overviews ? (
                 <LocationPage
                   overviews={this.state.overviews}
+                  prerequisites={this.state.prerequisites}
                   locations={this.state.locations}
                   allImages={this.state['locationImages']}
                 />
