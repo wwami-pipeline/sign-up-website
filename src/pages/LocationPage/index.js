@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
 import {
+  Button,
   withStyles,
   Typography,
   CssBaseline,
   Paper,
   Fab,
-  Grid,
-  Button
 } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
-import MedicalStudentRequirements from '../../components/MedicalStudentRequirements';
-import OtherGraduateRequirements from '../../components/OtherGraduateRequirements';
-import UndergraduateRequirements from '../../components/UndergraduateRequirements';
-import ProviderRequirements from '../../components/ProviderRequirements';
+import Requirements from '../../components/Requirements';
 import NavBar from '../../components/NavBar';
 import EventCalendar from '../../components/EventCalendar';
-import AlaskaGrid from '../../components/OpportunityGrid/AlaskaGrid';
-import SeattleGrid from '../../components/OpportunityGrid/SeattleGrid';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
+import OpportunityGrid from '../../components/OpportunityGrid/OpportunityGrid';
 
 import '../../App.css';
 import BottomBanner from '../../components/BottomBanner';
@@ -27,16 +22,16 @@ import BottomBanner from '../../components/BottomBanner';
 const styles = () => {
   return {
     page: {
-      overflow: 'hidden'
+      overflow: 'hidden',
     },
     calendarContainer: {
       backgroundColor: 'white',
       color: 'black',
       margin: '15px auto 0px auto',
-      maxWidth: '900px'
+      maxWidth: '900px',
     },
     calendarSignIn: {
-      textAlign: 'center'
+      textAlign: 'center',
     },
     dialogBody: {
       backgroundColor: '#513E6D',
@@ -59,27 +54,27 @@ const styles = () => {
     directionTitleTop: {
       margin: '0.5em auto 3em auto',
       textAlign: 'center',
-      maxWidth: 800
+      maxWidth: 800,
     },
     directionTitleHeader: {
       fontFamily: 'Lato',
       fontSize: '2em',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     directionTitleHeaderBold: {
       fontFamily: 'Lato',
       fontSize: '2.4em',
       fontWeight: 'bold',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     directionTitleTopText: {
       fontFamily: 'Lato',
       fontSize: '1.2em',
       marginTop: 5,
-      textAlign: 'left'
+      textAlign: 'left',
     },
     directionTitleBottom: {
-      textAlign: 'center'
+      textAlign: 'center',
     },
     fabButton: {
       fontFamily: 'Lato',
@@ -87,20 +82,20 @@ const styles = () => {
       fontSize: '1.1em',
       width: '320px',
       marginRight: '1em',
-      marginTop: '1em'
+      marginTop: '1em',
     },
     fabButtonHolder: {
-      textAlign: 'center'
+      textAlign: 'center',
     },
     gridContainer: {
       marginTop: '1.5em',
       marginBottom: '1em',
       marginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
     },
     linkBoxContainer: {
       mariginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
     },
     otherProjectsDiv: {
       backgroundColor: '#F4EFA8',
@@ -108,17 +103,17 @@ const styles = () => {
       minWidth: 280,
       border: '1px solid red',
       display: 'table-cell',
-      verticalAlign: 'middle'
+      verticalAlign: 'middle',
     },
     otherProjectsLink: {
-      textDecoration: 'none'
+      textDecoration: 'none',
     },
     otherProjectsText: {
       color: '#2E1159',
       marginLeft: '50px',
       marginRight: '50px',
       fontFamily: 'Lato',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     paperContainer: {
       backgroundColor: '#513E6D',
@@ -126,37 +121,37 @@ const styles = () => {
       margin: '1.5em',
       maxWidth: 900,
       marginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
     },
     selectionContainer: {
       maxWidth: 950,
       margin: '15px auto 0 auto',
       textAlign: 'center',
       padding: '2em',
-      paddingBottom: '5em'
+      paddingBottom: '5em',
     },
     signInButton: {
       fontSize: '1.2em',
-      margin: '12px 0 12px 0'
+      margin: '12px 0 12px 0',
     },
     title: {
       fontFamily: 'Lato',
       fontSize: '2em',
       fontWeight: 'bold',
       marginTop: '24px',
-      textAlign: 'center'
-    }
+      textAlign: 'center',
+    },
   };
 };
 
-class HomePage extends Component {
+class LocationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       providerRequirementsOpen: false,
       medicalRequirementsOpen: false,
       otherGradRequirementsOpen: false,
-      undergradRequirementsOpen: false
+      undergradRequirementsOpen: false,
     };
   }
 
@@ -183,32 +178,23 @@ class HomePage extends Component {
   }
 
   render() {
-    const { classes, history, allImages, locations, overviews } = this.props;
+    const { classes, history, allImages, overviews, locations } = this.props;
     const location = window.location.pathname.split('/')[2]; // Get location from URL
     const images = allImages[location];
-    var opportunityGrid;
-    switch (location) {
-      case 'Alaska':
-        opportunityGrid = (
-          <AlaskaGrid overviews={overviews} history={history} images={images} />
-        );
-        break;
-      case 'Seattle':
-        opportunityGrid = (
-          <SeattleGrid
-            overviews={overviews}
-            history={history}
-            images={images}
-          />
-        );
-        break;
-      // case "Spokane" : opportunityGrid = <SpokaneGrid overviews={overviews} history={history}/>; break;
-      // case "Montana" : opportunityGrid = <MontanaGrid overviews={overviews} history={history}/>; break;
-      // case "Idaho"   : opportunityGrid = <IdahoGrid overviews={overviews} history={history}/>; break;
-      // case "Wyoming" : opportunityGrid = <WyomingGrid overviews={overviews} history={history}/>; break;
-      default:
-        console.log('Error loading opportuniy grid');
-        break;
+    let opportunityGrid;
+
+    if (locations[location]) {
+      opportunityGrid = (
+        <OpportunityGrid
+          overviews={overviews}
+          history={history}
+          images={images}
+          locationData={locations}
+          locationName={location}
+        />
+      );
+    } else {
+      console.log('Error loading opportunity grid for ' + location);
     }
 
     var calendarEvents = [];
@@ -280,20 +266,8 @@ class HomePage extends Component {
         </Dialog>
 
         {/* Calendar div with authentication */}
-        {!this.state.authenticated ? (
-          <div className={classes.calendarSignIn}>
-            <Typography className={classes.title}>
-              Sign in required to access calendar
-            </Typography>
-            <Button 
-              className={classes.signInButton}
-              color="secondary"
-              variant="contained"
-              onClick={() => this.setState({authenticated: true})}>
-              UW Sign In
-            </Button>        
-          </div>
-        ) : !this.state.calendarHidden ? (
+        
+        {!this.state.calendarHidden ? (
           <div>
             <div className={classes.calendarSignIn}>
               <Button 
@@ -323,24 +297,33 @@ class HomePage extends Component {
 
         {/* Modals */}
 
-        <MedicalStudentRequirements
+        <Requirements
           open={this.state.medicalRequirementsOpen}
+          title="Medical Student Requirements"
+          data={this.props.prerequisites['Medical Students']}
           handleClose={() => this.setState({ medicalRequirementsOpen: false })}
         />
-        <UndergraduateRequirements
+
+        <Requirements
           open={this.state.undergradRequirementsOpen}
+          title="Undergraduate Student Requirements"
+          data={this.props.prerequisites['Undergraduates']}
           handleClose={() =>
             this.setState({ undergradRequirementsOpen: false })
           }
         />
-        <OtherGraduateRequirements
+        <Requirements
           open={this.state.otherGradRequirementsOpen}
+          title="Other HS Graduate Student Requirements"
+          data={this.props.prerequisites['Other HS Graduate Students']}
           handleClose={() =>
             this.setState({ otherGradRequirementsOpen: false })
           }
         />
-        <ProviderRequirements
+        <Requirements
           open={this.state.providerRequirementsOpen}
+          title="Provider Requirements"
+          data={this.props.prerequisites['Providers']}
           handleClose={() => this.setState({ providerRequirementsOpen: false })}
         />
 
@@ -426,4 +409,4 @@ class HomePage extends Component {
   }
 }
 
-export default withStyles(styles)(withRouter(HomePage));
+export default withStyles(styles)(withRouter(LocationPage));

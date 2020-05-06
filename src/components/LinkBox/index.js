@@ -1,52 +1,74 @@
-import React from "react";
-import { withStyles,
-  Typography
-} from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { withStyles, Typography } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import { Link } from 'react-router-dom';
 
 const styles = () => ({
   card: {
     minWidth: 280,
   },
   image: {
-    maxHeight: 280,
-    objectFit: "cover"
+    height: 360,
+    objectFit: 'cover',
   },
   disableLinkUnderline: {
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
   text: {
-    fontFamily: 'Lato'
-  }
+    fontFamily: 'Lato',
+  },
 });
 
-const LinkBox = props => {
+const LinkBox = (props) => {
   const { classes } = props;
-
+  console.log(props.imageLocation);
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <Link to={{ pathname: props.path }}
-          className={classes.disableLinkUnderline} >
-          <CardMedia
-            component="img"
-            alt={props.title}
-            image={props.imageLocation}
-            title={props.title}
-            className={classes.image}
-          />
-          <CardContent style={{ backgroundColor: "#F4EFA8" }}>
-            <Typography variant="h5" style={{ color: "#2E1159", fontFamily: "Lato" }} component="h2">
+        <Link
+          to={{ pathname: props.path }}
+          className={classes.disableLinkUnderline}
+        >
+          {props.imageLocation ? (
+            <CardMedia
+              component="img"
+              alt={props.title + ' image'}
+              image={props.imageLocation ? props.imageLocation : ''}
+              title={props.title}
+              className={classes.image}
+            />
+          ) : (
+            <CardHeader className={classes.image} />
+          )}
+
+          <CardContent style={{ backgroundColor: '#F4EFA8' }}>
+            <Typography
+              variant="h5"
+              style={{ color: '#2E1159', fontFamily: 'Lato' }}
+              component="h2"
+            >
               {props.title}
             </Typography>
-            <Typography variant="body1" style={{color: "#2E1159", fontWeight: "bold", fontFamily: "Lato"}} component="h3">
+            <Typography
+              variant="body1"
+              style={{
+                color: '#2E1159',
+                fontWeight: 'bold',
+                fontFamily: 'Lato',
+              }}
+              component="h3"
+            >
               {props.name}
             </Typography>
-            <Typography variant="body1" style={{color: "#2E1159", fontFamily: "Lato"}} component="p">
+            <Typography
+              variant="body1"
+              style={{ color: '#2E1159', fontFamily: 'Lato' }}
+              component="p"
+            >
               {props.description}
             </Typography>
           </CardContent>

@@ -18,30 +18,44 @@ class App extends Component {
     const db = firebase.database();
 
     this.state = {
+      signedIn: false,
       locations: {},
-      locationImages: {}
+      locationImages: {},
     };
 
     // Populate overviews
     db.ref('/Overviews')
       .once('value')
-      .then(value => {
+      .then((value) => {
         this.state.overviews = value.toJSON();
-        db.ref('/Locations')
+        // Populate prerequisites
+        db.ref('Prerequisites')
           .once('value')
-          .then(value => {
-            const locations = value.toJSON();
-            Object.keys(locations).forEach(location => {
-              this.state['locations'][location] = locations[location];
-              this.state['locationImages'][location] = {};
-              this.populateLocationImages(
-                location,
-                this.state['locations'][location],
-                this.state['locationImages'][location]
-              );
-            });
+          .then((value) => {
+            this.state.prerequisites = value.toJSON();
+            // Finally, populate Locations
+            db.ref('/Locations')
+              .once('value')
+              .then((value) => {
+                const locations = value.toJSON();
+                Object.keys(locations).forEach((location) => {
+                  this.state['locations'][location] = locations[location];
+                  this.state['locationImages'][location] = {};
+                  this.populateLocationImages(
+                    location,
+                    this.state['locations'][location],
+                    this.state['locationImages'][location]
+                  );
+                });
+              });
           });
       });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ signedIn: true });
+      }
+    });
   }
 
   populateLocationImages = (locationName, locationData, imageData) => {
@@ -49,12 +63,12 @@ class App extends Component {
     const storageRef = firebase.storage().ref();
     let orgCount = 0;
     // Populate Image URLs by organization
-    orgs.forEach(org => {
+    orgs.forEach((org) => {
       // Get org image
       storageRef
         .child('/' + locationName + '/' + org + '.jpg')
         .getDownloadURL()
-        .then(url => {
+        .then((url) => {
           imageData[org + '.jpg'] = url;
           orgCount++;
           if (orgCount >= orgs.length) {
@@ -68,7 +82,7 @@ class App extends Component {
       imageData[org] = {};
       const events = Object.keys(locationData[org]);
       let eventsCount = 0;
-      events.forEach(event => {
+      events.forEach((event) => {
         storageRef
           .child(
             '/' +
@@ -80,7 +94,7 @@ class App extends Component {
               '.jpg'
           )
           .getDownloadURL()
-          .then(url => {
+          .then((url) => {
             imageData[org][locationData[org][event]['Title']] = url;
             eventsCount++;
             if (eventsCount >= events.length) {
@@ -118,8 +132,9 @@ class App extends Component {
             render={() => {
               return this.state.overviews ? (
                 <LocationPage
-                  allImages={this.state['locationImages']}
-                  locations={this.state['locations']}
+                  prerequisites={this.state.prerequisites}
+                  locations={this.state.locations}
+                  allImages={this.state.locationImages}
                   overviews={this.state.overviews}
                 />
               ) : (
@@ -135,6 +150,7 @@ class App extends Component {
                 locations={this.state['locations']}
                 overviews={this.state['overviews']}
                 images={this.state['locationImages']}
+                signedIn={this.state.signedIn}
               />
             )}
           />
