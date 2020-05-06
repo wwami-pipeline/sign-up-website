@@ -5,7 +5,7 @@ import {
   Typography,
   CssBaseline,
   Grid,
-  Button
+  Button,
 } from '@material-ui/core';
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
@@ -14,63 +14,63 @@ import BottomBanner from '../../components/BottomBanner';
 
 const styles = () => ({
   page: {
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   description: {
     fontFamily: 'Lato',
-    marginBottom: '1em'
+    marginBottom: '1em',
   },
   title: {
     fontFamily: 'Lato',
     letterSpacing: '10px',
-    marginBottom: '1em'
+    marginBottom: '1em',
   },
   directionTitleTop: {
     marginTop: '2em',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   paperContainer: {
     padding: '2em',
     margin: '1.5em',
     width: '85%',
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
   },
   fabButton: {
     marginRight: '1em',
-    marginTop: '1em'
+    marginTop: '1em',
   },
   directionTitleBottom: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   selectionContainer: {
     maxWidth: 950,
     margin: '15px auto 0 auto',
     textAlign: 'center',
     padding: '2em',
-    paddingBottom: '5em'
+    paddingBottom: '5em',
   },
   gridContainer: {
     marginTop: '1.5em',
     marginBottom: '1em',
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
   },
   linkBoxContainer: {
     mariginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
   },
   videoButton: {
     backgroundColor: '#f0f9a4',
-    color: 'black'
-  }
+    color: 'black',
+  },
 });
 
 class OrgPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
     };
     this.updateState();
   }
@@ -78,7 +78,7 @@ class OrgPage extends Component {
   componentDidMount() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-  } 
+  }
 
   updateState = (location, org) => {
     if (
@@ -90,7 +90,7 @@ class OrgPage extends Component {
         overview: this.props['overviews'][org],
         title: org,
         path: window.location.pathname,
-        projects: this.props['locations'][location][org]
+        projects: this.props['locations'][location][org],
       });
     }
   };
@@ -98,11 +98,14 @@ class OrgPage extends Component {
   render() {
     if (this.state.path !== window.location.pathname) {
       const splitUrl = window.location.pathname.split('/');
-      this.updateState(decodeURIComponent(splitUrl[2]), decodeURIComponent(splitUrl[3]));
+      this.updateState(
+        decodeURIComponent(splitUrl[2]),
+        decodeURIComponent(splitUrl[3])
+      );
       return <div />;
     }
 
-    const { classes } = this.props;
+    const { classes, signedIn } = this.props;
     const { path, projects, images, overview, title } = this.state;
 
     if (path !== this.state.currPath) {
@@ -113,7 +116,7 @@ class OrgPage extends Component {
     let categories = {};
     categories[''] = [];
     if (projects) {
-      Object.keys(projects).forEach(projectKey => {
+      Object.keys(projects).forEach((projectKey) => {
         const project = projects[projectKey];
         if (project.Category) {
           const kvp = categories[project.Category];
@@ -129,7 +132,7 @@ class OrgPage extends Component {
         }
       });
     }
-    const grids = Object.keys(categories).map(category => (
+    const grids = Object.keys(categories).map((category) => (
       <div>
         {category !== '' ? (
           <Typography variant="h5">{category}</Typography>
@@ -146,11 +149,13 @@ class OrgPage extends Component {
             <Grid item key={index} xs={12} md={6}>
               {title === 'Others' ? (
                 <OtherItem
+                  signedIn={signedIn}
                   project={categories[category][project]}
                   path={path}
                 />
               ) : (
                 <OrgItem
+                  signedIn={signedIn}
                   project={categories[category][project]}
                   imageUrl={images[categories[category][project]['Title']]}
                 />
@@ -171,7 +176,7 @@ class OrgPage extends Component {
             <Typography className={classes.title} gutterBottom variant="h4">
               {title}
             </Typography>
-            
+
             {overview ? (
               <div>
                 <Typography

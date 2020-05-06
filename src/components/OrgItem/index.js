@@ -5,10 +5,17 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Card, CardContent, CardHeader, CardMedia } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Link,
+} from '@material-ui/core';
 import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import { rrulestr } from 'rrule';
+import firebase from 'firebase';
 
 const styles = () => ({
   button: {
@@ -42,11 +49,13 @@ const styles = () => ({
   },
   text: {
     fontFamily: 'Lato',
+    fontSize: 14,
     marginBottom: '.5em',
   },
   textItem: {
     fontFamily: 'Lato',
     marginBottom: 8,
+    fontSize: 16,
   },
   textCaps: {
     fontFamily: 'Lato',
@@ -59,7 +68,9 @@ class OrgItemModal extends React.Component {
     super(props);
     this.state = {
       modalOpen: false,
-      signUpLinks: props.project['Sign-up Link'].split(','),
+      signUpLinks: props.project['Sign-up Link']
+        ? props.project['Sign-up Link'].split(',')
+        : [],
     };
   }
 
@@ -91,9 +102,39 @@ class OrgItemModal extends React.Component {
       project['Occurrences'] = '';
       Object.keys(project['Dates']).forEach((key) => {
         project['Occurrences'] +=
-          "• " + rrulestr(project['Dates'][key]).toText() + '\n';
+          '• ' + rrulestr(project['Dates'][key]).toText() + '\n';
       });
     }
+
+    const signUpButtons = (
+      <div>
+        {this.state.signUpLinks.length === 1 ? (
+          <Button
+            size="large"
+            color="secondary"
+            variant="contained"
+            className={classes.button}
+            target="_blank"
+            href={this.state.signUpLinks[0]}
+          >
+            Sign Up
+          </Button>
+        ) : (
+          this.state.signUpLinks.map((link, index) => (
+            <Button
+              size="large"
+              color="secondary"
+              variant="contained"
+              className={classes.button}
+              target="_blank"
+              href={link}
+            >
+              Sign Up (Option {index + 1})
+            </Button>
+          ))
+        )}
+      </div>
+    );
 
     return (
       <div>
@@ -114,30 +155,34 @@ class OrgItemModal extends React.Component {
               >
                 Close
               </Button>
-              {this.state.signUpLinks.length === 1 ? (
-                <Button
-                  size="large"
-                  color="secondary"
-                  variant="contained"
-                  className={classes.button}
-                  target="_blank"
-                  href={this.state.signUpLinks[0]}
-                >
-                  Sign Up
-                </Button>
+              {this.state.signUpLinks.length > 0 ? (
+                this.props.signedIn ? (
+                  signUpButtons
+                ) : (
+                  <Typography style={{ fontSize: 18, marginTop: '1em' }}>
+                    <Link
+                      style={{
+                        cursor: 'pointer',
+                        color: 'pink',
+                      }}
+                      onClick={() => {
+                        var provider = new firebase.auth.OAuthProvider(
+                          'microsoft.com'
+                        );
+                        provider.setCustomParameters({
+                          // Target specific email with login hint.
+                          login_hint: 'netid@uw.edu',
+                        });
+                        firebase.auth().signInWithPopup(provider);
+                      }}
+                    >
+                      Sign In
+                    </Link>{' '}
+                    with your UW Net ID to see sign up links
+                  </Typography>
+                )
               ) : (
-                this.state.signUpLinks.map((link, index) => (
-                  <Button
-                    size="large"
-                    color="secondary"
-                    variant="contained"
-                    className={classes.button}
-                    target="_blank"
-                    href={link}
-                  >
-                    Sign Up (Option {index + 1})
-                  </Button>
-                ))
+                <div />
               )}
             </DialogTitle>
             <DialogContent>

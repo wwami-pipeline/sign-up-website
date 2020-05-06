@@ -18,6 +18,7 @@ class App extends Component {
     const db = firebase.database();
 
     this.state = {
+      signedIn: false,
       locations: {},
       locationImages: {},
     };
@@ -49,6 +50,12 @@ class App extends Component {
               });
           });
       });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ signedIn: true });
+      }
+    });
   }
 
   populateLocationImages = (locationName, locationData, imageData) => {
@@ -144,6 +151,7 @@ class App extends Component {
                 locations={this.state['locations']}
                 overviews={this.state['overviews']}
                 images={this.state['locationImages']}
+                signedIn={this.state.signedIn}
               />
             )}
           />
