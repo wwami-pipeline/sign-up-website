@@ -136,6 +136,7 @@ class App extends Component {
                   locations={this.state.locations}
                   allImages={this.state.locationImages}
                   overviews={this.state.overviews}
+                  signedIn={this.state.signedIn}
                 />
               ) : (
                 <div />

@@ -9,13 +9,12 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CardMedia,
-  Link,
+  CardMedia
 } from '@material-ui/core';
 import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import { rrulestr } from 'rrule';
-import firebase from 'firebase';
+import { SignInButton } from '../SignInButton/SignInButton'
 
 const styles = () => ({
   button: {
@@ -159,27 +158,9 @@ class OrgItemModal extends React.Component {
                 this.props.signedIn ? (
                   signUpButtons
                 ) : (
-                  <Typography style={{ fontSize: 18, marginTop: '1em' }}>
-                    <Link
-                      style={{
-                        cursor: 'pointer',
-                        color: 'pink',
-                      }}
-                      onClick={() => {
-                        var provider = new firebase.auth.OAuthProvider(
-                          'microsoft.com'
-                        );
-                        provider.setCustomParameters({
-                          // Target specific email with login hint.
-                          login_hint: 'netid@uw.edu',
-                        });
-                        firebase.auth().signInWithPopup(provider);
-                      }}
-                    >
-                      Sign In
-                    </Link>{' '}
-                    with your UW Net ID to see sign up links
-                  </Typography>
+                  <div style={{display: 'block' }}>
+                    <SignInButton/>
+                  </div>
                 )
               ) : (
                 <div />

@@ -15,9 +15,9 @@ import EventCalendar from '../../components/EventCalendar';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import OpportunityGrid from '../../components/OpportunityGrid/OpportunityGrid';
-
-import '../../App.css';
 import BottomBanner from '../../components/BottomBanner';
+import { SignInButton } from '../../components/SignInButton/SignInButton'
+import '../../App.css';
 
 const styles = () => {
   return {
@@ -148,6 +148,7 @@ class LocationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      calendarHidden: true,
       providerRequirementsOpen: false,
       medicalRequirementsOpen: false,
       otherGradRequirementsOpen: false,
@@ -178,7 +179,7 @@ class LocationPage extends Component {
   }
 
   render() {
-    const { classes, history, allImages, overviews, locations } = this.props;
+    const { classes, history, allImages, overviews, locations, signedIn } = this.props;
     const location = window.location.pathname.split('/')[2]; // Get location from URL
     const images = allImages[location];
     let opportunityGrid;
@@ -240,7 +241,8 @@ class LocationPage extends Component {
               <span style={{color: 'white'}}> {this.state.currentEventVolunteers} </span>
             
               <div className={classes.dialogButtonDiv}>
-                <Button
+                { signedIn ?
+                  <Button
                     className={classes.dialogSignupButton}
                     color="secondary"
                     href={this.state.currentEventSignupLink}
@@ -248,7 +250,11 @@ class LocationPage extends Component {
                     target="_blank"
                     variant="contained" >
                     Sign Up
-                </Button>
+                  </Button>
+                : <div style={{display: 'inline' }}>
+                    <SignInButton />
+                  </div>
+                }
                 <Button
                   className={classes.dialogDetailsButton}
                   color="secondary"
@@ -291,7 +297,7 @@ class LocationPage extends Component {
               color="secondary"
               variant="contained"
               onClick={() => this.setState({calendarHidden: false})}>
-              Show Calendar
+              Show Event Calendar
             </Button>
           </div> }
 
