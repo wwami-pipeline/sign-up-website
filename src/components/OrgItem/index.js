@@ -245,17 +245,25 @@ class OrgItemModal extends React.Component {
             }
           ></CardHeader>
           <CardContent>
-            <Typography
-              className={classes.text}
-              gutterBottom
-              align="left"
-              component="p"
-            >
-              <b>Location: </b> {project['Location']}
-            </Typography>
-            <Typography className={classes.text} align="left" component="p">
-              <b>Description: </b> {project['Project Description']}
-            </Typography>
+            {project['Location'] ? (
+              <Typography
+                className={classes.text}
+                gutterBottom
+                align="left"
+                component="p"
+              >
+                <b>Location: </b> {project['Location']}
+              </Typography>
+            ) : (
+              <div />
+            )}
+            {project['Project Description'] ? (
+              <Typography className={classes.text} align="left" component="p">
+                <b>Description: </b> {project['Project Description']}
+              </Typography>
+            ) : (
+              <div />
+            )}
           </CardContent>
         </Card>
       </div>
