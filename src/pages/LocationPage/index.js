@@ -208,6 +208,7 @@ class LocationPage extends Component {
       title: "Rotacare",
       volunteers: "We need physician preceptors and MS1, MS2, MS3, & MS4 students\r\n"
     });
+    
     Object.keys(locations[location]).forEach(key => {
       var value = locations[location][key]
       Object.values(value).forEach(org => {
@@ -240,6 +241,9 @@ class LocationPage extends Component {
               <Typography variant="h5"> {this.state.currentEventStartTime} - {this.state.currentEventEndTime} </Typography>
               <span style={{color: 'white'}}> {this.state.currentEventVolunteers} </span>
             
+              <span style={{color: 'white'}}> Please see DETAILS to confirm that you 
+                have the correct training/onboarding to sign up for this event 
+              </span>
               <div className={classes.dialogButtonDiv}>
                 { signedIn ?
                   <Button
@@ -265,8 +269,6 @@ class LocationPage extends Component {
                   Details
                 </Button>
               </div>
-              <span style={{color: 'white'}}> Please see DETAILS to confirm that you 
-              have the correct training/onboarding to sign up for this event </span>
             </DialogContent>
           </div>
         </Dialog>
