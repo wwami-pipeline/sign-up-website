@@ -4,14 +4,19 @@ import {
   withStyles,
   Typography,
   CssBaseline,
-  Link
+  Link,
 } from '@material-ui/core';
 import NavBar from '../../components/NavBar';
 import BottomBanner from '../../components/BottomBanner';
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 const styles = () => ({
   page: {
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   title: {
     color: 'white',
@@ -21,7 +26,6 @@ const styles = () => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: 750,
-    textDecoration: 'underline'
   },
   description: {
     color: 'white',
@@ -34,13 +38,76 @@ const styles = () => ({
   directionTitleTop: {
     fontFamily: 'Lato',
     margin: '30px 0 15px 0',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+    textDecoration: 'underline',
+  },
 });
+
+const processText = (text, classes) => {
+  const split = text.split(' ');
+  let arr = [{ type: 'p', value: '' }];
+  for (let i = 0; i < split.length; i++) {
+    if (split[i].includes('http')) {
+      arr.push({ type: 'link', value: split[i] });
+    } else if (split[i].includes('@') && split[i].includes('.')) {
+      arr.push({ type: 'email', value: split[i] });
+    } else {
+      if (arr[arr.length - 1].type === 'p') {
+        arr[arr.length - 1].value += ' ' + split[i];
+      } else {
+        arr.push({ type: 'p', value: split[i] });
+      }
+    }
+  }
+  return (
+    <div style={{ marginTop: 10, marginBottom: 10 }}>
+      {arr.map((item) => (
+        <div style={{ display: 'inline' }}>
+          {item.type === 'p' ? (
+            <Typography
+              inline
+              variant="subtitle1"
+              className={classes.description}
+            >
+              {item.value + ' '}
+            </Typography>
+          ) : item.type === 'email' ? (
+            <Typography
+              variant="subtitle1"
+              className={classes.description}
+              inline
+            >
+              <Link
+                inline
+                color="secondary"
+                href={'mailto://' + item.value.replace(/[()]/g, '')}
+                target="_blank"
+              >
+                {item.value}
+              </Link>
+            </Typography>
+          ) : (
+            <Typography
+              variant="subtitle1"
+              className={classes.description}
+              inline
+            >
+              <Link inline color="secondary" href={item.value} target="_blank">
+                {item.value}
+              </Link>
+            </Typography>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 class ResourcesPage extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, resources } = this.props;
+
+    const outsideOrgs = this.props.outsideOrgs ? this.props.outsideOrgs : {};
 
     return (
       <div className={classes.page}>
@@ -49,143 +116,131 @@ class ResourcesPage extends Component {
           <NavBar />
         </AppBar>
 
-        <div>
-          <Typography className={classes.directionTitleTop} variant="h4">
-            SERVICE LEARNING RESOURCES AND PROTOCOLS
-          </Typography>
+        {/* RESOURCES PAGE CONTENT */}
+        <div
+          style={{
+            maxWidth: 750,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}
+        >
+          {this.decipher(resources, classes)}
         </div>
 
-        <div>
-          <Typography variant="overline" className={classes.title}>
-            UWSOM SERVICE LEARNING LOGISTICS (FOR MD STUDENTS ONLY)
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            For information on things like purchasing supplies, the SLAC
-            mini-grant, starting up a new project, etc., please visit our Canvas
-            site{' '}
-            <Link
-              color="secondary"
-              href="https://canvas.uw.edu/courses/1176739"
-              target="_blank"
+        <div
+          style={{
+            marginTop: '1em',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            width: 750,
+          }}
+        >
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
-              here
-            </Link>
-            .
-          </Typography>
-          <Typography variant="overline" className={classes.title}>
-            TEACHING TOOLS
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            Toolkit for Preceptors
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link
-              color="secondary"
-              href="https://drive.google.com/file/d/195OaVgbVZ5DFdejFLJwX1_96FdnM-z-e/view?usp=sharing"
-              target="_blank"
+              <Typography className={classes.heading}>SEATTLE</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              {this.decipher(outsideOrgs['Seattle'], classes)}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
             >
-              Reflection Activities
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            Interprofessional Supervision Guide – If you are a preceptor and
-            have questions on who you can supervise specific activities, check
-            out this chart!
-          </Typography>
-          <Typography variant="overline" className={classes.title}>
-            SERVICE LEARNING TRAINING VIDEOS
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
-              Entering Communities Respectfully
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="https://youtu.be/-1Uzhd7YLdA" target="_blank">
-              Working with Minors
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
-              De-escalation Training
-            </Link>
-          </Typography>
-          <Typography variant="overline" className={classes.title}>
-            GENERAL PROTOCOLS
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link
-              color="secondary"
-              href="https://drive.google.com/file/d/19YXIakAij0IOf0yyEiP4ZjNPFJr-CLUc/view?usp=sharing"
-              target="_blank"
+              <Typography className={classes.heading}>SPOKANE</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              {this.decipher(outsideOrgs['Spokane'], classes)}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
-              UWSOM Bloodborne Pathogen Protocol – Step-by-step instructions on
-              what to do in the case of a needlestick.
-            </Link>
-          </Typography>
-          <Typography variant="overline" className={classes.title}>
-            CHAP SPECIFIC PROTOCOLS
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link
-              color="secondary"
-              href="https://drive.google.com/file/d/1ArIy-cOJ2d3keqkjyUxP-IBE3Y1D4q3z/view?usp=sharing"
-              target="_blank"
+              <Typography className={classes.heading}>WYOMING</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              {this.decipher(outsideOrgs['Wyoming'], classes)}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
-              Chap Footcare Manual
-            </Link>
-          </Typography>
-          <Typography variant="overline" className={classes.title}>
-            <Link
-              color="secondary"
-              href="https://drive.google.com/file/d/1W5g2tey9tPEMCyc5VMb-AsW3ITCqnWSz/view?usp=sharing"
-              target="_blank"
+              <Typography className={classes.heading}>ALASKA</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              {this.decipher(outsideOrgs['Alaska'], classes)}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
-              SHIFA SPECIFIC PROTOCOLS
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link
-              color="secondary"
-              href="https://drive.google.com/file/d/1ZTbz-diYHWxnEpEhEu57fLeCykdBD6UW/view?usp=sharing"
-              target="_blank"
-            >
-              (SHIFA) Blood Glucose Guide
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
-              (SHIFA) Blood Glucose Testing Protocol
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link
-              color="secondary"
-              href="https://drive.google.com/file/d/1__J_8Kc7P2Ll0WcVlJoFUECZ7lzDTFAp/view?usp=sharing"
-              target="_blank"
-            >
-              (SHIFA) Blood Pressure Volunteer Information
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link
-              color="secondary"
-              href="https://drive.google.com/file/d/19mAxA_9UNJ8whBkpRXdHlk26SmM3hnDU/view?usp=sharing"
-              target="_blank"
-            >
-              (SHIFA) Screen and refer information for preceptors
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
-              (SHIFA) Test result scripts
-            </Link>
-          </Typography>
+              <Typography className={classes.heading}>IDAHO</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              {this.decipher(outsideOrgs['Idaho'], classes)}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
         </div>
+
         <BottomBanner />
       </div>
     );
   }
+
+  decipher = (obj, classes) => {
+    return (
+      <div>
+        {obj ? (
+          Object.keys(obj).map((key) => {
+            const curr = obj[key];
+            if (curr.type === 'section-title') {
+              return (
+                <div>
+                  <Typography
+                    className={classes.directionTitleTop}
+                    variant="h5"
+                  >
+                    {curr.value}
+                  </Typography>
+                </div>
+              );
+            } else if (curr.type === 'subsection-title') {
+              return (
+                <Typography variant="overline" className={classes.title}>
+                  {curr.value}
+                </Typography>
+              );
+            } else if (curr.type === 'italics') {
+              return (
+                <Typography className={classes.description}>
+                  <i>{curr.value}</i>
+                </Typography>
+              );
+            } else {
+              return processText(curr.value, classes);
+            }
+          })
+        ) : (
+          <div />
+        )}
+      </div>
+    );
+  };
 }
 
 export default withStyles(styles)(ResourcesPage);
