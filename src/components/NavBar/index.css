@@ -1,6 +1,7 @@
 .toolbar-logo {
+  height: 65px;
   margin: 20px 0px 0px 15px;
-  height: 35px;
+  max-width: 90%;
 }
 
 .toolbar-title {
@@ -30,7 +31,12 @@
 }
 
 .tabLabel {
-  color: #440088;
+  color: #440088 !important;
   font-size: 1.2em;
   font-weight: bold;
+}
+
+
+.tabLabel:hover {
+  background-color: #DDDDDD;
 }
