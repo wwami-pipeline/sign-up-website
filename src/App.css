@@ -48,3 +48,7 @@ td.fc-today {
 .fc-title {
   margin: 0 0 0 4px
 }
+
+.fc-content {
+  color: white !important
+}

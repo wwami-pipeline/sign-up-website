@@ -70,6 +70,7 @@ class OrgPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      openedItem: window.location.pathname.split("/")[4],
       modalOpen: false,
     };
     this.updateState();
@@ -155,6 +156,7 @@ class OrgPage extends Component {
                 />
               ) : (
                 <OrgItem
+                  openedItem={categories[category][project]["Title"] === this.state.openedItem}
                   signedIn={signedIn}
                   project={categories[category][project]}
                   imageUrl={images[categories[category][project]['Title']]}

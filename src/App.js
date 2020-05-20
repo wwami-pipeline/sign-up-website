@@ -114,7 +114,6 @@ class App extends Component {
               return this.state.overviews ? (
                 <MainPage
                   overviews={this.state.overviews}
-                  images={this.state.SeattleImages}
                 />
               ) : (
                 <div />
@@ -126,10 +125,11 @@ class App extends Component {
             render={() => {
               return this.state.overviews ? (
                 <LocationPage
-                  overviews={this.state.overviews}
                   prerequisites={this.state.prerequisites}
                   locations={this.state.locations}
-                  allImages={this.state['locationImages']}
+                  allImages={this.state.locationImages}
+                  overviews={this.state.overviews}
+                  signedIn={this.state.signedIn}
                 />
               ) : (
                 <div />

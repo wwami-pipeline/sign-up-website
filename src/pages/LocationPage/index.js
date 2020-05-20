@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Button,
   withStyles,
   Typography,
   CssBaseline,
@@ -9,10 +10,14 @@ import {
 import { withRouter } from 'react-router-dom';
 import Requirements from '../../components/Requirements';
 import NavBar from '../../components/NavBar';
-import OpportunityGrid from '../../components/OpportunityGrid/OpportunityGrid';
+import EventCalendar from '../../components/EventCalendar';
 
-import '../../App.css';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import OpportunityGrid from '../../components/OpportunityGrid/OpportunityGrid';
 import BottomBanner from '../../components/BottomBanner';
+import { SignInButton } from '../../components/SignInButton/SignInButton'
+import '../../App.css';
 
 const styles = () => {
   return {
@@ -27,6 +32,24 @@ const styles = () => {
     },
     calendarSignIn: {
       textAlign: 'center',
+    },
+    dialogBody: {
+      backgroundColor: '#513E6D',
+    },
+    dialogButtonDiv: {
+      height: "36px",
+      margin: '10px 0 10px 0',
+      width: '100%'
+    },
+    dialogSubBody: {
+      margin: '10px'
+    },
+    dialogSignupButton: {
+      margin: '0 0 0px 20px',
+    },
+    dialogDetailsButton: {
+      float: 'right',
+      margin: '0 20px 0 0',
     },
     directionTitleTop: {
       margin: '0.5em auto 3em auto',
@@ -125,6 +148,7 @@ class LocationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      calendarHidden: true,
       providerRequirementsOpen: false,
       medicalRequirementsOpen: false,
       otherGradRequirementsOpen: false,
@@ -132,12 +156,28 @@ class LocationPage extends Component {
     };
   }
 
+  removeSeconds(string) {
+    var split = string.split(":");
+    console.log(split);
+    return split[0] + ":" + split[1] + split[2].substring(2);
+  }
+
   calendarEventClick(info) {
-    alert(info.event.title + ': ' + info.event.extendedProps.description);
+    console.log(info.event);
+    this.setState({
+      currentEventDate: info.event.start.toDateString().substring(4),
+      currentEventDetailsLink: info.event.extendedProps.detailsLink,
+      currentEventVolunteers: info.event.extendedProps.volunteers,
+      currentEventEndTime: this.removeSeconds(info.event.end.toLocaleTimeString()),
+      currentEventSignupLink: info.event.extendedProps.signupLink,
+      currentEventStartTime: this.removeSeconds(info.event.start.toLocaleTimeString()),
+      currentEventTitle: info.event.title,
+      eventClicked: true
+    });
   }
 
   render() {
-    const { classes, history, allImages, overviews, locations } = this.props;
+    const { classes, history, allImages, overviews, locations, signedIn } = this.props;
     const location = window.location.pathname.split('/')[2]; // Get location from URL
     const images = allImages[location];
     let opportunityGrid;
@@ -156,58 +196,109 @@ class LocationPage extends Component {
       console.log('Error loading opportunity grid for ' + location);
     }
 
+    var calendarEvents = [];
+    // // Demo event
+    // calendarEvents.push({
+    //   duration : "02:00",
+    //   detailsLink: "/org/Seattle/SHIFA/Rotacare", // + "|" + org["Title"],
+    //   rrule: "FREQ=WEEKLY;BYDAY=SA;INTERVAL=1;UNTIL=20200620T070000Z",
+    //   signupLink : "https://www.wejoinin.com/sheets/uqkya", 
+    //   title: "Rotacare",
+    //   volunteers: "We need physician preceptors and MS1, MS2, MS3, & MS4 students\r\n"
+    // });
+    if (locations[location]) {
+      Object.keys(locations[location]).forEach(key => { // searching by location
+        var value = locations[location][key];
+        Object.values(value).forEach(org => { // 
+          var date = org["Dates"];
+          if (date) {
+            calendarEvents.push({
+              detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
+              duration : "02:00",
+              rrule: org["Dates"],
+              signupLink: org["Sign-up Link"].split(',')[0],
+              title: org["Title"],
+              volunteers: org["Volunteer Openings"]
+            });
+          }
+        })
+      });
+    }
+
     return (
       <div className={classes.page}>
         <CssBaseline />
-        <NavBar />
+        <NavBar />        
+        <Dialog
+          open={this.state.eventClicked}
+          onClose={() => this.setState({ eventClicked: false })} >
+          <div className={classes.dialogBody}>
+            <DialogContent>
+              <Typography variant ="h5"> {this.state.currentEventDate} </Typography>
+              <Typography variant="h5"> {this.state.currentEventStartTime} - {this.state.currentEventEndTime} </Typography>
+              <p style={{color: 'white'}}> {this.state.currentEventVolunteers} </p>
+            
+              <p style={{color: 'white'}}> Please see DETAILS to confirm that you 
+                have the correct training/onboarding to sign up for this event 
+              </p>
+              <div className={classes.dialogButtonDiv}>
+                { signedIn ?
+                  <Button
+                    className={classes.dialogSignupButton}
+                    color="secondary"
+                    href={this.state.currentEventSignupLink}
+                    size="medium"
+                    target="_blank"
+                    variant="contained" >
+                    Sign Up
+                  </Button>
+                : <div style={{display: 'inline' }}>
+                    <SignInButton />
+                  </div>
+                }
+                <Button
+                  className={classes.dialogDetailsButton}
+                  color="secondary"
+                  href={this.state.currentEventDetailsLink}
+                  size="medium"
+                  target="_blank"
+                  variant="contained" >
+                  Details
+                </Button>
+              </div>
+            </DialogContent>
+          </div>
+        </Dialog>
 
-        {/* {!this.state.authenticated ? (
-          <div className={classes.calendarSignIn}>
-          <Typography className={classes.title}>
-            Sign in required to access calendar
-          </Typography>
-          <Button 
-            className={classes.signInButton}
-            color="secondary"
-            variant="contained"
-            onClick={() => this.setState({authenticated: true})}>
-            UW Sign In
-          </Button>        
-        </div>
-        ) : !this.state.calendarHidden ? (
-        <div>
-          <div className={classes.calendarSignIn}>
-            <Button 
+        {/* Calendar div with authentication */}
+        
+        {!this.state.calendarHidden ? (
+          <div>
+            <div className={classes.calendarSignIn}>
+              <Button 
+                className={classes.signInButton}
+                color="secondary"
+                variant="contained"
+                onClick={() => this.setState({calendarHidden: true})}>
+                Hide Calendar
+              </Button>
+            </div>
+            <div className={classes.calendarContainer}>
+              <EventCalendar 
+                eventClickFn={e => this.calendarEventClick(e)}
+                events={calendarEvents} 
+              />
+            </div>
+          </div>) : 
+            <div className={classes.calendarSignIn}>
+              <Button 
               className={classes.signInButton}
               color="secondary"
               variant="contained"
-              onClick={() => this.setState({calendarHidden: true})}>
-              Hide Calendar
+              onClick={() => this.setState({calendarHidden: false})}>
+              Show Event Calendar
             </Button>
-          </div>
-          <div className={classes.calendarContainer}>
-            <EventCalendar 
-              eventClickFn={e => this.calendarEventClick(e)}
-              // events={[
-              //   { rrule: 'DTSTART:20120201T103000Z\nRRULE:FREQ=WEEKLY;INTERVAL=5;UNTIL=20120601;BYDAY=MO,FR' }
-              //   // {title: 'event 1', date: '2020-02-26', description: 'test' },
-              //   // {title: 'event 2', date: '2020-02-26', description: 'test1' },
-              //   // {title: 'event 3', date: '2020-02-26' },
-              //   // {title: 'event 4', date: '2020-02-26' },
-              //   // {title: 'event 5', date: '2020-02-26' }
-              // ]} 
-            />
-          </div>
-        </div>) : 
-          <div className={classes.calendarSignIn}>
-            <Button 
-            className={classes.signInButton}
-            color="secondary"
-            variant="contained"
-            onClick={() => this.setState({calendarHidden: false})}>
-            Show Calendar
-          </Button>
-          </div> }        */}
+          </div> }
 
         {/* Modals */}
 
