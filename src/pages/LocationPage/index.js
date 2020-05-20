@@ -156,26 +156,24 @@ class LocationPage extends Component {
     };
   }
 
+  removeSeconds(string) {
+    var split = string.split(":");
+    console.log(split);
+    return split[0] + ":" + split[1] + split[2].substring(2);
+  }
+
   calendarEventClick(info) {
-    // alert(info.event.title + ': ' + info.event.extendedProps.description);
     console.log(info.event);
     this.setState({
       currentEventDate: info.event.start.toDateString().substring(4),
       currentEventDetailsLink: info.event.extendedProps.detailsLink,
       currentEventVolunteers: info.event.extendedProps.volunteers,
-      currentEventEndTime: info.event.end.toLocaleTimeString(),
+      currentEventEndTime: this.removeSeconds(info.event.end.toLocaleTimeString()),
       currentEventSignupLink: info.event.extendedProps.signupLink,
-      currentEventStartTime: info.event.start.toLocaleTimeString(),
+      currentEventStartTime: this.removeSeconds(info.event.start.toLocaleTimeString()),
       currentEventTitle: info.event.title,
       eventClicked: true
     });
-    console.log(this.state.currentEventDate);
-    console.log(this.state.currentEventVolunteers);
-    console.log(this.state.currentEventEndTime);
-    console.log(this.state.currentEventSignupLink);
-    console.log(this.state.currentEventDetailsLink);
-    console.log(this.state.currentEventStartTime);
-    console.log(this.state.currentEventTitle);
   }
 
   render() {
@@ -209,22 +207,24 @@ class LocationPage extends Component {
       volunteers: "We need physician preceptors and MS1, MS2, MS3, & MS4 students\r\n"
     });
     
-    Object.keys(locations[location]).forEach(key => {
-      var value = locations[location][key]
-      Object.values(value).forEach(org => {
-        var date = org["Dates"];
-        if (date) {
-          calendarEvents.push({
-            detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
-            duration : "02:00",
-            rrule: org["Dates"],
-            signupLink: org["Sign-up Link"].split(',')[0],
-            title: org["Title"],
-            volunteers: org["Volunteer Openings"]
-          });
-        }
-      })
-    });
+    if (locations[location]) {
+      Object.keys(locations[location]).forEach(key => {
+        var value = locations[location][key]
+        Object.values(value).forEach(org => {
+          var date = org["Dates"];
+          if (date) {
+            calendarEvents.push({
+              detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
+              duration : "02:00",
+              rrule: org["Dates"],
+              signupLink: org["Sign-up Link"].split(',')[0],
+              title: org["Title"],
+              volunteers: org["Volunteer Openings"]
+            });
+          }
+        })
+      });
+    }
 
     return (
       <div className={classes.page}>
@@ -237,13 +237,13 @@ class LocationPage extends Component {
         >
           <div className={classes.dialogBody}>
             <DialogContent>
-              <Typography variant="h5"> {this.state.currentEventDate} </Typography>
+              <Typography variant ="h5"> {this.state.currentEventDate} </Typography>
               <Typography variant="h5"> {this.state.currentEventStartTime} - {this.state.currentEventEndTime} </Typography>
-              <span style={{color: 'white'}}> {this.state.currentEventVolunteers} </span>
+              <p style={{color: 'white'}}> {this.state.currentEventVolunteers} </p>
             
-              <span style={{color: 'white'}}> Please see DETAILS to confirm that you 
+              <p style={{color: 'white'}}> Please see DETAILS to confirm that you 
                 have the correct training/onboarding to sign up for this event 
-              </span>
+              </p>
               <div className={classes.dialogButtonDiv}>
                 { signedIn ?
                   <Button
