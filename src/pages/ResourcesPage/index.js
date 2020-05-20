@@ -4,14 +4,19 @@ import {
   withStyles,
   Typography,
   CssBaseline,
-  Link
+  Link,
 } from '@material-ui/core';
 import NavBar from '../../components/NavBar';
 import BottomBanner from '../../components/BottomBanner';
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 const styles = () => ({
   page: {
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   title: {
     color: 'white',
@@ -21,7 +26,6 @@ const styles = () => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: 750,
-    textDecoration: 'underline'
   },
   description: {
     color: 'white',
@@ -34,8 +38,9 @@ const styles = () => ({
   directionTitleTop: {
     fontFamily: 'Lato',
     margin: '30px 0 15px 0',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+    textDecoration: 'underline',
+  },
 });
 
 class ResourcesPage extends Component {
@@ -49,9 +54,10 @@ class ResourcesPage extends Component {
           <NavBar />
         </AppBar>
 
+        {/* SERVICE LEARNING WEBSITE LINKS */}
         <div>
-          <Typography className={classes.directionTitleTop} variant="h4">
-            SERVICE LEARNING RESOURCES AND PROTOCOLS
+          <Typography className={classes.directionTitleTop} variant="h5">
+            SERVICE LEARNING WEBSITE LINKS
           </Typography>
         </div>
 
@@ -72,11 +78,103 @@ class ResourcesPage extends Component {
             </Link>
             .
           </Typography>
+
           <Typography variant="overline" className={classes.title}>
-            TEACHING TOOLS
+            Official UWSOM Service Learning Site
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
-            Toolkit for Preceptors
+            <Link
+              color="secondary"
+              href="https://www.uwmedicine.org/school-of-medicine/md-program/service-learning"
+              target="_blank"
+            >
+              https://www.uwmedicine.org/school-of-medicine/md-program/service-learning
+            </Link>
+          </Typography>
+
+          <Typography variant="overline" className={classes.title}>
+            UWSOM Intranet Site - Service Learning
+          </Typography>
+          <Typography variant="subtitle1" className={classes.description}>
+            <Link
+              color="secondary"
+              href="https://education.uwmedicine.org/volunteer-opportunities-2-2/"
+              target="_blank"
+            >
+              https://education.uwmedicine.org/volunteer-opportunities-2-2/
+            </Link>
+          </Typography>
+
+          <Typography variant="overline" className={classes.title}>
+            CHSIE Interprofessional Community Engagement
+          </Typography>
+          <Typography variant="subtitle1" className={classes.description}>
+            <Link
+              color="secondary"
+              href="https://collaborate.uw.edu/in-the-community/"
+              target="_blank"
+            >
+              https://collaborate.uw.edu/in-the-community/
+            </Link>
+          </Typography>
+
+          {/* TRAINING MATERIALS  */}
+
+          <div>
+            <Typography className={classes.directionTitleTop} variant="h5">
+              SERVICE LEARNING TRAINING VIDEOS
+            </Typography>
+          </div>
+
+          <Typography variant="overline" className={classes.title}>
+            Entering Communities Respectfully
+          </Typography>
+          <Typography variant="subtitle1" className={classes.description}>
+            <Link
+              color="secondary"
+              href="http://servicelearning.washington.edu/resources"
+              target="_blank"
+            >
+              http://servicelearning.washington.edu/resources
+            </Link>
+          </Typography>
+
+          <Typography variant="overline" className={classes.title}>
+            Working with Minors
+          </Typography>
+          <Typography variant="subtitle1" className={classes.description}>
+            <Link
+              color="secondary"
+              href="https://youtu.be/-1Uzhd7YLdA"
+              target="_blank"
+            >
+              https://youtu.be/-1Uzhd7YLdA
+            </Link>
+          </Typography>
+
+          <Typography variant="overline" className={classes.title}>
+            De-escalation Training
+          </Typography>
+          <Typography variant="subtitle1" className={classes.description}>
+            <Link
+              color="secondary"
+              href="http://servicelearning.washington.edu/resources"
+              target="_blank"
+            >
+              http://servicelearning.washington.edu/resources
+            </Link>
+          </Typography>
+
+          {/* TEACHING TOOLS */}
+
+          <div>
+            <Typography className={classes.directionTitleTop} variant="h5">
+              TEACHING TOOLS
+            </Typography>
+          </div>
+
+          <Typography variant="subtitle1" className={classes.title}>
+            TOOLKIT FOR PRECEPTORS
           </Typography>
           <Typography variant="subtitle1" className={classes.description}>
             <Link
@@ -87,29 +185,19 @@ class ResourcesPage extends Component {
               Reflection Activities
             </Link>
           </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
+          <Typography variant="subtitle1" className={classes.title}>
             Interprofessional Supervision Guide – If you are a preceptor and
             have questions on who you can supervise specific activities, check
             out this chart!
           </Typography>
-          <Typography variant="overline" className={classes.title}>
-            SERVICE LEARNING TRAINING VIDEOS
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
-              Entering Communities Respectfully
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="https://youtu.be/-1Uzhd7YLdA" target="_blank">
-              Working with Minors
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" className={classes.description}>
-            <Link color="secondary" href="">
-              De-escalation Training
-            </Link>
-          </Typography>
+
+          {/* PROTOCOLS */}
+          <div>
+            <Typography className={classes.directionTitleTop} variant="h5">
+              PROTOCOLS
+            </Typography>
+          </div>
+
           <Typography variant="overline" className={classes.title}>
             GENERAL PROTOCOLS
           </Typography>
@@ -123,6 +211,11 @@ class ResourcesPage extends Component {
               what to do in the case of a needlestick.
             </Link>
           </Typography>
+
+          <Typography variant="overline" className={classes.title}>
+            <u>SEATTLE</u>
+          </Typography>
+
           <Typography variant="overline" className={classes.title}>
             CHAP SPECIFIC PROTOCOLS
           </Typography>
@@ -181,6 +274,93 @@ class ResourcesPage extends Component {
               (SHIFA) Test result scripts
             </Link>
           </Typography>
+
+          {/* PROTOCOLS */}
+          <div>
+            <Typography className={classes.directionTitleTop} variant="h5">
+              OTHER OPPORTUNITIES
+            </Typography>
+          </div>
+
+          <Typography className={classes.title}>
+            Service Learning is just one way to participate in activities
+            outside of the classroom. Please check out these other opportunities
+            for School of Medicine students to get involved.
+          </Typography>
+
+          <Typography className={classes.description}>
+            <i>
+              *Although many of these organizations involve service, Service
+              Learning at the SOM has a more limited definition as providing
+              service to our external, rather than internal communities.
+            </i>
+          </Typography>
+
+          <div
+            style={{
+              marginTop: '1em',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: 750,
+            }}
+          >
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography className={classes.heading}>
+                  SEATTLE ORGANIZATIONS
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>WORK IN PROGRESS...</Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel2a-content"
+                id="panel2a-header"
+              >
+                <Typography className={classes.heading}>
+                  SPOKANE ORGANIZATIONS
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>WORK IN PROGRESS...</Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography className={classes.heading}>
+                  WYOMING ORGANIZATIONS
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>WORK IN PROGRESS...</Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography className={classes.heading}>
+                  IDAHO ORGANIZATIONS
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>WORK IN PROGRESS...</Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </div>
         </div>
         <BottomBanner />
       </div>
