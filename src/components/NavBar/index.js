@@ -8,7 +8,7 @@ const NavBar = () => {
       <div className="App">
         <div style={{ backgroundColor: "#f8f9fa" }}>
           <a href="/" >
-            <img className="toolbar-logo" alt="UW School of Medicine Volunteer Logo" src="/images/logo2.jpg" />
+            <img className="toolbar-logo" alt="UW School of Medicine Volunteer Logo" src="/images/uw_name_logo.jpg" />
           </a>
             <br/>
         </div>
