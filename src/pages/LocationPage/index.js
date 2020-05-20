@@ -197,20 +197,19 @@ class LocationPage extends Component {
     }
 
     var calendarEvents = [];
-    // Demo event
-    calendarEvents.push({
-      duration : "02:00",
-      detailsLink: "/org/Seattle/SHIFA/Rotacare", // + "|" + org["Title"],
-      rrule: "FREQ=WEEKLY;BYDAY=SA;INTERVAL=1;UNTIL=20200620T070000Z",
-      signupLink : "https://www.wejoinin.com/sheets/uqkya", 
-      title: "Rotacare",
-      volunteers: "We need physician preceptors and MS1, MS2, MS3, & MS4 students\r\n"
-    });
-    
+    // // Demo event
+    // calendarEvents.push({
+    //   duration : "02:00",
+    //   detailsLink: "/org/Seattle/SHIFA/Rotacare", // + "|" + org["Title"],
+    //   rrule: "FREQ=WEEKLY;BYDAY=SA;INTERVAL=1;UNTIL=20200620T070000Z",
+    //   signupLink : "https://www.wejoinin.com/sheets/uqkya", 
+    //   title: "Rotacare",
+    //   volunteers: "We need physician preceptors and MS1, MS2, MS3, & MS4 students\r\n"
+    // });
     if (locations[location]) {
-      Object.keys(locations[location]).forEach(key => {
-        var value = locations[location][key]
-        Object.values(value).forEach(org => {
+      Object.keys(locations[location]).forEach(key => { // searching by location
+        var value = locations[location][key];
+        Object.values(value).forEach(org => { // 
           var date = org["Dates"];
           if (date) {
             calendarEvents.push({
@@ -229,12 +228,10 @@ class LocationPage extends Component {
     return (
       <div className={classes.page}>
         <CssBaseline />
-        <NavBar />
-        
+        <NavBar />        
         <Dialog
           open={this.state.eventClicked}
-          onClose={() => this.setState({ eventClicked: false })}
-        >
+          onClose={() => this.setState({ eventClicked: false })} >
           <div className={classes.dialogBody}>
             <DialogContent>
               <Typography variant ="h5"> {this.state.currentEventDate} </Typography>
