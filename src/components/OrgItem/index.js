@@ -259,7 +259,10 @@ class OrgItemModal extends React.Component {
             )}
             {project['Project Description'] ? (
               <Typography className={classes.text} align="left" component="p">
-                <b>Description: </b> {project['Project Description']}
+                <b>Description: </b>{' '}
+                {project['Project Description'].length > 200
+                  ? project['Project Description'].substring(0, 200) + "..."
+                  : project['Project Description']}
               </Typography>
             ) : (
               <div />
