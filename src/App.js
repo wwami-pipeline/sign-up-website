@@ -23,32 +23,25 @@ class App extends Component {
       locationImages: {},
     };
 
-    // Populate overviews
-    db.ref('/Overviews')
+    db.ref('/')
       .once('value')
       .then((value) => {
-        this.state.overviews = value.toJSON();
-        // Populate prerequisites
-        db.ref('Prerequisites')
-          .once('value')
-          .then((value) => {
-            this.state.prerequisites = value.toJSON();
-            // Finally, populate Locations
-            db.ref('/Locations')
-              .once('value')
-              .then((value) => {
-                const locations = value.toJSON();
-                Object.keys(locations).forEach((location) => {
-                  this.state['locations'][location] = locations[location];
-                  this.state['locationImages'][location] = {};
-                  this.populateLocationImages(
-                    location,
-                    this.state['locations'][location],
-                    this.state['locationImages'][location]
-                  );
-                });
-              });
-          });
+        const data = value.toJSON();
+        this.state.overviews = data['Overviews'];
+        this.state.prerequisites = data['Prerequisites'];
+        this.state.resources = data['Resources'];
+        this.state.outsideOrgs = data['OutsideOrganizations'];
+        this.forceUpdate();
+        const locations = data['Locations'];
+        Object.keys(locations).forEach((location) => {
+          this.state['locations'][location] = locations[location];
+          this.state['locationImages'][location] = {};
+          this.populateLocationImages(
+            location,
+            this.state['locations'][location],
+            this.state['locationImages'][location]
+          );
+        });
       });
 
     firebase.auth().onAuthStateChanged((user) => {
@@ -158,7 +151,15 @@ class App extends Component {
           <Route exact path="/about" component={AboutPage} />
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/donate" component={DonatePage} />
-          <Route exact path="/resources" component={ResourcesPage} />
+          <Route
+            path="/resources"
+            render={() => (
+              <ResourcesPage
+                resources={this.state['resources']}
+                outsideOrgs={this.state['outsideOrgs']}
+              />
+            )}
+          />
         </Switch>
       </Router>
     );
