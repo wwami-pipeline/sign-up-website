@@ -5,16 +5,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia
-} from '@material-ui/core';
+import { Card, CardContent, CardHeader, CardMedia } from '@material-ui/core';
 import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import { rrulestr } from 'rrule';
-import { SignInButton } from '../SignInButton/SignInButton'
+import { SignInButton } from '../SignInButton/SignInButton';
 
 const styles = () => ({
   button: {
@@ -101,7 +96,13 @@ class OrgItemModal extends React.Component {
       project['Occurrences'] = '';
       Object.keys(project['Dates']).forEach((key) => {
         project['Occurrences'] +=
-          '• ' + rrulestr(project['Dates'][key].rrule).toText() + '\n';
+          '• ' +
+          rrulestr(project['Dates'][key].rrule).toText() +
+          ' starting at ' +
+          project['Dates'][key].startTime +
+          ' for ' +
+          project['Dates'][key].duration +
+          ' hours\n';
       });
     }
 
@@ -158,8 +159,8 @@ class OrgItemModal extends React.Component {
                 this.props.signedIn ? (
                   signUpButtons
                 ) : (
-                  <div style={{display: 'block' }}>
-                    <SignInButton/>
+                  <div style={{ display: 'block' }}>
+                    <SignInButton />
                   </div>
                 )
               ) : (
@@ -242,7 +243,7 @@ class OrgItemModal extends React.Component {
               <Typography className={classes.text} align="left" component="p">
                 <b>Description: </b>{' '}
                 {project['Project Description'].length > 200
-                  ? project['Project Description'].substring(0, 200) + "..."
+                  ? project['Project Description'].substring(0, 200) + '...'
                   : project['Project Description']}
               </Typography>
             ) : (
