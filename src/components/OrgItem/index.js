@@ -101,7 +101,7 @@ class OrgItemModal extends React.Component {
       project['Occurrences'] = '';
       Object.keys(project['Dates']).forEach((key) => {
         project['Occurrences'] +=
-          '• ' + rrulestr(project['Dates'][key]).toText() + '\n';
+          '• ' + rrulestr(project['Dates'][key].rrule).toText() + '\n';
       });
     }
 
