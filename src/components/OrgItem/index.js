@@ -53,6 +53,7 @@ const styles = () => ({
   },
   textCaps: {
     fontFamily: 'Lato',
+    marginBottom: 3,
     textTransform: 'uppercase',
   },
 });
@@ -147,7 +148,7 @@ class OrgItemModal extends React.Component {
         >
           <div className={classes.dialogBody}>
             <DialogTitle>
-              <Typography variant="h4"> {project['Title']} </Typography>
+              <Typography variant="h5"> {project['Title']} </Typography>
               <Button
                 className={classes.closeButton}
                 onClick={() => this.setState({ modalOpen: false })}
@@ -183,9 +184,9 @@ class OrgItemModal extends React.Component {
                         align="left"
                         component="p"
                       >
-                        <h3 className={classes.textCaps}>
+                        <Typography variant="h6" className={classes.textCaps}>
                           <u>{key}</u>
-                        </h3>
+                        </Typography>
                         {project[key].split('\n').map((item, i) => {
                           return (
                             <p className={classes.indentText} key={i}>

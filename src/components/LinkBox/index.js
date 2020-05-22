@@ -64,13 +64,6 @@ const LinkBox = (props) => {
             >
               {props.name}
             </Typography>
-            <Typography
-              variant="body1"
-              style={{ color: '#2E1159', fontFamily: 'Lato' }}
-              component="p"
-            >
-              {props.description}
-            </Typography>
           </CardContent>
         </Link>
       </CardActionArea>

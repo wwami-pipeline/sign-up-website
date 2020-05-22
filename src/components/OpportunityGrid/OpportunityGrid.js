@@ -50,7 +50,6 @@ class OpportunityGrid extends React.Component {
     const {
       classes,
       images,
-      overviews,
       locationData,
       locationName,
     } = this.props;
@@ -71,13 +70,6 @@ class OpportunityGrid extends React.Component {
                   <LinkBox
                     title={org}
                     name={names[org] ? names[org] : ''}
-                    description={
-                      overviews[org]
-                        ? overviews[org].description
-                          ? overviews[org].description
-                          : ''
-                        : ''
-                    }
                     imageLocation={images[org + '.jpg']}
                     path={'/org/' + locationName + '/' + org}
                   />

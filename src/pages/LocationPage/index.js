@@ -177,7 +177,7 @@ class LocationPage extends Component {
   }
 
   render() {
-    const { classes, history, allImages, overviews, locations, signedIn } = this.props;
+    const { classes, history, allImages, locations, signedIn } = this.props;
     const location = window.location.pathname.split('/')[2]; // Get location from URL
     const images = allImages[location];
     let opportunityGrid;
@@ -185,7 +185,6 @@ class LocationPage extends Component {
     if (locations[location]) {
       opportunityGrid = (
         <OpportunityGrid
-          overviews={overviews}
           history={history}
           images={images}
           locationData={locations}

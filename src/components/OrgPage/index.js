@@ -70,7 +70,7 @@ class OrgPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openedItem: window.location.pathname.split("/")[4],
+      openedItem: window.location.pathname.split('/')[4],
       modalOpen: false,
     };
     this.updateState();
@@ -106,8 +106,10 @@ class OrgPage extends Component {
       return <div />;
     }
 
-    const { classes, signedIn } = this.props;
-    const { path, projects, images, overview, title } = this.state;
+    const { classes, signedIn, overviews } = this.props;
+    const { path, projects, images, title } = this.state;
+
+    const overview = overviews ? overviews[title] : undefined;
 
     if (path !== this.state.currPath) {
       this.setState({ currPath: path });
@@ -156,7 +158,10 @@ class OrgPage extends Component {
                 />
               ) : (
                 <OrgItem
-                  openedItem={categories[category][project]["Title"] === this.state.openedItem}
+                  openedItem={
+                    categories[category][project]['Title'] ===
+                    this.state.openedItem
+                  }
                   signedIn={signedIn}
                   project={categories[category][project]}
                   imageUrl={images[categories[category][project]['Title']]}
@@ -186,11 +191,11 @@ class OrgPage extends Component {
                   gutterBottom
                   variant="h6"
                 >
-                  {overview.description}
+                  {overview.Description}
                 </Typography>
-                {overview.video ? (
+                {overview.Video ? (
                   <Button
-                    onClick={() => window.open(overview.video)}
+                    onClick={() => window.open(overview.Video)}
                     className={classes.videoButton}
                     variant="contained"
                   >
