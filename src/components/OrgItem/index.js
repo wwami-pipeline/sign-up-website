@@ -67,9 +67,21 @@ class OrgItemModal extends React.Component {
         ? props.project['Sign-up Link'].split(',')
         : [],
     };
+
+    if (props.project['Order']) {
+      this.state.order = [];
+      Object.keys(props.project['Order']).forEach((key) => {
+        this.state.order.push(props.project['Order'][key]);
+      });
+    }
   }
 
   getOrderNumber(x) {
+    if (this.state.order) {
+      let index = this.state.order.indexOf(x);
+      return index === -1 ? 1000 : index;
+    }
+
     if (x.toLowerCase().includes('occurrences')) return 2;
     if (x.toLowerCase().includes('project description')) return 3;
     if (x.toLowerCase().includes('types of volunteers needed')) return 3.5;
@@ -170,7 +182,7 @@ class OrgItemModal extends React.Component {
             </DialogTitle>
             <DialogContent>
               {Object.keys(project)
-                .filter((x) => x !== 'Dates')
+                .filter((x) => x !== 'Dates' && x !== 'Order')
                 .sort((x, y) => {
                   return this.getOrderNumber(x) - this.getOrderNumber(y);
                 })
