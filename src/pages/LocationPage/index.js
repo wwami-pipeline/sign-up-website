@@ -168,6 +168,14 @@ class LocationPage extends Component {
       currentEventTitle: info.event.title,
       eventClicked: true
     });
+    
+    console.log(this.state.currentEventDate);
+    console.log(this.state.currentEventDetailsLink);
+    console.log(this.state.currentEventVolunteers);
+    console.log(this.state.currentEventEndTime);
+    console.log(this.state.currentEventSignupLink);
+    console.log(this.state.currentEventStartTime);
+    console.log(this.state.currentEventTitle);
   }
 
   // Returns a formatted string for the rrule
@@ -215,25 +223,28 @@ class LocationPage extends Component {
     if (locations[location]) {
       Object.keys(locations[location]).forEach(key => { // searching by location
         var value = locations[location][key];
-        Object.values(value).forEach(org => { // 
+        Object.values(value).forEach(org => {
           var date = org["Dates"];
+          // console.log(org);
+
+          var link = (org["Sign-up Link"] === "TBD") ? "" : org["Sign-up Link"];
+          link = "";
+
           if (date) {
             for (var i = 0; i < Object.values(date).length; i++) {
               calendarEvents.push({
                 detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
                 duration: date[i].duration,
                 rrule: this.formatRule(date[i]),
-                signupLink: org["Sign-up Link"].split(',')[0],
+                signupLink: link,
                 title: org["Title"],
                 volunteers: org["Volunteer Openings"]
               });
-            }
-            
+            }            
           }
         })
       });
     }
-
     return (
       <div className={classes.page}>
         <CssBaseline />
@@ -254,12 +265,12 @@ class LocationPage extends Component {
                 { signedIn ?
                   <Button
                     className={classes.dialogSignupButton}
-                    color="secondary"
-                    href={this.state.currentEventSignupLink}
+                    color="secondary" 
                     size="medium"
                     target="_blank"
-                    variant="contained" >
-                    Sign Up
+                    variant="contained"
+                    {... this.state.currentEventSignupLink !== "" ? {href: this.state.currentEventSignupLink} : "" } >
+                      { this.state.currentEventSignupLink !== "" ? "Sign Up" : "No Sign-Up Link"}
                   </Button>
                 : <div style={{display: 'inline' }}>
                     <SignInButton />
