@@ -36,7 +36,19 @@
   font-weight: bold;
 }
 
-
 .tabLabel:hover {
   background-color: #DDDDDD;
+}
+
+.tabSubLabel {
+  color: #440088 !important;
+  font-weight: bold;
+}
+
+.tabSubLabel:hover {
+  background-color: #DDDDDD;
+}
+
+.dropdown-toggle {
+  color: #440088 !important;
 }
