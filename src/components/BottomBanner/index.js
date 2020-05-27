@@ -5,7 +5,7 @@ const BottomBanner = () => {
   return (
     <div className="bottom-banner">
       <p>
-        University of Washington Wchool of Medicine Service Learning Program
+        University of Washington School of Medicine Service Learning Program
       </p>
       <p>
         Contact us: <a href="tel:2066852009">(206) 685-2009</a> or{' '}

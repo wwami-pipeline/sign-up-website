@@ -313,7 +313,7 @@ class HomeMap extends React.Component {
           </svg>
           <svg width="206px" height="345px" className={classes.idaho}>
             <g transform="translate(0, 345) scale(0.1, -0.1)" fill="transparent" stroke="none">
-              <a href="/location/Idaho" target="_self" cursor="pointer">
+              <a href="https://idahowwami.school.blog/" target="_self" cursor="pointer">
               <path d="M104 3212 c0 -103 -3 -374 -7 -602 -4 -228 -7 -422 -7 -430 1 -8 2
                 -28 2 -43 1 -20 3 -25 9 -15 5 8 9 -8 9 -42 0 -71 32 -136 82 -170 52 -35 90
                 -89 83 -118 -3 -12 -22 -48 -42 -79 -46 -73 -93 -193 -93 -241 0 -28 -8 -46

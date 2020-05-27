@@ -11,6 +11,7 @@ const styles = () => {
       marginRight: 'auto',
     },
     linkBoxContainer: {
+      maxWidth: 500,
       mariginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -60,7 +61,7 @@ class OpportunityGrid extends React.Component {
           {Object.keys(locationData[locationName])
             .filter((x) => x !== 'Others')
             .map((org) => (
-              <Grid item xs>
+              <Grid item xs={12} md={6}>
                 <div
                   className={classes.linkBoxContainer}
                   onClick={() => {
