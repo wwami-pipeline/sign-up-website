@@ -127,7 +127,7 @@ class ResourcesPage extends Component {
           {this.decipher(resources, classes)}
         </div>
 
-        <div
+        {/* <div
           style={{
             marginTop: '1em',
             marginLeft: 'auto',
@@ -195,7 +195,7 @@ class ResourcesPage extends Component {
               {this.decipher(outsideOrgs['Idaho'], classes)}
             </ExpansionPanelDetails>
           </ExpansionPanel>
-        </div>
+        </div> */}
 
         <BottomBanner />
       </div>
