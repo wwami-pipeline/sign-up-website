@@ -156,12 +156,6 @@ class LocationPage extends Component {
     };
   }
 
-  removeSeconds(string) {
-    var split = string.split(":");
-    console.log(split);
-    return split[0] + ":" + split[1] + split[2].substring(2);
-  }
-
   calendarEventClick(info) {
     console.log(info.event);
     this.setState({
@@ -174,6 +168,28 @@ class LocationPage extends Component {
       currentEventTitle: info.event.title,
       eventClicked: true
     });
+  }
+
+  // Returns a formatted string for the rrule
+  formatRule(event) {
+    // Rrule generated from admin site has no start date,
+    // so event just starts on the current day
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + mm + dd;
+
+    // Format the start time
+    var split = event.startTime.split(":");
+    var formattedStartTime = split[0] + split[1] + "00";
+
+    return "DTSTART;TZID=America/Los_Angeles:" + today + "T" + formattedStartTime + " " + event.rrule;
+  }
+
+  removeSeconds(string) {
+    var split = string.split(":");
+    return split[0] + ":" + split[1] + split[2].substring(2);
   }
 
   render() {
@@ -196,29 +212,23 @@ class LocationPage extends Component {
     }
 
     var calendarEvents = [];
-    // // Demo event
-    // calendarEvents.push({
-    //   duration : "02:00",
-    //   detailsLink: "/org/Seattle/SHIFA/Rotacare", // + "|" + org["Title"],
-    //   rrule: "FREQ=WEEKLY;BYDAY=SA;INTERVAL=1;UNTIL=20200620T070000Z",
-    //   signupLink : "https://www.wejoinin.com/sheets/uqkya", 
-    //   title: "Rotacare",
-    //   volunteers: "We need physician preceptors and MS1, MS2, MS3, & MS4 students\r\n"
-    // });
     if (locations[location]) {
       Object.keys(locations[location]).forEach(key => { // searching by location
         var value = locations[location][key];
         Object.values(value).forEach(org => { // 
           var date = org["Dates"];
           if (date) {
-            calendarEvents.push({
-              detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
-              duration : "02:00",
-              rrule: org["Dates"],
-              signupLink: org["Sign-up Link"].split(',')[0],
-              title: org["Title"],
-              volunteers: org["Volunteer Openings"]
-            });
+            for (var i = 0; i < Object.values(date).length; i++) {
+              calendarEvents.push({
+                detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
+                duration: date[i].duration,
+                rrule: this.formatRule(date[i]),
+                signupLink: org["Sign-up Link"].split(',')[0],
+                title: org["Title"],
+                volunteers: org["Volunteer Openings"]
+              });
+            }
+            
           }
         })
       });
