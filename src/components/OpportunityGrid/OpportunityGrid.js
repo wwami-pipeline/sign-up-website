@@ -17,7 +17,7 @@ const styles = () => {
     },
     otherProjectsDiv: {
       backgroundColor: '#F4EFA8',
-      height: 473,
+      height: 440,
       minWidth: 280,
       border: '1px solid red',
       display: 'table-cell',

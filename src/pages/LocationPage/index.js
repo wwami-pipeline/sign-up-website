@@ -169,13 +169,13 @@ class LocationPage extends Component {
       eventClicked: true
     });
     
-    console.log(this.state.currentEventDate);
-    console.log(this.state.currentEventDetailsLink);
-    console.log(this.state.currentEventVolunteers);
-    console.log(this.state.currentEventEndTime);
-    console.log(this.state.currentEventSignupLink);
-    console.log(this.state.currentEventStartTime);
-    console.log(this.state.currentEventTitle);
+    // console.log(this.state.currentEventDate);
+    // console.log(this.state.currentEventDetailsLink);
+    // console.log(this.state.currentEventVolunteers);
+    // console.log(this.state.currentEventEndTime);
+    // console.log(this.state.currentEventSignupLink);
+    // console.log(this.state.currentEventStartTime);
+    // console.log(this.state.currentEventTitle);
   }
 
   // Returns a formatted string for the rrule

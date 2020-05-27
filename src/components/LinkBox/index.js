@@ -45,7 +45,7 @@ const LinkBox = (props) => {
             <CardHeader className={classes.image} />
           )}
 
-          <CardContent style={{ backgroundColor: '#F4EFA8' }}>
+          <CardContent style={{ backgroundColor: '#F4EFA8', height: 80 }}>
             <Typography
               variant="h5"
               style={{ color: '#2E1159', fontFamily: 'Lato' }}
