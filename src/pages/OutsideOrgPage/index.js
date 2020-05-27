@@ -5,6 +5,8 @@ import {
   Typography,
   CssBaseline,
   Link,
+  Paper,
+  Grid,
 } from '@material-ui/core';
 import NavBar from '../../components/NavBar';
 import BottomBanner from '../../components/BottomBanner';
@@ -12,15 +14,15 @@ import BottomBanner from '../../components/BottomBanner';
 const styles = () => ({
   page: {
     overflow: 'hidden',
+    fontFamily: 'Lato',
   },
   title: {
     color: 'white',
     fontFamily: 'Lato',
-    fontSize: '1.2em',
+    fontSize: '1.4em',
     marginTop: '1em',
     marginLeft: 'auto',
     marginRight: 'auto',
-    maxWidth: 750,
   },
   description: {
     color: 'white',
@@ -100,7 +102,13 @@ const processText = (text, classes) => {
 
 class ResourcesPage extends Component {
   render() {
-    const { classes, resources } = this.props;
+    const { classes } = this.props;
+
+    const location = window.location.pathname.split('/')[2]; // Get location from URL
+
+    const outsideOrgs = this.props.outsideOrgs[location]
+      ? this.props.outsideOrgs[location]
+      : {};
 
     return (
       <div className={classes.page}>
@@ -109,75 +117,74 @@ class ResourcesPage extends Component {
           <NavBar />
         </AppBar>
 
+        <div
+          style={{
+            marginTop: '1.5em',
+            maxWidth: 1000,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            textAlign: 'center',
+          }}
+        >
+          <Typography variant="h4" style={{ marginBottom: '1em' }}>
+            EXPLORE OTHER OPPORTUNITIES IN {location.toUpperCase()}
+          </Typography>
+
+          <Typography style={{ marginBottom: '0.5em', fontSize: 17 }}>
+            Service Learning* is just one way to participate in activities
+            outside of the classroom. Please check out these other opportunities
+            for SOM students to get involved!
+          </Typography>
+
+          <Typography style={{ marginBottom: '0.5em', fontSize: 17 }}>
+            *Although many organizations involve service, Service Learning at
+            the SOM is defined in a more limited way as providing service to our
+            external, rather than internal communities.
+          </Typography>
+        </div>
+
         {/* RESOURCES PAGE CONTENT */}
         <div
           style={{
-            maxWidth: 750,
+            marginTop: '1.5em',
+            marginBottom: '1em',
+            maxWidth: 1250,
             marginLeft: 'auto',
             marginRight: 'auto',
           }}
         >
-          {this.decipher(resources, classes)}
-
-          <div
-            style={{
-              marginTop: '1em',
-              marginBottom: '1em',
-              maxWidth: 750,
-              fontSize: 20,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Seattle"
-            >
-              Seattle
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Spokane"
-            >
-              Spokane
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Wyoming"
-            >
-              Wyoming
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Alaska"
-            >
-              Alaska
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Montana"
-            >
-              Montana
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Idaho"
-            >
-              Idaho
-            </Link>
-          </div>
+          <Grid container spacing={24}>
+            <Grid item xs={12} md={6}>
+              <Paper
+                style={{
+                  margin: '1em',
+                  padding: '1em',
+                  height: 800,
+                  overflowY: 'scroll',
+                }}
+              >
+                <Typography style={{ marginBottom: '1em' }} variant="h4">
+                  Committees
+                </Typography>
+                {this.decipher(outsideOrgs['Committees'], classes)}
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Paper
+                style={{
+                  margin: '1em',
+                  padding: '1em',
+                  height: 800,
+                  overflowY: 'scroll',
+                }}
+              >
+                <Typography style={{ marginBottom: '1em' }} variant="h4">
+                  Student Interest Groups
+                </Typography>
+                {this.decipher(outsideOrgs['StudentInterestGroups'], classes)}
+              </Paper>
+            </Grid>
+          </Grid>
         </div>
         <BottomBanner />
       </div>

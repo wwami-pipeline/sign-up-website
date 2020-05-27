@@ -10,6 +10,7 @@ import config from './config';
 import { Switch } from 'react-router-dom';
 import OrgPage from './components/OrgPage';
 import ResourcesPage from './pages/ResourcesPage';
+import OutsideOrgPage from './pages/OutsideOrgPage';
 
 class App extends Component {
   constructor(props) {
@@ -112,9 +113,7 @@ class App extends Component {
             path="/"
             render={() => {
               return this.state.overviews ? (
-                <MainPage
-                  overviews={this.state.overviews}
-                />
+                <MainPage overviews={this.state.overviews} />
               ) : (
                 <div />
               );
@@ -153,11 +152,12 @@ class App extends Component {
           <Route exact path="/donate" component={DonatePage} />
           <Route
             path="/resources"
+            render={() => <ResourcesPage resources={this.state['resources']} />}
+          />
+          <Route
+            path="/outsideOrganizations"
             render={() => (
-              <ResourcesPage
-                resources={this.state['resources']}
-                outsideOrgs={this.state['outsideOrgs']}
-              />
+              <OutsideOrgPage outsideOrgs={this.state['outsideOrgs']} />
             )}
           />
         </Switch>
