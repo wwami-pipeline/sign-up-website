@@ -63,9 +63,21 @@ class OrgItemModal extends React.Component {
       modalOpen: false,
       signUpLinks: props.project['Sign-up Link'].split(','),
     };
+
+    if (props.project['Order']) {
+      this.state.order = [];
+      Object.keys(props.project['Order']).forEach((key) => {
+        this.state.order.push(props.project['Order'][key]);
+      });
+    }
   }
 
   getOrderNumber(x) {
+    if (this.state.order) {
+      let index = this.state.order.indexOf(x);
+      return index === -1 ? 1000 : index;
+    }
+
     if (x.toLowerCase().includes('project description')) return 3;
     if (x.toLowerCase().includes('types of volunteers needed')) return 3.5;
     if (x.toLowerCase().includes('clinic schedule')) return 4;
@@ -172,7 +184,12 @@ class OrgItemModal extends React.Component {
                   return this.getOrderNumber(x) - this.getOrderNumber(y);
                 })
                 .map((key) => {
-                  if (key.toLowerCase() !== 'title' && key !== 'Sign-up Link')
+                  if (
+                    key.toLowerCase() !== 'title' &&
+                    key !== 'Sign-up Link' &&
+                    key !== 'Dates' &&
+                    key !== 'Order'
+                  )
                     return (
                       <Typography
                         key={key}
