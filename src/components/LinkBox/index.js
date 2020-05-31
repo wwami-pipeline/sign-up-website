@@ -26,6 +26,7 @@ const styles = () => ({
 const LinkBox = (props) => {
   const { classes } = props;
   console.log(props.imageLocation);
+  var h2Height = props.name ? "36px" : "50px";
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -45,13 +46,13 @@ const LinkBox = (props) => {
             <CardHeader className={classes.image} />
           )}
 
-          <CardContent style={{ backgroundColor: '#F4EFA8', height: 80 }}>
+          <CardContent style={{ backgroundColor: '#F4EFA8' }}>
             <Typography
               variant="h5"
-              style={{ color: '#2E1159', fontFamily: 'Lato' }}
+              style={{ color: '#2E1159', fontFamily: 'Lato', lineHeight: h2Height}}
               component="h2"
             >
-              {props.title}
+              <span> {props.title} </span>             
             </Typography>
             <Typography
               variant="body1"
@@ -59,6 +60,7 @@ const LinkBox = (props) => {
                 color: '#2E1159',
                 fontWeight: 'bold',
                 fontFamily: 'Lato',
+                lineHeight: '1em'
               }}
               component="h3"
             >

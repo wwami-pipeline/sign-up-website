@@ -228,7 +228,6 @@ class LocationPage extends Component {
           // console.log(org);
 
           var link = (org["Sign-up Link"] === "TBD") ? "" : org["Sign-up Link"];
-          link = "";
 
           if (date) {
             for (var i = 0; i < Object.values(date).length; i++) {

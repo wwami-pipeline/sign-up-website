@@ -11,16 +11,15 @@ const styles = () => {
       marginRight: 'auto',
     },
     linkBoxContainer: {
-      maxWidth: 500,
-      mariginLeft: 'auto',
+      marginLeft: 'auto',
       marginRight: 'auto',
     },
     otherProjectsDiv: {
       backgroundColor: '#F4EFA8',
-      height: 440,
-      minWidth: 280,
-      border: '1px solid red',
+      borderRadius: '4px',
       display: 'table-cell',
+      height: 450,
+      minWidth: 280,
       verticalAlign: 'middle',
     },
     otherProjectsLink: {
@@ -99,9 +98,7 @@ class OpportunityGrid extends React.Component {
                 </div>
               </Link>
             </Grid>
-          ) : (
-            <div />
-          )}
+          ) : ( <div /> )}
         </Grid>
       </div>
     );
