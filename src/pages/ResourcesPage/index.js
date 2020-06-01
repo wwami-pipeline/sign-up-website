@@ -100,7 +100,21 @@ const processText = (text, classes) => {
 
 class ResourcesPage extends Component {
   render() {
-    const { classes, resources } = this.props;
+    const { classes } = this.props;
+
+    let type = window.location.pathname.split('/')[2]; // Get resource type from URL
+
+    if (type === 'links') {
+      type = 'Service Learning Website Links';
+    } else if (type === 'videos') {
+      type = 'Service Learning Training Videos';
+    } else if (type === 'tools') {
+      type = 'Teaching Tools';
+    } else {
+      type = 'Protocols';
+    }
+
+    const resources = this.props.resources ? this.props.resources[type] : {};
 
     return (
       <div className={classes.page}>
@@ -109,7 +123,7 @@ class ResourcesPage extends Component {
           <NavBar />
         </AppBar>
 
-        {/* RESOURCES PAGE CONTENT */}
+        {/* RESOURCE PAGE CONTENT */}
         <div
           style={{
             maxWidth: 750,
@@ -118,66 +132,6 @@ class ResourcesPage extends Component {
           }}
         >
           {this.decipher(resources, classes)}
-
-          <div
-            style={{
-              marginTop: '1em',
-              marginBottom: '1em',
-              maxWidth: 750,
-              fontSize: 20,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Seattle"
-            >
-              Seattle
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Spokane"
-            >
-              Spokane
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Wyoming"
-            >
-              Wyoming
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Alaska"
-            >
-              Alaska
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Montana"
-            >
-              Montana
-            </Link>
-            <Link
-              style={{ marginLeft: '2em' }}
-              inline
-              color="secondary"
-              href="/outsideOrganizations/Idaho"
-            >
-              Idaho
-            </Link>
-          </div>
         </div>
         <BottomBanner />
       </div>
