@@ -324,14 +324,14 @@ class LocationPage extends Component {
         <Requirements
           open={this.state.medicalRequirementsOpen}
           title="Medical Student Requirements"
-          data={this.props.prerequisites['Medical Students']}
+          data={this.props.prerequisites[location]['Medical Students']}
           handleClose={() => this.setState({ medicalRequirementsOpen: false })}
         />
 
         <Requirements
           open={this.state.undergradRequirementsOpen}
           title="Undergraduate Student Requirements"
-          data={this.props.prerequisites['Undergraduates']}
+          data={this.props.prerequisites[location]['Undergraduates']}
           handleClose={() =>
             this.setState({ undergradRequirementsOpen: false })
           }
@@ -339,7 +339,7 @@ class LocationPage extends Component {
         <Requirements
           open={this.state.otherGradRequirementsOpen}
           title="Other HS Graduate Student Requirements"
-          data={this.props.prerequisites['Other HS Graduate Students']}
+          data={this.props.prerequisites[location]['Other HS Graduate Students']}
           handleClose={() =>
             this.setState({ otherGradRequirementsOpen: false })
           }
@@ -347,7 +347,7 @@ class LocationPage extends Component {
         <Requirements
           open={this.state.providerRequirementsOpen}
           title="Provider Requirements"
-          data={this.props.prerequisites['Providers']}
+          data={this.props.prerequisites[location]['Providers']}
           handleClose={() => this.setState({ providerRequirementsOpen: false })}
         />
 
