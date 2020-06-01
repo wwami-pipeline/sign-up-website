@@ -29,6 +29,7 @@ const styles = () => {
       color: 'black',
       margin: '15px auto 0px auto',
       maxWidth: '900px',
+      textAlign: 'center'
     },
     calendarSignIn: {
       textAlign: 'center',
@@ -123,6 +124,16 @@ const styles = () => {
       marginLeft: 'auto',
       marginRight: 'auto',
     },
+    searchBar: {
+      margin: "10px 0 -5px 0",
+      fontSize: '18px'
+    },
+    searchClear: {
+      margin: "10px 5px -5px 0",
+      border: 'none',
+      fontSize: '18px',
+      backgroundColor: 'green'
+    },
     selectionContainer: {
       maxWidth: 950,
       margin: '15px auto 0 auto',
@@ -153,6 +164,7 @@ class LocationPage extends Component {
       medicalRequirementsOpen: false,
       otherGradRequirementsOpen: false,
       undergradRequirementsOpen: false,
+      searchText: ''
     };
   }
 
@@ -194,6 +206,15 @@ class LocationPage extends Component {
 
     return "DTSTART;TZID=America/Los_Angeles:" + today + "T" + formattedStartTime + " " + event.rrule;
   }
+  
+  clearSearchText = () => {
+    this.setState({searchText: ''});
+    this.refs.searchInput.value = '';
+  }
+
+  updateSearchText = (e) => {
+    this.setState({searchText: e.target.value});
+  }
 
   removeSeconds(string) {
     var split = string.split(":");
@@ -225,12 +246,15 @@ class LocationPage extends Component {
         var value = locations[location][key];
         Object.values(value).forEach(org => {
           var date = org["Dates"];
-          // console.log(org);
-
           var link = (org["Sign-up Link"] === "TBD") ? "" : org["Sign-up Link"];
 
-          if (date) {
+          // TODO: fix temporary search feature
+          
+
+          if (date && org["Project Description"].includes(this.state.searchText)) {
             for (var i = 0; i < Object.values(date).length; i++) {
+              
+              console.log(org["Project Description"]);
               calendarEvents.push({
                 detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
                 duration: date[i].duration,
@@ -269,7 +293,7 @@ class LocationPage extends Component {
                     target="_blank"
                     variant="contained"
                     {... this.state.currentEventSignupLink !== "" ? {href: this.state.currentEventSignupLink} : "" } >
-                      { this.state.currentEventSignupLink !== "" ? "Sign Up" : "No Sign-Up Link"}
+                    { this.state.currentEventSignupLink !== "" ? "Sign Up" : "No Sign-Up Link"}
                   </Button>
                 : <div style={{display: 'inline' }}>
                     <SignInButton />
@@ -303,6 +327,10 @@ class LocationPage extends Component {
               </Button>
             </div>
             <div className={classes.calendarContainer}>
+              <div>
+                <input className={classes.searchBar} ref='searchInput' type='text' placeholder='Search Here' onChange={this.updateSearchText} />
+                <button className={classes.searchClear} onClick={this.clearSearchText}>Clear</button>
+              </div>
               <EventCalendar 
                 eventClickFn={e => this.calendarEventClick(e)}
                 events={calendarEvents} 
