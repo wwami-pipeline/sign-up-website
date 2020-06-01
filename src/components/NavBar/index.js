@@ -23,8 +23,21 @@ const NavBar = () => {
                   <NavDropdown.Item className="tabSubLabel" href="/contact"> About Us </NavDropdown.Item>
                   <NavDropdown.Item className="tabSubLabel" href="/contact"> Contact Us </NavDropdown.Item>
                 </NavDropdown>
+                <NavDropdown className="tabLabel" title="Resources" id="basic-nav-dropdown">
+                  <NavDropdown.Item className="tabSubLabel" href="/resources/links"> Website Links </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/resources/videos"> Training Videos </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/resources/tools"> Teaching Tools </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/resources/protocols"> Protocols </NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown className="tabLabel" title="Outside Organizations" id="basic-nav-dropdown">
+                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Seattle"> Seattle </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Spokane"> Spokane </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Wyoming"> Wyoming </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Alaska"> Alaska </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Montana"> Montana </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Idaho"> Idaho </NavDropdown.Item>
+                </NavDropdown>
                 {/* <Nav.Link className="tabLabel" href="/about">About</Nav.Link> */}
-                <Nav.Link className="tabLabel" href="/resources">Resources</Nav.Link>
                 {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
