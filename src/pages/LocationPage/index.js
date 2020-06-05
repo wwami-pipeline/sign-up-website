@@ -129,10 +129,12 @@ const styles = () => {
       fontSize: '18px'
     },
     searchClear: {
-      margin: "10px 5px -5px 0",
+      backgroundColor: '#2E1159',
       border: 'none',
+      color: 'white',
       fontSize: '18px',
-      backgroundColor: 'green'
+      height: '32px',
+      margin: "-10px 0 -5px 10px",
     },
     selectionContainer: {
       maxWidth: 950,
@@ -246,20 +248,16 @@ class LocationPage extends Component {
         var value = locations[location][key];
         Object.values(value).forEach(org => {
           var date = org["Dates"];
-          var link = (org["Sign-up Link"] === "TBD") ? "" : org["Sign-up Link"];
 
           // TODO: fix temporary search feature
-          
 
           if (date && org["Project Description"].includes(this.state.searchText)) {
             for (var i = 0; i < Object.values(date).length; i++) {
-              
-              console.log(org["Project Description"]);
               calendarEvents.push({
                 detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
                 duration: date[i].duration,
                 rrule: this.formatRule(date[i]),
-                signupLink: link,
+                signupLink: date[i].link ? date[i].link : "",
                 title: org["Title"],
                 volunteers: org["Volunteer Openings"]
               });
@@ -329,7 +327,23 @@ class LocationPage extends Component {
             <div className={classes.calendarContainer}>
               <div>
                 <input className={classes.searchBar} ref='searchInput' type='text' placeholder='Search Here' onChange={this.updateSearchText} />
-                <button className={classes.searchClear} onClick={this.clearSearchText}>Clear</button>
+                <Button 
+                  className={classes.searchClear}
+                  color="secondary"
+                  onClick={this.clearSearchText}
+                  size="medium"
+                  >
+                    Clear
+                </Button>
+                {/* <Button
+                  className={classes.dialogDetailsButton}
+                  color="secondary"
+                  href={this.state.currentEventDetailsLink}
+                  size="medium"
+                  target="_blank"
+                  variant="contained" >
+                  Details
+                </Button> */}
               </div>
               <EventCalendar 
                 eventClickFn={e => this.calendarEventClick(e)}
