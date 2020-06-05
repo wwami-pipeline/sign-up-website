@@ -63,10 +63,17 @@ class OrgItemModal extends React.Component {
     super(props);
     this.state = {
       modalOpen: false,
-      signUpLinks: props.project['Sign-up Link']
-        ? props.project['Sign-up Link'].split(',')
-        : [],
+      signUpLinks: [],
     };
+
+    if (props.project['Dates']) {
+      Object.keys(props.project['Dates']).forEach((key) => {
+        let link = props.project['Dates'][key]['link'];
+        if (link && !this.state.signUpLinks.includes(link)) {
+          this.state.signUpLinks.push(link);
+        }
+      });
+    }
 
     if (props.project['Order']) {
       this.state.order = [];
