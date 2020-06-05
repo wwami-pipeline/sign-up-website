@@ -29,7 +29,7 @@ const NavBar = () => {
                   <NavDropdown.Item className="tabSubLabel" href="/resources/tools"> Teaching Tools </NavDropdown.Item>
                   <NavDropdown.Item className="tabSubLabel" href="/resources/protocols"> Protocols </NavDropdown.Item>
                 </NavDropdown>
-                <NavDropdown className="tabLabel" title="Outside Organizations" id="basic-nav-dropdown">
+                <NavDropdown className="tabLabel" title="Other Student Orgs" id="basic-nav-dropdown">
                   <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Seattle"> Seattle </NavDropdown.Item>
                   <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Spokane"> Spokane </NavDropdown.Item>
                   <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Wyoming"> Wyoming </NavDropdown.Item>
@@ -37,16 +37,7 @@ const NavBar = () => {
                   <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Montana"> Montana </NavDropdown.Item>
                   <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Idaho"> Idaho </NavDropdown.Item>
                 </NavDropdown>
-                {/* <Nav.Link className="tabLabel" href="/about">About</Nav.Link> */}
-                {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown> */}
                 <Nav.Link className="tabLabel" href="/donate">Donations</Nav.Link>
-                <Nav.Link className="tabLabel" href="/contact">Contact Us</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </div>
