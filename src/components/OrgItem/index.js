@@ -70,7 +70,11 @@ class OrgItemModal extends React.Component {
       Object.keys(props.project['Dates']).forEach((key) => {
         let link = props.project['Dates'][key]['link'];
         if (link && !this.state.signUpLinks.includes(link)) {
-          this.state.signUpLinks.push(link);
+          if (link.includes('http')) {
+            this.state.signUpLinks.push(link);
+          } else {
+            this.state.signUpLinks.push('http://' + link);
+          }
         }
       });
     }

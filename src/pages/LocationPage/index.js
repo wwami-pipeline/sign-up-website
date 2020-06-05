@@ -16,7 +16,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import OpportunityGrid from '../../components/OpportunityGrid/OpportunityGrid';
 import BottomBanner from '../../components/BottomBanner';
-import { SignInButton } from '../../components/SignInButton/SignInButton'
+import { SignInButton } from '../../components/SignInButton/SignInButton';
 import '../../App.css';
 
 const styles = () => {
@@ -29,7 +29,7 @@ const styles = () => {
       color: 'black',
       margin: '15px auto 0px auto',
       maxWidth: '900px',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     calendarSignIn: {
       textAlign: 'center',
@@ -38,12 +38,12 @@ const styles = () => {
       backgroundColor: '#513E6D',
     },
     dialogButtonDiv: {
-      height: "36px",
+      height: '36px',
       margin: '10px 0 10px 0',
-      width: '100%'
+      width: '100%',
     },
     dialogSubBody: {
-      margin: '10px'
+      margin: '10px',
     },
     dialogSignupButton: {
       margin: '0 0 0px 20px',
@@ -125,8 +125,8 @@ const styles = () => {
       marginRight: 'auto',
     },
     searchBar: {
-      margin: "10px 0 -5px 0",
-      fontSize: '18px'
+      margin: '10px 0 -5px 0',
+      fontSize: '18px',
     },
     searchClear: {
       backgroundColor: '#2E1159',
@@ -134,7 +134,7 @@ const styles = () => {
       color: 'white',
       fontSize: '18px',
       height: '32px',
-      margin: "-10px 0 -5px 10px",
+      margin: '-10px 0 -5px 10px',
     },
     selectionContainer: {
       maxWidth: 950,
@@ -166,7 +166,7 @@ class LocationPage extends Component {
       medicalRequirementsOpen: false,
       otherGradRequirementsOpen: false,
       undergradRequirementsOpen: false,
-      searchText: ''
+      searchText: '',
     };
   }
 
@@ -176,13 +176,17 @@ class LocationPage extends Component {
       currentEventDate: info.event.start.toDateString().substring(4),
       currentEventDetailsLink: info.event.extendedProps.detailsLink,
       currentEventVolunteers: info.event.extendedProps.volunteers,
-      currentEventEndTime: this.removeSeconds(info.event.end.toLocaleTimeString()),
+      currentEventEndTime: this.removeSeconds(
+        info.event.end.toLocaleTimeString()
+      ),
       currentEventSignupLink: info.event.extendedProps.signupLink,
-      currentEventStartTime: this.removeSeconds(info.event.start.toLocaleTimeString()),
+      currentEventStartTime: this.removeSeconds(
+        info.event.start.toLocaleTimeString()
+      ),
       currentEventTitle: info.event.title,
-      eventClicked: true
+      eventClicked: true,
     });
-    
+
     // console.log(this.state.currentEventDate);
     // console.log(this.state.currentEventDetailsLink);
     // console.log(this.state.currentEventVolunteers);
@@ -203,24 +207,31 @@ class LocationPage extends Component {
     today = yyyy + mm + dd;
 
     // Format the start time
-    var split = event.startTime.split(":");
-    var formattedStartTime = split[0] + split[1] + "00";
+    var split = event.startTime.split(':');
+    var formattedStartTime = split[0] + split[1] + '00';
 
-    return "DTSTART;TZID=America/Los_Angeles:" + today + "T" + formattedStartTime + " " + event.rrule;
+    return (
+      'DTSTART;TZID=America/Los_Angeles:' +
+      today +
+      'T' +
+      formattedStartTime +
+      ' ' +
+      event.rrule
+    );
   }
-  
+
   clearSearchText = () => {
-    this.setState({searchText: ''});
+    this.setState({ searchText: '' });
     this.refs.searchInput.value = '';
-  }
+  };
 
   updateSearchText = (e) => {
-    this.setState({searchText: e.target.value});
-  }
+    this.setState({ searchText: e.target.value });
+  };
 
   removeSeconds(string) {
-    var split = string.split(":");
-    return split[0] + ":" + split[1] + split[2].substring(2);
+    var split = string.split(':');
+    return split[0] + ':' + split[1] + split[2].substring(2);
   }
 
   render() {
@@ -244,66 +255,100 @@ class LocationPage extends Component {
 
     var calendarEvents = [];
     if (locations[location]) {
-      Object.keys(locations[location]).forEach(key => { // searching by location
+      Object.keys(locations[location]).forEach((key) => {
+        // searching by location
         var value = locations[location][key];
-        Object.values(value).forEach(org => {
-          var date = org["Dates"];
+        Object.values(value).forEach((org) => {
+          var date = org['Dates'];
 
           // TODO: fix temporary search feature
 
-          if (date && org["Project Description"].includes(this.state.searchText)) {
+          if (
+            date &&
+            org['Project Description'].includes(this.state.searchText)
+          ) {
             for (var i = 0; i < Object.values(date).length; i++) {
+              let link = undefined;
+              if (date[i].link) {
+                if (date[i].link.includes('http')) {
+                  link = date[i].link;
+                } else {
+                  link = 'http://' + date[i].link;
+                }
+              }
+
               calendarEvents.push({
-                detailsLink: "/org/" + location + "/" + key + "/" + org["Title"],
+                detailsLink:
+                  '/org/' + location + '/' + key + '/' + org['Title'],
                 duration: date[i].duration,
                 rrule: this.formatRule(date[i]),
-                signupLink: date[i].link ? date[i].link : "",
-                title: org["Title"],
-                volunteers: org["Volunteer Openings"]
+                signupLink: link ? link : '',
+                title: org['Title'],
+                volunteers: org['Volunteer Openings'],
               });
-            }            
+            }
           }
-        })
+        });
       });
     }
     return (
       <div className={classes.page}>
         <CssBaseline />
-        <NavBar />        
+        <NavBar />
         <Dialog
           open={this.state.eventClicked}
-          onClose={() => this.setState({ eventClicked: false })} >
+          onClose={() => this.setState({ eventClicked: false })}
+        >
           <div className={classes.dialogBody}>
             <DialogContent>
-              <Typography variant ="h5"> {this.state.currentEventDate} </Typography>
-              <Typography variant="h5"> {this.state.currentEventStartTime} - {this.state.currentEventEndTime} </Typography>
-              <p style={{color: 'white'}}> {this.state.currentEventVolunteers} </p>
-            
-              <p style={{color: 'white'}}> Please see DETAILS to confirm that you 
-                have the correct training/onboarding to sign up for this event 
+              <Typography variant="h5">
+                {' '}
+                {this.state.currentEventDate}{' '}
+              </Typography>
+              <Typography variant="h5">
+                {' '}
+                {this.state.currentEventStartTime} -{' '}
+                {this.state.currentEventEndTime}{' '}
+              </Typography>
+              <p style={{ color: 'white' }}>
+                {' '}
+                {this.state.currentEventVolunteers}{' '}
+              </p>
+
+              <p style={{ color: 'white' }}>
+                {' '}
+                Please see DETAILS to confirm that you have the correct
+                training/onboarding to sign up for this event
               </p>
               <div className={classes.dialogButtonDiv}>
-                { signedIn ?
+                {signedIn ? (
                   <Button
                     className={classes.dialogSignupButton}
-                    color="secondary" 
+                    color="secondary"
                     size="medium"
                     target="_blank"
                     variant="contained"
-                    {... this.state.currentEventSignupLink !== "" ? {href: this.state.currentEventSignupLink} : "" } >
-                    { this.state.currentEventSignupLink !== "" ? "Sign Up" : "No Sign-Up Link"}
+                    {...(this.state.currentEventSignupLink !== ''
+                      ? { href: this.state.currentEventSignupLink }
+                      : '')}
+                  >
+                    {this.state.currentEventSignupLink !== ''
+                      ? 'Sign Up'
+                      : 'No Sign-Up Link'}
                   </Button>
-                : <div style={{display: 'inline' }}>
+                ) : (
+                  <div style={{ display: 'inline' }}>
                     <SignInButton />
                   </div>
-                }
+                )}
                 <Button
                   className={classes.dialogDetailsButton}
                   color="secondary"
                   href={this.state.currentEventDetailsLink}
                   size="medium"
                   target="_blank"
-                  variant="contained" >
+                  variant="contained"
+                >
                   Details
                 </Button>
               </div>
@@ -312,28 +357,35 @@ class LocationPage extends Component {
         </Dialog>
 
         {/* Calendar div with authentication */}
-        
+
         {!this.state.calendarHidden ? (
           <div>
             <div className={classes.calendarSignIn}>
-              <Button 
+              <Button
                 className={classes.signInButton}
                 color="secondary"
                 variant="contained"
-                onClick={() => this.setState({calendarHidden: true})}>
+                onClick={() => this.setState({ calendarHidden: true })}
+              >
                 Hide Calendar
               </Button>
             </div>
             <div className={classes.calendarContainer}>
               <div>
-                <input className={classes.searchBar} ref='searchInput' type='text' placeholder='Search Here' onChange={this.updateSearchText} />
-                <Button 
+                <input
+                  className={classes.searchBar}
+                  ref="searchInput"
+                  type="text"
+                  placeholder="Search Here"
+                  onChange={this.updateSearchText}
+                />
+                <Button
                   className={classes.searchClear}
                   color="secondary"
                   onClick={this.clearSearchText}
                   size="medium"
-                  >
-                    Clear
+                >
+                  Clear
                 </Button>
                 {/* <Button
                   className={classes.dialogDetailsButton}
@@ -345,21 +397,24 @@ class LocationPage extends Component {
                   Details
                 </Button> */}
               </div>
-              <EventCalendar 
-                eventClickFn={e => this.calendarEventClick(e)}
-                events={calendarEvents} 
+              <EventCalendar
+                eventClickFn={(e) => this.calendarEventClick(e)}
+                events={calendarEvents}
               />
             </div>
-          </div>) : 
-            <div className={classes.calendarSignIn}>
-              <Button 
+          </div>
+        ) : (
+          <div className={classes.calendarSignIn}>
+            <Button
               className={classes.signInButton}
               color="secondary"
               variant="contained"
-              onClick={() => this.setState({calendarHidden: false})}>
+              onClick={() => this.setState({ calendarHidden: false })}
+            >
               Show Event Calendar
             </Button>
-          </div> }
+          </div>
+        )}
 
         {/* Modals */}
 
@@ -381,7 +436,9 @@ class LocationPage extends Component {
         <Requirements
           open={this.state.otherGradRequirementsOpen}
           title="Other HS Graduate Student Requirements"
-          data={this.props.prerequisites[location]['Other HS Graduate Students']}
+          data={
+            this.props.prerequisites[location]['Other HS Graduate Students']
+          }
           handleClose={() =>
             this.setState({ otherGradRequirementsOpen: false })
           }
