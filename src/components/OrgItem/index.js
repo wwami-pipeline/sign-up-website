@@ -35,11 +35,11 @@ const styles = () => ({
   indentText: {
     paddingLeft: 10,
   },
-  title: {
-    marginBottom: '.5em',
-  },
   titleText: {
     color: '#5a2c6e',
+    fontFamily: 'Lato',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
   text: {
     fontFamily: 'Lato',
@@ -244,7 +244,7 @@ class OrgItemModal extends React.Component {
           <CardHeader
             className={classes.cardHeader}
             title={
-              <Typography className={classes.titleText} variant="h5">
+              <Typography className={classes.titleText} variant="h6">
                 {' '}
                 {project['Title']}{' '}
               </Typography>

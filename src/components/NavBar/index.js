@@ -20,7 +20,7 @@ const NavBar = () => {
               <Nav className="mr-auto">
                 <Nav.Link className="tabLabel" href="/">Home</Nav.Link>
                 <NavDropdown className="tabLabel" title="About" id="basic-nav-dropdown">
-                  <NavDropdown.Item className="tabSubLabel" href="/contact"> About Us </NavDropdown.Item>
+                  <NavDropdown.Item className="tabSubLabel" href="/about"> About Us </NavDropdown.Item>
                   <NavDropdown.Item className="tabSubLabel" href="/contact"> Contact </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown className="tabLabel" title="Resources" id="basic-nav-dropdown">
