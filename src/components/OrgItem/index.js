@@ -27,10 +27,21 @@ const styles = () => ({
     height: 360,
   },
   closeButton: {
+    color: '#2E1159',
     float: 'right',
   },
   dialogBody: {
+    backgroundColor: '#DAD9E1',
+  },
+  dialogBorder: {
     backgroundColor: '#513E6D',
+    height: '20px',
+  },
+  dialogHeader: {
+    color: '#2E1159',
+    fontFamily: 'Lato',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
   indentText: {
     paddingLeft: 10,
@@ -47,11 +58,13 @@ const styles = () => ({
     marginBottom: '.5em',
   },
   textItem: {
+    color: '#2E1159',
     fontFamily: 'Lato',
     marginBottom: 8,
     fontSize: 16,
   },
   textCaps: {
+    color: '#2E1159',
     fontFamily: 'Lato',
     marginBottom: 3,
     textTransform: 'uppercase',
@@ -170,8 +183,12 @@ class OrgItemModal extends React.Component {
           maxWidth="lg"
         >
           <div className={classes.dialogBody}>
+            <div className={classes.dialogBorder} />
             <DialogTitle>
-              <Typography variant="h5"> {project['Title']} </Typography>
+              <Typography className={classes.dialogHeader} variant="h5">
+                {' '}
+                {project['Title']}{' '}
+              </Typography>
               <Button
                 className={classes.closeButton}
                 onClick={() => this.setState({ modalOpen: false })}
@@ -231,6 +248,8 @@ class OrgItemModal extends React.Component {
               </Button>
             </DialogActions>
           </div>
+
+          <div className={classes.dialogBorder} />
         </Dialog>
         <Card
           className={classes.card}

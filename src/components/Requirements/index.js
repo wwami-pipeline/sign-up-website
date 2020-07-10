@@ -15,6 +15,9 @@ const styles = () => ({
     backgroundColor: '#513E6D',
     height: '20px',
   },
+  dialogContent: {
+    maxHeight: '600px',
+  },
   title: {
     marginBottom: '.5em',
   },
@@ -52,9 +55,12 @@ const processText = (text) => {
       {arr.map((item) => (
         <div style={{ display: 'inline' }}>
           {item.type === 'p' ? (
-            <span>{item.value + " "}</span>
+            <span>{item.value + ' '}</span>
           ) : item.type === 'email' ? (
-            <a href={'mailto://' + item.value.replace(/[()]/g,"")} style={{ color: '#F4EFA8' }}>
+            <a
+              href={'mailto://' + item.value.replace(/[()]/g, '')}
+              style={{ color: '#F4EFA8' }}
+            >
               {item.value}
             </a>
           ) : (
@@ -86,6 +92,7 @@ class Requirements extends React.Component {
     return (
       <div>
         <Dialog
+          className={classes.dialog}
           open={this.props.open}
           onClose={this.props.handleClose}
           fullWidth
@@ -97,7 +104,7 @@ class Requirements extends React.Component {
             </Typography>
           </DialogTitle>
           <div className={classes.dialogBody}>
-            <DialogContent className={this.props.dialogContent}>
+            <DialogContent className={classes.dialogContent}>
               {this.state.items.map((item) => {
                 if (item.type === 'title') {
                   return (
@@ -116,11 +123,6 @@ class Requirements extends React.Component {
                 }
               })}
             </DialogContent>
-            <DialogActions>
-              <Button onClick={this.props.handleClose} color="white">
-                Close
-              </Button>
-            </DialogActions>
           </div>
           <div className={classes.dialogBorder} />
         </Dialog>
