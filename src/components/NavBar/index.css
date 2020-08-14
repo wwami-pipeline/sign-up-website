@@ -34,10 +34,11 @@
   color: #440088 !important;
   font-size: 1.2em;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .tabLabel:hover {
-  background-color: #DDDDDD;
+  background-color: #dddddd;
 }
 
 .tabSubLabel {
@@ -46,7 +47,7 @@
 }
 
 .tabSubLabel:hover {
-  background-color: #DDDDDD;
+  background-color: #dddddd;
 }
 
 .dropdown-toggle {

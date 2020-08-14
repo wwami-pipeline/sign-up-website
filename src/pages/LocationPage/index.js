@@ -234,145 +234,146 @@ class LocationPage extends Component {
     if (locations[location]) {
       Object.keys(locations[location]).forEach((key) => {
         // searching by location
-        var value = locations[location][key];
-        Object.values(value).forEach((org) => {
-          var date = org['Dates'];
+        if (key === 'CHAP') {
+          var value = locations[location][key];
+          console.log(key);
+          Object.values(value).forEach((org) => {
+            var date = org['Dates'];
 
-          // TODO: fix temporary search feature
+            // TODO: fix temporary search feature
 
-          if (
-            date &&
-            org['Project Description'].includes(this.state.searchText)
-          ) {
-            for (var i = 0; i < Object.values(date).length; i++) {
-              let link = undefined;
-              if (date[i].link) {
-                if (date[i].link.includes('http')) {
-                  link = date[i].link;
-                } else {
-                  link = 'http://' + date[i].link;
+            if (
+              date &&
+              org['Project Description'].includes(this.state.searchText)
+            ) {
+              for (var i = 0; i < Object.values(date).length; i++) {
+                let link = undefined;
+                if (date[i].link) {
+                  if (date[i].link.includes('http')) {
+                    link = date[i].link;
+                  } else {
+                    link = 'http://' + date[i].link;
+                  }
+                }
+
+                // Validate rrule before adding
+                try {
+                  const parsedRule = rrulestr(date[i].rrule); // If invalid, will throw
+
+                  calendarEvents.push({
+                    detailsLink:
+                      '/org/' + location + '/' + key + '/' + org['Title'],
+                    duration: date[i].duration,
+                    rrule: date[i].rrule,
+                    signupLink: link ? link : '',
+                    title: org['Title'],
+                    volunteers: org['Volunteer Openings'],
+                  });
+                } catch (error) {
+                  console.log(error);
                 }
               }
-
-              // Validate rrule before adding
-              try {
-                const parsedRule = rrulestr(date[i].rrule); // If invalid, will throw
-
-                calendarEvents.push({
-                  detailsLink:
-                    '/org/' + location + '/' + key + '/' + org['Title'],
-                  duration: date[i].duration,
-                  rrule: date[i].rrule,
-                  signupLink: link ? link : '',
-                  title: org['Title'],
-                  volunteers: org['Volunteer Openings'],
-                });
-
-
-              } catch (error) { console.log(error); }
-              
             }
-          }
-        });
+          });
+        }
       });
-    }
-    return (
-      <div className={classes.page}>
-        <CssBaseline />
-        <NavBar />
-        <Dialog
-          open={this.state.eventClicked}
-          onClose={() => this.setState({ eventClicked: false })}
-        >
-          <div className={classes.dialogBody}>
-            <DialogContent>
-              <Typography variant="h5">
-                {' '}
-                {this.state.currentEventDate}{' '}
-              </Typography>
-              <Typography variant="h5">
-                {' '}
-                {this.state.currentEventStartTime} -{' '}
-                {this.state.currentEventEndTime}{' '}
-              </Typography>
-              <p style={{ color: 'white' }}>
-                {' '}
-                {this.state.currentEventVolunteers}{' '}
-              </p>
+      return (
+        <div className={classes.page}>
+          <CssBaseline />
+          <NavBar />
+          <Dialog
+            open={this.state.eventClicked}
+            onClose={() => this.setState({ eventClicked: false })}
+          >
+            <div className={classes.dialogBody}>
+              <DialogContent>
+                <Typography variant="h5">
+                  {' '}
+                  {this.state.currentEventDate}{' '}
+                </Typography>
+                <Typography variant="h5">
+                  {' '}
+                  {this.state.currentEventStartTime} -{' '}
+                  {this.state.currentEventEndTime}{' '}
+                </Typography>
+                <p style={{ color: 'white' }}>
+                  {' '}
+                  {this.state.currentEventVolunteers}{' '}
+                </p>
 
-              <p style={{ color: 'white' }}>
-                {' '}
-                Please see DETAILS to confirm that you have the correct
-                training/onboarding to sign up for this event
-              </p>
-              <div className={classes.dialogButtonDiv}>
-                {signedIn ? (
+                <p style={{ color: 'white' }}>
+                  {' '}
+                  Please see DETAILS to confirm that you have the correct
+                  training/onboarding to sign up for this event
+                </p>
+                <div className={classes.dialogButtonDiv}>
+                  {signedIn ? (
+                    <Button
+                      className={classes.dialogSignupButton}
+                      color="secondary"
+                      size="medium"
+                      target="_blank"
+                      variant="contained"
+                      {...(this.state.currentEventSignupLink !== ''
+                        ? { href: this.state.currentEventSignupLink }
+                        : '')}
+                    >
+                      {this.state.currentEventSignupLink !== ''
+                        ? 'Sign Up'
+                        : 'No Sign-Up Link'}
+                    </Button>
+                  ) : (
+                    <div style={{ display: 'inline' }}>
+                      <SignInButton />
+                    </div>
+                  )}
                   <Button
-                    className={classes.dialogSignupButton}
+                    className={classes.dialogDetailsButton}
                     color="secondary"
+                    href={this.state.currentEventDetailsLink}
                     size="medium"
                     target="_blank"
                     variant="contained"
-                    {...(this.state.currentEventSignupLink !== ''
-                      ? { href: this.state.currentEventSignupLink }
-                      : '')}
                   >
-                    {this.state.currentEventSignupLink !== ''
-                      ? 'Sign Up'
-                      : 'No Sign-Up Link'}
+                    Details
                   </Button>
-                ) : (
-                  <div style={{ display: 'inline' }}>
-                    <SignInButton />
-                  </div>
-                )}
+                </div>
+              </DialogContent>
+            </div>
+          </Dialog>
+
+          {/* Calendar div with authentication */}
+
+          {!this.state.calendarHidden ? (
+            <div>
+              <div className={classes.calendarSignIn}>
                 <Button
-                  className={classes.dialogDetailsButton}
+                  className={classes.signInButton}
                   color="secondary"
-                  href={this.state.currentEventDetailsLink}
-                  size="medium"
-                  target="_blank"
                   variant="contained"
+                  onClick={() => this.setState({ calendarHidden: true })}
                 >
-                  Details
+                  Hide Calendar
                 </Button>
               </div>
-            </DialogContent>
-          </div>
-        </Dialog>
-
-        {/* Calendar div with authentication */}
-
-        {!this.state.calendarHidden ? (
-          <div>
-            <div className={classes.calendarSignIn}>
-              <Button
-                className={classes.signInButton}
-                color="secondary"
-                variant="contained"
-                onClick={() => this.setState({ calendarHidden: true })}
-              >
-                Hide Calendar
-              </Button>
-            </div>
-            <div className={classes.calendarContainer}>
-              <div>
-                <input
-                  className={classes.searchBar}
-                  ref="searchInput"
-                  type="text"
-                  placeholder="Search Here"
-                  onChange={this.updateSearchText}
-                />
-                <Button
-                  className={classes.searchClear}
-                  color="secondary"
-                  onClick={this.clearSearchText}
-                  size="medium"
-                >
-                  Clear
-                </Button>
-                {/* <Button
+              <div className={classes.calendarContainer}>
+                <div>
+                  <input
+                    className={classes.searchBar}
+                    ref="searchInput"
+                    type="text"
+                    placeholder="Search Here"
+                    onChange={this.updateSearchText}
+                  />
+                  <Button
+                    className={classes.searchClear}
+                    color="secondary"
+                    onClick={this.clearSearchText}
+                    size="medium"
+                  >
+                    Clear
+                  </Button>
+                  {/* <Button
                   className={classes.dialogDetailsButton}
                   color="secondary"
                   href={this.state.currentEventDetailsLink}
@@ -381,139 +382,150 @@ class LocationPage extends Component {
                   variant="contained" >
                   Details
                 </Button> */}
+                </div>
+                <EventCalendar
+                  eventClickFn={(e) => this.calendarEventClick(e)}
+                  events={calendarEvents}
+                />
               </div>
-              <EventCalendar
-                eventClickFn={(e) => this.calendarEventClick(e)}
-                events={calendarEvents}
-              />
             </div>
-          </div>
-        ) : (
-          <div className={classes.calendarSignIn}>
-            <Button
-              className={classes.signInButton}
-              color="secondary"
-              variant="contained"
-              onClick={() => this.setState({ calendarHidden: false })}
-            >
-              Show Event Calendar
-            </Button>
-          </div>
-        )}
+          ) : (
+            <div className={classes.calendarSignIn}>
+              <Button
+                className={classes.signInButton}
+                color="secondary"
+                variant="contained"
+                onClick={() => this.setState({ calendarHidden: false })}
+              >
+                Show Event Calendar
+              </Button>
+            </div>
+          )}
 
-        {/* Modals */}
+          {/* Modals */}
 
-        <Requirements
-          open={this.state.medicalRequirementsOpen}
-          title="Medical Student Requirements"
-          data={this.props.prerequisites[location]['Medical Students']}
-          handleClose={() => this.setState({ medicalRequirementsOpen: false })}
-        />
+          <Requirements
+            open={this.state.medicalRequirementsOpen}
+            title="Medical Student Requirements"
+            data={this.props.prerequisites[location]['Medical Students']}
+            handleClose={() =>
+              this.setState({ medicalRequirementsOpen: false })
+            }
+          />
 
-        <Requirements
-          open={this.state.undergradRequirementsOpen}
-          title="Undergraduate Student Requirements"
-          data={this.props.prerequisites[location]['Undergraduates']}
-          handleClose={() =>
-            this.setState({ undergradRequirementsOpen: false })
-          }
-        />
-        <Requirements
-          open={this.state.otherGradRequirementsOpen}
-          title="Other HS Graduate Student Requirements"
-          data={
-            this.props.prerequisites[location]['Other HS Graduate Students']
-          }
-          handleClose={() =>
-            this.setState({ otherGradRequirementsOpen: false })
-          }
-        />
-        <Requirements
-          open={this.state.providerRequirementsOpen}
-          title="Provider Requirements"
-          data={this.props.prerequisites[location]['Providers']}
-          handleClose={() => this.setState({ providerRequirementsOpen: false })}
-        />
+          <Requirements
+            open={this.state.undergradRequirementsOpen}
+            title="Undergraduate Student Requirements"
+            data={this.props.prerequisites[location]['Undergraduates']}
+            handleClose={() =>
+              this.setState({ undergradRequirementsOpen: false })
+            }
+          />
+          <Requirements
+            open={this.state.otherGradRequirementsOpen}
+            title="Other HS Graduate Student Requirements"
+            data={
+              this.props.prerequisites[location]['Other HS Graduate Students']
+            }
+            handleClose={() =>
+              this.setState({ otherGradRequirementsOpen: false })
+            }
+          />
+          <Requirements
+            open={this.state.providerRequirementsOpen}
+            title="Provider Requirements"
+            data={this.props.prerequisites[location]['Providers']}
+            handleClose={() =>
+              this.setState({ providerRequirementsOpen: false })
+            }
+          />
 
-        {/* Requirements */}
+          {/* Requirements */}
 
-        <div className={classes.directionTitleTop}>
-          <Typography className={classes.directionTitleHeaderBold}>
-            SERVE WITH US
-          </Typography>
-          <Typography className={classes.directionTitleTopText}>
-            Volunteering with our programs is a wonderful way to practice your
-            clinical and teaching skills, make a difference in our community and
-            form meaningful connections. We invite you to explore our
-            opportunities for providers and students alike.{' '}
-          </Typography>
-          <Typography className={classes.directionTitleTopText}>
-            We are very flexible and try to make it easy to work around busy
-            schedules. There is no required hourly commitment. Simply sign up
-            when you have the time!
-          </Typography>
-        </div>
-
-        <Paper className={classes.paperContainer}>
-          <Typography className={classes.directionTitleHeader}>
-            Here's What You Need To Know To Get Started
-          </Typography>
-          <div className={classes.fabButtonHolder}>
-            <Fab
-              color="secondary"
-              style={{ color: '#2E1159' }}
-              variant="extended"
-              className={classes.fabButton}
-              onClick={() => this.setState({ providerRequirementsOpen: true })}
-            >
-              Providers
-            </Fab>
-            <Fab
-              color="secondary"
-              style={{ color: '#2E1159' }}
-              variant="extended"
-              className={classes.fabButton}
-              onClick={() => this.setState({ medicalRequirementsOpen: true })}
-            >
-              Medical Students
-            </Fab>
-          </div>
-          <div className={classes.fabButtonHolder}>
-            <Fab
-              color="secondary"
-              style={{ color: '#2E1159' }}
-              variant="extended"
-              className={classes.fabButton}
-              onClick={() => this.setState({ otherGradRequirementsOpen: true })}
-            >
-              Other HS Graduate Students
-            </Fab>
-            <Fab
-              color="secondary"
-              style={{ color: '#2E1159' }}
-              variant="extended"
-              className={classes.fabButton}
-              onClick={() => this.setState({ undergradRequirementsOpen: true })}
-            >
-              Undergraduates
-            </Fab>
-          </div>
-        </Paper>
-
-        {/* Organizations */}
-
-        <div className={classes.selectionContainer}>
-          <div className={classes.directionTitleBottom}>
+          <div className={classes.directionTitleTop}>
             <Typography className={classes.directionTitleHeaderBold}>
-              FIND AN OPPORTUNITY
+              SERVE WITH US
+            </Typography>
+            <Typography className={classes.directionTitleTopText}>
+              Volunteering with our programs is a wonderful way to practice your
+              clinical and teaching skills, make a difference in our community
+              and form meaningful connections. We invite you to explore our
+              opportunities for providers and students alike.{' '}
+            </Typography>
+            <Typography className={classes.directionTitleTopText}>
+              We are very flexible and try to make it easy to work around busy
+              schedules. There is no required hourly commitment. Simply sign up
+              when you have the time!
             </Typography>
           </div>
 
-          <div className={classes.gridContainer}>{opportunityGrid}</div>
+          <Paper className={classes.paperContainer}>
+            <Typography className={classes.directionTitleHeader}>
+              Here's What You Need To Know To Get Started
+            </Typography>
+            <div className={classes.fabButtonHolder}>
+              <Fab
+                color="secondary"
+                style={{ color: '#2E1159' }}
+                variant="extended"
+                className={classes.fabButton}
+                onClick={() =>
+                  this.setState({ providerRequirementsOpen: true })
+                }
+              >
+                Providers
+              </Fab>
+              <Fab
+                color="secondary"
+                style={{ color: '#2E1159' }}
+                variant="extended"
+                className={classes.fabButton}
+                onClick={() => this.setState({ medicalRequirementsOpen: true })}
+              >
+                Medical Students
+              </Fab>
+            </div>
+            <div className={classes.fabButtonHolder}>
+              <Fab
+                color="secondary"
+                style={{ color: '#2E1159' }}
+                variant="extended"
+                className={classes.fabButton}
+                onClick={() =>
+                  this.setState({ otherGradRequirementsOpen: true })
+                }
+              >
+                Other HS Graduate Students
+              </Fab>
+              <Fab
+                color="secondary"
+                style={{ color: '#2E1159' }}
+                variant="extended"
+                className={classes.fabButton}
+                onClick={() =>
+                  this.setState({ undergradRequirementsOpen: true })
+                }
+              >
+                Undergraduates
+              </Fab>
+            </div>
+          </Paper>
+
+          {/* Organizations */}
+
+          <div className={classes.selectionContainer}>
+            <div className={classes.directionTitleBottom}>
+              <Typography className={classes.directionTitleHeaderBold}>
+                FIND AN OPPORTUNITY
+              </Typography>
+            </div>
+
+            <div className={classes.gridContainer}>{opportunityGrid}</div>
+          </div>
+          <BottomBanner />
         </div>
-        <BottomBanner />
-      </div>
-    );
+      );
+    }
   }
 }
 

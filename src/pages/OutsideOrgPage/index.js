@@ -12,31 +12,65 @@ import NavBar from '../../components/NavBar';
 import BottomBanner from '../../components/BottomBanner';
 
 const styles = () => ({
-  page: {
-    overflow: 'hidden',
-    fontFamily: 'Lato',
-  },
-  title: {
-    color: 'white',
-    fontFamily: 'Lato',
-    fontSize: '1.4em',
-    marginTop: '1em',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
   description: {
-    color: 'white',
+    color: '#2E1159',
+    fontFamily: 'Lato',
+    fontSize: '1.1em',
+    maxWidth: 750,
+    marginLeft: '10px',
+  },
+  directionTitleTop: {
+    color: '#2E1159',
+    fontFamily: 'Lato',
+    margin: '30px 0 15px 0',
+    textAlign: 'center',
+    textDecoration: 'underline',
+  },
+  italics: {
+    color: '#2E1159',
     fontFamily: 'Lato',
     fontSize: '1.1em',
     maxWidth: 750,
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-  directionTitleTop: {
+  gridTitle: {
+    color: '#2E1159',
     fontFamily: 'Lato',
-    margin: '30px 0 15px 0',
+    marginBottom: '1em',
+    textTransform: 'uppercase',
+  },
+  mainGrid: {
+    backgroundColor: '#DAD9E1',
+    borderRadius: '2px',
+    margin: '1.5em auto 1em auto',
+    maxWidth: 1250,
+    padding: '1em',
     textAlign: 'center',
-    textDecoration: 'underline',
+  },
+  page: {
+    overflow: 'hidden',
+    fontFamily: 'Lato',
+  },
+  paperContainer: {
+    backgroundColor: '#DAD9E1',
+    borderRadius: '2px',
+    margin: '1.5em auto 1em auto',
+    maxWidth: 1250,
+    padding: '1em',
+    textAlign: 'center',
+  },
+  title: {
+    color: '#2E1159',
+    fontFamily: 'Lato',
+    fontSize: '1.4em',
+    margin: '1em 0 0 10px',
+    textAlign: 'left',
+  },
+  text: {
+    color: '#2E1159',
+    fontFamily: 'Lato',
+    margin: 'auto',
   },
 });
 
@@ -57,7 +91,7 @@ const processText = (text, classes) => {
     }
   }
   return (
-    <div style={{ marginTop: 10, marginBottom: 10 }}>
+    <div style={{ marginTop: 10, marginBottom: 10, textAlign: 'left' }}>
       {arr.map((item) => (
         <div style={{ display: 'inline' }}>
           {item.type === 'p' ? (
@@ -116,32 +150,35 @@ class ResourcesPage extends Component {
         <AppBar position="static">
           <NavBar />
         </AppBar>
-
-        <div
-          style={{
-            marginTop: '1.5em',
-            maxWidth: 1000,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            textAlign: 'center',
-          }}
-        >
-          <Typography variant="h4" style={{ marginBottom: '1em' }}>
-            EXPLORE OTHER OPPORTUNITIES IN {location.toUpperCase()}
+        <Paper className={classes.paperContainer}>
+          <Typography
+            className={classes.text}
+            variant="h4"
+            style={{ margin: '0.5em 0 1.5em 0' }}
+          >
+            OTHER {location.toUpperCase()} STUDENT ORGANIZATIONS
           </Typography>
 
-          <Typography style={{ marginBottom: '0.5em', fontSize: 17 }}>
-            Service Learning* is just one way to participate in activities
-            outside of the classroom. Please check out these other opportunities
-            for SOM students to get involved!
+          <Typography
+            className={classes.text}
+            style={{ marginBottom: '1.5em', fontSize: 24, fontWeight: 'bold' }}
+          >
+            Service Learning* is just one way to participate outside of the
+            classroom!
           </Typography>
 
-          <Typography style={{ marginBottom: '0.5em', fontSize: 17 }}>
-            *Although many organizations involve service, Service Learning at
-            the SOM is defined in a more limited way as providing service to our
+          <Typography
+            className={classes.text}
+            style={{ marginBottom: '1.5em', fontSize: 20, fontWeight: 'bold' }}
+          >
+            For contact information on the groups listed below, click here
+          </Typography>
+
+          <Typography className={classes.text} style={{ fontSize: 16 }}>
+            *Service Learning at the SOM is defined as providing service to
             external, rather than internal communities.
           </Typography>
-        </div>
+        </Paper>
 
         {/* RESOURCES PAGE CONTENT */}
         <div
@@ -156,14 +193,14 @@ class ResourcesPage extends Component {
           <Grid container spacing={24}>
             <Grid item xs={12} md={6}>
               <Paper
+                className={classes.paperContainer}
                 style={{
-                  margin: '1em',
                   padding: '1em',
-                  height: 800,
+                  height: 600,
                   overflowY: 'scroll',
                 }}
               >
-                <Typography style={{ marginBottom: '1em' }} variant="h4">
+                <Typography className={classes.gridTitle} variant="h4">
                   Committees
                 </Typography>
                 {this.decipher(outsideOrgs['Committees'], classes)}
@@ -171,14 +208,14 @@ class ResourcesPage extends Component {
             </Grid>
             <Grid item xs={12} md={6}>
               <Paper
+                className={classes.paperContainer}
                 style={{
-                  margin: '1em',
                   padding: '1em',
-                  height: 800,
+                  height: 600,
                   overflowY: 'scroll',
                 }}
               >
-                <Typography style={{ marginBottom: '1em' }} variant="h4">
+                <Typography className={classes.gridTitle} variant="h4">
                   Student Interest Groups
                 </Typography>
                 {this.decipher(outsideOrgs['StudentInterestGroups'], classes)}
@@ -216,7 +253,7 @@ class ResourcesPage extends Component {
               );
             } else if (curr.type === 'italics') {
               return (
-                <Typography className={classes.description}>
+                <Typography className={classes.italics}>
                   <i>{curr.value}</i>
                 </Typography>
               );
