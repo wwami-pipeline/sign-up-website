@@ -7,6 +7,7 @@ import {
   Paper,
   Fab,
 } from '@material-ui/core';
+import { rrulestr } from 'rrule';
 import { withRouter } from 'react-router-dom';
 import Requirements from '../../components/Requirements';
 import NavBar from '../../components/NavBar';
@@ -196,30 +197,6 @@ class LocationPage extends Component {
     // console.log(this.state.currentEventTitle);
   }
 
-  // Returns a formatted string for the rrule
-  formatRule(event) {
-    // Rrule generated from admin site has no start date,
-    // so event just starts on the current day
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    today = yyyy + mm + dd;
-
-    // Format the start time
-    var split = event.startTime.split(':');
-    var formattedStartTime = split[0] + split[1] + '00';
-
-    return (
-      'DTSTART;TZID=America/Los_Angeles:' +
-      today +
-      'T' +
-      formattedStartTime +
-      ' ' +
-      event.rrule
-    );
-  }
-
   clearSearchText = () => {
     this.setState({ searchText: '' });
     this.refs.searchInput.value = '';
@@ -277,15 +254,23 @@ class LocationPage extends Component {
                 }
               }
 
-              calendarEvents.push({
-                detailsLink:
-                  '/org/' + location + '/' + key + '/' + org['Title'],
-                duration: date[i].duration,
-                rrule: this.formatRule(date[i]),
-                signupLink: link ? link : '',
-                title: org['Title'],
-                volunteers: org['Volunteer Openings'],
-              });
+              // Validate rrule before adding
+              try {
+                const parsedRule = rrulestr(date[i].rrule); // If invalid, will throw
+
+                calendarEvents.push({
+                  detailsLink:
+                    '/org/' + location + '/' + key + '/' + org['Title'],
+                  duration: date[i].duration,
+                  rrule: date[i].rrule,
+                  signupLink: link ? link : '',
+                  title: org['Title'],
+                  volunteers: org['Volunteer Openings'],
+                });
+
+
+              } catch (error) { console.log(error); }
+              
             }
           }
         });
