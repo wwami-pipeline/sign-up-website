@@ -32,7 +32,6 @@ class App extends Component {
         this.state.prerequisites = data['Prerequisites'];
         this.state.resources = data['Resources'];
         this.state.outsideOrgs = data['OutsideOrganizations'];
-        this.forceUpdate();
         const locations = data['Locations'];
         Object.keys(locations).forEach((location) => {
           this.state['locations'][location] = locations[location];
@@ -43,6 +42,7 @@ class App extends Component {
             this.state['locationImages'][location]
           );
         });
+        this.forceUpdate();
       });
 
     firebase.auth().onAuthStateChanged((user) => {
@@ -122,6 +122,7 @@ class App extends Component {
           <Route
             path="/location"
             render={() => {
+              console.log(this.state.locations)
               return this.state.overviews ? (
                 <LocationPage
                   prerequisites={this.state.prerequisites}
