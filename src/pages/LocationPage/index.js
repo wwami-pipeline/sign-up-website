@@ -171,7 +171,6 @@ class LocationPage extends Component {
   }
 
   calendarEventClick(info) {
-    console.log(info.event);
     this.setState({
       currentEventDate: info.event.start.toDateString().substring(4),
       currentEventDetailsLink: info.event.extendedProps.detailsLink,
@@ -186,40 +185,6 @@ class LocationPage extends Component {
       currentEventTitle: info.event.title,
       eventClicked: true,
     });
-
-    // console.log(this.state.currentEventDate);
-    // console.log(this.state.currentEventDetailsLink);
-    // console.log(this.state.currentEventVolunteers);
-    // console.log(this.state.currentEventEndTime);
-    // console.log(this.state.currentEventSignupLink);
-    // console.log(this.state.currentEventStartTime);
-    // console.log(this.state.currentEventTitle);
-  }
-
-  // Returns a formatted string for the rrule
-  formatRule(event) {
-    // Rrule generated from admin site has no start date,
-    // so event just starts on the current day
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    today = yyyy + mm + dd;
-
-    // Format the start time
-    var split = event.startTime.split(':');
-    var formattedStartTime = split[0] + split[1] + '00';
-
-    console.log(event.rrule);
-
-    return (
-      'DTSTART;TZID=America/Los_Angeles:' +
-      today +
-      'T' +
-      formattedStartTime +
-      ' ' +
-      event.rrule
-    );
   }
 
   clearSearchText = () => {
@@ -259,48 +224,40 @@ class LocationPage extends Component {
     if (locations[location]) {
       Object.keys(locations[location]).forEach((key) => {
         // searching by location
-        if (key === "CHAP") {
-          var value = locations[location][key];
-          console.log(key);
-          Object.values(value).forEach((org) => {
-            var date = org['Dates'];
-            console.log(org);
-            console.log("date");
-            console.log(date);
+        var value = locations[location][key];
+        Object.values(value).forEach((org) => {
+          var date = org['Dates'];
+          // TODO: fix temporary search featur
 
-            // TODO: fix temporary search feature
-
-            if (
-              date &&
-              org['Project Description'].includes(this.state.searchText)
-            ) {
-              for (var i = 0; i < Object.values(date).length; i++) {
-                let link = undefined;
-                if (date[i].link) {
-                  if (date[i].link.includes('http')) {
-                    link = date[i].link;
-                  } else {
-                    link = 'http://' + date[i].link;
-                  }
+          if (
+            date &&
+            org['Project Description'].includes(this.state.searchText)
+          ) {
+            for (var i = 0; i < Object.values(date).length; i++) {
+              let link = undefined;
+              if (date[i].link) {
+                if (date[i].link.includes('http')) {
+                  link = date[i].link;
+                } else {
+                  link = 'http://' + date[i].link;
                 }
-
-                calendarEvents.push({
-                  detailsLink:
-                    '/org/' + location + '/' + key + '/' + org['Title'],
-                  duration: date[i].duration,
-                  rrule: this.formatRule(date[i]),
-                  signupLink: link ? link : '',
-                  title: org['Title'],
-                  volunteers: org['Volunteer Openings'],
-                });
               }
+              calendarEvents.push({
+                detailsLink:
+                  '/org/' + location + '/' + key + '/' + org['Title'],
+                duration: date[i].duration,
+                rrule: date[i].rrule,
+                signupLink: link ? link : '',
+                title: org['Title'],
+                volunteers: org['Volunteer Openings'],
+              });
             }
-          });
-        }
+          }
+        });
       });
     }
     return (
-      <div className={classes.page} >
+      <div className={classes.page}>
         <CssBaseline />
         <NavBar />
         <Dialog
@@ -345,10 +302,10 @@ class LocationPage extends Component {
                       : 'No Sign-Up Link'}
                   </Button>
                 ) : (
-                    <div style={{ display: 'inline' }}>
-                      <SignInButton />
-                    </div>
-                  )}
+                  <div style={{ display: 'inline' }}>
+                    <SignInButton />
+                  </div>
+                )}
                 <Button
                   className={classes.dialogDetailsButton}
                   color="secondary"
@@ -412,17 +369,17 @@ class LocationPage extends Component {
             </div>
           </div>
         ) : (
-            <div className={classes.calendarSignIn}>
-              <Button
-                className={classes.signInButton}
-                color="secondary"
-                variant="contained"
-                onClick={() => this.setState({ calendarHidden: false })}
-              >
-                Show Event Calendar
+          <div className={classes.calendarSignIn}>
+            <Button
+              className={classes.signInButton}
+              color="secondary"
+              variant="contained"
+              onClick={() => this.setState({ calendarHidden: false })}
+            >
+              Show Event Calendar
             </Button>
-            </div>
-          )}
+          </div>
+        )}
 
         {/* Modals */}
 
@@ -535,7 +492,7 @@ class LocationPage extends Component {
           <div className={classes.gridContainer}>{opportunityGrid}</div>
         </div>
         <BottomBanner />
-      </div >
+      </div>
     );
   }
 }

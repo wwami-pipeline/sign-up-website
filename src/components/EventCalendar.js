@@ -5,15 +5,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import rrulePlugin from '@fullcalendar/rrule';
 
 export default class EventCalendar extends Component {
-    render() {
-        return (
-            <FullCalendar
-                defaultView="dayGridMonth"
-                plugins={[ dayGridPlugin, rrulePlugin ]}
-                eventClick={this.props.eventClickFn}
-                eventLimit='true' 
-                events={this.props.events}
-            />
-        )
-    }
+  render() {
+    return (
+      <FullCalendar
+        defaultView="dayGridMonth"
+        plugins={[dayGridPlugin, rrulePlugin]}
+        eventClick={this.props.eventClickFn}
+        eventLimit="true"
+        events={this.props.events}
+      />
+    );
+  }
 }
