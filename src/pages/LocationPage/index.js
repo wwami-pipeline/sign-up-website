@@ -217,6 +217,7 @@ class LocationPage extends Component {
         />
       );
     } else {
+      opportunityGrid = <div />;
       console.log('Error loading opportunity grid for ' + location);
     }
 
