@@ -8,6 +8,7 @@ export default class EventCalendar extends Component {
   render() {
     return (
       <FullCalendar
+        timeZone="UTC"
         defaultView="dayGridMonth"
         plugins={[dayGridPlugin, rrulePlugin]}
         eventClick={this.props.eventClickFn}
