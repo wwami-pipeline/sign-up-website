@@ -10,7 +10,7 @@ import {
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
 import OtherItem from '../OtherItem';
-import BottomBanner from '../../components/BottomBanner';
+import BottomBanner from '../BottomBanner';
 
 const styles = () => ({
   page: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import LocationPage from './pages/LocationPage';
 import AboutPage from './pages/AboutPage';
@@ -7,7 +7,6 @@ import ContactPage from './pages/ContactPage';
 import DonatePage from './pages/DonationsPage';
 import firebase from 'firebase';
 import config from './config';
-import { Switch } from 'react-router-dom';
 import OrgPage from './components/OrgPage';
 import ResourcesPage from './pages/ResourcesPage';
 import OutsideOrgPage from './pages/OutsideOrgPage';
