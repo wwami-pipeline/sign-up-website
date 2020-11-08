@@ -20,7 +20,7 @@ interface OutsideOrgPageProps {
 const OutsideOrgPage: React.FC<OutsideOrgPageProps> = (props) => {
   const { classes } = props;
   const location = window.location.pathname.split('/')[2]; // Get location from URL
-  const outsideOrgs = props.outsideOrgs[location]
+  const outsideOrgs = props.outsideOrgs && props.outsideOrgs[location]
     ? props.outsideOrgs[location]
     : {};
 
