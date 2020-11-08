@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createStyles, withStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const HomeMap: React.FC<{ classes: any }> = (props) => {
   const [width, setWidth] = useState<number>(window.innerWidth);
@@ -25,7 +26,7 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
         <img src='/images/wwami.png' className={classes.wwamiImage_small} alt="WWAMI map" />
         <svg className={classes.alaska_small} >
           <g transform="translate(0, 125) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/Alaska" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Alaska" }}>
               <path d="M461 1206 c-14 -8 -31 -12 -38 -9 -7 3 -13 0 -13 -6 0 -6 -17 -11
               -38 -11 -31 0 -43 -6 -60 -30 -15 -19 -34 -31 -59 -36 -40 -7 -73 -29 -73 -49
               0 -6 11 -22 25 -35 15 -14 25 -35 25 -52 0 -23 5 -30 29 -34 31 -7 50 -49 25
@@ -54,12 +55,12 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               l-30 0 -7 95 c-5 52 -14 205 -22 339 -14 236 -15 246 -38 263 -13 10 -36 18
               -53 18 -48 -1 -99 11 -117 27 -11 10 -29 14 -49 11 -22 -4 -34 0 -42 14 -7 10
               -19 18 -27 18 -8 0 -26 9 -40 20 -29 23 -46 24 -79 6z"/>
-            </a>
+            </Link>
           </g>
         </svg>
         <svg className={classes.seattle_small}>
           <g transform="translate(0, 64) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Seattle" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Seattle" }}>
               <path d="M254 616 c-3 -8 -1 -24 6 -35 7 -14 7 -21 0 -21 -5 0 -10 -10 -10
               -22 0 -42 -15 -52 -67 -49 -33 2 -65 13 -103 37 -31 19 -58 34 -62 34 -14 0
               -1 -106 16 -139 14 -25 19 -63 21 -144 3 -117 7 -127 57 -127 15 0 30 -4 33
@@ -67,21 +68,21 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               98 2 6 -9 103 -5 154 5 17 3 21 9 17 27 -3 12 1 121 10 241 8 121 15 230 15
               243 0 15 8 27 22 32 17 6 9 9 -38 14 -91 10 -276 36 -296 43 -11 3 -20 -1 -24
               -10z"/>
-            </a>
+            </Link>
           </g>
         </svg>
         <svg className={classes.spokane_small}>
           <g transform="translate(0, 55) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Spokane" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Spokane" }}>
               <path d="M43 533 c-1 -10 -9 -128 -18 -263 -9 -135 -18 -250 -20 -257 -4 -13
               57 -7 89 9 11 6 68 7 142 3 l124 -7 0 255 0 255 -122 6 c-68 4 -139 9 -158 12
               -29 4 -36 2 -37 -13z"/>
-            </a>
+            </Link>
           </g>
         </svg>
         <svg className={classes.idaho_small}>
           <g transform="translate(0, 131) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Idaho" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Idaho" }}>
               <path d="M50 1011 c0 -269 0 -270 23 -288 36 -29 37 -37 12 -88 -14 -27 -25
               -54 -25 -61 0 -6 -11 -32 -25 -55 -30 -53 -31 -70 -6 -86 17 -11 18 -17 10
               -45 -5 -18 -9 -108 -9 -199 l0 -166 152 -6 c83 -4 252 -7 376 -7 l224 0 -5 22
@@ -91,12 +92,12 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               48 -26 49 -49 34 -48 -31 -70 16 -55 114 6 37 13 75 16 84 4 13 -5 22 -35 34
               -30 12 -43 24 -50 47 -6 18 -27 45 -46 60 -22 18 -35 36 -35 52 0 13 -8 31
               -17 41 -15 14 -18 35 -18 111 l0 93 -52 0 -53 0 0 -269z"/>
-            </a>
+            </Link>
           </g>
         </svg>
         <svg className={classes.montana_small}>
           <g transform="translate(0, 96) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Montana" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Montana" }}>
               <path d="M1120 937 c-3 -3 -68 -10 -145 -16 -77 -6 -180 -16 -230 -21 -88 -10
               -627 -40 -705 -40 l-40 0 0 -204 c0 -131 4 -207 10 -211 6 -4 8 -14 6 -23 -12
               -36 -16 -174 -6 -193 14 -24 24 -24 49 2 l20 21 30 -61 c17 -33 31 -71 31 -85
@@ -105,18 +106,18 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               8 118 12 61 3 137 8 170 10 33 3 112 7 175 10 63 3 160 8 215 11 55 3 122 6
               148 6 l49 1 -6 56 c-37 341 -66 613 -68 641 -3 34 -4 35 -48 38 -25 2 -48 1
               -50 -1z"/>
-            </a>
+            </Link>
           </g>
         </svg>
         <svg className={classes.wyoming_small}>
           <g transform="translate(0, 83) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Wyoming" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Wyoming" }}>
               <path d="M888 820 c-2 -6 -59 -14 -143 -20 -132 -9 -684 -40 -714 -40 -11 0
               -12 -20 -7 -102 3 -57 8 -182 12 -279 6 -168 6 -177 -12 -182 -16 -4 -16 -5
               -2 -6 15 -1 18 -14 20 -88 l3 -88 50 2 c28 2 147 7 265 13 118 5 307 17 418
               27 l204 17 -6 65 c-4 36 -11 100 -16 141 -6 41 -21 180 -35 309 -14 129 -27
               236 -29 238 -2 2 -6 -1 -8 -7z"/>
-            </a>
+            </Link>
           </g>
         </svg>
       </div>
@@ -127,7 +128,7 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
         <img src='/images/wwami.png' className={classes.wwamiImage} alt="WWAMI map" />
         <svg width="385px" height="319px" className={classes.alaska} >
           <g transform="translate(0, 319) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Alaska" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Alaska" }}>
               <path d="M1277 3107 c-43 -22 -72 -31 -108 -31 -41 0 -49 -3 -49 -19 0 -23
               -18 -57 -30 -57 -6 0 -10 10 -10 21 0 19 -4 21 -31 15 -17 -3 -53 -6 -79 -6
               -45 0 -48 -1 -85 -55 -60 -88 -93 -112 -167 -121 -34 -4 -78 -6 -95 -5 -18 1
@@ -194,12 +195,12 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               -17 -50 7 -11 12 -31 12 -45 0 -32 31 -34 54 -2 l17 22 -6 -28 c-6 -32 19 -40
               28 -8 3 13 11 17 28 14 19 -3 38 9 87 54 69 64 79 93 33 93 -24 0 -63 25 -50
               33 2 1 18 11 34 23 17 11 38 23 48 27 24 9 21 22 -8 41 -32 21 -34 20 -75 -14z"/>
-            </a>
+            </Link>
           </g>
         </svg>
         <svg width="159px" height="167px" className={classes.seattle}>
           <g transform="translate(0, 167) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Seattle" target="_self" style={{ cursor: "pointer" }} >
+            <Link to={{ pathname: "/location/Seattle" }} >
               <path d="M677 1624 c-22 -22 -1 -95 54 -181 18 -30 1 -44 -18 -15 -9 12 -24
                 22 -36 22 -17 0 -19 -5 -14 -33 3 -19 -1 -43 -9 -57 -7 -14 -13 -40 -14 -57 0
                 -25 -4 -33 -18 -33 -9 0 -25 -12 -34 -27 l-16 -28 -7 27 c-7 26 -7 26 -132 33
@@ -219,22 +220,22 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
                 33 82 3 34 3 84 0 110 -5 40 -8 45 -19 33 -8 -7 -14 -20 -14 -28 0 -25 -37
                 -63 -50 -51 -8 8 -2 21 20 49 33 42 36 58 15 95 -8 14 -14 43 -14 65 l1 40 21
                 -47 c36 -79 70 -57 42 26 -16 47 -15 76 4 76 5 0 14 -14 20 -31z"/>
-            </a>
+            </Link>
           </g>
-        </svg>
+        </svg >
         <svg width="97px" height="146px" className={classes.spokane}>
           <g transform="translate(0, 146) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Spokane" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Spokane" }}>
               <path d="M101 1412 c-10 -7 -24 -149 -57 -598 -46 -612 -52 -812 -24 -806 8 2
               44 8 80 14 36 6 79 16 95 23 72 31 103 34 273 20 92 -7 228 -17 303 -20 l137
               -8 7 41 c4 25 2 54 -6 75 -10 27 -10 126 0 473 6 242 14 507 18 590 l6 151
               -134 7 c-149 8 -531 33 -624 42 -33 3 -66 1 -74 -4z"/>
-            </a>
+            </Link>
           </g>
-        </svg>
+        </svg >
         <svg width="206px" height="345px" className={classes.idaho}>
           <g transform="translate(0, 345) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="https://idahowwami.school.blog/" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "https://idahowwami.school.blog/" }}>
               <path d="M104 3212 c0 -103 -3 -374 -7 -602 -4 -228 -7 -422 -7 -430 1 -8 2
               -28 2 -43 1 -20 3 -25 9 -15 5 8 9 -8 9 -42 0 -71 32 -136 82 -170 52 -35 90
               -89 83 -118 -3 -12 -22 -48 -42 -79 -46 -73 -93 -193 -93 -241 0 -28 -8 -46
@@ -250,12 +251,12 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               53 -143 121 -23 68 -44 95 -116 150 -36 28 -80 66 -99 86 l-34 35 18 40 18 40
               -45 53 c-25 29 -51 64 -59 78 -17 31 -26 388 -11 442 l10 36 -141 1 c-77 1
               -143 4 -146 5 -3 2 -6 -80 -7 -182z"/>
-            </a>
+            </Link>
           </g>
-        </svg>
+        </svg >
         <svg width="346" height="249px" className={classes.montana}>
           <g transform="translate(0, 249) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Montana" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Montana" }}>
               <path d="M3065 2444 c-1070 -112 -2288 -194 -2892 -194 l-173 0 0 -543 0 -544
               40 -12 40 -12 -22 -42 c-18 -35 -22 -64 -26 -179 -3 -100 -8 -141 -18 -149
               -18 -15 -18 -68 2 -134 33 -117 88 -137 160 -60 31 34 44 42 51 33 6 -7 41
@@ -265,20 +266,20 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               1 88 3 91 5 4 164 14 634 40 50 3 131 7 180 10 163 10 259 15 355 20 52 3 138
               8 190 11 52 3 102 6 110 6 8 0 168 8 355 19 187 10 372 19 410 21 l70 3 -3 40
               c-5 67 -192 1848 -198 1883 -3 17 -10 31 -17 31 -7 -1 -70 -8 -142 -15z"/>
-            </a>
+            </Link>
           </g>
-        </svg>
+        </svg >
         <svg width="270px" height="218px" className={classes.wyoming}>
           <g transform="translate(0, 218) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <a href="/location/Wyoming" target="_self" style={{ cursor: "pointer" }}>
+            <Link to={{ pathname: "/location/Wyoming" }}>
               <path d="M2194 2131 c-2 -2 -43 -5 -91 -7 -272 -10 -431 -18 -1170 -59 -446
               -25 -820 -45 -831 -45 -25 0 -27 89 17 -1070 23 -593 37 -879 45 -886 12 -12
               60 -10 686 21 832 42 1736 112 1751 136 3 6 4 20 2 32 -2 12 -48 436 -103 942
               -56 506 -102 925 -104 930 -3 9 -193 15 -202 6z"/>
-            </a>
+            </Link>
           </g>
-        </svg>
-      </div>
+        </svg >
+      </div >
     );
   }
 }
