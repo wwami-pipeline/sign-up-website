@@ -1,7 +1,10 @@
 .toolbar-logo {
-  height: 65px;
-  margin: 20px 0px 0px 15px;
-  max-width: 90%;
+  height: auto;
+  width: 60vw;
+}
+
+.App {
+  background-color: #f8f9fa;
 }
 
 .toolbar-title {
@@ -32,9 +35,10 @@
 
 .tabLabel {
   color: #440088 !important;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
   text-transform: uppercase;
+  margin: 0 4px;
 }
 
 .tabLabel:hover {
@@ -52,4 +56,15 @@
 
 .dropdown-toggle {
   color: #440088 !important;
+}
+
+@media (min-width: 768px) {
+  .toolbar-logo {
+    height: 65px;
+    margin: 10px 15px;
+    max-width: 485px;
+  }
+  .tabLabel {
+    font-size: 1.3em;
+  }
 }

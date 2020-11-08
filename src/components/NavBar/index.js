@@ -7,40 +7,35 @@ import './index.css';
 const NavBar = () => {
     return(
       <div className="App">
-        <div style={{ backgroundColor: "#f8f9fa" }}>
-          <a href="/" >
+        <Navbar collapseOnSelect bg="light" expand="lg">
+          <Navbar.Brand href="/">
             <img className="toolbar-logo" alt="UW School of Medicine Volunteer Logo" src="/images/uw_name_logo.jpg" />
-          </a>
-            <br/>
-        </div>
-        <Navbar bg="light" expand="lg">
-          <div>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link className="tabLabel" href="/">Home</Nav.Link>
-                <NavDropdown className="tabLabel" title="About" id="basic-nav-dropdown">
-                  <NavDropdown.Item className="tabSubLabel" href="/about"> About Us </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/contact"> Contact </NavDropdown.Item>
-                </NavDropdown>
-                <NavDropdown className="tabLabel" title="Resources" id="basic-nav-dropdown">
-                  <NavDropdown.Item className="tabSubLabel" href="/resources/links"> Website Links </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/resources/videos"> Training Videos </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/resources/tools"> Teaching Tools </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/resources/protocols"> Protocols </NavDropdown.Item>
-                </NavDropdown>
-                <NavDropdown className="tabLabel" title="Other Student Orgs" id="basic-nav-dropdown">
-                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Seattle"> Seattle </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Spokane"> Spokane </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Wyoming"> Wyoming </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Alaska"> Alaska </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Montana"> Montana </NavDropdown.Item>
-                  <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Idaho"> Idaho </NavDropdown.Item>
-                </NavDropdown>
-                <Nav.Link className="tabLabel" href="/donate">Donations</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </div>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="ml-auto">
+              <Nav.Link className="tabLabel" href="/">Home</Nav.Link>
+              <NavDropdown className="tabLabel" title="About" id="collasible-nav-dropdown">
+                <NavDropdown.Item className="tabSubLabel" href="/about"> About Us </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/contact"> Contact </NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown className="tabLabel" title="Resources" id="collasible-nav-dropdown">
+                <NavDropdown.Item className="tabSubLabel" href="/resources/links"> Website Links </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/resources/videos"> Training Videos </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/resources/tools"> Teaching Tools </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/resources/protocols"> Protocols </NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown className="tabLabel" title="Other Student Orgs" id="collasible-nav-dropdown">
+                <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Seattle"> Seattle </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Spokane"> Spokane </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Wyoming"> Wyoming </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Alaska"> Alaska </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Montana"> Montana </NavDropdown.Item>
+                <NavDropdown.Item className="tabSubLabel" href="/outsideOrganizations/Idaho"> Idaho </NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link className="tabLabel" href="/donate">Donations</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     )
