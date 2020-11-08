@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppBar,
   withStyles,
@@ -7,11 +7,108 @@ import {
   Link,
   Paper,
   Grid,
+  createStyles,
 } from '@material-ui/core';
 import NavBar from '../../components/NavBar';
 import BottomBanner from '../../components/BottomBanner';
 
-const styles = () => ({
+interface OutsideOrgPageProps {
+  classes?: any; // CSS-in-JS styling
+  outsideOrgs: any;
+}
+
+const OutsideOrgPage: React.FC<OutsideOrgPageProps> = (props) => {
+  const { classes } = props;
+  const location = window.location.pathname.split('/')[2]; // Get location from URL
+  const outsideOrgs = props.outsideOrgs[location]
+    ? props.outsideOrgs[location]
+    : {};
+
+  return (
+    <div className={classes.page}>
+      <CssBaseline />
+      <AppBar position="static">
+        <NavBar />
+      </AppBar>
+      <Paper className={classes.paperContainer}>
+        <Typography
+          className={classes.text}
+          variant="h4"
+          style={{ margin: '0.5em 0 1.5em 0' }}
+        >
+          OTHER {location.toUpperCase()} STUDENT ORGANIZATIONS
+          </Typography>
+
+        <Typography
+          className={classes.text}
+          style={{ marginBottom: '1.5em', fontSize: 24, fontWeight: 'bold' }}
+        >
+          Service Learning* is just one way to participate outside of the
+          classroom!
+          </Typography>
+
+        <Typography
+          className={classes.text}
+          style={{ marginBottom: '1.5em', fontSize: 20, fontWeight: 'bold' }}
+        >
+          For contact information on the groups listed below, click here
+          </Typography>
+
+        <Typography className={classes.text} style={{ fontSize: 16 }}>
+          *Service Learning at the SOM is defined as providing service to
+          external, rather than internal communities.
+          </Typography>
+      </Paper>
+
+      {/* RESOURCES PAGE CONTENT */}
+      <div
+        style={{
+          marginTop: '1.5em',
+          marginBottom: '1em',
+          maxWidth: 1250,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <Grid container spacing={24}>
+          <Grid item xs={12} md={6}>
+            <Paper
+              className={classes.paperContainer}
+              style={{
+                padding: '1em',
+                height: 600,
+                overflowY: 'scroll',
+              }}
+            >
+              <Typography className={classes.gridTitle} variant="h4">
+                Committees
+                </Typography>
+              {decipher(outsideOrgs['Committees'], classes)}
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Paper
+              className={classes.paperContainer}
+              style={{
+                padding: '1em',
+                height: 600,
+                overflowY: 'scroll',
+              }}
+            >
+              <Typography className={classes.gridTitle} variant="h4">
+                Student Interest Groups
+                </Typography>
+              {decipher(outsideOrgs['StudentInterestGroups'], classes)}
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
+      <BottomBanner />
+    </div>
+  );
+}
+
+const styles = createStyles({
   description: {
     color: '#2E1159',
     fontFamily: 'Lato',
@@ -118,155 +215,60 @@ const processText = (text, classes) => {
               </Link>
             </Typography>
           ) : (
-            <Typography
-              variant="subtitle1"
-              className={classes.description}
-              inline
-            >
-              <Link inline color="secondary" href={item.value} target="_blank">
-                {item.value}
-              </Link>
-            </Typography>
-          )}
+                <Typography
+                  variant="subtitle1"
+                  className={classes.description}
+                  inline
+                >
+                  <Link inline color="secondary" href={item.value} target="_blank">
+                    {item.value}
+                  </Link>
+                </Typography>
+              )}
         </div>
       ))}
     </div>
   );
 };
 
-class ResourcesPage extends Component {
-  render() {
-    const { classes } = this.props;
-
-    const location = window.location.pathname.split('/')[2]; // Get location from URL
-
-    const outsideOrgs = this.props.outsideOrgs[location]
-      ? this.props.outsideOrgs[location]
-      : {};
-
-    return (
-      <div className={classes.page}>
-        <CssBaseline />
-        <AppBar position="static">
-          <NavBar />
-        </AppBar>
-        <Paper className={classes.paperContainer}>
-          <Typography
-            className={classes.text}
-            variant="h4"
-            style={{ margin: '0.5em 0 1.5em 0' }}
-          >
-            OTHER {location.toUpperCase()} STUDENT ORGANIZATIONS
-          </Typography>
-
-          <Typography
-            className={classes.text}
-            style={{ marginBottom: '1.5em', fontSize: 24, fontWeight: 'bold' }}
-          >
-            Service Learning* is just one way to participate outside of the
-            classroom!
-          </Typography>
-
-          <Typography
-            className={classes.text}
-            style={{ marginBottom: '1.5em', fontSize: 20, fontWeight: 'bold' }}
-          >
-            For contact information on the groups listed below, click here
-          </Typography>
-
-          <Typography className={classes.text} style={{ fontSize: 16 }}>
-            *Service Learning at the SOM is defined as providing service to
-            external, rather than internal communities.
-          </Typography>
-        </Paper>
-
-        {/* RESOURCES PAGE CONTENT */}
-        <div
-          style={{
-            marginTop: '1.5em',
-            marginBottom: '1em',
-            maxWidth: 1250,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-        >
-          <Grid container spacing={24}>
-            <Grid item xs={12} md={6}>
-              <Paper
-                className={classes.paperContainer}
-                style={{
-                  padding: '1em',
-                  height: 600,
-                  overflowY: 'scroll',
-                }}
-              >
-                <Typography className={classes.gridTitle} variant="h4">
-                  Committees
-                </Typography>
-                {this.decipher(outsideOrgs['Committees'], classes)}
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Paper
-                className={classes.paperContainer}
-                style={{
-                  padding: '1em',
-                  height: 600,
-                  overflowY: 'scroll',
-                }}
-              >
-                <Typography className={classes.gridTitle} variant="h4">
-                  Student Interest Groups
-                </Typography>
-                {this.decipher(outsideOrgs['StudentInterestGroups'], classes)}
-              </Paper>
-            </Grid>
-          </Grid>
-        </div>
-        <BottomBanner />
-      </div>
-    );
-  }
-
-  decipher = (obj, classes) => {
-    return (
-      <div>
-        {obj ? (
-          Object.keys(obj).map((key) => {
-            const curr = obj[key];
-            if (curr.type === 'section-title') {
-              return (
-                <div>
-                  <Typography
-                    className={classes.directionTitleTop}
-                    variant="h5"
-                  >
-                    {curr.value}
-                  </Typography>
-                </div>
-              );
-            } else if (curr.type === 'subsection-title') {
-              return (
-                <Typography variant="overline" className={classes.title}>
+const decipher = (obj, classes) => {
+  return (
+    <div>
+      {obj ? (
+        Object.keys(obj).map((key) => {
+          const curr = obj[key];
+          if (curr.type === 'section-title') {
+            return (
+              <div>
+                <Typography
+                  className={classes.directionTitleTop}
+                  variant="h5"
+                >
                   {curr.value}
                 </Typography>
-              );
-            } else if (curr.type === 'italics') {
-              return (
-                <Typography className={classes.italics}>
-                  <i>{curr.value}</i>
-                </Typography>
-              );
-            } else {
-              return processText(curr.value, classes);
-            }
-          })
-        ) : (
+              </div>
+            );
+          } else if (curr.type === 'subsection-title') {
+            return (
+              <Typography variant="overline" className={classes.title}>
+                {curr.value}
+              </Typography>
+            );
+          } else if (curr.type === 'italics') {
+            return (
+              <Typography className={classes.italics}>
+                <i>{curr.value}</i>
+              </Typography>
+            );
+          } else {
+            return processText(curr.value, classes);
+          }
+        })
+      ) : (
           <div />
         )}
-      </div>
-    );
-  };
-}
+    </div>
+  );
+};
 
-export default withStyles(styles)(ResourcesPage);
+export default withStyles(styles)(OutsideOrgPage);

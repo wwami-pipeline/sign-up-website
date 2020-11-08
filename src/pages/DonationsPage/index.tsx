@@ -4,12 +4,13 @@ import {
   Button,
   withStyles,
   Typography,
-  CssBaseline
+  CssBaseline,
+  createStyles
 } from "@material-ui/core";
 import NavBar from "../../components/NavBar";
 import BottomBanner from '../../components/BottomBanner';
 
-const styles = () => ({
+const styles = createStyles({
   page: {
     overflow: "hidden"
   },
@@ -66,65 +67,62 @@ const styles = () => ({
   }
 });
 
-class AboutPage extends Component {
-  render() {
-    const { classes } = this.props;
+const AboutPage: React.FC<{ classes: any }> = (props) => {
+  const { classes } = props;
+  return (
+    <div className={classes.page}>
+      <CssBaseline />
+      <AppBar position="static">
+        <NavBar />
+      </AppBar>
 
-    return (
-      <div className={classes.page}>
-        <CssBaseline />
-        <AppBar position="static">
-          <NavBar />          
-        </AppBar>
-
-        <div className={classes.donateSection}>
-          <Typography className={classes.topDonationText} variant="h5">Consider A Gift To The </Typography>
-          <Typography className={classes.donationText} variant="h4">UWSOM MEDICINE SERVICE LEARNING FUND</Typography>
-          <Typography className={classes.donationText}variant="h5">
-            Your Support Will Help To Sustain Our Efforts!
-          </Typography>
-          <div className={classes.buttonContainer}>
-            <Button
-              className={classes.donationButtonMain}
-              href="http://depts.washington.edu/givemed/give/?page=make&source=servmd"
-              target="_blank">
-              Make A Gift
-            </Button>
-          </div>
-          <Typography className={classes.donationText}variant="h4">
-            Specific Project Fundraising Pages
-          </Typography>
-          <div className={classes.buttonContainer}>
-            <Button
-              className={classes.donationButtonSecondary}
-              href="https://online.gifts.washington.edu/peer2peer/campaign/b2a0bc42-b48b-49c7-8615-4a6fc1ad53c2"
-              target="_blank">
-              HEALTH SCIENCES MOBILE HEALTH VAN
-            </Button>
-            <Button
-              className={classes.donationButtonSecondary}
-              href="https://online.gifts.washington.edu/peer2peer/campaign/5c9028f3-582b-449d-ba71-91e56490e82f"
-              target="_blank">
-              SHIFA
-            </Button>
-            <Button
-              className={classes.donationButtonSecondary}
-              href="https://online.gifts.washington.edu/peer2peer/campaign/44c375de-6bec-40cf-8e99-e8af258b04d9"
-              target="_blank">
-              UDSM
-            </Button>
-            <Button
-              className={classes.donationButtonSecondary}
-              href="https://online.gifts.washington.edu/peer2peer/Campaign/d929d3c5-a01a-45cd-b84f-80925a2fc6e3"
-              target="_blank">
-              UTEST
-            </Button>
-          </div>
+      <div className={classes.donateSection}>
+        <Typography className={classes.topDonationText} variant="h5">Consider A Gift To The </Typography>
+        <Typography className={classes.donationText} variant="h4">UWSOM MEDICINE SERVICE LEARNING FUND</Typography>
+        <Typography className={classes.donationText} variant="h5">
+          Your Support Will Help To Sustain Our Efforts!
+        </Typography>
+        <div className={classes.buttonContainer}>
+          <Button
+            className={classes.donationButtonMain}
+            href="http://depts.washington.edu/givemed/give/?page=make&source=servmd"
+            target="_blank">
+            Make A Gift
+          </Button>
         </div>
-        <BottomBanner />
+        <Typography className={classes.donationText} variant="h4">
+          Specific Project Fundraising Pages
+        </Typography>
+        <div className={classes.buttonContainer}>
+          <Button
+            className={classes.donationButtonSecondary}
+            href="https://online.gifts.washington.edu/peer2peer/campaign/b2a0bc42-b48b-49c7-8615-4a6fc1ad53c2"
+            target="_blank">
+            HEALTH SCIENCES MOBILE HEALTH VAN
+          </Button>
+          <Button
+            className={classes.donationButtonSecondary}
+            href="https://online.gifts.washington.edu/peer2peer/campaign/5c9028f3-582b-449d-ba71-91e56490e82f"
+            target="_blank">
+            SHIFA
+          </Button>
+          <Button
+            className={classes.donationButtonSecondary}
+            href="https://online.gifts.washington.edu/peer2peer/campaign/44c375de-6bec-40cf-8e99-e8af258b04d9"
+            target="_blank">
+            UDSM
+          </Button>
+          <Button
+            className={classes.donationButtonSecondary}
+            href="https://online.gifts.washington.edu/peer2peer/Campaign/d929d3c5-a01a-45cd-b84f-80925a2fc6e3"
+            target="_blank">
+            UTEST
+          </Button>
+        </div>
       </div>
-    );
-  }
+      <BottomBanner />
+    </div>
+  );
 }
 
 export default withStyles(styles)(AboutPage);

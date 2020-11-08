@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import LocationPage from './pages/LocationPage';
@@ -11,128 +11,115 @@ import OrgPage from './components/OrgPage';
 import ResourcesPage from './pages/ResourcesPage';
 import OutsideOrgPage from './pages/OutsideOrgPage';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    firebase.initializeApp(config);
-    const db = firebase.database();
+firebase.initializeApp(config);
+const db = firebase.database();
 
-    this.state = {
-      signedIn: false,
-      locations: {},
-      locationImages: {},
-    };
+const useForceUpdate = () => {
+  const [value, setValue] = useState(0); // integer state
+  return () => setValue(value => ++value); // update the state to force render
+}
 
+const App: React.FC = () => {
+  const forceUpdate = useForceUpdate();
+
+  // Highest-Level State
+  let [signedIn, setSignedIn] = useState<boolean>(false);
+  let [locations, setLocations] = useState<any>();
+  let [locationImages, setLocationImages] = useState<any>();
+  let [overviews, setOverviews] = useState<any>();
+  let [prerequisites, setPrerequisites] = useState<any>();
+  let [resources, setResources] = useState<any>();
+  let [outsideOrgs, setOutsideOrgs] = useState<any>();
+
+  useEffect(() => {
     db.ref('/')
       .once('value')
       .then((value) => {
         const data = value.toJSON();
-        this.state.overviews = data['Overviews'];
-        this.state.prerequisites = data['Prerequisites'];
-        this.state.resources = data['Resources'];
-        this.state.outsideOrgs = data['OutsideOrganizations'];
-        const locations = data['Locations'];
-        Object.keys(locations).forEach((location) => {
-          this.state['locations'][location] = locations[location];
-          this.state['locationImages'][location] = {};
-          this.populateLocationImages(
+        setOverviews(data ? data['Overviews'] : null);
+        setPrerequisites(data ? data['Prerequisites'] : null);
+        setResources(data ? data['Resources'] : null);
+        setOutsideOrgs(data ? data['OutsideOrganizations'] : null);
+        let tempLocationImages = {};
+        let tempLocations = {};
+        const locationData = data ? data['Locations'] : {};
+        Object.keys(locationData).forEach((location) => {
+          tempLocations[location] = locationData[location];
+          tempLocationImages[location] = {};
+          populateLocationImages(
             location,
-            this.state['locations'][location],
-            this.state['locationImages'][location]
-          );
+            tempLocations[location],
+            tempLocationImages
+          ).then(() => {
+            setLocations(tempLocations);
+            setLocationImages(tempLocationImages);
+            setTimeout(() => {forceUpdate(); }, 1); // Bug: Need to force render, and need to wait 1ms for images
+          })
         });
-        this.forceUpdate();
+        setLocations(tempLocations);
+        setLocationImages(tempLocationImages);
       });
+  }, [])
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ signedIn: true });
-      }
-    });
-  }
+  const populateLocationImages = async (locationName, locationData, allImageData) => {
+    return new Promise((res, err) => {
+      const orgs = Object.keys(locationData);
+      const storageRef = firebase.storage().ref();
+      // Populate Image URLs by organization
+      orgs.forEach(async (org) => {
+        // Get org image
+        const url = await storageRef.child('/' + locationName + '/' + org + '.jpg').getDownloadURL().catch(err => { })
+        allImageData[locationName][org + '.jpg'] = url;
 
-  populateLocationImages = (locationName, locationData, imageData) => {
-    const orgs = Object.keys(locationData);
-    const storageRef = firebase.storage().ref();
-    let orgCount = 0;
-    // Populate Image URLs by organization
-    orgs.forEach((org) => {
-      // Get org image
-      storageRef
-        .child('/' + locationName + '/' + org + '.jpg')
-        .getDownloadURL()
-        .then((url) => {
-          imageData[org + '.jpg'] = url;
-          orgCount++;
-          if (orgCount >= orgs.length) {
-            this.forceUpdate();
-          }
-        })
-        .catch(() => {
-          orgCount++;
-        });
-      // Get image for each event in org
-      imageData[org] = {};
-      const events = Object.keys(locationData[org]);
-      let eventsCount = 0;
-      events.forEach((event) => {
-        storageRef
-          .child(
-            '/' +
+        // Get image for each event in org
+        allImageData[locationName][org] = {};
+        const events = Object.keys(locationData[org]);
+        events.forEach(async (event) => {
+          const eventUrl = await storageRef
+            .child(
+              '/' +
               locationName +
               '/' +
               org +
               '/' +
               locationData[org][event]['Title'] +
               '.jpg'
-          )
-          .getDownloadURL()
-          .then((url) => {
-            imageData[org][locationData[org][event]['Title']] = url;
-            eventsCount++;
-            if (eventsCount >= events.length) {
-              this.forceUpdate();
-            }
-          })
-          .catch(() => {
-            eventsCount++;
-          });
+            )
+            .getDownloadURL().catch(err => { })
+          allImageData[locationName][org][locationData[org][event]['Title']] = eventUrl;
+        });
+
+        res();
       });
-    });
+    })
   };
 
-  render() {
-    return this.state.overviews === undefined ? (
-      <div />
-    ) : (
+  return overviews === undefined ? (
+    <div />
+  ) : (
       <Router>
         <Switch>
           <Route
             exact
             path="/"
             render={() => {
-              return this.state.overviews ? (
-                <MainPage overviews={this.state.overviews} />
-              ) : (
-                <div />
-              );
+              return overviews ? <MainPage /> : <div />;
             }}
           />
           <Route
             path="/location"
             render={() => {
-              console.log(this.state.locations)
-              return this.state.overviews ? (
+              return overviews ? (
                 <LocationPage
-                  prerequisites={this.state.prerequisites}
-                  locations={this.state.locations}
-                  allImages={this.state.locationImages}
-                  overviews={this.state.overviews}
-                  signedIn={this.state.signedIn}
+                  prerequisites={prerequisites}
+                  locations={locations}
+                  allImages={locationImages}
+                  overviews={overviews}
+                  signedIn={signedIn}
                 />
               ) : (
-                <div />
-              );
+                  <div />
+                );
             }}
           />
           {/* Routes for each organization */}
@@ -140,10 +127,10 @@ class App extends Component {
             path="/org"
             render={() => (
               <OrgPage
-                locations={this.state['locations']}
-                overviews={this.state['overviews']}
-                images={this.state['locationImages']}
-                signedIn={this.state.signedIn}
+                locations={locations}
+                overviews={overviews}
+                images={locationImages}
+                signedIn={signedIn}
               />
             )}
           />
@@ -152,18 +139,17 @@ class App extends Component {
           <Route exact path="/donate" component={DonatePage} />
           <Route
             path="/resources"
-            render={() => <ResourcesPage resources={this.state['resources']} />}
+            render={() => <ResourcesPage resources={resources} />}
           />
           <Route
             path="/outsideOrganizations"
             render={() => (
-              <OutsideOrgPage outsideOrgs={this.state['outsideOrgs']} />
+              <OutsideOrgPage outsideOrgs={outsideOrgs} />
             )}
           />
         </Switch>
       </Router>
     );
-  }
 }
 
 export default App;

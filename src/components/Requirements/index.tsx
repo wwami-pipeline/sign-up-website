@@ -1,11 +1,7 @@
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
-import React from 'react';
+import React, { useState } from 'react';
+import { createStyles, Dialog, DialogContent, DialogTitle, Typography, withStyles } from '@material-ui/core';
 
-const styles = () => ({
+const styles = createStyles({
   dialogBody: {
     backgroundColor: '#B1A6C1',
   },
@@ -62,71 +58,73 @@ const processText = (text) => {
               {item.value}
             </a>
           ) : (
-            <a href={item.value} style={{ color: '#F4EFA8' }}>
-              {item.value}
-            </a>
-          )}
+                <a href={item.value} style={{ color: '#F4EFA8' }}>
+                  {item.value}
+                </a>
+              )}
         </div>
       ))}
     </div>
   );
 };
 
-class Requirements extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [],
-      title: props.title,
-      open: false,
-    };
-    Object.keys(props.data).forEach((key) => {
-      this.state.items.push(props.data[key]);
-    });
-  }
+interface RequirementsProps {
+  classes?: any; // CSS-in-JS styling
+  title: string;
+  data: any;
+  open: boolean;
+  handleClose: any;
+}
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <div>
-        <Dialog
-          className={classes.dialog}
-          open={this.props.open}
-          onClose={this.props.handleClose}
-          fullWidth
-        >
-          <div className={classes.dialogBorder} />
-          <DialogTitle className={classes.dialogBody}>
-            <Typography variant="h4" className={classes.textCaps}>
-              {this.state.title}
-            </Typography>
-          </DialogTitle>
-          <div className={classes.dialogBody}>
-            <DialogContent className={classes.dialogContent}>
-              {this.state.items.map((item) => {
-                if (item.type === 'title') {
-                  return (
-                    <Typography className={classes.text}>
-                      <b>{item.value}</b>
-                    </Typography>
-                  );
-                } else if (item.type === 'italics') {
-                  return (
-                    <Typography className={classes.text}>
-                      <i>{item.value}</i>
-                    </Typography>
-                  );
-                } else {
-                  return processText(item.value);
-                }
-              })}
-            </DialogContent>
-          </div>
-          <div className={classes.dialogBorder} />
-        </Dialog>
-      </div>
-    );
+const Requirements: React.FC<RequirementsProps> = (props) => {
+  const { classes } = props;
+  const [items, setItems] = useState<any[]>([]);
+  const [title, setTitle] = useState<string>(props.title);
+  const [open, setOpen] = useState<boolean>(false);
+
+  if (props.data) {
+    Object.keys(props.data).forEach(key => items.push(props.data[key]));
   }
+  
+  return (
+    <div>
+      <Dialog
+        className={classes.dialog}
+        open={props.open}
+        onClose={props.handleClose}
+        fullWidth
+      >
+        <div className={classes.dialogBorder} />
+        <DialogTitle className={classes.dialogBody}>
+          <Typography variant="h4" className={classes.textCaps}>
+            {title}
+          </Typography>
+        </DialogTitle>
+        <div className={classes.dialogBody}>
+          <DialogContent className={classes.dialogContent}>
+            {items.map((item) => {
+              if (item.type === 'title') {
+                return (
+                  <Typography className={classes.text}>
+                    <b>{item.value}</b>
+                  </Typography>
+                );
+              } else if (item.type === 'italics') {
+                return (
+                  <Typography className={classes.text}>
+                    <i>{item.value}</i>
+                  </Typography>
+                );
+              } else {
+                return processText(item.value);
+              }
+            })}
+          </DialogContent>
+        </div>
+        <div className={classes.dialogBorder} />
+      </Dialog>
+    </div>
+  );
 }
 
 export default withStyles(styles)(Requirements);

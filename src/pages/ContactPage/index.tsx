@@ -1,14 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   AppBar,
   withStyles,
   Typography,
-  CssBaseline
+  CssBaseline,
+  createStyles
 } from "@material-ui/core";
 import NavBar from "../../components/NavBar";
 import BottomBanner from '../../components/BottomBanner';
 
-const styles = () => ({
+const styles = createStyles({
   page: {
     overflow: "hidden",
   },
@@ -41,44 +42,41 @@ const styles = () => ({
   }
 });
 
-class AboutPage extends Component {
-  render() {
-    const { classes } = this.props;
+const AboutPage: React.FC<{ classes: any }> = (props) => {
+  const { classes } = props;
+  return (
+    <div className={classes.page}>
+      <CssBaseline />
+      <AppBar position="static">
+        <NavBar />
+      </AppBar>
 
-    return (
-      <div className={classes.page}>
-        <CssBaseline />
-        <AppBar position="static">
-          <NavBar />          
-        </AppBar>
+      <div className={classes.contactSection}>
+        <Typography className={classes.titleTop} variant="h4">
+          CONTACT US
+          </Typography>
+        <Typography className={classes.secondaryTitle} variant="h5">
+          Questions? We'd love to hear from you.
+          </Typography>
 
-        <div className={classes.contactSection}>
-            <Typography className={classes.titleTop} variant="h4">
-              CONTACT US
-            </Typography>
-            <Typography className={classes.secondaryTitle} variant="h5">
-              Questions? We'd love to hear from you.
-            </Typography>
-
-          <div>
-            <Typography className={classes.contactBlockBold}>Leonora Clarke, Service Learning Manager, UW School of Medicine </Typography> 
-            <Typography className={classes.contactBlock} >clarkel@uw.edu <br/>
-            206-685-2009 <br/>
-            Health Sciences Building, Suite A-300</Typography> 
-          </div>
-
-          <div>
-            <Typography className={classes.contactBlockBold}> Mailing Address </Typography>
-            <Typography className={classes.contactBlock}>
-            1959 NE. Pacific Ave. Suite A-300 <br/>
-            Box 356340 <br/>
-            Seattle, WA  98195 </Typography> 
-          </div>
+        <div>
+          <Typography className={classes.contactBlockBold}>Leonora Clarke, Service Learning Manager, UW School of Medicine </Typography>
+          <Typography className={classes.contactBlock} >clarkel@uw.edu <br />
+          206-685-2009 <br />
+          Health Sciences Building, Suite A-300</Typography>
         </div>
-        <BottomBanner />
+
+        <div>
+          <Typography className={classes.contactBlockBold}> Mailing Address </Typography>
+          <Typography className={classes.contactBlock}>
+            1959 NE. Pacific Ave. Suite A-300 <br />
+          Box 356340 <br />
+          Seattle, WA  98195 </Typography>
+        </div>
       </div>
-    );
-  }
+      <BottomBanner />
+    </div>
+  );
 }
 
 export default withStyles(styles)(AboutPage);

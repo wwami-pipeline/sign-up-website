@@ -5,12 +5,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Card, CardContent, CardHeader, Link } from '@material-ui/core';
-import React from 'react';
+import { Card, CardContent, CardHeader, createStyles, Link } from '@material-ui/core';
+import React, { useState } from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import firebase from 'firebase';
+import { RouteComponentProps } from 'react-router-dom';
 
-const styles = () => ({
+const styles = createStyles({
   button: {
     marginTop: '1em',
   },
@@ -56,25 +57,23 @@ const styles = () => ({
   },
 });
 
-class OrgItemModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalOpen: false,
-      signUpLinks: props.project['Sign-up Link'].split(','),
-    };
+interface OtherItemModalProps extends RouteComponentProps<RouterProps> {
+  classes: any; // CSS-in-JS styling
+  fullScreen: boolean;
+  project: any;
+  signedIn: boolean;
+}
 
-    if (props.project['Order']) {
-      this.state.order = [];
-      Object.keys(props.project['Order']).forEach((key) => {
-        this.state.order.push(props.project['Order'][key]);
-      });
-    }
-  }
+const OtherItemModal: React.FC<OtherItemModalProps> = (props) => {
+  const { classes, fullScreen, project, signedIn } = props;
 
-  getOrderNumber(x) {
-    if (this.state.order) {
-      let index = this.state.order.indexOf(x);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [signUpLinks, setSignUpLinks] = useState<string[]>(props.project['Sign-up Link'].split(','));
+  const [order, setOrder] = useState<string[] | null>(null);
+
+  const getOrderNumber = (x) => {
+    if (order) {
+      let index = order.indexOf(x);
       return index === -1 ? 1000 : index;
     }
 
@@ -96,24 +95,21 @@ class OrgItemModal extends React.Component {
     return 14;
   }
 
-  render() {
-    const { classes, fullScreen, project } = this.props;
-
-    const signUpButtons = (
-      <div>
-        {this.state.signUpLinks.length === 1 ? (
-          <Button
-            size="large"
-            color="secondary"
-            variant="contained"
-            className={classes.button}
-            target="_blank"
-            href={this.state.signUpLinks[0]}
-          >
-            Sign Up
-          </Button>
-        ) : (
-          this.state.signUpLinks.map((link, index) => (
+  const signUpButtons = (
+    <div>
+      {signUpLinks.length === 1 ? (
+        <Button
+          size="large"
+          color="secondary"
+          variant="contained"
+          className={classes.button}
+          target="_blank"
+          href={signUpLinks[0]}
+        >
+          Sign Up
+        </Button>
+      ) : (
+          signUpLinks.map((link, index) => (
             <Button
               size="large"
               color="secondary"
@@ -126,32 +122,31 @@ class OrgItemModal extends React.Component {
             </Button>
           ))
         )}
-      </div>
-    );
+    </div>
+  );
 
-    return (
-      <div>
-        <Dialog
-          open={this.state.modalOpen}
-          onClose={() => this.setState({ modalOpen: false })}
-          fullWidth={!fullScreen}
-          fullScreen={fullScreen}
-          maxWidth="lg"
-        >
-          <div className={classes.dialogBody}>
-            <DialogTitle>
-              <Typography variant="h4"> {project['Title']} </Typography>
-              <Button
-                className={classes.closeButton}
-                onClick={() => this.setState({ modalOpen: false })}
-                color="white"
-              >
-                Close
-              </Button>
-              {this.state.signUpLinks.length > 0 ? (
-                this.props.signedIn ? (
-                  signUpButtons
-                ) : (
+  return (
+    <div>
+      <Dialog
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        fullWidth={!fullScreen}
+        fullScreen={fullScreen}
+        maxWidth="lg"
+      >
+        <div className={classes.dialogBody}>
+          <DialogTitle>
+            <Typography variant="h4"> {project['Title']} </Typography>
+            <Button
+              className={classes.closeButton}
+              onClick={() => setModalOpen(false)}
+            >
+              Close
+            </Button>
+            {signUpLinks.length > 0 ? (
+              signedIn ? (
+                signUpButtons
+              ) : (
                   <Typography style={{ fontSize: 18, marginTop: '1em' }}>
                     <Link
                       style={{
@@ -170,100 +165,97 @@ class OrgItemModal extends React.Component {
                       }}
                     >
                       Sign In
-                    </Link>{' '}
-                    with your UW Net ID to see sign up links
+                  </Link>{' '}
+                  with your UW Net ID to see sign up links
                   </Typography>
                 )
-              ) : (
+            ) : (
                 <div />
               )}
-            </DialogTitle>
-            <DialogContent>
-              {Object.keys(project)
-                .sort((x, y) => {
-                  return this.getOrderNumber(x) - this.getOrderNumber(y);
-                })
-                .map((key) => {
-                  if (
-                    key.toLowerCase() !== 'title' &&
-                    key !== 'Sign-up Link' &&
-                    key !== 'Dates' &&
-                    key !== 'Order'
-                  )
-                    return (
-                      <Typography
-                        key={key}
-                        className={classes.textItem}
-                        gutterBottom
-                        align="left"
-                        component="p"
-                      >
-                        <h3 className={classes.textCaps}>
-                          <u>{key}</u>
-                        </h3>
-                        {project[key].split('\n').map((item, i) => {
-                          return (
-                            <p className={classes.indentText} key={i}>
-                              {item}
-                            </p>
-                          );
-                        })}
-                      </Typography>
-                    );
-                  return <div key="0" />;
-                })}
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={() => this.setState({ modalOpen: false })}
-                color="white"
-              >
-                Close
-              </Button>
-            </DialogActions>
-          </div>
-        </Dialog>
-        <Card
-          className={classes.card}
-          onClick={() => this.setState({ modalOpen: true })}
-        >
-          <CardHeader
-            className={classes.cardHeader}
-            title={
-              <Typography className={classes.titleText} variant="h5">
-                {' '}
-                {project['Title']}{' '}
-              </Typography>
-            }
-          ></CardHeader>
-          <CardContent>
-            <Typography
-              className={classes.text}
-              gutterBottom
-              align="left"
-              component="p"
-            >
-              <b>Contact: </b>{' '}
-              {typeof project['Contact'] === 'string'
-                ? project['Contact'] === ''
-                  ? 'TBD'
-                  : project['Contact']
-                : 'TBD'}
+          </DialogTitle>
+          <DialogContent>
+            {Object.keys(project)
+              .sort((x, y) => {
+                return getOrderNumber(x) - getOrderNumber(y);
+              })
+              .map((key) => {
+                if (
+                  key.toLowerCase() !== 'title' &&
+                  key !== 'Sign-up Link' &&
+                  key !== 'Dates' &&
+                  key !== 'Order'
+                )
+                  return (
+                    <Typography
+                      key={key}
+                      className={classes.textItem}
+                      gutterBottom
+                      align="left"
+                      component="p"
+                    >
+                      <h3 className={classes.textCaps}>
+                        <u>{key}</u>
+                      </h3>
+                      {project[key].split('\n').map((item, i) => {
+                        return (
+                          <p className={classes.indentText} key={i}>
+                            {item}
+                          </p>
+                        );
+                      })}
+                    </Typography>
+                  );
+                return <div key="0" />;
+              })}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setModalOpen(false)}>
+              Close
+            </Button>
+          </DialogActions>
+        </div>
+      </Dialog>
+      <Card
+        className={classes.card}
+        onClick={() => setModalOpen(true)}
+      >
+        <CardHeader
+          className={classes.cardHeader}
+          title={
+            <Typography className={classes.titleText} variant="h5">
+              {' '}
+              {project['Title']}{' '}
             </Typography>
-            <Typography className={classes.text} align="left" component="p">
-              <b>Description: </b>
-              {/* Show description up to certain point */}
-              {typeof project['Project Description'] === 'string'
-                ? project['Project Description'].length > 250
-                  ? project['Project Description'].substring(0, 250) + '...'
-                  : project['Project Description']
-                : ''}
-            </Typography>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+          }
+        ></CardHeader>
+        <CardContent>
+          <Typography
+            className={classes.text}
+            gutterBottom
+            align="left"
+            component="p"
+          >
+            <b>Contact: </b>{' '}
+            {typeof project['Contact'] === 'string'
+              ? project['Contact'] === ''
+                ? 'TBD'
+                : project['Contact']
+              : 'TBD'}
+          </Typography>
+          <Typography className={classes.text} align="left" component="p">
+            <b>Description: </b>
+            {/* Show description up to certain point */}
+            {typeof project['Project Description'] === 'string'
+              ? project['Project Description'].length > 250
+                ? project['Project Description'].substring(0, 250) + '...'
+                : project['Project Description']
+              : ''}
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
 
-export default withMobileDialog()(withStyles(styles)(OrgItemModal));
+//@ts-ignore
+export default withMobileDialog()(withStyles(styles)(OtherItemModal));

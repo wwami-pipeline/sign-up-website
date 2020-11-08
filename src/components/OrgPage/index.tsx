@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
   withStyles,
@@ -6,13 +6,14 @@ import {
   CssBaseline,
   Grid,
   Button,
+  createStyles,
 } from '@material-ui/core';
 import NavBar from '../NavBar';
 import OrgItem from '../OrgItem';
 import OtherItem from '../OtherItem';
 import BottomBanner from '../BottomBanner';
 
-const styles = () => ({
+const styles = createStyles({
   page: {
     overflow: 'hidden',
   },
@@ -66,157 +67,158 @@ const styles = () => ({
   },
 });
 
-class OrgPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openedItem: window.location.pathname.split('/')[4],
-      modalOpen: false,
-    };
-    this.updateState();
-  }
+interface OrgPageProps  {
+  classes?: any; // CSS-in-JS styling
+  locations: any;
+  overviews: any;
+  images: any;
+  signedIn: boolean;
+}
 
-  componentDidMount() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
+const OrgPage: React.FC<OrgPageProps> = (props) => {
+  const [openedItem, setOpenedItem] = useState<string>(window.location.pathname.split('/')[4]);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  updateState = (location, org) => {
+  const [path, setPath] = useState<string>("");
+  const [currPath, setCurrPath] = useState<string>("");
+  const [images, setImages] = useState<any>();
+  const [overview, setOverview] = useState<any>();
+  const [title, setTitle] = useState<string>("");
+  const [projects, setProjects] = useState<any>();
+
+  const updateState = (location, org) => {
     if (
-      this.props['images'][location] !== undefined &&
-      this.props['locations'][location] !== undefined
+      props['images'][location] !== undefined &&
+      props['locations'][location] !== undefined
     ) {
-      this.setState({
-        images: this.props['images'][location][org],
-        overview: this.props['overviews'][org],
-        title: org,
-        path: window.location.pathname,
-        projects: this.props['locations'][location][org],
-      });
+      setImages(props['images'][location][org]);
+      setOverview(props['overviews'][org]);
+      setTitle(org);
+      setPath(window.location.pathname);
+      setProjects(props['locations'][location][org]);
     }
   };
 
-  render() {
-    if (this.state.path !== window.location.pathname) {
-      const splitUrl = window.location.pathname.split('/');
-      this.updateState(
-        decodeURIComponent(splitUrl[2]),
-        decodeURIComponent(splitUrl[3])
-      );
-      return <div />;
-    }
+  if (path !== window.location.pathname) {
+    const splitUrl = window.location.pathname.split('/');
+    updateState(
+      decodeURIComponent(splitUrl[2]),
+      decodeURIComponent(splitUrl[3])
+    );
+    return <div />;
+  }
 
-    const { classes, signedIn, overviews } = this.props;
-    const { path, projects, images, title } = this.state;
+  const { classes, signedIn, overviews } = props;
 
-    const overview = overviews ? overviews[title] : undefined;
+  if (path !== currPath) {
+    setCurrPath(path);
+  }
 
-    if (path !== this.state.currPath) {
-      this.setState({ currPath: path });
-    }
-
-    // Divide projects by their category field, if present
-    let categories = {};
-    categories[''] = [];
-    if (projects) {
-      Object.keys(projects).forEach((projectKey) => {
-        const project = projects[projectKey];
-        if (project.Category) {
-          const kvp = categories[project.Category];
-          if (kvp) {
-            kvp.push(project);
-          } else {
-            const arr = [project];
-            categories[project.Category] = arr;
-          }
+  // Divide projects by their category field, if present
+  let categories = {};
+  categories[''] = [];
+  if (projects) {
+    Object.keys(projects).forEach((projectKey) => {
+      const project = projects[projectKey];
+      if (project.Category) {
+        const kvp = categories[project.Category];
+        if (kvp) {
+          kvp.push(project);
         } else {
-          const emptyCategory = categories[''];
-          emptyCategory.push(project);
+          const arr = [project];
+          categories[project.Category] = arr;
         }
-      });
-    }
-    const grids = Object.keys(categories).map((category) => (
-      <div>
-        {category !== '' ? (
-          <Typography variant="h5">{category}</Typography>
-        ) : (
+      } else {
+        const emptyCategory = categories[''];
+        emptyCategory.push(project);
+      }
+    });
+  }
+  const grids = Object.keys(categories).map((category) => (
+    <div>
+      {category !== '' ? (
+        <Typography variant="h5">{category}</Typography>
+      ) : (
           <div />
         )}
-        <Grid
-          container
-          spacing={24}
-          alignContent="center"
-          className={classes.gridContainer}
-        >
-          {Object.keys(categories[category]).map((project, index) => (
-            <Grid item key={index} xs={12} md={6}>
-              {title === 'Others' ? (
-                <OtherItem
-                  signedIn={signedIn}
-                  project={categories[category][project]}
-                  path={path}
-                />
-              ) : (
+      <Grid
+        container
+        spacing={24}
+        alignContent="center"
+        className={classes.gridContainer}
+      >
+        {Object.keys(categories[category]).map((project, index) => (
+          <Grid item key={index} xs={12} md={6}>
+            {title === 'Others' ? (
+              <OtherItem
+                //@ts-ignore
+                signedIn={signedIn}
+                project={categories[category][project]}
+                path={path}
+              />
+            ) : (
+
                 <OrgItem
+                  //@ts-ignore
                   openedItem={
                     categories[category][project]['Title'] ===
-                    this.state.openedItem
+                    openedItem
                   }
                   signedIn={signedIn}
                   project={categories[category][project]}
                   imageUrl={images[categories[category][project]['Title']]}
                 />
               )}
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    ));
-    return (
-      <div className={classes.page}>
-        <CssBaseline />
-        <AppBar position="static">
-          <NavBar />
-        </AppBar>
-        <div className={classes.selectionContainer}>
-          <div className={classes.directionTitleBottom}>
-            <Typography className={classes.title} gutterBottom variant="h4">
-              {title}
-            </Typography>
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  ));
+  return (
+    <div className={classes.page}>
+      <CssBaseline />
+      <AppBar position="static">
+        <NavBar />
+      </AppBar>
+      <div className={classes.selectionContainer}>
+        <div className={classes.directionTitleBottom}>
+          <Typography className={classes.title} gutterBottom variant="h4">
+            {title}
+          </Typography>
 
-            {overview ? (
-              <div>
-                <Typography
-                  className={classes.description}
-                  gutterBottom
-                  variant="h6"
+          {overview ? (
+            <div>
+              <Typography
+                className={classes.description}
+                gutterBottom
+                variant="h6"
+              >
+                {overview.Description}
+              </Typography>
+              {overview.Video ? (
+                <Button
+                  onClick={() => window.open(overview.Video)}
+                  className={classes.videoButton}
+                  variant="contained"
                 >
-                  {overview.Description}
-                </Typography>
-                {overview.Video ? (
-                  <Button
-                    onClick={() => window.open(overview.Video)}
-                    className={classes.videoButton}
-                    variant="contained"
-                  >
-                    {title} Information Video
-                  </Button>
-                ) : (
+                  {title} Information Video
+                </Button>
+              ) : (
                   <div />
                 )}
-              </div>
-            ) : (
+            </div>
+          ) : (
               <div />
             )}
 
-            {/* Card Grids By Category */}
-            {grids}
-          </div>
+          {/* Card Grids By Category */}
+          {grids}
         </div>
-        <BottomBanner />
       </div>
-    );
-  }
+      <BottomBanner />
+    </div>
+  );
+
 }
 
 export default withStyles(styles)(OrgPage);

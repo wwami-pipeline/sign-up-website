@@ -1,17 +1,9 @@
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { Card, CardContent, CardHeader, CardMedia } from '@material-ui/core';
-import React from 'react';
-import withMobileDialog from '@material-ui/core/withMobileDialog';
+import React, { useEffect, useState } from 'react';
+import { Card, CardContent, CardHeader, CardMedia, createStyles, withMobileDialog, Typography, withStyles, DialogTitle, DialogContent, DialogActions, Dialog, Button } from '@material-ui/core';
 import { rrulestr } from 'rrule';
 import { SignInButton } from '../SignInButton/SignInButton';
 
-const styles = () => ({
+const styles = createStyles({
   button: {
     marginTop: '1em',
   },
@@ -71,41 +63,48 @@ const styles = () => ({
   },
 });
 
-class OrgItemModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalOpen: false,
-      signUpLinks: [],
-    };
+interface OrgItemModalProps {
+  project: any;
+  fullScreen: boolean;
+  imageUrl: string;
+  classes: any;
+  signedIn: boolean;
+}
 
+const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
+  const { classes, fullScreen, project, imageUrl, signedIn } = props;
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [signUpLinks, setSignUpLinks] = useState<string[]>([]);
+  const [order, setOrder] = useState<string[]>([]);
+
+  useEffect(() => {
     if (props.project['Dates']) {
+      setSignUpLinks([]);
       Object.keys(props.project['Dates']).forEach((key) => {
         let link = props.project['Dates'][key]['link'];
-        if (link && !this.state.signUpLinks.includes(link)) {
+        if (link && !signUpLinks.includes(link)) {
           if (link.includes('http')) {
-            this.state.signUpLinks.push(link);
+            signUpLinks.push(link);
           } else {
-            this.state.signUpLinks.push('http://' + link);
+            signUpLinks.push('http://' + link);
           }
         }
       });
     }
-
     if (props.project['Order']) {
-      this.state.order = [];
+      setOrder([]);
       Object.keys(props.project['Order']).forEach((key) => {
-        this.state.order.push(props.project['Order'][key]);
+        order.push(props.project['Order'][key]);
       });
     }
-  }
+  }, [window.location]);
 
-  getOrderNumber(x) {
-    if (this.state.order) {
-      let index = this.state.order.indexOf(x);
+  const getOrderNumber = (x: string) => {
+    if (order) {
+      let index = order.indexOf(x);
       return index === -1 ? 1000 : index;
     }
-
+    // If no ordering in database, use defaults
     if (x.toLowerCase().includes('occurrences')) return 2;
     if (x.toLowerCase().includes('project description')) return 3;
     if (x.toLowerCase().includes('types of volunteers needed')) return 3.5;
@@ -125,39 +124,36 @@ class OrgItemModal extends React.Component {
     return 14;
   }
 
-  render() {
-    const { classes, fullScreen, project, imageUrl } = this.props;
+  // Turn Dates object of RRule array into readable string as 'Occurrences' field
+  if (project && project['Dates']) {
+    project['Occurrences'] = '';
+    Object.keys(project['Dates']).forEach((key) => {
+      project['Occurrences'] +=
+        '• ' +
+        rrulestr(project['Dates'][key].rrule).toText() +
+        ' starting at ' +
+        project['Dates'][key].startTime +
+        ' for ' +
+        project['Dates'][key].duration +
+        ' hours\n';
+    });
+  }
 
-    // Turn Dates object of RRule array into readable string as 'Occurrences' field
-    if (project && project['Dates']) {
-      project['Occurrences'] = '';
-      Object.keys(project['Dates']).forEach((key) => {
-        project['Occurrences'] +=
-          '• ' +
-          rrulestr(project['Dates'][key].rrule).toText() +
-          ' starting at ' +
-          project['Dates'][key].startTime +
-          ' for ' +
-          project['Dates'][key].duration +
-          ' hours\n';
-      });
-    }
-
-    const signUpButtons = (
-      <div>
-        {this.state.signUpLinks.length === 1 ? (
-          <Button
-            size="large"
-            color="secondary"
-            variant="contained"
-            className={classes.button}
-            target="_blank"
-            href={this.state.signUpLinks[0]}
-          >
-            Sign Up
-          </Button>
-        ) : (
-          this.state.signUpLinks.map((link, index) => (
+  const signUpButtons = (
+    <div>
+      {signUpLinks.length === 1 ? (
+        <Button
+          size="large"
+          color="secondary"
+          variant="contained"
+          className={classes.button}
+          target="_blank"
+          href={signUpLinks[0]}
+        >
+          Sign Up
+        </Button>
+      ) : (
+          signUpLinks.map((link, index) => (
             <Button
               size="large"
               color="secondary"
@@ -170,133 +166,131 @@ class OrgItemModal extends React.Component {
             </Button>
           ))
         )}
-      </div>
-    );
+    </div>
+  );
 
-    return (
-      <div>
-        <Dialog
-          open={this.state.modalOpen}
-          onClose={() => this.setState({ modalOpen: false })}
-          fullWidth={!fullScreen}
-          fullScreen={fullScreen}
-          maxWidth="lg"
-        >
-          <div className={classes.dialogBody}>
-            <div className={classes.dialogBorder} />
-            <DialogTitle>
-              <Typography className={classes.dialogHeader} variant="h5">
-                {' '}
-                {project['Title']}{' '}
-              </Typography>
-              <Button
-                className={classes.closeButton}
-                onClick={() => this.setState({ modalOpen: false })}
-                color="white"
-              >
-                Close
-              </Button>
-              {this.state.signUpLinks.length > 0 ? (
-                this.props.signedIn ? (
-                  signUpButtons
-                ) : (
+  return (
+    <div>
+      <Dialog
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        fullWidth={!fullScreen}
+        fullScreen={fullScreen}
+        maxWidth="lg"
+      >
+        <div className={classes.dialogBody}>
+          <div className={classes.dialogBorder} />
+          <DialogTitle>
+            <Typography className={classes.dialogHeader} variant="h5">
+              {' '}
+              {project['Title']}{' '}
+            </Typography>
+            <Button
+              className={classes.closeButton}
+              onClick={() => setModalOpen(false)}
+            >
+              Close
+            </Button>
+            {signUpLinks.length > 0 ? (
+              signedIn ? (
+                signUpButtons
+              ) : (
                   <div style={{ display: 'block' }}>
                     <SignInButton />
                   </div>
                 )
-              ) : (
+            ) : (
                 <div />
               )}
-            </DialogTitle>
-            <DialogContent>
-              {Object.keys(project)
-                .filter((x) => x !== 'Dates' && x !== 'Order')
-                .sort((x, y) => {
-                  return this.getOrderNumber(x) - this.getOrderNumber(y);
-                })
-                .map((key) => {
-                  if (key.toLowerCase() !== 'title' && key !== 'Sign-up Link')
-                    return (
-                      <Typography
-                        key={key}
-                        className={classes.textItem}
-                        gutterBottom
-                        align="left"
-                        component="p"
-                      >
-                        <Typography variant="h6" className={classes.textCaps}>
-                          <u>{key}</u>
-                        </Typography>
-                        {project[key].split('\n').map((item, i) => {
-                          return (
-                            <p className={classes.indentText} key={i}>
-                              {item}
-                            </p>
-                          );
-                        })}
+          </DialogTitle>
+          <DialogContent>
+            {Object.keys(project)
+              .filter((x) => x !== 'Dates' && x !== 'Order')
+              .sort((x, y) => {
+                return getOrderNumber(x) - getOrderNumber(y);
+              })
+              .map((key) => {
+                if (key.toLowerCase() !== 'title' && key !== 'Sign-up Link')
+                  return (
+                    <Typography
+                      key={key}
+                      className={classes.textItem}
+                      gutterBottom
+                      align="left"
+                      component="p"
+                    >
+                      <Typography variant="h6" className={classes.textCaps}>
+                        <u>{key}</u>
                       </Typography>
-                    );
-                  return <div key="0" />;
-                })}
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={() => this.setState({ modalOpen: false })}
-                color="white"
-              >
-                Close
-              </Button>
-            </DialogActions>
-          </div>
+                      {project[key].split('\n').map((item, i) => {
+                        return (
+                          <p className={classes.indentText} key={i}>
+                            {item}
+                          </p>
+                        );
+                      })}
+                    </Typography>
+                  );
+                return <div key="0" />;
+              })}
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => setModalOpen(false)}
+            >
+              Close
+            </Button>
+          </DialogActions>
+        </div>
 
-          <div className={classes.dialogBorder} />
-        </Dialog>
-        <Card
-          className={classes.card}
-          onClick={() => this.setState({ modalOpen: true })}
-        >
-          <CardMedia
-            className={classes.cardMedia}
-            image={imageUrl}
-            title={project['Title']}
-          />
-          <CardHeader
-            className={classes.cardHeader}
-            title={
-              <Typography className={classes.titleText} variant="h6">
-                {' '}
-                {project['Title']}{' '}
-              </Typography>
-            }
-          ></CardHeader>
-          <CardContent>
-            {project['Location'] ? (
-              <Typography
-                className={classes.text}
-                gutterBottom
-                align="left"
-                component="p"
-              >
-                <b>Location: </b> {project['Location']}
-              </Typography>
-            ) : (
+        <div className={classes.dialogBorder} />
+      </Dialog>
+      <Card
+        className={classes.card}
+        onClick={() => setModalOpen(true)}
+      >
+        <CardMedia
+          className={classes.cardMedia}
+          image={imageUrl}
+          title={project['Title']}
+        />
+        <CardHeader
+          className={classes.cardHeader}
+          title={
+            <Typography className={classes.titleText} variant="h6">
+              {' '}
+              {project['Title']}{' '}
+            </Typography>
+          }
+        ></CardHeader>
+        <CardContent>
+          {project['Location'] ? (
+            <Typography
+              className={classes.text}
+              gutterBottom
+              align="left"
+              component="p"
+            >
+              <b>Location: </b> {project['Location']}
+            </Typography>
+          ) : (
               <div />
             )}
-            {project['Project Description'] ? (
-              <Typography className={classes.text} align="left" component="p">
-                <b>Description: </b>{' '}
-                {project['Project Description'].length > 200
-                  ? project['Project Description'].substring(0, 200) + '...'
-                  : project['Project Description']}
-              </Typography>
-            ) : (
+          {project['Project Description'] ? (
+            <Typography className={classes.text} align="left" component="p">
+              <b>Description: </b>{' '}
+              {project['Project Description'].length > 200
+                ? project['Project Description'].substring(0, 200) + '...'
+                : project['Project Description']}
+            </Typography>
+          ) : (
               <div />
             )}
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
 
+//@ts-ignore
 export default withMobileDialog()(withStyles(styles)(OrgItemModal));

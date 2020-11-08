@@ -1,15 +1,59 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppBar,
   withStyles,
   Typography,
   CssBaseline,
   Link,
+  createStyles,
 } from '@material-ui/core';
 import NavBar from '../../components/NavBar';
 import BottomBanner from '../../components/BottomBanner';
 
-const styles = () => ({
+interface ResourcesPageProps {
+  classes?: any; // CSS-in-JS styling
+  resources: any;
+}
+
+const ResourcesPage: React.FC<ResourcesPageProps> = (props) => {
+  const { classes } = props;
+
+  let type = window.location.pathname.split('/')[2]; // Get resource type from URL
+  if (type === 'links') {
+    type = 'Service Learning Website Links';
+  } else if (type === 'videos') {
+    type = 'Service Learning Training Videos';
+  } else if (type === 'tools') {
+    type = 'Teaching Tools';
+  } else {
+    type = 'Protocols';
+  }
+
+  const resources = props.resources ? props.resources[type] : {};
+
+  return (
+    <div className={classes.page}>
+      <CssBaseline />
+      <AppBar position="static">
+        <NavBar />
+      </AppBar>
+
+      {/* RESOURCE PAGE CONTENT */}
+      <div
+        style={{
+          maxWidth: 750,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        {decipher(resources, classes)}
+      </div>
+      <BottomBanner />
+    </div>
+  );
+}
+
+const styles = createStyles({
   page: {
     overflow: 'hidden',
   },
@@ -82,101 +126,60 @@ const processText = (text, classes) => {
               </Link>
             </Typography>
           ) : (
-            <Typography
-              variant="subtitle1"
-              className={classes.description}
-              inline
-            >
-              <Link inline color="secondary" href={item.value} target="_blank">
-                {item.value}
-              </Link>
-            </Typography>
-          )}
+                <Typography
+                  variant="subtitle1"
+                  className={classes.description}
+                  inline
+                >
+                  <Link inline color="secondary" href={item.value} target="_blank">
+                    {item.value}
+                  </Link>
+                </Typography>
+              )}
         </div>
       ))}
     </div>
   );
 };
 
-class ResourcesPage extends Component {
-  render() {
-    const { classes } = this.props;
-
-    let type = window.location.pathname.split('/')[2]; // Get resource type from URL
-
-    if (type === 'links') {
-      type = 'Service Learning Website Links';
-    } else if (type === 'videos') {
-      type = 'Service Learning Training Videos';
-    } else if (type === 'tools') {
-      type = 'Teaching Tools';
-    } else {
-      type = 'Protocols';
-    }
-
-    const resources = this.props.resources ? this.props.resources[type] : {};
-
-    return (
-      <div className={classes.page}>
-        <CssBaseline />
-        <AppBar position="static">
-          <NavBar />
-        </AppBar>
-
-        {/* RESOURCE PAGE CONTENT */}
-        <div
-          style={{
-            maxWidth: 750,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-        >
-          {this.decipher(resources, classes)}
-        </div>
-        <BottomBanner />
-      </div>
-    );
-  }
-
-  decipher = (obj, classes) => {
-    return (
-      <div>
-        {obj ? (
-          Object.keys(obj).map((key) => {
-            const curr = obj[key];
-            if (curr.type === 'section-title') {
-              return (
-                <div>
-                  <Typography
-                    className={classes.directionTitleTop}
-                    variant="h5"
-                  >
-                    {curr.value}
-                  </Typography>
-                </div>
-              );
-            } else if (curr.type === 'subsection-title') {
-              return (
-                <Typography variant="overline" className={classes.title}>
+const decipher = (obj, classes) => {
+  return (
+    <div>
+      {obj ? (
+        Object.keys(obj).map((key) => {
+          const curr = obj[key];
+          if (curr.type === 'section-title') {
+            return (
+              <div>
+                <Typography
+                  className={classes.directionTitleTop}
+                  variant="h5"
+                >
                   {curr.value}
                 </Typography>
-              );
-            } else if (curr.type === 'italics') {
-              return (
-                <Typography className={classes.description}>
-                  <i>{curr.value}</i>
-                </Typography>
-              );
-            } else {
-              return processText(curr.value, classes);
-            }
-          })
-        ) : (
+              </div>
+            );
+          } else if (curr.type === 'subsection-title') {
+            return (
+              <Typography variant="overline" className={classes.title}>
+                {curr.value}
+              </Typography>
+            );
+          } else if (curr.type === 'italics') {
+            return (
+              <Typography className={classes.description}>
+                <i>{curr.value}</i>
+              </Typography>
+            );
+          } else {
+            return processText(curr.value, classes);
+          }
+        })
+      ) : (
           <div />
         )}
-      </div>
-    );
-  };
-}
+    </div>
+  );
+};
 
 export default withStyles(styles)(ResourcesPage);
