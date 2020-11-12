@@ -12,7 +12,7 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <LinkContainer to="/">
             <Navbar.Brand>
-              <img className="toolbar-logo" alt="UW School of Medicine Volunteer Logo" src="/images/uw_name_logo.jpg" />
+              <img className="toolbar-logo" alt="UW School of Medicine Volunteer Logo" src="/images/uw_name_logo.png" />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Collapse id="responsive-navbar-nav">
