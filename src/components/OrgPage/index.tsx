@@ -67,7 +67,7 @@ const styles = createStyles({
   },
 });
 
-interface OrgPageProps  {
+interface OrgPageProps {
   classes?: any; // CSS-in-JS styling
   locations: any;
   overviews: any;
@@ -87,15 +87,21 @@ const OrgPage: React.FC<OrgPageProps> = (props) => {
   const [projects, setProjects] = useState<any>();
 
   const updateState = (location, org) => {
-    if (
+    if (props['images'] &&
       props['images'][location] !== undefined &&
+      props['locations'] &&
       props['locations'][location] !== undefined
     ) {
-      setImages(props['images'][location][org]);
       setOverview(props['overviews'][org]);
       setTitle(org);
       setPath(window.location.pathname);
       setProjects(props['locations'][location][org]);
+      setTimeout(() => {
+        setImages(props['images'][location][org]);
+        setTimeout(() => {
+          setImages(props['images'][location][org]);
+        }, 1000)
+      }, 500);
     }
   };
 
@@ -133,6 +139,8 @@ const OrgPage: React.FC<OrgPageProps> = (props) => {
         emptyCategory.push(project);
       }
     });
+  } else {
+    return <div />
   }
   const grids = Object.keys(categories).map((category) => (
     <div>
@@ -157,7 +165,6 @@ const OrgPage: React.FC<OrgPageProps> = (props) => {
                 path={path}
               />
             ) : (
-
                 <OrgItem
                   //@ts-ignore
                   openedItem={
@@ -166,7 +173,7 @@ const OrgPage: React.FC<OrgPageProps> = (props) => {
                   }
                   signedIn={signedIn}
                   project={categories[category][project]}
-                  imageUrl={images[categories[category][project]['Title']]}
+                  imageUrl={images ? images[categories[category][project]['Title']] : ""}
                 />
               )}
           </Grid>

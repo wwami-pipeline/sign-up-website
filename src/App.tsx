@@ -53,12 +53,18 @@ const App: React.FC = () => {
           ).then(() => {
             setLocations(tempLocations);
             setLocationImages(tempLocationImages);
-            setTimeout(() => {forceUpdate(); }, 1); // Bug: Need to force render, and need to wait 1ms for images
+            setTimeout(() => { forceUpdate(); }, 1); // Bug: Need to force render, and need to wait 1ms for images
           })
         });
         setLocations(tempLocations);
         setLocationImages(tempLocationImages);
       });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setSignedIn(true);
+      }
+    });
   }, [])
 
   const populateLocationImages = async (locationName, locationData, allImageData) => {
