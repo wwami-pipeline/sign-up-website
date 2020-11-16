@@ -22,8 +22,6 @@ interface OpportunityGridProps {
 const OpportunityGrid: React.FC<OpportunityGridProps> = (props) => {
   const { classes, images, locationData, locationName } = props;
 
-  console.log("IMAGES: " + JSON.stringify(images))
-
   return (
     <div className={classes.gridContainer}>
       <Grid container spacing={24}>
@@ -34,9 +32,6 @@ const OpportunityGrid: React.FC<OpportunityGridProps> = (props) => {
             <Grid item xs={12} md={6}>
               <div
                 className={classes.linkBoxContainer}
-                onClick={() => {
-                  props.history.push('/org/' + locationName + '/' + org);
-                }}
               >
                 <LinkBox
                   title={org}
@@ -56,9 +51,6 @@ const OpportunityGrid: React.FC<OpportunityGridProps> = (props) => {
             >
               <div
                 className={classes.otherProjectsDiv}
-                onClick={() => {
-                  props.history.push('/org/' + locationName + '/Others');
-                }}
               >
                 <Typography
                   variant="h4"
