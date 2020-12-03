@@ -10,6 +10,7 @@ import React from 'react';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import { rrulestr } from 'rrule';
 import { SignInButton } from '../SignInButton/SignInButton';
+import "../cards.css"
 
 const styles = () => ({
   button: {
@@ -22,9 +23,6 @@ const styles = () => ({
   },
   cardHeader: {
     backgroundColor: '#f0f9a4',
-  },
-  cardMedia: {
-    height: 360,
   },
   closeButton: {
     color: '#2E1159',
@@ -256,7 +254,7 @@ class OrgItemModal extends React.Component {
           onClick={() => this.setState({ modalOpen: true })}
         >
           <CardMedia
-            className={classes.cardMedia}
+            className={"cardMedia"}
             image={imageUrl}
             title={project['Title']}
           />

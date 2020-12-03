@@ -1,0 +1,16 @@
+.linkbox-image {
+  height: 18rem;
+  object-fit: cover;
+}
+
+@media (min-width: 576px) {
+  .linkbox-image {
+    height: 24rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .linkbox-image {
+    height: 260px;
+  }
+}

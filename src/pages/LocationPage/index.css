@@ -1,0 +1,11 @@
+.directionTitleTop {
+  margin: 0.5em 2em 3em;
+  text-align: 'center';
+  max-width: 800px;
+}
+
+@media (min-width: 850px) {
+  .directionTitleTop {
+    margin: 0.5em auto 3em auto;
+  }
+}

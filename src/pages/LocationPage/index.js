@@ -18,6 +18,7 @@ import OpportunityGrid from '../../components/OpportunityGrid/OpportunityGrid';
 import BottomBanner from '../../components/BottomBanner';
 import { SignInButton } from '../../components/SignInButton/SignInButton';
 import '../../App.css';
+import './index.css';
 
 const styles = () => {
   return {
@@ -52,11 +53,6 @@ const styles = () => {
       float: 'right',
       margin: '0 20px 0 0',
     },
-    directionTitleTop: {
-      margin: '0.5em auto 3em auto',
-      textAlign: 'center',
-      maxWidth: 800,
-    },
     directionTitleHeader: {
       fontFamily: 'Lato',
       fontSize: '2em',
@@ -71,7 +67,7 @@ const styles = () => {
     directionTitleTopText: {
       fontFamily: 'Lato',
       fontSize: '1.2em',
-      marginTop: 5,
+      marginTop: 10,
       textAlign: 'left',
     },
     directionTitleBottom: {
@@ -418,7 +414,7 @@ class LocationPage extends Component {
 
         {/* Requirements */}
 
-        <div className={classes.directionTitleTop}>
+        <div className={"directionTitleTop"}>
           <Typography className={classes.directionTitleHeaderBold}>
             SERVE WITH US
           </Typography>

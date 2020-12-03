@@ -149,7 +149,7 @@ class OrgPage extends Component {
           className={classes.gridContainer}
         >
           {Object.keys(categories[category]).map((project, index) => (
-            <Grid item key={index} xs={12} md={6}>
+            <Grid item xs={12} sm={6} md={4}>
               {title === 'Others' ? (
                 <OtherItem
                   signedIn={signedIn}
