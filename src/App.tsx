@@ -68,7 +68,7 @@ const App: React.FC = () => {
   }, [])
 
   const populateLocationImages = async (locationName, locationData, allImageData) => {
-    return new Promise((res, err) => {
+    return new Promise<void>((res, err) => {
       const orgs = Object.keys(locationData);
       const storageRef = firebase.storage().ref();
       // Populate Image URLs by organization
@@ -94,9 +94,8 @@ const App: React.FC = () => {
             .getDownloadURL().catch(err => { })
           allImageData[locationName][org][locationData[org][event]['Title']] = eventUrl;
         });
-
-        res();
       });
+      res();
     })
   };
 

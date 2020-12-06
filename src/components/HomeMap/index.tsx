@@ -82,7 +82,7 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
         </svg>
         <svg className={classes.idaho_small}>
           <g transform="translate(0, 131) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <Link to={{ pathname: "/location/Idaho" }}>
+            <a href="https://idahowwami.school.blog/">
               <path d="M50 1011 c0 -269 0 -270 23 -288 36 -29 37 -37 12 -88 -14 -27 -25
               -54 -25 -61 0 -6 -11 -32 -25 -55 -30 -53 -31 -70 -6 -86 17 -11 18 -17 10
               -45 -5 -18 -9 -108 -9 -199 l0 -166 152 -6 c83 -4 252 -7 376 -7 l224 0 -5 22
@@ -92,7 +92,7 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               48 -26 49 -49 34 -48 -31 -70 16 -55 114 6 37 13 75 16 84 4 13 -5 22 -35 34
               -30 12 -43 24 -50 47 -6 18 -27 45 -46 60 -22 18 -35 36 -35 52 0 13 -8 31
               -17 41 -15 14 -18 35 -18 111 l0 93 -52 0 -53 0 0 -269z"/>
-            </Link>
+            </a>
           </g>
         </svg>
         <svg className={classes.montana_small}>
@@ -235,7 +235,7 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
         </svg >
         <svg width="206px" height="345px" className={classes.idaho}>
           <g transform="translate(0, 345) scale(0.1, -0.1)" fill="transparent" stroke="none">
-            <Link to={{ pathname: "https://idahowwami.school.blog/" }}>
+            <a href="https://idahowwami.school.blog/">
               <path d="M104 3212 c0 -103 -3 -374 -7 -602 -4 -228 -7 -422 -7 -430 1 -8 2
               -28 2 -43 1 -20 3 -25 9 -15 5 8 9 -8 9 -42 0 -71 32 -136 82 -170 52 -35 90
               -89 83 -118 -3 -12 -22 -48 -42 -79 -46 -73 -93 -193 -93 -241 0 -28 -8 -46
@@ -251,7 +251,7 @@ const HomeMap: React.FC<{ classes: any }> = (props) => {
               53 -143 121 -23 68 -44 95 -116 150 -36 28 -80 66 -99 86 l-34 35 18 40 18 40
               -45 53 c-25 29 -51 64 -59 78 -17 31 -26 388 -11 442 l10 36 -141 1 c-77 1
               -143 4 -146 5 -3 2 -6 -80 -7 -182z"/>
-            </Link>
+            </a>
           </g>
         </svg >
         <svg width="346" height="249px" className={classes.montana}>
