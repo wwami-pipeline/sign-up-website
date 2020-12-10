@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
+import "../Styles/Cards.css"
 
 const LinkBox = (props) => {
   const { classes } = props;
@@ -23,10 +24,10 @@ const LinkBox = (props) => {
               aria-label={props.title + ' image'}
               image={props.imageLocation ? props.imageLocation : ''}
               title={props.title}
-              className={classes.image}
+              className={"cardMedia"}
             />
           ) : (
-              <CardHeader className={classes.image} />
+              <CardHeader className={"cardMedia"} />
             )}
 
           <CardContent style={{ backgroundColor: '#F4EFA8' }}>
@@ -59,10 +60,6 @@ const LinkBox = (props) => {
 const styles = createStyles({
   card: {
     minWidth: 280,
-  },
-  image: {
-    height: 360,
-    objectFit: 'cover',
   },
   disableLinkUnderline: {
     textDecoration: 'none',
