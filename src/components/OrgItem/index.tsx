@@ -167,6 +167,8 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
     </div>
   );
 
+  let loclen = project['Location'] ? project['Location'].length : 0;
+
   return (
     <div>
       <Dialog
@@ -252,16 +254,15 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
           image={imageUrl}
           title={project['Title']}
         />
-        <CardHeader
-          className={classes.cardHeader}
+        <CardHeader className={"cardHeaderContainer"}
           title={
-            <Typography className={classes.titleText} variant="h6">
+            <Typography className={"cardHeader"} variant="h2">
               {' '}
               {project['Title']}{' '}
             </Typography>
           }
         ></CardHeader>
-        <CardContent>
+        <CardContent className={"cardDescContainer"}>
           {project['Location'] ? (
             <Typography
               className={classes.text}
@@ -277,8 +278,8 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
           {project['Project Description'] ? (
             <Typography className={classes.text} align="left" component="p">
               <b>Description: </b>{' '}
-              {project['Project Description'].length > 200
-                ? project['Project Description'].substring(0, 200) + '...'
+              {project['Project Description'].length + loclen > 250
+                ? project['Project Description'].substring(0, 250 - loclen ) + '...'
                 : project['Project Description']}
             </Typography>
           ) : (

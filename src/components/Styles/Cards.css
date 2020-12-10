@@ -3,9 +3,28 @@
   object-fit: cover;
 }
 
+.cardHeader {
+  color: #2E1159 !important;
+  line-height: 36px !important;
+  font-size: 20px !important;
+  font-weight: bold;
+}
+
+.cardHeaderContainer {
+  background-color: #F4EFA8;
+  height: 6rem;
+}
+
+.cardDescContainer {
+  height: 12rem !important;
+}
+
 @media (min-width: 576px) {
   .cardMedia {
     height: 24rem;
+  }
+  .cardDescContainer {
+    height: 14rem !important;
   }
 }
 

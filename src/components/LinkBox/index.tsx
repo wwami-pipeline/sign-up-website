@@ -30,15 +30,16 @@ const LinkBox = (props) => {
               <CardHeader className={"cardMedia"} />
             )}
 
-          <CardContent style={{ backgroundColor: '#F4EFA8' }}>
-            <Typography
-              variant="h5"
-              style={{ color: '#2E1159', fontFamily: 'Lato', lineHeight: h2Height }}
-              component="h2"
-            >
-              <span> {props.title} </span>
-            </Typography>
-            <Typography
+          <CardHeader className={"cardHeaderContainer"}
+            title = {
+              <Typography
+                className={"cardHeader"}
+                variant="h2"
+              >{props.title}
+              </Typography>
+            }>
+
+            {/* <Typography
               variant="body1"
               style={{
                 color: '#2E1159',
@@ -49,8 +50,8 @@ const LinkBox = (props) => {
               component="h3"
             >
               {props.name}
-            </Typography>
-          </CardContent>
+            </Typography> */}
+          </CardHeader>
         </Link>
       </CardActionArea>
     </Card>
