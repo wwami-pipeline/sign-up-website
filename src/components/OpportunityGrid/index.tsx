@@ -29,7 +29,7 @@ const OpportunityGrid: React.FC<OpportunityGridProps> = (props) => {
         {Object.keys(locationData[locationName])
           .filter((x) => x !== 'Others')
           .map((org) => (
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6} md={4}>
               <div
                 className={classes.linkBoxContainer}
               >

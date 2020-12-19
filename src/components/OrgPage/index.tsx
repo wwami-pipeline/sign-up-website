@@ -156,7 +156,7 @@ const OrgPage: React.FC<OrgPageProps> = (props) => {
         className={classes.gridContainer}
       >
         {Object.keys(categories[category]).map((project, index) => (
-          <Grid item key={index} xs={12} md={6}>
+          <Grid item key={index} xs={12} sm={6} md={4}>
             {title === 'Others' ? (
               <OtherItem
                 //@ts-ignore

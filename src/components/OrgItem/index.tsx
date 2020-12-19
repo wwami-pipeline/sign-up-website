@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardMedia, createStyles, withMobileDialog, Typography, withStyles, DialogTitle, DialogContent, DialogActions, Dialog, Button } from '@material-ui/core';
 import { rrulestr } from 'rrule';
 import { SignInButton } from '../SignInButton/SignInButton';
+import "../Styles/Cards.css"
 
 const styles = createStyles({
   button: {
@@ -14,9 +15,6 @@ const styles = createStyles({
   },
   cardHeader: {
     backgroundColor: '#f0f9a4',
-  },
-  cardMedia: {
-    height: 360,
   },
   closeButton: {
     color: '#2E1159',
@@ -169,6 +167,8 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
     </div>
   );
 
+  let loclen = project['Location'] ? project['Location'].length : 0;
+
   return (
     <div>
       <Dialog
@@ -250,20 +250,19 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
         onClick={() => setModalOpen(true)}
       >
         <CardMedia
-          className={classes.cardMedia}
+          className={"cardMedia"}
           image={imageUrl}
           title={project['Title']}
         />
-        <CardHeader
-          className={classes.cardHeader}
+        <CardHeader className={"cardHeaderContainer"}
           title={
-            <Typography className={classes.titleText} variant="h6">
+            <Typography className={"cardHeader"} variant="h2">
               {' '}
               {project['Title']}{' '}
             </Typography>
           }
         ></CardHeader>
-        <CardContent>
+        <CardContent className={"cardDescContainer"}>
           {project['Location'] ? (
             <Typography
               className={classes.text}
@@ -279,8 +278,8 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
           {project['Project Description'] ? (
             <Typography className={classes.text} align="left" component="p">
               <b>Description: </b>{' '}
-              {project['Project Description'].length > 200
-                ? project['Project Description'].substring(0, 200) + '...'
+              {project['Project Description'].length + loclen > 250
+                ? project['Project Description'].substring(0, 250 - loclen ) + '...'
                 : project['Project Description']}
             </Typography>
           ) : (
