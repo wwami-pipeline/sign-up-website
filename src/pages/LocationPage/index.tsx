@@ -143,6 +143,10 @@ const LocationPage: React.FC<LocationPageProps> = (props) => {
           <DialogContent>
             <Typography variant="h5">
               {' '}
+              {currentEventTitle}{' '}
+            </Typography>
+            <Typography variant="h5">
+              {' '}
               {currentEventDate}{' '}
             </Typography>
             <Typography variant="h5">
