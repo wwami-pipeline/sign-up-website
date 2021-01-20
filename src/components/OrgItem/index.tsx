@@ -8,11 +8,6 @@ const styles = createStyles({
   button: {
     marginTop: '1em',
   },
-  card: {
-    backgroundColor: '#513E6D',
-    paddingBottom: 5,
-    cursor: 'pointer',
-  },
   cardHeader: {
     backgroundColor: '#f0f9a4',
   },
@@ -246,7 +241,7 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
         <div className={classes.dialogBorder} />
       </Dialog>
       <Card
-        className={classes.card}
+        className={"card"}
         onClick={() => setModalOpen(true)}
       >
         <CardMedia
@@ -265,7 +260,6 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
         <CardContent className={"cardDescContainer"}>
           {project['Location'] ? (
             <Typography
-              className={classes.text}
               gutterBottom
               align="left"
               component="p"
@@ -276,7 +270,7 @@ const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
               <div />
             )}
           {project['Project Description'] ? (
-            <Typography className={classes.text} align="left" component="p">
+            <Typography align="left" component="p">
               <b>Description: </b>{' '}
               {project['Project Description'].length + loclen > 250
                 ? project['Project Description'].substring(0, 250 - loclen ) + '...'
