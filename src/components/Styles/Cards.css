@@ -1,13 +1,23 @@
+.card {
+  background-color: #513E6D !important;
+  cursor:pointer !important;
+}
+
+.card:hover .cardMedia {
+  opacity: 1;
+}
+
 .cardMedia {
   height: 18rem;
   object-fit: cover;
+  opacity: 1;
 }
 
 .cardHeader {
   color: #2E1159 !important;
   line-height: 36px !important;
   font-size: 20px !important;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .cardHeaderContainer {
@@ -22,6 +32,8 @@
 @media (min-width: 576px) {
   .cardMedia {
     height: 24rem;
+    opacity: 0.75;
+    transition: 0.3s;
   }
   .cardDescContainer {
     height: 14rem !important;

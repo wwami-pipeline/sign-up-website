@@ -10,13 +10,11 @@ import "../Styles/Cards.css"
 
 const LinkBox = (props) => {
   const { classes } = props;
-  var h2Height = props.name ? "36px" : "50px";
   return (
-    <Card className={classes.card}>
+    <Card className={"card"}>
       <CardActionArea>
         <Link
           to={{ pathname: props.path }}
-          className={classes.disableLinkUnderline}
         >
           {props.imageLocation ? (
             <CardMedia
@@ -59,14 +57,8 @@ const LinkBox = (props) => {
 };
 
 const styles = createStyles({
-  card: {
-    minWidth: 280,
-  },
   disableLinkUnderline: {
     textDecoration: 'none',
-  },
-  text: {
-    fontFamily: 'Lato',
   },
 });
 
