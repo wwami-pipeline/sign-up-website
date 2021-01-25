@@ -62,11 +62,12 @@ interface OrgItemModalProps {
   imageUrl: string;
   classes: any;
   signedIn: boolean;
+  openedItem: boolean;
 }
 
 const OrgItemModal: React.FC<OrgItemModalProps> = (props) => {
-  const { classes, fullScreen, project, imageUrl, signedIn } = props;
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const { classes, fullScreen, project, imageUrl, signedIn, openedItem } = props;
+  const [modalOpen, setModalOpen] = useState<boolean>(openedItem);
   const [signUpLinks, setSignUpLinks] = useState<string[]>([]);
   const [order, setOrder] = useState<string[]>([]);
 

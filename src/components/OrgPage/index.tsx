@@ -76,7 +76,7 @@ interface OrgPageProps {
 }
 
 const OrgPage: React.FC<OrgPageProps> = (props) => {
-  const [openedItem, setOpenedItem] = useState<string>(window.location.pathname.split('/')[4]);
+  const [openedItem, setOpenedItem] = useState<string>(decodeURI(window.location.pathname.split('/')[4]));
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const [path, setPath] = useState<string>("");

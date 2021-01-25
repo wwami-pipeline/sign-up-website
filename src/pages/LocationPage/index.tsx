@@ -58,6 +58,7 @@ const LocationPage: React.FC<LocationPageProps> = (props) => {
 
   // Calendar Event/Search Methods
   const calendarEventClick = (info) => {
+    console.log(info.event)
     setCurrentEventDate(info.event.start.toDateString().substring(4));
     setCurrentEventDetailsLink(info.event.extendedProps.detailsLink);
     setCurrentEventVolunteers(info.event.extendedProps.volunteers);
