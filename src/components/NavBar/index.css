@@ -61,32 +61,43 @@
 @media (min-width: 768px) {
   .toolbar-logo {
     height: 60px;
-    margin: 10px 80px;
-    max-width: 485px;
+    margin: .5em 2em;
+    max-width: 460px;
   }
   .tabLabel {
-    font-size: 1.3em;
+    font-size: 1.2em;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .toolbar-logo {
-    height: 48px;
+    height: 45px;
     margin: 10px 15px;
-    max-width: 375px;
+    max-width: 360px;
   }
   .tabLabel {
     font-size: .9em;
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1050px) {
+  .toolbar-logo {
+    height: 48px;
+    margin: 10px 15px;
+    max-width: 375px;
+  }
+  .tabLabel {
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 1300px) {
   .toolbar-logo {
     height: 60px;
     margin: 10px 15px;
-    max-width: 485px;
+    max-width: 480px;
   }
   .tabLabel {
-    font-size: 1.3em;
+    font-size: 1.2em;
   }
 }
