@@ -60,7 +60,29 @@
 
 @media (min-width: 768px) {
   .toolbar-logo {
-    height: 65px;
+    height: 60px;
+    margin: 10px 80px;
+    max-width: 485px;
+  }
+  .tabLabel {
+    font-size: 1.3em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .toolbar-logo {
+    height: 48px;
+    margin: 10px 15px;
+    max-width: 375px;
+  }
+  .tabLabel {
+    font-size: .9em;
+  }
+}
+
+@media (min-width: 1440px) {
+  .toolbar-logo {
+    height: 60px;
     margin: 10px 15px;
     max-width: 485px;
   }
